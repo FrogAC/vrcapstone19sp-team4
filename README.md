@@ -1,9 +1,9 @@
 ## VRCapstone-19SP-Team4 Blog
 
-This page is hosting on https://uwrealitylab.github.io/vrcapstone19sp-team4/
+This page is hosting on [https://uwrealitylab.github.io/vrcapstone19sp-team4/]
 
 ### Project Proposal is available here: 
-https://docs.google.com/document/d/1V69Ls4ID84_nt9mg4wguqv0sTw7dM2adHBnqVyagK6U/edit?usp=sharing
+[https://docs.google.com/document/d/1V69Ls4ID84_nt9mg4wguqv0sTw7dM2adHBnqVyagK6U/edit?usp=sharing]
 
 ### Week 1
 We spent most of week 1 exploring the various pieces of hardware and software that we have at our disposal. We were able
