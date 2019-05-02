@@ -5,7 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/PitchingMechanic/VR Pitching/VR Pitching.unity
     guid: 0fe08876455b775419e497a1ffcf2a30
+  - enabled: 1
+    path: Assets/Baseball Stadium Pack/Scenes/BaseballStadium1.unity
+    guid: 6a1a16279e679104c90e1bfbbe3d4489
+  - enabled: 1
+    path: Assets/VR Batter Different Pitches.unity
+    guid: 0af3fd8ccbd5c4a4cb26acc28d337c4e
   m_configObjects: {}

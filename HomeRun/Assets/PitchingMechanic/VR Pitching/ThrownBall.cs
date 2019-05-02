@@ -24,15 +24,18 @@ public class ThrownBall : OVRGrabbable
     Vector3 releaseAngVel;
 
     Vector3 flightVel;
+    private OVRGrabber prevGrabber;
 
     new private void Start()
     {
         base.Start();
-        initialize(strikezone);
+        initialize();
     }
 
     override public void GrabEnd(Vector3 linearVelocity, Vector3 angularVelocity)
     {
+        prevGrabber = grabbedBy;
+
         base.GrabEnd(linearVelocity, angularVelocity);
 
         releaseLinVel = linearVelocity;
@@ -43,10 +46,10 @@ public class ThrownBall : OVRGrabbable
         StartCoroutine(Throw());
     }
 
-    public void initialize(Transform strikezone)
+    public void initialize()
     {
         rb = GetComponent<Rigidbody>();
-        this.strikezone = strikezone;
+        strikezone = Strikezone.strikezone.transform;
         strikezoneCollider = strikezone.GetComponent<Collider>();
     }
 
@@ -86,6 +89,8 @@ public class ThrownBall : OVRGrabbable
             // Moves the ball in the direction it's facing
             //transform.position += transform.forward * Time.fixedDeltaTime * speed * releaseLinVel.magnitude;
             flightVel = transform.forward * speed * releaseLinVel.magnitude;
+
+            rb.angularVelocity = Vector3.zero;
             rb.velocity = flightVel;
 
             yield return new WaitForFixedUpdate();
@@ -118,11 +123,15 @@ public class ThrownBall : OVRGrabbable
 
     private void OnCollisionEnter(Collision collision)
     {
-        StopAllCoroutines();
-        rb.useGravity = true;
-        rb.constraints = RigidbodyConstraints.None;
-        //rb.velocity = Vector3.Reflect(flightVel.normalized, collision.impulse.normalized) * flightVel.magnitude;
-        Debug.Log(name + " hit " + collision.gameObject.name);
+        // Ignore collision with hands
+        if (collision.gameObject.layer != LayerMask.NameToLayer("PlayerBody"))
+        {
+            StopAllCoroutines();
+            rb.useGravity = true;
+            rb.constraints = RigidbodyConstraints.None;
+            //rb.velocity = Vector3.Reflect(flightVel.normalized, collision.impulse.normalized) * flightVel.magnitude;
+            //Debug.Log(name + " hit " + collision.gameObject.name);
+        }
     }
     /*
     private void OnTriggerEnter(Collider other)

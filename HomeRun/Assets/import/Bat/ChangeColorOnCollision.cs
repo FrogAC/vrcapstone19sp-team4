@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class ChangeColorOnCollision : MonoBehaviour
 {
-    //[SerializeField]
-    //int init_X_Velocity_On_Collision;
-    //[SerializeField]
-    //int init_Y_Velocity_On_Collision;
-    //[SerializeField]
-    //int init_Z_Velocity_On_Collision;
+    [SerializeField]
+    int init_X_Velocity_On_Collision;
+    [SerializeField]
+    int init_Y_Velocity_On_Collision;
+    [SerializeField]
+    int init_Z_Velocity_On_Collision;
 
-    // Used to track the final velocity prior to a collision
+    //Used to track the final velocity prior to a collision
     //float previousY;
 
-    // Update is called once per frame
+    //Update is called once per frame
     //void Update()
     //{
     //    if (GetComponent<Rigidbody>().velocity.y != 0) previousY = -(GetComponent<Rigidbody>().velocity.y);
@@ -22,16 +22,11 @@ public class ChangeColorOnCollision : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag.Equals("Bat"))
+        Debug.Log(collision.gameObject.name);
+        if(collision.gameObject.name.Equals("fastball(Clone)") || collision.gameObject.name.Equals("curveball(Clone)") || collision.gameObject.name.Equals("spiralball(Clone)"))
         {
-            //GetComponent<Rigidbody>().velocity = new Vector3(init_X_Velocity_On_Collision, init_Y_Velocity_On_Collision, init_Z_Velocity_On_Collision);
-            GetComponent<Renderer>().material = collision.gameObject.GetComponent<Renderer>().material;
+            Debug.Log("Names Match");
+            collision.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(init_X_Velocity_On_Collision, init_Y_Velocity_On_Collision, init_Z_Velocity_On_Collision);
         }
-
-        //if (collision.gameObject.tag.Equals("Ground"))
-        //{
-        //    Vector3 v3 = GetComponent<Rigidbody>().velocity;
-        //    GetComponent<Rigidbody>().velocity = new Vector3(v3.x, previousY/2.5f, v3.z);
-        //}
     }
 }
