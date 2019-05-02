@@ -205,6 +205,22 @@ public class OVRGrabber : MonoBehaviour
             GrabEnd();
         }
     }
+    
+    private void RemoveNullsFromGrabCandidates()
+    {
+        List<OVRGrabbable> toRemove = new List<OVRGrabbable>();
+        foreach(OVRGrabbable grabbable in m_grabCandidates.Keys)
+        {
+            if(grabbable == null)
+            {
+                toRemove.Add(grabbable);
+            }
+        }
+        foreach(OVRGrabbable grabbable in toRemove)
+        {
+            m_grabCandidates.Remove(grabbable);
+        }
+    }
 
     protected virtual void GrabBegin()
     {
@@ -212,8 +228,10 @@ public class OVRGrabber : MonoBehaviour
 		OVRGrabbable closestGrabbable = null;
         Collider closestGrabbableCollider = null;
 
+        RemoveNullsFromGrabCandidates();
+
         // Iterate grab candidates and find the closest grabbable candidate
-		foreach (OVRGrabbable grabbable in m_grabCandidates.Keys)
+        foreach (OVRGrabbable grabbable in m_grabCandidates.Keys)
         {
             bool canGrab = !(grabbable.isGrabbed && !grabbable.allowOffhandGrab);
             if (!canGrab)
