@@ -35,3 +35,7 @@ We have assembled our simulation for hitting and pitching into a demo scene. The
 Our networking was set back slightly due to the new Unity release, which did an overhaul of the High Level Networking API. Our goal for next week is to be able to get two players in VR interacting in the same networked space.
 
 In terms of asset creation, we have finished a simple bat and textture design. Now, any new bats that need to be made can simply be done by retexturing the bat model. The field texture was inserted into Unity in order to do scale tests. Initial character design sketches have been produced, and modelling will start this weekend. Our goal for next week is to have our basic mechanics setup in a stadium environment for the user to test. Sound design exploration has also begun.
+
+### Week 5
+##### NetWorking Blog
+Since unity depreacate UNET in their 2019 pipeline, through the weeks we tried the new unity Multiplayer, Photon, and Oculus Native Platform SDK. The new multiplayer is in develpment, use ECS and lacks of documentations; Photon is a 3rd party networking solution, great in scalability but requires server and requires some extra-cost. Therefore we choose Oculus Platform, which provides convenient and simple Matchmaking and P2P networking api. Hopefully Oculus will update their store interface soon -- for now we are debugging using rift. The SDK performs pretty solid on oculus GO so I'm not expecting too much problems while swtiching platforms in the future.
