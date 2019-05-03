@@ -41,7 +41,6 @@ public class ThrownBall : OVRGrabbable
         releaseLinVel = linearVelocity;
         releaseAngVel = angularVelocity;
         //Debug.Log("GrabEnd Success!");
-        GetComponent<Renderer>().material.color = Color.red;
 
         StartCoroutine(Throw());
     }
@@ -121,6 +120,8 @@ public class ThrownBall : OVRGrabbable
         return strikezone.position;
     }
 
+    private bool hasHitBat = false;
+    public float batHitMult = 3;
     private void OnCollisionEnter(Collision collision)
     {
         // Ignore collision with hands
@@ -131,15 +132,29 @@ public class ThrownBall : OVRGrabbable
             rb.constraints = RigidbodyConstraints.None;
             //rb.velocity = Vector3.Reflect(flightVel.normalized, collision.impulse.normalized) * flightVel.magnitude;
             //Debug.Log(name + " hit " + collision.gameObject.name);
+            
+            /*
+            // BatHit functionality
+            if(collision.gameObject.layer == LayerMask.NameToLayer("Bat") && !hasHitBat)
+            {
+                hasHitBat = true;
+                Physics.IgnoreCollision(collision.collider, this.GetComponent<Collider>(), true);
+                // Launch ball
+
+                Vector3 LaunchDir = Vector3.ProjectOnPlane(rb.velocity, collision.collider.transform.up);
+                rb.velocity = LaunchDir.normalized * rb.velocity.magnitude * batHitMult;
+
+                
+                
+                Rigidbody batRB = collision.gameObject.GetComponentInParent<OVRGrabbable>().GetComponent<Rigidbody>();
+                if (batRB != null)
+                {  
+                    
+                }
+
+                Debug.DrawLine(collision.GetContact(0).point, collision.GetContact(0).point + rb.velocity.normalized * 2, Color.red, 3);
+
+            }*/
         }
     }
-    /*
-    private void OnTriggerEnter(Collider other)
-    {
-        StopCoroutine(Throw());
-        Debug.Log(name + " triggered " + other.gameObject.name);
-    }
-    */
-
-
 }

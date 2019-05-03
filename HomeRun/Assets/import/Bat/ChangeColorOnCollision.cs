@@ -22,10 +22,8 @@ public class ChangeColorOnCollision : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.name);
         if(collision.gameObject.name.Equals("fastball(Clone)") || collision.gameObject.name.Equals("curveball(Clone)") || collision.gameObject.name.Equals("spiralball(Clone)"))
         {
-            Debug.Log("Names Match");
             collision.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(init_X_Velocity_On_Collision, init_Y_Velocity_On_Collision, init_Z_Velocity_On_Collision);
         }
     }

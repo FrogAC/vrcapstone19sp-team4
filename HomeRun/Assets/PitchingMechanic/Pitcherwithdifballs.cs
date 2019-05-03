@@ -42,7 +42,7 @@ public class Pitcherwithdifballs : MonoBehaviour
         {// || OVRInput.GetDown(OVRInput.Button.Any, OVRInput.Controller.All)) {
             ThrowBall();
         }
-        if (OVRInput.GetDown(nextSelection))
+        if (OVRInput.GetDown(nextSelection) || Input.GetKeyDown(KeyCode.E))
         {
             currIndex = ((currIndex + 1) + ballToThrow.Length) % ballToThrow.Length;
         }
