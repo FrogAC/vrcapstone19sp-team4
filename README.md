@@ -35,3 +35,30 @@ We have assembled our simulation for hitting and pitching into a demo scene. The
 Our networking was set back slightly due to the new Unity release, which did an overhaul of the High Level Networking API. Our goal for next week is to be able to get two players in VR interacting in the same networked space.
 
 In terms of asset creation, we have finished a simple bat and textture design. Now, any new bats that need to be made can simply be done by retexturing the bat model. The field texture was inserted into Unity in order to do scale tests. Initial character design sketches have been produced, and modelling will start this weekend. Our goal for next week is to have our basic mechanics setup in a stadium environment for the user to test. Sound design exploration has also begun.
+
+### Week 5
+##### NetWorking Blog
+Since unity depreacate UNET in their 2019 pipeline, through the weeks we tried the new unity Multiplayer, Photon, and Oculus Native Platform SDK. The new multiplayer is in develpment, use ECS and lacks of documentations; Photon is a 3rd party networking solution, great in scalability but requires server and requires some extra-cost. Therefore we choose Oculus Platform, which provides convenient and simple Matchmaking and P2P networking api. Hopefully Oculus will update their store interface soon -- for now we are debugging using rift. The SDK performs pretty solid on oculus GO so I'm not expecting too much problems while swtiching platforms in the future.
+
+We were able to get a demo scene working with 2 Oculus Rift headsets using the Oculus P2P framework, which was just as sample demo created by Oculus which allowed players to have a basketball shooting competition over a networked connection. We could not get the networked demo working on the Quest yet due to Oculus account issues which are currently being looked into with the help of the TAs.
+
+![alt text](https://github.com/UWRealityLab/vrcapstone19sp-team4/blob/master/Screenshots/Week5/NetDemo.png "NetDemo")
+
+##### Asset Creation
+In terms of asset creation, we have decided to use a Stadium Asset Pack as a base for other potential stadiums. The current sadiums look decent, but they are quite low-poly, as most of the assets are transparent planes. Time permitting we would like to add a little more geometry to to make it look more pronounced, as the planar approach can be visually distracting at times, and as seen below, it causes a lot of hard shadows and lighting artifacts.
+
+We have an ititial character design sketches, which will most likely be very low poly, with textured facial fieatures as opposed to modeled geometry to save time on animations. The focus for this week will be on making the glove for the pitcher, and assets that required for specific game modes, such as vfx shaders for home run derby, targets for target practice, and zombies for our zombie survival mode. A stretch goal we also have is to make a locker room that serves as the start menu scene.
+
+![alt text](https://github.com/UWRealityLab/vrcapstone19sp-team4/blob/master/Screenshots/Week5/Bat.PNG "Bat")
+
+##### Demo Scene
+We have created a demo scene using the stadium pack, the bat and the piching script. Currently the batter controls the pitching mechanic with their left hand controller, using the X and Y buttons to cycle through different pitches. They can also use the left thumbstick to move around and adjust their position in relation to the batters box. They can grab the bat with with the righthand middle finger grip and must keep that button pressed in order to hold onto it. They can trigger the pitch with the left controller and swing the bat with the right handed one.
+
+![alt text](https://github.com/UWRealityLab/vrcapstone19sp-team4/blob/master/Screenshots/Week5/CurveballCrop.png "Curveball")
+
+![alt text](https://github.com/UWRealityLab/vrcapstone19sp-team4/blob/master/Screenshots/Week5/FastballCrop.png "Fastball")
+
+![alt text](https://github.com/UWRealityLab/vrcapstone19sp-team4/blob/master/Screenshots/Week5/SpiralballCrop.png "Spiralball")
+
+##### Gameplay Goals
+For next week our goals are to turn the demo scene into actual gameplay modes. Our minimum goal is to have a home run derby mode where with a timer, where you have to see how many home runs you can hit. We will have an automatic pitcher and some sort of ui that shows the time you have left and the number that you have hit.
