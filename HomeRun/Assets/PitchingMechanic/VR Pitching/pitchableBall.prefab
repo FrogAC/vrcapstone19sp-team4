@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1900042084187694043}
   - component: {fileID: 2454735733605466773}
   m_Layer: 0
-  m_Name: BasicPitchableBall
+  m_Name: pitchableBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -188,6 +188,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   spiralSpeed: 1
+  batHitMult: 3
 --- !u!114 &2454735733605466773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,6 +201,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2ed378211f4b1146a3eede1997d5f6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  init_X_Velocity_On_Collision: 0
+  init_Y_Velocity_On_Collision: 0
+  init_Z_Velocity_On_Collision: 0
 --- !u!1 &6021147260157153455
 GameObject:
   m_ObjectHideFlags: 0

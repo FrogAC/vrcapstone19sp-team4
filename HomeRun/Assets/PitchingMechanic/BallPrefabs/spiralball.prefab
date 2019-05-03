@@ -311,6 +311,11 @@ PrefabInstance:
       propertyPath: spiralspeed
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
+        type: 3}
+      propertyPath: spiralSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1900042084187694041, guid: e909dd8cf0768dc4dba50ac58709bc30,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -370,6 +375,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248399032667543809, guid: e909dd8cf0768dc4dba50ac58709bc30,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248399032667543809, guid: e909dd8cf0768dc4dba50ac58709bc30,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 0.89049053
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248399032667543809, guid: e909dd8cf0768dc4dba50ac58709bc30,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248399032667543809, guid: e909dd8cf0768dc4dba50ac58709bc30,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248399032667543809, guid: e909dd8cf0768dc4dba50ac58709bc30,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.g
+      value: 0.89049053
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248399032667543809, guid: e909dd8cf0768dc4dba50ac58709bc30,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2454735733605466773, guid: e909dd8cf0768dc4dba50ac58709bc30, type: 3}
