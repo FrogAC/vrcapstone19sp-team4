@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44367498, g: 0.4930097, b: 0.5725637, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -273,6 +273,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d7cfad8bd172924eac32510abb2bed1, type: 3}
+--- !u!1 &1739701162 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 7d7cfad8bd172924eac32510abb2bed1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1739701161}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1739701163
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739701162}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1000, y: 0.2, z: 1000}
+  m_Center: {x: 0, y: -0.1, z: 0}
 --- !u!1 &1900284368
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,7 +311,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &1900284369
 AudioListener:
   m_ObjectHideFlags: 0
@@ -458,10 +477,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2102706098}
-  m_LocalRotation: {x: 0.40821794, y: -0.23456973, z: 0.109381676, w: 0.87542605}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalRotation: {x: 0.84945184, y: 0.1537382, z: 0.024364004, w: 0.504185}
+  m_LocalPosition: {x: 0.01, y: 10.61, z: -4.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 58.111004, y: 158.173, z: 147.25401}

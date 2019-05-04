@@ -124,6 +124,12 @@ public class ThrownBall : OVRGrabbable
     public float batHitMult = 3;
     private void OnCollisionEnter(Collision collision)
     {
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Environment"))
+        {
+            Destroy(gameObject, 4);
+        }
+
         // Ignore collision with hands
         if (collision.gameObject.layer != LayerMask.NameToLayer("PlayerBody"))
         {
@@ -133,28 +139,67 @@ public class ThrownBall : OVRGrabbable
             //rb.velocity = Vector3.Reflect(flightVel.normalized, collision.impulse.normalized) * flightVel.magnitude;
             //Debug.Log(name + " hit " + collision.gameObject.name);
             
-            /*
+            
             // BatHit functionality
             if(collision.gameObject.layer == LayerMask.NameToLayer("Bat") && !hasHitBat)
             {
                 hasHitBat = true;
-                Physics.IgnoreCollision(collision.collider, this.GetComponent<Collider>(), true);
+                Physics.IgnoreCollision(collision.collider, collision.GetContact(0).otherCollider, true);
                 // Launch ball
-
+                rb.velocity = Vector3.Reflect(rb.velocity, collision.GetContact(0).normal);
                 Vector3 LaunchDir = Vector3.ProjectOnPlane(rb.velocity, collision.collider.transform.up);
+
                 rb.velocity = LaunchDir.normalized * rb.velocity.magnitude * batHitMult;
 
-                
-                
+                float pointSpeed = 1;
                 Rigidbody batRB = collision.gameObject.GetComponentInParent<OVRGrabbable>().GetComponent<Rigidbody>();
                 if (batRB != null)
-                {  
-                    
+                {
+                    //Debug.Log(batRB.velocity + "------" + batRB.angularVelocity);
+                    pointSpeed = batRB.GetPointVelocity(collision.GetContact(0).point).magnitude;
+                    rb.velocity *= pointSpeed;
                 }
 
                 Debug.DrawLine(collision.GetContact(0).point, collision.GetContact(0).point + rb.velocity.normalized * 2, Color.red, 3);
 
-            }*/
+                Debug.Log("pointSpeed = " + pointSpeed);
+
+                //StartCoroutine(VibrateController(vibrationFrequency, vibrationAmplitude, vibrationDuration));
+                OVRHapticsClip clip = new OVRHapticsClip();
+                for (int i = 0; i < vibrationDuration * 320; i++)
+                {
+                    clip.WriteSample((byte)Mathf.Clamp((int)(vibrationAmplitude * 255 * (1 + pointSpeed/10)), 0, 255));
+                }
+                OVRHaptics.RightChannel.Preempt(clip);
+                OVRHaptics.LeftChannel.Preempt(clip);
+
+            }
         }
     }
+
+    [Space]
+    public float vibrationFrequency = 0.4f;
+    public float vibrationAmplitude = 0.4f;
+    public float vibrationDuration = 0.1f;
+
+    /*
+    public static int vibrationCounter = 0;
+    IEnumerator VibrateController(float freqency, float amplitude, float duration)
+    {
+
+
+        /*
+        vibrationCounter++;
+        int curr = vibrationCounter;
+        OVRInput.SetControllerVibration(freqency, amplitude, OVRInput.Controller.RTouch);
+        OVRInput.SetControllerVibration(freqency, amplitude, OVRInput.Controller.LTouch);
+
+        Debug.Log("Vibrate " + curr + " Start Time = " + Time.time);
+        yield return new WaitForSeconds(duration);
+        
+        Debug.Log("Vibrate " + curr + " End Time = " + Time.time);
+
+        OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
+        OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.LTouch);*/
+    //}
 }
