@@ -188,7 +188,10 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   spiralSpeed: 1
-  batHitMult: 3
+  batHitMult: 0.1
+  vibrationFrequency: 0.32
+  vibrationAmplitude: 0.22
+  vibrationDuration: 0.1
 --- !u!114 &2454735733605466773
 MonoBehaviour:
   m_ObjectHideFlags: 0

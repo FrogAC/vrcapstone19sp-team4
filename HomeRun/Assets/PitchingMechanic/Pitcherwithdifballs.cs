@@ -5,6 +5,11 @@ using OVR;
 
 public class Pitcherwithdifballs : MonoBehaviour
 {
+    public bool autoPitch;
+    public float randomThrowRange = 1;
+    public float randomThrowDelay = 3;
+    [Space]
+
     public ThrownBall [] ballToThrow;
     public ThrownBall baseballPrefab;
     public float lifetime = 6;
@@ -23,7 +28,22 @@ public class Pitcherwithdifballs : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (autoPitch)
+        {
+            StartCoroutine(AutomaticPitching());
+        }
+    }
 
+    IEnumerator AutomaticPitching()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(randomThrowDelay);
+
+            transform.forward += new Vector3(Random.Range(-randomThrowRange, randomThrowRange) * 3, Random.Range(-randomThrowRange, randomThrowRange), 1);
+            currIndex = Random.Range(0, ballToThrow.Length);
+            ThrowBall();
+        }
     }
 
     void ThrowBall()
