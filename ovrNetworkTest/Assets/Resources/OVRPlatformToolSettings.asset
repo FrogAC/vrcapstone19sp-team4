@@ -28,9 +28,9 @@ MonoBehaviour:
   - Alpha
   - Alpha
   - Alpha
-  riftBuildDiretory: 
-  riftBuildVersion: 
-  riftLaunchFile: 
+  riftBuildDiretory: C:/Users/vrteam4/Documents/GitHub/vrcapstone19sp-team4/ovrNetworkTest/Build/Rift
+  riftBuildVersion: 0
+  riftLaunchFile: C:/Users/vrteam4/Documents/GitHub/vrcapstone19sp-team4/ovrNetworkTest/Build/Rift/Net_Quest.exe
   riftLaunchParams: 
   rift2DLaunchFile: 
   rift2DLaunchParams: 
