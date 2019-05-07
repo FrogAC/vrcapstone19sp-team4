@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using OVR;
+using UnityEngine.Events;
 
 public class ThrownBall : OVRGrabbable
 {
-    [Space(10)]
+    [Space]
     public float speed = 3;
 
     Vector3 releasePosition;
@@ -15,10 +16,16 @@ public class ThrownBall : OVRGrabbable
     [Header("Path properties")]
     // How strongly does the ball curve to the strike zone at different parts of the throw
     [SerializeField] AnimationCurve redirectionStrength = AnimationCurve.Linear(0,0,1,1);
-    [Space(10)]
+    [Space]
     // How strongly is the Spiral motion applieds
     [SerializeField] AnimationCurve SpiralAnimStrength = AnimationCurve.Linear(0, 1, 1, 0);
     [SerializeField] float spiralSpeed = 1f;
+    [Space]
+    public float vibrationFrequency = 0.4f;
+    public float vibrationAmplitude = 0.4f;
+    public float vibrationDuration = 0.1f;
+    [Space]
+    [SerializeField] UnityEvent onHitByBat;
 
     Vector3 releaseLinVel;
     Vector3 releaseAngVel;
@@ -144,6 +151,9 @@ public class ThrownBall : OVRGrabbable
             if(collision.gameObject.layer == LayerMask.NameToLayer("Bat") && !hasHitBat)
             {
                 hasHitBat = true;
+
+                onHitByBat.Invoke();
+
                 Physics.IgnoreCollision(collision.collider, collision.GetContact(0).otherCollider, true);
                 // Launch ball
                 rb.velocity = Vector3.Reflect(rb.velocity, collision.GetContact(0).normal);
@@ -177,10 +187,7 @@ public class ThrownBall : OVRGrabbable
         }
     }
 
-    [Space]
-    public float vibrationFrequency = 0.4f;
-    public float vibrationAmplitude = 0.4f;
-    public float vibrationDuration = 0.1f;
+
 
     /*
     public static int vibrationCounter = 0;
