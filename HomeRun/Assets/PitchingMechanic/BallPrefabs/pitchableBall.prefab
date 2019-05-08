@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1900042084187694042}
   - component: {fileID: 1900042084187694043}
   - component: {fileID: 2454735733605466773}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: pitchableBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1144639948647641258}
   - component: {fileID: 6248399032667543809}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
