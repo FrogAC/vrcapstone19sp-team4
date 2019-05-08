@@ -1,0 +1,158 @@
+fileFormatVersion: 2
+guid: 66b2f711f2044a84ab4e6df6aa986e55
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 232528478, guid: 43a8bbf65be290d44ba52b94476242b9, type: 3}
+  version: 17
+  mGraphInstanceData:
+  - graphLabel: grass
+    prototypeName: grass
+    graphDescIndex: 0
+    generateAllOutputs: 0
+    generateMipMaps: 1
+    preset: " <sbspreset pkgurl=\"pkg://grass\" label=\"\" >\n </sbspreset>\n"
+    shaderName: Standard
+    outputNames: baseColor,normal,metallic,height,ambientOcclusion
+    texturePackingList:
+    - outputName: baseColor
+      alphaSource: baseColor
+    - outputName: normal
+      alphaSource: normal
+    - outputName: roughness
+      alphaSource: roughness
+    - outputName: metallic
+      alphaSource: smoothness
+    - outputName: height
+      alphaSource: height
+    - outputName: ambientOcclusion
+      alphaSource: ambientOcclusion
+    textureParameters:
+    - textureName: grass - roughness
+      wrapMode: 0
+      filterMode: 1
+      aniso: 1
+    - textureName: grass - baseColor
+      wrapMode: 0
+      filterMode: 1
+      aniso: 1
+    - textureName: grass - normal
+      wrapMode: 0
+      filterMode: 1
+      aniso: 1
+    - textureName: grass - metallic
+      wrapMode: 0
+      filterMode: 1
+      aniso: 1
+    - textureName: grass - height
+      wrapMode: 0
+      filterMode: 1
+      aniso: 1
+    - textureName: grass - ambientOcclusion
+      wrapMode: 0
+      filterMode: 1
+      aniso: 1
+    colorSpaceList:
+    - outputName: baseColor
+      bLinear: 0
+    - outputName: normal
+      bLinear: 1
+    - outputName: roughness
+      bLinear: 1
+    - outputName: metallic
+      bLinear: 1
+    - outputName: height
+      bLinear: 1
+    - outputName: ambientOcclusion
+      bLinear: 1
+    inputTextureMap: []
+    targetSettingList:
+    - label: 
+      bLockRatio: 1
+      textureWidth: 256
+      textureHeight: 256
+      textureFormat: 0
+      bGenerateOnLoad: 1
+    material: {fileID: -9117483709511198939, guid: 66b2f711f2044a84ab4e6df6aa986e55,
+      type: 3}
+    generatedTextures:
+    - {fileID: -1387883846988599863, guid: 66b2f711f2044a84ab4e6df6aa986e55, type: 3}
+    - {fileID: -2013316763387345597, guid: 66b2f711f2044a84ab4e6df6aa986e55, type: 3}
+    - {fileID: -9139008800958924754, guid: 66b2f711f2044a84ab4e6df6aa986e55, type: 3}
+    - {fileID: 5190856435900987921, guid: 66b2f711f2044a84ab4e6df6aa986e55, type: 3}
+    - {fileID: -5438511697376885214, guid: 66b2f711f2044a84ab4e6df6aa986e55, type: 3}
+  - graphLabel: infield
+    prototypeName: infield
+    graphDescIndex: 1
+    generateAllOutputs: 0
+    generateMipMaps: 1
+    preset: " <sbspreset pkgurl=\"pkg://infield\" label=\"\" >\n  <presetinput identifier=\"$outputsize\"
+      uid=\"481309274\" type=\"8\" value=\"10,10\" />\n </sbspreset>\n"
+    shaderName: Standard
+    outputNames: baseColor,normal,metallic,height,ambientOcclusion
+    texturePackingList:
+    - outputName: baseColor
+      alphaSource: baseColor
+    - outputName: normal
+      alphaSource: normal
+    - outputName: roughness
+      alphaSource: roughness
+    - outputName: metallic
+      alphaSource: smoothness
+    - outputName: height
+      alphaSource: height
+    - outputName: ambientOcclusion
+      alphaSource: ambientOcclusion
+    textureParameters:
+    - textureName: infield - roughness
+      wrapMode: 0
+      filterMode: 1
+      aniso: 1
+    - textureName: infield - baseColor
+      wrapMode: 0
+      filterMode: 1
+      aniso: 1
+    - textureName: infield - normal
+      wrapMode: 0
+      filterMode: 1
+      aniso: 1
+    - textureName: infield - metallic
+      wrapMode: 0
+      filterMode: 1
+      aniso: 1
+    - textureName: infield - height
+      wrapMode: 0
+      filterMode: 1
+      aniso: 1
+    - textureName: infield - ambientOcclusion
+      wrapMode: 0
+      filterMode: 1
+      aniso: 1
+    colorSpaceList:
+    - outputName: baseColor
+      bLinear: 0
+    - outputName: normal
+      bLinear: 1
+    - outputName: roughness
+      bLinear: 1
+    - outputName: metallic
+      bLinear: 1
+    - outputName: height
+      bLinear: 1
+    - outputName: ambientOcclusion
+      bLinear: 1
+    inputTextureMap: []
+    targetSettingList:
+    - label: 
+      bLockRatio: 1
+      textureWidth: 1024
+      textureHeight: 1024
+      textureFormat: 0
+      bGenerateOnLoad: 1
+    material: {fileID: 8993573551179898814, guid: 66b2f711f2044a84ab4e6df6aa986e55,
+      type: 3}
+    generatedTextures: []
