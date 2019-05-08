@@ -74,7 +74,7 @@ public class Pitcherwithdifballs : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.forward += new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 1);
+        //transform.forward += new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 1);
         //transform.Rotate(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"), 0, Space.World);
     }
 }
