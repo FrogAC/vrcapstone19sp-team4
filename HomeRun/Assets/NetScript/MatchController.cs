@@ -10,44 +10,25 @@ namespace HomeRun.Net
     // and entering a practice or online game match.
     public class MatchController : MonoBehaviour
     {
+        private PlayerType m_playerType = PlayerType.Batter;
+
         // Text to display when the match will start or finish
         [SerializeField] private Text m_timerText = null;
 
         // the camera is moved between the idle position and the assigned court position
-        [SerializeField] private Camera m_camera = null;
+        [SerializeField] private GameObject m_player = null;
 
         // where the camera will be when not in a match
-        [SerializeField] private Transform m_idleCameraTransform = null;
-
-        // button that toggles between matchmaking and cancel
-        [SerializeField] private Text m_matchmakeButtonText = null;
+        [SerializeField] private Transform m_idleAreaTransform = null;
 
         // this should equal the maximum number of players configured on the Oculus Dashboard
-        [SerializeField] private PlayerArea[] m_playerAreas = new PlayerArea[3];
-
-        // the time to wait between selecting Practice and starting
-        [SerializeField] private uint PRACTICE_WARMUP_TIME = 5;
+        [SerializeField] private PlayerArea[] m_playerAreas = new PlayerArea[2];
 
         // seconds to wait to coordinate P2P setup with other match players before starting
-        [SerializeField] private uint MATCH_WARMUP_TIME = 30;
+        [SerializeField] private uint MATCH_WARMUP_TIME = 10;
 
         // seconds for the match
-        [SerializeField] private uint MATCH_TIME = 20;
-
-        // how long to remain in position after the match to view results
-        [SerializeField] private uint MATCH_COOLDOWN_TIME = 10;
-
-        // panel to add most-wins leaderboard entries to
-        [SerializeField] private GameObject m_mostWinsLeaderboard = null;
-
-        // panel to add high-score leaderboard entries to
-        [SerializeField] private GameObject m_highestScoresLeaderboard = null;
-
-        // leaderboard entry Text prefab
-        [SerializeField] private GameObject m_leaderboardEntryPrefab = null;
-
-        // Text prefab to use for achievements fly-text
-        [SerializeField] private GameObject m_flytext = null;
+        [SerializeField] private uint MATCH_TIME = 999;
 
         // the current state of the match controller
         private State m_currentState;
@@ -59,13 +40,21 @@ namespace HomeRun.Net
         // the court the local player was assigned to
         private int m_localSlot;
 
+        public PlayerType PlayerType
+        {
+            get { return m_playerType; }
+            set
+            {
+                m_playerType = value;
+                PlatformManager.Instance.SetTransformActiveFromType(value);
+            }
+        }
+
         void Start()
         {
             PlatformManager.Matchmaking.EnqueueResultCallback = OnMatchFoundCallback;
             PlatformManager.Matchmaking.MatchPlayerAddedCallback = MatchPlayerAddedCallback;
             PlatformManager.P2P.StartTimeOfferCallback = StartTimeOfferCallback;
-            PlatformManager.Leaderboards.MostWinsLeaderboardUpdatedCallback = MostWinsLeaderboardCallback;
-            PlatformManager.Leaderboards.HighScoreLeaderboardUpdatedCallback = HighestScoreLeaderboardCallback;
 
             TransitionToState(State.NONE);
         }
@@ -127,13 +116,11 @@ namespace HomeRun.Net
                         SetupForIdle();
                         MoveCameraToIdlePosition();
                         PlatformManager.TransitionToState(PlatformManager.State.WAITING_TO_PRACTICE_OR_MATCHMAKE);
-                        m_matchmakeButtonText.text = "Play Online";
                         break;
 
                     case State.WAITING_FOR_MATCH:
                         Assert.AreEqual(oldState, State.NONE);
                         PlatformManager.TransitionToState(PlatformManager.State.MATCH_TRANSITION);
-                        m_matchmakeButtonText.text = "Cancel";
                         break;
 
                     case State.WAITING_TO_SETUP_MATCH:
@@ -145,6 +132,7 @@ namespace HomeRun.Net
                         Assert.AreEqual(oldState, State.WAITING_TO_SETUP_MATCH);
                         PlatformManager.TransitionToState(PlatformManager.State.PLAYING_A_NETWORKED_MATCH);
                         m_nextStateTransitionTime = Time.time + MATCH_TIME;
+                        Debug.Log("Match Time Until" + m_nextStateTransitionTime);
                         break;
                 }
             }
@@ -179,6 +167,7 @@ namespace HomeRun.Net
                         break;
                     case State.PLAYING_MATCH:
                         var delta = m_nextStateTransitionTime - Time.time;
+                        m_nextStateTransitionTime += delta + 1.0f;
                         m_timerText.text = string.Format("{0:#0}:{1:#00}.{2:00}",
                             Mathf.Floor(delta / 60),
                             Mathf.Floor(delta) % 60,
@@ -197,24 +186,6 @@ namespace HomeRun.Net
             for (int i = 0; i < m_playerAreas.Length; i++)
             {
                 m_playerAreas[i].SetupForPlayer<AIPlayer>("* AI *");
-            }
-        }
-
-        void SetupForPractice()
-        {
-            // randomly select a position for the local player
-            m_localSlot = Random.Range(0, m_playerAreas.Length - 1);
-
-            for (int i = 0; i < m_playerAreas.Length; i++)
-            {
-                if (i == m_localSlot)
-                {
-                    m_playerAreas[i].SetupForPlayer<LocalPlayer>(PlatformManager.MyOculusID);
-                }
-                else
-                {
-                    m_playerAreas[i].SetupForPlayer<AIPlayer>("* AI *");
-                }
             }
         }
 
@@ -248,12 +219,8 @@ namespace HomeRun.Net
 
         void MoveCameraToIdlePosition()
         {
-            var ejector = m_camera.gameObject.GetComponentInChildren<BallEjector>();
-            if (ejector)
-            {
-                ejector.transform.SetParent(m_camera.transform.parent, false);
-                m_camera.transform.SetParent(m_idleCameraTransform, false);
-            }
+            m_player.transform.SetParent(m_idleAreaTransform, false);
+            m_player.transform.localPosition = Vector3.zero;
         }
 
         void MoveCameraToMatchPosition()
@@ -263,9 +230,8 @@ namespace HomeRun.Net
                 var player = playerArea.GetComponentInChildren<LocalPlayer>();
                 if (player)
                 {
-                    var ejector = player.GetComponentInChildren<BallEjector>();
-                    m_camera.transform.SetParent(player.transform, false);
-                    ejector.transform.SetParent(m_camera.transform, false);
+                    m_player.transform.SetParent(player.transform, false);
+                    m_player.transform.localPosition = Vector3.zero;
                     break;
                 }
             }
@@ -322,38 +288,5 @@ namespace HomeRun.Net
 
         #endregion
 
-        #region Leaderboards and Achievements
-
-        void MostWinsLeaderboardCallback(SortedDictionary<int, LeaderboardEntry> entries)
-        {
-            foreach (Transform entry in m_mostWinsLeaderboard.transform)
-            {
-                Destroy(entry.gameObject);
-            }
-            foreach (var entry in entries.Values)
-            {
-                GameObject label = Instantiate(m_leaderboardEntryPrefab);
-                label.transform.SetParent(m_mostWinsLeaderboard.transform, false);
-                label.GetComponent<Text>().text =
-                    string.Format("{0} - {1} - {2}", entry.Rank, entry.User.OculusID, entry.Score);
-            }
-        }
-
-        void HighestScoreLeaderboardCallback(SortedDictionary<int, LeaderboardEntry> entries)
-        {
-            foreach (Transform entry in m_highestScoresLeaderboard.transform)
-            {
-                Destroy(entry.gameObject);
-            }
-            foreach (var entry in entries.Values)
-            {
-                GameObject label = Instantiate(m_leaderboardEntryPrefab);
-                label.transform.SetParent(m_highestScoresLeaderboard.transform, false);
-                label.GetComponent<Text>().text =
-                    string.Format("{0} - {1} - {2}", entry.Rank, entry.User.OculusID, entry.Score);
-            }
-        }
-
-        #endregion
     }
 }

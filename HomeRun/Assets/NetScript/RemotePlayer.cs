@@ -16,5 +16,9 @@ namespace HomeRun.Net
 			get { return m_user.ID; }
 		}
 
+		void Start() {
+			base.BallSelector = PlatformManager.Instance.RemoteBallSelector;
+		}
+
 	}
 }
