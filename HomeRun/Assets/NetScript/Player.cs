@@ -17,9 +17,6 @@ namespace HomeRun.Net
 		// delay time before a new ball will spawn.
 		private const float RESPAWN_SECONDS = 2.0f;
 
-		// current score for the player
-		private uint m_score;
-
 		// cached reference to the Text component to render the score
 		private Text m_scoreUI;
 
@@ -39,20 +36,6 @@ namespace HomeRun.Net
 		private float m_nextSpawnTime;
 
 		#region Properties
-
-		public virtual uint Score
-		{
-			get { return m_score; }
-			set
-			{
-				m_score = value;
-
-				if (m_scoreUI)
-				{
-					m_scoreUI.text = m_score.ToString();
-				}
-			}
-		}
 
 		public GameObject BallPrefab
 		{
@@ -86,8 +69,6 @@ namespace HomeRun.Net
 			ball.transform.SetParent(m_ballEjector.transform, true);
 			ball.GetComponent<Rigidbody>().useGravity = false;
 			ball.GetComponent<Rigidbody>().detectCollisions = false;
-			ball.GetComponent<DetectBasket>().Player = this;
-
 			return ball;
 		}
 

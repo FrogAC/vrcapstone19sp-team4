@@ -6,20 +6,6 @@ namespace HomeRun.Net
 	// This class listens for Input events to shoot a ball, and also notifies the P2PManager when
 	// ball or scores needs to be synchronized to remote players.
 	public class LocalPlayer : Player {
-
-		public override uint Score
-		{
-			set
-			{
-				base.Score = value;
-
-				if (PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH)
-				{
-					PlatformManager.P2P.SendScoreUpdate(base.Score);
-				}
-			}
-		}
-
 		void Update ()
 		{
 			GameObject newball = null;
