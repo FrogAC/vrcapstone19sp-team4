@@ -6,10 +6,14 @@ namespace HomeRun.Net
 
 	public class PlatformManager : MonoBehaviour
 	{
+		[SerializeField] private GameObject m_remoteHead = null;
+		[SerializeField] private GameObject m_remoteBat = null;
+
 		private static PlatformManager s_instance;
 		private MatchmakingManager m_matchmaking;
 		private P2PManager m_p2p;
 		private State m_currentState;
+		// GameObject that represents the Head of the remote Avatar
 
 		// my Application-scoped Oculus ID
 		private ulong m_myID;

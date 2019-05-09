@@ -2,6 +2,7 @@ namespace HomeRun.Net
 {
 	using UnityEngine;
 	using System.Collections;
+	using HomeRun.Game;
 
 	// This component handles network coordination for moving balls.
 	// Synchronizing moving objects that are under the influence of physics
@@ -11,6 +12,8 @@ namespace HomeRun.Net
 	// versions of the simulation.
 	public class P2PNetworkBall : MonoBehaviour
 	{
+		private BallType ballType = BallType.FastBall;
+		
 		// the last time this ball locally collided with something
 		private float lastCollisionTime;
 
@@ -30,6 +33,15 @@ namespace HomeRun.Net
 		public bool IsHeld()
 		{
 			return !rigidBody.useGravity;
+		}
+
+		public BallType BallType {
+			get { return ballType; }
+		}
+
+		public P2PNetworkBall SetType(BallType t) {
+			ballType = t;
+			return this;
 		}
 
 		public void ProcessRemoteUpdate(float remoteTime, bool isHeld, Vector3 pos, Vector3 vel)

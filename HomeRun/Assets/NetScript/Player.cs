@@ -3,6 +3,7 @@ namespace HomeRun.Net
 	using UnityEngine;
 	using UnityEngine.UI;
 	using System.Collections.Generic;
+	using HomeRun.Game;
 
 	public enum PlayerType {
 		Batter,
@@ -28,29 +29,29 @@ namespace HomeRun.Net
 		private GameObject m_ballPrefab;
 
 		// gameobject for the position and orientation of where the ball will be shot
-		private BallEjector m_ballEjector;
+		private BallSelector m_ballSelector;
 
 		// queue of active balls for the player to make sure too many arent in play
 		private Queue<GameObject> m_balls = new Queue<GameObject>();
 
 		void Start()
 		{
-			m_ballEjector = transform.GetComponentInChildren<BallEjector>();
+			m_ballSelector = transform.GetComponentInChildren<BallSelector>();
 			m_scoreUI = transform.parent.GetComponentInChildren<Text>();
 			m_scoreUI.text = "0";
 		}
 
-		public GameObject CreateBall()
+		public GameObject CreateBall(BallType ballType)
 		{
 			if (m_balls.Count >= MAX_BALLS)
 			{
 				Destroy(m_balls.Dequeue());
 			}
-			var ball = Instantiate(m_ballPrefab);
+			var ball = m_ballSelector.CreateBall(ballType);
 			m_balls.Enqueue(ball);
 
-			ball.transform.position = m_ballEjector.transform.position;
-			ball.transform.SetParent(m_ballEjector.transform, true);
+			ball.transform.position = m_ballSelector.transform.position;
+			ball.transform.SetParent(m_ballSelector.transform, true);
 			ball.GetComponent<Rigidbody>().useGravity = false;
 			ball.GetComponent<Rigidbody>().detectCollisions = false;
 			return ball;
