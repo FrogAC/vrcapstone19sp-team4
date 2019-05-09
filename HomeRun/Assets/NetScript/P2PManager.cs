@@ -438,7 +438,8 @@ namespace HomeRun.Net
             foreach (var ball in m_localBalls.Values)
             {
                 PackInt32((int)ball.BallType, sendBuffer, ref offset);
-                PackBool(ball.IsHeld(), sendBuffer, ref offset);
+                //PackBool(ball.IsHeld(), sendBuffer, ref offset);
+                PackBool(true, sendBuffer, ref offset);
                 PackInt32(ball.gameObject.GetInstanceID(), sendBuffer, ref offset);
                 PackVector3(ball.transform.position, sendBuffer, ref offset);
                 PackVector3(ball.velocity, sendBuffer, ref offset);
