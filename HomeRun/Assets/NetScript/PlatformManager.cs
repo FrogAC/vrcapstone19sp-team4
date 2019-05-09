@@ -9,6 +9,9 @@ namespace HomeRun.Net
 		[SerializeField] private Transform m_remoteHead = null;
 		[SerializeField] private Transform m_remoteBat = null;
 
+		[SerializeField] private Transform m_localHead = null;
+		[SerializeField] private Transform m_localBat = null;
+
 		private static PlatformManager s_instance;
 		private MatchmakingManager m_matchmaking;
 		private P2PManager m_p2p;
@@ -42,7 +45,7 @@ namespace HomeRun.Net
 
 			Core.Initialize();
 			m_matchmaking = new MatchmakingManager();
-			m_p2p = new P2PManager(m_remoteHead, m_remoteBat);
+			m_p2p = new P2PManager(m_remoteHead, m_remoteBat, m_localHead, m_localBat);
 		}
 
 
