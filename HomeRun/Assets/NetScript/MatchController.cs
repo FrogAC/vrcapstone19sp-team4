@@ -132,6 +132,7 @@ namespace HomeRun.Net
                         Assert.AreEqual(oldState, State.WAITING_TO_SETUP_MATCH);
                         PlatformManager.TransitionToState(PlatformManager.State.PLAYING_A_NETWORKED_MATCH);
                         m_nextStateTransitionTime = Time.time + MATCH_TIME;
+                        Debug.Log("Match Time Until" + m_nextStateTransitionTime);
                         break;
                 }
             }

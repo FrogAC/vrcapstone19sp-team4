@@ -85,7 +85,7 @@ namespace HomeRun.Net
 
             Core.Initialize();
             m_matchmaking = new MatchmakingManager();
-            m_p2p = new P2PManager(m_remoteHead, m_remoteBat, m_localHead, m_localBat);
+            m_p2p = new P2PManager(m_remoteHead, m_remoteBat, m_remoteGlove, m_localHead, m_localBat, m_localGlove);
         }
 
 
