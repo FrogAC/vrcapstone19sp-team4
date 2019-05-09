@@ -219,6 +219,7 @@ namespace HomeRun.Net
         void MoveCameraToIdlePosition()
         {
             m_player.transform.SetParent(m_idleAreaTransform, false);
+            m_player.transform.localPosition = Vector3.zero;
         }
 
         void MoveCameraToMatchPosition()
@@ -229,6 +230,7 @@ namespace HomeRun.Net
                 if (player)
                 {
                     m_player.transform.SetParent(player.transform, false);
+                    m_player.transform.localPosition = Vector3.zero;
                     break;
                 }
             }

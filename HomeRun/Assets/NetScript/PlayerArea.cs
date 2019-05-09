@@ -38,6 +38,8 @@ namespace HomeRun.Net
 			var player = m_playerHolder.AddComponent<T>();
 			m_nameText.text = name;
 
+			Debug.Log("Setup PlayerArea for " + ((player is LocalPlayer) ? "LocalPlayer" : "RemotePlayer"));
+
 			if (player is RemotePlayer)
 			{
 			}
