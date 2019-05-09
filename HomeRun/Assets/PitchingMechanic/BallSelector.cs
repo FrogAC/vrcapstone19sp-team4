@@ -1,110 +1,130 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using HomeRun.Net;
-using TMPro;
-
-public class BallSelector : MonoBehaviour
+﻿namespace HomeRun.Game
 {
-    [SerializeField] Selection[] selections = new Selection[0];
-    int currentIndex = 0;
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine;
+    using HomeRun.Net;
+    using TMPro;
 
-    [Space]
-
-    [SerializeField] TextMeshProUGUI ballNameText;
-    [SerializeField] Transform spawnPoint;
-    GameObject spawnedPrefab = null;
-    OVRGrabbable spawnedGrabbable;
-    [SerializeField] OVRInput.Button selectNext = OVRInput.Button.DpadLeft;
-    [SerializeField] OVRInput.Button selectPrev = OVRInput.Button.DpadRight;
-
-
-    // Start is called before the first frame update
-    void Start()
+    public enum BallType
     {
-        UpdateSelection();
+        FastBall = 0,
+        CurveBall = 1,
+        SpiralBall = 2
     }
 
-    private void Update()
+    public class BallSelector : MonoBehaviour
     {
-        if (OVRInput.GetDown(selectNext))
+        [SerializeField] Selection[] selections = new Selection[0];
+        int currentIndex = 0;
+
+        [Space]
+
+        [SerializeField] TextMeshProUGUI ballNameText;
+        [SerializeField] Transform spawnPoint;
+        GameObject spawnedPrefab = null;
+        OVRGrabbable spawnedGrabbable;
+        [SerializeField] OVRInput.Button selectNext = OVRInput.Button.DpadLeft;
+        [SerializeField] OVRInput.Button selectPrev = OVRInput.Button.DpadRight;
+
+
+        // Start is called before the first frame update
+        void Start()
         {
-            NextSelection();
-        }
-        else if (OVRInput.GetDown(selectPrev))
-        {
-            PrevSelection();
+            UpdateSelection();
         }
 
-        if (spawnedGrabbable != null)
+        private void Update()
         {
-            if (spawnedGrabbable.isGrabbed)
+            if (OVRInput.GetDown(selectNext))
             {
-                spawnedPrefab.GetComponent<Rigidbody>().isKinematic = false;
-                spawnedPrefab.transform.SetParent(null);
-
-                spawnedPrefab = null;
-                spawnedGrabbable = null;
-                UpdateBallNameText();
+                NextSelection();
             }
-        } 
-    }
+            else if (OVRInput.GetDown(selectPrev))
+            {
+                PrevSelection();
+            }
 
-    void UpdateSelection()
-    {
-        if (spawnedPrefab != null)
-        {
-            Destroy(spawnedPrefab.gameObject);
+            if (spawnedGrabbable != null)
+            {
+                if (spawnedGrabbable.isGrabbed)
+                {
+                    spawnedPrefab.GetComponent<Rigidbody>().isKinematic = false;
+                    spawnedPrefab.transform.SetParent(null);
+
+                    spawnedPrefab = null;
+                    spawnedGrabbable = null;
+                    UpdateBallNameText();
+                }
+            }
         }
 
-        spawnedPrefab = Instantiate(selections[currentIndex].prefab, spawnPoint.position, spawnPoint.rotation, spawnPoint);
-        spawnedGrabbable = spawnedPrefab.GetComponent<OVRGrabbable>();
-        spawnedPrefab.GetComponent<Rigidbody>().isKinematic = true;
-        
-        if (PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH) {
-            PlatformManager.P2P.AddNetworkBall(spawnedPrefab);
+        // For Network
+        public GameObject CreateBall(BallType ballType) {
+            GameObject ball = Instantiate(selections[currentIndex].prefab, spawnPoint.position, spawnPoint.rotation, spawnPoint);
+            ball.GetComponent<Rigidbody>().isKinematic = true;
+            return ball;
         }
-        UpdateBallNameText();
-    }
 
-    void UpdateBallNameText()
-    {
-        if (ballNameText != null)
+        void UpdateSelection()
         {
             if (spawnedPrefab != null)
             {
-                ballNameText.text = selections[currentIndex].name;
-            } else
-            {
-                ballNameText.text = "";
+                Destroy(spawnedPrefab.gameObject);
             }
-            
-        }
-    }
 
-    public void NextSelection()
-    {
-        if (spawnedPrefab != null)
+            spawnedPrefab = Instantiate(selections[currentIndex].prefab, spawnPoint.position, spawnPoint.rotation, spawnPoint);
+            spawnedGrabbable = spawnedPrefab.GetComponent<ThrownBall>();
+            spawnedPrefab.GetComponent<Rigidbody>().isKinematic = true;
+
+            if (PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH)
+            {
+                PlatformManager.P2P.AddNetworkBall(spawnedPrefab, selections[currentIndex].type);
+            }
+            UpdateBallNameText();
+        }
+
+        void UpdateBallNameText()
         {
-            currentIndex = (currentIndex + 1) % selections.Length;
-        }
-        UpdateSelection();
-    }
+            if (ballNameText != null)
+            {
+                if (spawnedPrefab != null)
+                {
+                    ballNameText.text = selections[currentIndex].name;
+                }
+                else
+                {
+                    ballNameText.text = "";
+                }
 
-    public void PrevSelection()
-    {
-        if (spawnedPrefab != null)
+            }
+        }
+
+        public void NextSelection()
         {
-            currentIndex = ((currentIndex - 1) + selections.Length) % selections.Length;
+            if (spawnedPrefab != null)
+            {
+                currentIndex = (currentIndex + 1) % selections.Length;
+            }
+            UpdateSelection();
         }
-        UpdateSelection();
-    }
+
+        public void PrevSelection()
+        {
+            if (spawnedPrefab != null)
+            {
+                currentIndex = ((currentIndex - 1) + selections.Length) % selections.Length;
+            }
+            UpdateSelection();
+        }
 
 
-    [System.Serializable]
-    public class Selection
-    {
-        public string name;
-        public GameObject prefab;
+        [System.Serializable]
+        public class Selection
+        {
+            public string name;
+            public BallType type;
+            public GameObject prefab;
+        }
     }
 }

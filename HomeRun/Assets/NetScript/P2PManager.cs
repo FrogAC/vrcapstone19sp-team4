@@ -6,6 +6,7 @@ namespace HomeRun.Net
 	using Oculus.Platform.Models;
 	using System;
 	using UnityEngine.Assertions;
+	using HomeRun.Game;
 
 	// This helper class coordinates establishing Peer-to-Peer connections between the
 	// players in the match.  It tries to sychronize time between the devices and
@@ -39,8 +40,8 @@ namespace HomeRun.Net
 		private const int TIME_SYNC_MESSAGE_COUNT = 7;
 		private const byte START_TIME_MESSAGE = 2;
 		private const uint START_TIME_MESSAGE_SIZE = 1+4;
-		private const byte LOCAL_BALLS_UPDATE_MESSAGE = 4;
-		private const uint LOCAL_BALLS_UPDATE_MESSATE_SIZE_MAX = 1+4+(2*Player.MAX_BALLS*(1+4+12+12));
+		private const byte LOCAL_BALLS_UPDATE_MESSAGE = 5;
+		private const uint LOCAL_BALLS_UPDATE_MESSATE_SIZE_MAX = 1+1+4+(2*Player.MAX_BALLS*(1+4+12+12));
 		private const float LOCAL_BALLS_UPDATE_DELAY = 0.1f;
 
 		// cache of local balls that we are sending updates for
@@ -340,9 +341,9 @@ namespace HomeRun.Net
 
 		#region Ball Tansforms
 
-		public void AddNetworkBall(GameObject ball)
+		public void AddNetworkBall(GameObject ball, BallType type)
 		{
-			m_localBalls[ball.GetInstanceID()] = ball.AddComponent<P2PNetworkBall>();
+			m_localBalls[ball.GetInstanceID()] = ball.AddComponent<P2PNetworkBall>().SetType(type);
 		}
 
 		public void RemoveNetworkBall(GameObject ball)
@@ -362,6 +363,7 @@ namespace HomeRun.Net
 
 			foreach (var ball in m_localBalls.Values)
 			{
+				PackInt32((int)ball.BallType, sendBuffer, ref offset);
 				PackBool(ball.IsHeld(), sendBuffer, ref offset);
 				PackInt32(ball.gameObject.GetInstanceID(), sendBuffer, ref offset);
 				PackVector3(ball.transform.localPosition, sendBuffer, ref offset);
@@ -393,6 +395,7 @@ namespace HomeRun.Net
 			// loop over all ball updates in the message
 			while (offset != (int)msgLength)
 			{
+				int ballType = UnpackInt32(msg, ref offset);
 				bool isHeld = UnpackBool(msg, ref offset);
 				int instanceID = UnpackInt32(msg, ref offset);
 				Vector3 pos = UnpackVector3(msg, ref offset);
@@ -400,7 +403,7 @@ namespace HomeRun.Net
 
 				if (!m_remotePlayers[remoteID].activeBalls.ContainsKey(instanceID))
 				{
-					var newball = m_remotePlayers[remoteID].player.CreateBall().AddComponent<P2PNetworkBall>();
+					var newball = m_remotePlayers[remoteID].player.CreateBall((BallType)ballType).AddComponent<P2PNetworkBall>();
 					newball.transform.SetParent(m_remotePlayers[remoteID].player.transform.parent);
 					m_remotePlayers[remoteID].activeBalls[instanceID] = newball;
 				}
@@ -413,6 +416,8 @@ namespace HomeRun.Net
 		}
 
 		#endregion
+
+
 
 		#region Serialization
 

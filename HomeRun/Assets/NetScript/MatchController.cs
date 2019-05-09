@@ -213,12 +213,7 @@ namespace HomeRun.Net
 
         void MoveCameraToIdlePosition()
         {
-            var ejector = m_player.gameObject.GetComponentInChildren<BallEjector>();
-            if (ejector)
-            {
-                ejector.transform.SetParent(m_player.transform.parent, false);
-                m_player.transform.SetParent(m_idleAreaTransform, false);
-            }
+            m_player.transform.SetParent(m_idleAreaTransform, false);
         }
 
         void MoveCameraToMatchPosition()
@@ -228,9 +223,7 @@ namespace HomeRun.Net
                 var player = playerArea.GetComponentInChildren<LocalPlayer>();
                 if (player)
                 {
-                    var ejector = player.GetComponentInChildren<BallEjector>();
                     m_player.transform.SetParent(player.transform, false);
-                    ejector.transform.SetParent(m_player.transform, false);
                     break;
                 }
             }
