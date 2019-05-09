@@ -4,10 +4,14 @@ namespace HomeRun.Net
 	using UnityEngine.UI;
 	using System.Collections.Generic;
 
+	public enum PlayerType {
+		Batter,
+		Pitcher
+	}
+
 	// The base Player component manages the balls that are in play.  Besides spawning new balls,
 	// old balls are destroyed when too many are around or the Player object itself is destroyed.
 	public abstract class Player : MonoBehaviour {
-
 		// maximum number of balls allowed at a time
 		public const uint MAX_BALLS = 6;
 
@@ -28,26 +32,6 @@ namespace HomeRun.Net
 
 		// queue of active balls for the player to make sure too many arent in play
 		private Queue<GameObject> m_balls = new Queue<GameObject>();
-
-		// reference to a ball that hasn't been shot yet and is tied to the camera
-		private GameObject m_heldBall;
-
-		// when to spawn a new ball
-		private float m_nextSpawnTime;
-
-		#region Properties
-
-		public GameObject BallPrefab
-		{
-			set { m_ballPrefab = value; }
-		}
-
-		protected bool HasBall
-		{
-			get { return m_heldBall != null; }
-		}
-
-		#endregion
 
 		void Start()
 		{
@@ -72,36 +56,19 @@ namespace HomeRun.Net
 			return ball;
 		}
 
-		protected GameObject CheckSpawnBall()
-		{
-			switch (PlatformManager.CurrentState)
-			{
-				case PlatformManager.State.WAITING_TO_PRACTICE_OR_MATCHMAKE:
-				case PlatformManager.State.PLAYING_A_LOCAL_MATCH:
-				case PlatformManager.State.PLAYING_A_NETWORKED_MATCH:
-					if (Time.time >= m_nextSpawnTime && !HasBall)
-					{
-						m_heldBall = CreateBall();
-						return m_heldBall;
-					}
-					break;
-			}
-			return null;
-		}
+		// protected GameObject ShootBall()
+		// {
+		// 	GameObject ball = m_heldBall;
+		// 	m_heldBall = null;
 
-		protected GameObject ShootBall()
-		{
-			GameObject ball = m_heldBall;
-			m_heldBall = null;
+		// 	ball.GetComponent<Rigidbody>().useGravity = true;
+		// 	ball.GetComponent<Rigidbody>().detectCollisions = true;
+		// 	ball.GetComponent<Rigidbody>().AddForce(m_ballEjector.transform.forward * INITIAL_FORCE, ForceMode.Acceleration);
+		// 	ball.transform.SetParent(transform.parent, true);
 
-			ball.GetComponent<Rigidbody>().useGravity = true;
-			ball.GetComponent<Rigidbody>().detectCollisions = true;
-			ball.GetComponent<Rigidbody>().AddForce(m_ballEjector.transform.forward * INITIAL_FORCE, ForceMode.Acceleration);
-			ball.transform.SetParent(transform.parent, true);
-
-			m_nextSpawnTime = Time.time + RESPAWN_SECONDS;
-			return ball;
-		}
+		// 	m_nextSpawnTime = Time.time + RESPAWN_SECONDS;
+		// 	return ball;
+		// }
 
 		void OnDestroy()
 		{

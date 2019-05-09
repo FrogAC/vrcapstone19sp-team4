@@ -10,6 +10,8 @@ namespace HomeRun.Net
     // and entering a practice or online game match.
     public class MatchController : MonoBehaviour
     {
+        private PlayerType m_playerType = PlayerType.Batter;
+
         // Text to display when the match will start or finish
         [SerializeField] private Text m_timerText = null;
 
@@ -37,6 +39,12 @@ namespace HomeRun.Net
 
         // the court the local player was assigned to
         private int m_localSlot;
+
+        public PlayerType PlayerType
+        {
+            get { return m_playerType; }
+            set { m_playerType = value; }
+        }
 
         void Start()
         {

@@ -31,7 +31,6 @@ namespace HomeRun.Net
 
 		// authorized users to connect to and associated data
 		private readonly Dictionary<ulong, RemotePlayerData> m_remotePlayers = new Dictionary<ulong, RemotePlayerData>();
-
 		// when to send the next update to remotes on the state on my local balls
 		private float m_timeForNextBallUpdate;
 
