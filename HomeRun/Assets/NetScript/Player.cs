@@ -1,114 +1,89 @@
 namespace HomeRun.Net
 {
-	using UnityEngine;
-	using UnityEngine.UI;
-	using System.Collections.Generic;
+    using UnityEngine;
+    using UnityEngine.UI;
+    using System.Collections.Generic;
+    using HomeRun.Game;
 
-	// The base Player component manages the balls that are in play.  Besides spawning new balls,
-	// old balls are destroyed when too many are around or the Player object itself is destroyed.
-	public abstract class Player : MonoBehaviour {
+    public enum PlayerType
+    {
+        Batter,
+        Pitcher
+    }
 
-		// maximum number of balls allowed at a time
-		public const uint MAX_BALLS = 6;
+    // The base Player component manages the balls that are in play.  Besides spawning new balls,
+    // old balls are destroyed when too many are around or the Player object itself is destroyed.
+    public abstract class Player : MonoBehaviour
+    {
 
-		// the initial force to impart when shooting a ball
-		private const float INITIAL_FORCE = 870f;
+        // maximum number of balls allowed at a time
+        public const uint MAX_BALLS = 6;
 
-		// delay time before a new ball will spawn.
-		private const float RESPAWN_SECONDS = 2.0f;
+        // the initial force to impart when shooting a ball
+        private const float INITIAL_FORCE = 870f;
 
-		// cached reference to the Text component to render the score
-		private Text m_scoreUI;
+        // delay time before a new ball will spawn.
+        private const float RESPAWN_SECONDS = 2.0f;
 
-		// prefab for the GameObject representing a ball
-		private GameObject m_ballPrefab;
+        // cached reference to the Text component to render the score
+        private Text m_scoreUI;
 
-		// gameobject for the position and orientation of where the ball will be shot
-		private BallEjector m_ballEjector;
+        // prefab for the GameObject representing a ball
+        private GameObject m_ballPrefab;
 
-		// queue of active balls for the player to make sure too many arent in play
-		private Queue<GameObject> m_balls = new Queue<GameObject>();
+        // Pitcher
+        private BallSelector m_ballSelector;
 
-		// reference to a ball that hasn't been shot yet and is tied to the camera
-		private GameObject m_heldBall;
+        protected BallSelector BallSelector
+        {
+            set { m_ballSelector = value; }
+        }
 
-		// when to spawn a new ball
-		private float m_nextSpawnTime;
+        // queue of active balls for the player to make sure too many arent in play
+        private Queue<GameObject> m_balls = new Queue<GameObject>();
 
-		#region Properties
+        void Start()
+        {
+            m_scoreUI = transform.parent.GetComponentInChildren<Text>();
+            m_scoreUI.text = "0";
+        }
 
-		public GameObject BallPrefab
-		{
-			set { m_ballPrefab = value; }
-		}
+        public GameObject CreateBall(BallType ballType)
+        {
+            if (m_balls.Count >= MAX_BALLS)
+            {
+                Destroy(m_balls.Dequeue());
+            }
+            var ball = m_ballSelector.CreateBall(ballType);
+            m_balls.Enqueue(ball);
 
-		protected bool HasBall
-		{
-			get { return m_heldBall != null; }
-		}
+            ball.transform.position = m_ballSelector.SpawnPoint.position;
+            ball.transform.SetParent(m_ballSelector.SpawnPoint, true);
+            ball.GetComponent<Rigidbody>().useGravity = false;
+            ball.GetComponent<Rigidbody>().detectCollisions = false;
+            return ball;
+        }
 
-		#endregion
+        // protected GameObject ShootBall()
+        // {
+        // 	GameObject ball = m_heldBall;
+        // 	m_heldBall = null;
 
-		void Start()
-		{
-			m_ballEjector = transform.GetComponentInChildren<BallEjector>();
-			m_scoreUI = transform.parent.GetComponentInChildren<Text>();
-			m_scoreUI.text = "0";
-		}
+        // 	ball.GetComponent<Rigidbody>().useGravity = true;
+        // 	ball.GetComponent<Rigidbody>().detectCollisions = true;
+        // 	ball.GetComponent<Rigidbody>().AddForce(m_ballEjector.transform.forward * INITIAL_FORCE, ForceMode.Acceleration);
+        // 	ball.transform.SetParent(transform.parent, true);
 
-		public GameObject CreateBall()
-		{
-			if (m_balls.Count >= MAX_BALLS)
-			{
-				Destroy(m_balls.Dequeue());
-			}
-			var ball = Instantiate(m_ballPrefab);
-			m_balls.Enqueue(ball);
+        // 	m_nextSpawnTime = Time.time + RESPAWN_SECONDS;
+        // 	return ball;
+        // }
 
-			ball.transform.position = m_ballEjector.transform.position;
-			ball.transform.SetParent(m_ballEjector.transform, true);
-			ball.GetComponent<Rigidbody>().useGravity = false;
-			ball.GetComponent<Rigidbody>().detectCollisions = false;
-			return ball;
-		}
-
-		protected GameObject CheckSpawnBall()
-		{
-			switch (PlatformManager.CurrentState)
-			{
-				case PlatformManager.State.WAITING_TO_PRACTICE_OR_MATCHMAKE:
-				case PlatformManager.State.PLAYING_A_LOCAL_MATCH:
-				case PlatformManager.State.PLAYING_A_NETWORKED_MATCH:
-					if (Time.time >= m_nextSpawnTime && !HasBall)
-					{
-						m_heldBall = CreateBall();
-						return m_heldBall;
-					}
-					break;
-			}
-			return null;
-		}
-
-		protected GameObject ShootBall()
-		{
-			GameObject ball = m_heldBall;
-			m_heldBall = null;
-
-			ball.GetComponent<Rigidbody>().useGravity = true;
-			ball.GetComponent<Rigidbody>().detectCollisions = true;
-			ball.GetComponent<Rigidbody>().AddForce(m_ballEjector.transform.forward * INITIAL_FORCE, ForceMode.Acceleration);
-			ball.transform.SetParent(transform.parent, true);
-
-			m_nextSpawnTime = Time.time + RESPAWN_SECONDS;
-			return ball;
-		}
-
-		void OnDestroy()
-		{
-			foreach (var ball in m_balls)
-			{
-				Destroy(ball);
-			}
-		}
-	}
+        void OnDestroy()
+        {
+            foreach (var ball in m_balls)
+            {
+                Destroy(ball);
+            }
+        }
+    }
 }
