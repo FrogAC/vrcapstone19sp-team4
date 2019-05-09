@@ -127,7 +127,6 @@ namespace HomeRun.Net
                     continue;
 
                 packet.ReadBytes(readBuffer);
-				Debug.Log("Packet Receive" + readBuffer[0]);
 
                 switch (readBuffer[0])
                 {
