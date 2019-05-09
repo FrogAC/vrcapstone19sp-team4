@@ -6,6 +6,8 @@ namespace HomeRun.Net
 
 	public class PlayerArea : MonoBehaviour
 	{
+		[SerializeField] private PlayerType playerType = PlayerType.Batter;
+
 		// cached gameobject that where the player camera will move to
 		private GameObject m_playerHolder;
 
@@ -25,7 +27,7 @@ namespace HomeRun.Net
 		void Awake()
 		{
 			m_playerHolder = gameObject.transform.Find("Player Holder").gameObject;
-			m_nameText = gameObject.GetComponentsInChildren<Text>()[1];
+			m_nameText = gameObject.GetComponentInChildren<Text>();
 		}
 
 		public T SetupForPlayer<T>(string name) where T : Player
