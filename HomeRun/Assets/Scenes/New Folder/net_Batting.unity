@@ -1870,8 +1870,6 @@ GameObject:
   - component: {fileID: 1095769796}
   - component: {fileID: 1095769795}
   - component: {fileID: 1095769794}
-  - component: {fileID: 1095769793}
-  - component: {fileID: 1095769792}
   - component: {fileID: 1095769791}
   - component: {fileID: 1095769790}
   - component: {fileID: 1095769789}
@@ -1922,7 +1920,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1095769787}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   m_Radius: 1.08
   m_Height: 6.41
   m_Direction: 1
@@ -1941,38 +1939,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1095769792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1095769787}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 501f2be83d7cdb24dbc4aa3b034e9184, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grabbable: {fileID: 1095769793}
-  rb: {fileID: 1095769794}
---- !u!114 &1095769793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1095769787}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d61468f8b77ae4b92c344bc9a600fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_allowOffhandGrab: 1
-  m_snapPosition: 0
-  m_snapOrientation: 0
-  m_snapOffset: {fileID: 0}
-  m_grabPoints:
-  - {fileID: 1095769791}
 --- !u!54 &1095769794
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2405,7 +2371,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 5169800952663457035}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   m_Radius: 1.08
   m_Height: 6.41
   m_Direction: 1
