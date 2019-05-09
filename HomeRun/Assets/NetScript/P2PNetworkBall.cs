@@ -48,6 +48,7 @@ namespace HomeRun.Net
 		{
 			if (isHeld)
 			{
+				Debug.Log("UPDATE BALL POS");
 				transform.position = pos;
 			}
 			// TODO
