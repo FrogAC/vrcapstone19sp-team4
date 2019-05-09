@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HomeRun.Net;
 using TMPro;
 
 public class BallSelector : MonoBehaviour
@@ -59,7 +60,10 @@ public class BallSelector : MonoBehaviour
         spawnedPrefab = Instantiate(selections[currentIndex].prefab, spawnPoint.position, spawnPoint.rotation, spawnPoint);
         spawnedGrabbable = spawnedPrefab.GetComponent<OVRGrabbable>();
         spawnedPrefab.GetComponent<Rigidbody>().isKinematic = true;
-
+        
+        if (PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH) {
+            PlatformManager.P2P.AddNetworkBall(spawnedPrefab);
+        }
         UpdateBallNameText();
     }
 

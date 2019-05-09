@@ -6,18 +6,15 @@ namespace HomeRun.Net
 
 	public class PlayerArea : MonoBehaviour
 	{
-		// the prefab for the ball that players will shoot
-		[SerializeField] private GameObject m_ballPrefab = null;
-
 		// cached gameobject that where the player camera will move to
-		private GameObject m_playerHead;
+		private GameObject m_playerHolder;
 
 		// cached Text component where we'll render the player's name
 		private Text m_nameText;
 
 		public Player Player
 		{
-			get { return m_playerHead.GetComponent<Player>(); }
+			get { return m_playerHolder.GetComponent<Player>(); }
 		}
 
 		public Text NameText
@@ -27,16 +24,16 @@ namespace HomeRun.Net
 
 		void Awake()
 		{
-			m_playerHead = gameObject.transform.Find("Player Head").gameObject;
+			m_playerHolder = gameObject.transform.Find("Player Holder").gameObject;
 			m_nameText = gameObject.GetComponentsInChildren<Text>()[1];
 		}
 
 		public T SetupForPlayer<T>(string name) where T : Player
 		{
-			var oldplayer = m_playerHead.GetComponent<Player>();
+			var oldplayer = m_playerHolder.GetComponent<Player>();
 			if (oldplayer) Destroy(oldplayer);
 
-			var player = m_playerHead.AddComponent<T>();
+			var player = m_playerHolder.AddComponent<T>();
 			m_nameText.text = name;
 
 			if (player is RemotePlayer)
