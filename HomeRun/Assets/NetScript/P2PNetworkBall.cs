@@ -48,12 +48,14 @@ namespace HomeRun.Net
 		{
 			if (isHeld)
 			{
-				transform.localPosition = pos;
+				transform.position = pos;
 			}
+			// TODO
 			// if we've collided since the update was sent, our state is going to be more accurate so
 			// it's better to ignore the update
 			else if (lastCollisionTime < remoteTime)
 			{
+				Debug.Log("SHOULDNT SEE THIS UPDATE!");
 				// To correct the position this sample directly moves the ball.
 				// Another approach would be to gradually lerp the ball there during
 				// FixedUpdate.  However, that approach aggravates any errors that
