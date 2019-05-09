@@ -20,7 +20,7 @@ public class MatchStartTrigger : MonoBehaviour
 
         var triggers = GameObject.FindObjectsOfType<MatchStartTrigger>();
         foreach (var trigger in triggers) {
-            trigger.enabled = false;
+            trigger.gameObject.SetActive(false);
         }
     }
 }
