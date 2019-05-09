@@ -9,8 +9,6 @@ namespace HomeRun.Net
 		private static PlatformManager s_instance;
 		private MatchmakingManager m_matchmaking;
 		private P2PManager m_p2p;
-		private LeaderboardManager m_leaderboards;
-		private AchievementsManager m_achievements;
 		private State m_currentState;
 
 		// my Application-scoped Oculus ID
@@ -22,7 +20,6 @@ namespace HomeRun.Net
 		void Update()
 		{
 			m_p2p.UpdateNetwork();
-			m_leaderboards.CheckForUpdates();
 		}
 
 		#region Initialization and Shutdown
@@ -42,8 +39,6 @@ namespace HomeRun.Net
 			Core.Initialize();
 			m_matchmaking = new MatchmakingManager();
 			m_p2p = new P2PManager();
-			m_leaderboards = new LeaderboardManager();
-			m_achievements = new AchievementsManager();
 		}
 
 
@@ -78,7 +73,6 @@ namespace HomeRun.Net
 			m_myOculusID = msg.Data.OculusID;
 
 			TransitionToState(State.WAITING_TO_PRACTICE_OR_MATCHMAKE);
-			Achievements.CheckForAchievmentUpdates();
 		}
 
 		// In this example, for most errors, we terminate the Application.  A full App would do
@@ -112,16 +106,6 @@ namespace HomeRun.Net
 		public static P2PManager P2P
 		{
 			get { return s_instance.m_p2p; }
-		}
-
-		public static LeaderboardManager Leaderboards
-		{
-			get { return s_instance.m_leaderboards; }
-		}
-
-		public static AchievementsManager Achievements
-		{
-			get { return s_instance.m_achievements; }
 		}
 
 		public static State CurrentState
