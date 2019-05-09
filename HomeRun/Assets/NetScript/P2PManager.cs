@@ -99,12 +99,15 @@ namespace HomeRun.Net
 
         #endregion
 
-        public P2PManager(Transform head, Transform bat, Transform localHead, Transform localBat)
+        public P2PManager(Transform head, Transform bat, Transform glove, Transform localHead, Transform localBat, Transform localGlove)
         {
             remoteHeadTransform = head;
             remoteBatTransform = bat;
+			remoteGloveTransform = glove;
+
             localHeadTransform = localHead;
             localBatTransform = localBat;
+			localGloveTransform = localGlove;
             Net.SetPeerConnectRequestCallback(PeerConnectRequestCallback);
             Net.SetConnectionStateChangedCallback(ConnectionStateChangedCallback);
         }
