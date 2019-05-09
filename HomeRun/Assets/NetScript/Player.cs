@@ -57,10 +57,8 @@ namespace HomeRun.Net
             var ball = m_ballSelector.CreateBall(ballType);
             m_balls.Enqueue(ball);
 
-            ball.transform.position = m_ballSelector.SpawnPoint.position;
-            ball.transform.SetParent(m_ballSelector.SpawnPoint, true);
-            ball.GetComponent<Rigidbody>().useGravity = false;
-            ball.GetComponent<Rigidbody>().detectCollisions = false;
+            // ball.transform.position = m_ballSelector.SpawnPoint.position;
+            // ball.transform.SetParent(m_ballSelector.SpawnPoint, true);
             return ball;
         }
 

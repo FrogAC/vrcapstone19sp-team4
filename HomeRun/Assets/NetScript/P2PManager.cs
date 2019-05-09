@@ -51,16 +51,16 @@ namespace HomeRun.Net
         private const int TIME_SYNC_MESSAGE_COUNT = 7;
         private const byte START_TIME_MESSAGE = 2;
         private const uint START_TIME_MESSAGE_SIZE = 1 + 4;
-        private const byte LOCAL_BALLS_UPDATE_MESSAGE = 5;
-        private const uint LOCAL_BALLS_UPDATE_MESSATE_SIZE_MAX = 1 + 4 + 4 + (2 * Player.MAX_BALLS * (1 + 4 + 12 + 12));
-        private const float LOCAL_BALLS_UPDATE_DELAY = 0.1f;
-        private const byte LOCAL_HEAD_UPDATE_MESSAGE = 6;
-        private const byte LOCAL_BAT_UPDATE_MESSAGE = 7;
-        private const byte LOCAL_GLOVE_UPDATE_MESSAGE = 8;
+        private const byte LOCAL_BALLS_UPDATE_MESSAGE = 3;
+        private const uint LOCAL_BALLS_UPDATE_MESSATE_SIZE_MAX = 1 + 4 + (2 * Player.MAX_BALLS * (1 + 4 + 4 + 12 + 12));
+        private const float LOCAL_BALLS_UPDATE_DELAY = 0.011f;
+        private const byte LOCAL_HEAD_UPDATE_MESSAGE = 4;
+        private const byte LOCAL_BAT_UPDATE_MESSAGE = 5;
+        private const byte LOCAL_GLOVE_UPDATE_MESSAGE = 6;
         private const byte LOCAL_PACKET_SIZE = 4 + 29;
 		
 		// 90fps = 0.011, 120fps = 0.008
-        private const float LOCAL_UPDATE_DELAY = 0.011f;
+        private const float LOCAL_UPDATE_DELAY = 0.04f;
 
         // cache of local balls that we are sending updates for
         private readonly Dictionary<int, P2PNetworkBall> m_localBalls = new Dictionary<int, P2PNetworkBall>();
@@ -430,7 +430,7 @@ namespace HomeRun.Net
         {
             m_timeForNextBallUpdate = Time.time + LOCAL_BALLS_UPDATE_DELAY;
 
-            int msgSize = 1 + 4 + 4 + (m_localBalls.Count * (1 + 4 + 12 + 12));
+            int msgSize = 1 + 4 + (m_localBalls.Count * (1 + 4 + 4 + 12 + 12));
             byte[] sendBuffer = new byte[msgSize];
             sendBuffer[0] = LOCAL_BALLS_UPDATE_MESSAGE;
             int offset = 1;
@@ -441,7 +441,7 @@ namespace HomeRun.Net
                 PackInt32((int)ball.BallType, sendBuffer, ref offset);
                 PackBool(ball.IsHeld(), sendBuffer, ref offset);
                 PackInt32(ball.gameObject.GetInstanceID(), sendBuffer, ref offset);
-                PackVector3(ball.transform.localPosition, sendBuffer, ref offset);
+                PackVector3(ball.transform.position, sendBuffer, ref offset);
                 PackVector3(ball.velocity, sendBuffer, ref offset);
             }
 
