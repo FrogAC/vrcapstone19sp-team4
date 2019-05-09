@@ -22,6 +22,7 @@ namespace HomeRun.Net
         [SerializeField] private Transform m_idleAreaTransform = null;
 
         // this should equal the maximum number of players configured on the Oculus Dashboard
+        // 0 = Batter, 1 = Pitcher
         [SerializeField] private PlayerArea[] m_playerAreas = new PlayerArea[2];
 
         // seconds to wait to coordinate P2P setup with other match players before starting
@@ -197,14 +198,14 @@ namespace HomeRun.Net
             {
                 if (user.ID == PlatformManager.MyID)
                 {
-                    var localPlayer = m_playerAreas[slot].SetupForPlayer<LocalPlayer>(user.OculusID);
+                    var localPlayer = m_playerAreas[(int)m_playerType].SetupForPlayer<LocalPlayer>(user.OculusID);
                     MoveCameraToMatchPosition();
                     player = localPlayer;
                     m_localSlot = slot;
                 }
                 else
                 {
-                    var remotePlayer = m_playerAreas[slot].SetupForPlayer<RemotePlayer>(user.OculusID);
+                    var remotePlayer = m_playerAreas[1-(int)m_playerType].SetupForPlayer<RemotePlayer>(user.OculusID);
                     remotePlayer.User = user;
                     player = remotePlayer;
                 }

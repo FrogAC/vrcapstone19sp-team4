@@ -58,7 +58,9 @@ namespace HomeRun.Net
         private const byte LOCAL_BAT_UPDATE_MESSAGE = 7;
         private const byte LOCAL_GLOVE_UPDATE_MESSAGE = 8;
         private const byte LOCAL_PACKET_SIZE = 4 + 29;
-        private const float LOCAL_UPDATE_DELAY = 0.03f;
+		
+		// 90fps = 0.011, 120fps = 0.008
+        private const float LOCAL_UPDATE_DELAY = 0.011f;
 
         // cache of local balls that we are sending updates for
         private readonly Dictionary<int, P2PNetworkBall> m_localBalls = new Dictionary<int, P2PNetworkBall>();

@@ -5,10 +5,10 @@ namespace HomeRun.Net
     using System.Collections.Generic;
     using HomeRun.Game;
 
-    public enum PlayerType
+    public enum PlayerType : int
     {
-        Batter,
-        Pitcher
+        Batter = 0,
+        Pitcher = 1
     }
 
     // The base Player component manages the balls that are in play.  Besides spawning new balls,
