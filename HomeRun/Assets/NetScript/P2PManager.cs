@@ -641,9 +641,9 @@ namespace HomeRun.Net
 
             float completed = Math.Min(Time.time - remoteTime, LOCAL_UPDATE_DELAY) / LOCAL_UPDATE_DELAY;
             remoteGloveTransform.position =
-                Vector3.Lerp(batData.receivedPositionPrior, gloveData.receivedPosition, completed);
+                Vector3.Lerp(gloveData.receivedPositionPrior, gloveData.receivedPosition, completed);
             remoteGloveTransform.rotation =
-                Quaternion.Slerp(batData.receivedRotationPrior, gloveData.receivedRotation, completed);
+                Quaternion.Slerp(gloveData.receivedRotationPrior, gloveData.receivedRotation, completed);
         }
 
 
