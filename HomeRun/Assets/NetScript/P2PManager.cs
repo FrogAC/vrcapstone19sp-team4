@@ -60,7 +60,7 @@ namespace HomeRun.Net
         private const byte LOCAL_PACKET_SIZE = 4 + 29;
 		
 		// 90fps = 0.011, 120fps = 0.008
-        private const float LOCAL_UPDATE_DELAY = 0.04f;
+        private const float LOCAL_UPDATE_DELAY = 0.01f;
 
         // cache of local balls that we are sending updates for
         private readonly Dictionary<int, P2PNetworkBall> m_localBalls = new Dictionary<int, P2PNetworkBall>();
