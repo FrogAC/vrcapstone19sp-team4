@@ -37,7 +37,6 @@ namespace HomeRun.Net
 			if (oldplayer) Destroy(oldplayer);
 
 			var player = m_playerHead.AddComponent<T>();
-			player.BallPrefab = m_ballPrefab;
 			m_nameText.text = name;
 
 			if (player is RemotePlayer)
