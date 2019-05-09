@@ -6,7 +6,7 @@
     using HomeRun.Net;
     using TMPro;
 
-    public enum BallType
+    public enum BallType : int
     {
         FastBall = 0,
         CurveBall = 1,

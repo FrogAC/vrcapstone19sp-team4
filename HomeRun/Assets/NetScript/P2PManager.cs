@@ -52,13 +52,13 @@ namespace HomeRun.Net
         private const byte START_TIME_MESSAGE = 2;
         private const uint START_TIME_MESSAGE_SIZE = 1 + 4;
         private const byte LOCAL_BALLS_UPDATE_MESSAGE = 5;
-        private const uint LOCAL_BALLS_UPDATE_MESSATE_SIZE_MAX = 1 + 1 + 4 + (2 * Player.MAX_BALLS * (1 + 4 + 12 + 12));
+        private const uint LOCAL_BALLS_UPDATE_MESSATE_SIZE_MAX = 1 + 4 + 4 + (2 * Player.MAX_BALLS * (1 + 4 + 12 + 12));
         private const float LOCAL_BALLS_UPDATE_DELAY = 0.1f;
         private const byte LOCAL_HEAD_UPDATE_MESSAGE = 6;
         private const byte LOCAL_BAT_UPDATE_MESSAGE = 7;
         private const byte LOCAL_GLOVE_UPDATE_MESSAGE = 8;
         private const byte LOCAL_PACKET_SIZE = 4 + 29;
-        private const float LOCAL_UPDATE_DELAY = 0.1f;
+        private const float LOCAL_UPDATE_DELAY = 0.03f;
 
         // cache of local balls that we are sending updates for
         private readonly Dictionary<int, P2PNetworkBall> m_localBalls = new Dictionary<int, P2PNetworkBall>();
@@ -428,7 +428,7 @@ namespace HomeRun.Net
         {
             m_timeForNextBallUpdate = Time.time + LOCAL_BALLS_UPDATE_DELAY;
 
-            int msgSize = 1 + 1 + 4 + (m_localBalls.Count * (1 + 4 + 12 + 12));
+            int msgSize = 1 + 4 + 4 + (m_localBalls.Count * (1 + 4 + 12 + 12));
             byte[] sendBuffer = new byte[msgSize];
             sendBuffer[0] = LOCAL_BALLS_UPDATE_MESSAGE;
             int offset = 1;
@@ -536,7 +536,7 @@ namespace HomeRun.Net
         {
             m_timeForNextGloveUpdate = Time.time + LOCAL_UPDATE_DELAY;
 
-            sendTransformBuffer[0] = LOCAL_BAT_UPDATE_MESSAGE;  // Packet format
+            sendTransformBuffer[0] = LOCAL_GLOVE_UPDATE_MESSAGE;  // Packet format
             int offset = 1;
             PackFloat(Time.realtimeSinceStartup, sendTransformBuffer, ref offset);
 
