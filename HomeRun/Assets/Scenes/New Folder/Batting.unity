@@ -175,6 +175,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3488583714348692919, guid: ce816f2e6abb0504092c23ed9b970dfd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1075553486, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
       propertyPath: m_Convex
       value: 1
@@ -182,11 +187,6 @@ PrefabInstance:
     - target: {fileID: 1075553486, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
       propertyPath: m_Enabled
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3488583714348692919, guid: ce816f2e6abb0504092c23ed9b970dfd,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
@@ -1320,6 +1320,7 @@ GameObject:
   - component: {fileID: 5169800952663457036}
   - component: {fileID: 1389212603068418274}
   - component: {fileID: 1300347039}
+  - component: {fileID: 5169800952663457037}
   m_Layer: 11
   m_Name: Handle (ball handles hit)
   m_TagString: Bat
@@ -1341,6 +1342,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grabbable: {fileID: 5169800952663457034}
   rb: {fileID: 5169800952663457141}
+--- !u!114 &5169800952663457037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5169800952663457035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2ce255ee3f27be408d5e54cc89aca43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 5814903909371394753, guid: 11cafb6105ef6964fa583f7f54623fcb, type: 3}
 --- !u!4 &5169800952663457137
 Transform:
   m_ObjectHideFlags: 0

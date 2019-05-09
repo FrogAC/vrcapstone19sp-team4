@@ -6,7 +6,7 @@
     using HomeRun.Net;
     using TMPro;
 
-    public enum BallType
+    public enum BallType : int
     {
         FastBall = 0,
         CurveBall = 1,
@@ -64,10 +64,12 @@
             }
         }
 
-        // For Network
+        // Used for Create remote Ball
         public GameObject CreateBall(BallType ballType) {
-            GameObject ball = Instantiate(selections[currentIndex].prefab, spawnPoint.position, spawnPoint.rotation, spawnPoint);
+            GameObject ball = Instantiate(selections[(int)ballType].prefab, spawnPoint.position, spawnPoint.rotation, spawnPoint);
             ball.GetComponent<Rigidbody>().isKinematic = true;
+            // Debug
+            ball.GetComponent<ThrownBall>().enabled = false;
             return ball;
         }
 
