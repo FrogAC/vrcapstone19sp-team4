@@ -15,8 +15,12 @@ namespace HomeRun.Net
     {
         #region Member variables
 
-		private Transform headTransform;
-		private Transform batTransform;
+		private Transform remoteHeadTransform;
+		private Transform remoteBatTransform;
+
+		private Transform localHeadTransform;
+		private Transform localBatTransform;
+
         // helper class to hold data we need for remote players
         private class RemotePlayerData
         {
@@ -48,7 +52,7 @@ namespace HomeRun.Net
         private const uint LOCAL_BALLS_UPDATE_MESSATE_SIZE_MAX = 1 + 1 + 4 + (2 * Player.MAX_BALLS * (1 + 4 + 12 + 12));
         private const float LOCAL_BALLS_UPDATE_DELAY = 0.1f;
         private const byte LOCAL_HEAD_UPDATE_MESSAGE = 6;
-        private const byte LOCAL_BAT_UPDATE_MESSAGE = 6;
+        private const byte LOCAL_BAT_UPDATE_MESSAGE = 7;
         private const byte LOCAL_PACKET_SIZE = 4+29;
         private const float LOCAL_UPDATE_DELAY = 0.1f;
 
@@ -90,10 +94,12 @@ namespace HomeRun.Net
 
         #endregion
 
-        public P2PManager(Transform head, Transform bat)
+        public P2PManager(Transform head, Transform bat, Transform localHead, Transform localBat)
         {
-			headTransform = head;
-			batTransform = bat;
+			remoteHeadTransform = head;
+			remoteBatTransform = bat;
+			localHeadTransform = localHead;
+			localBatTransform = localBat;
             Net.SetPeerConnectRequestCallback(PeerConnectRequestCallback);
             Net.SetConnectionStateChangedCallback(ConnectionStateChangedCallback);
         }
@@ -127,6 +133,14 @@ namespace HomeRun.Net
                     case LOCAL_BALLS_UPDATE_MESSAGE:
                         ReceiveBallTransforms(packet.SenderID, readBuffer, packet.Size);
                         break;
+
+                    case LOCAL_HEAD_UPDATE_MESSAGE:
+                        ReceiveHeadTransforms(packet.SenderID, readBuffer, packet.Size);
+                        break;
+
+                    case LOCAL_BAT_UPDATE_MESSAGE:
+                        ReceiveBatTransforms(packet.SenderID, readBuffer, packet.Size);
+                        break;
                 }
             }
 
@@ -137,8 +151,12 @@ namespace HomeRun.Net
 
             if (Time.time >= m_timeForNextHeadUpdate)
             {
-
+				SendHeadTransform(localHeadTransform);
             }
+
+			if (Time.time >= m_timeForNextBatUpdate) {
+				SendBatTransform(localBatTransform);
+			}
         }
 
         #region Connection Management
@@ -519,9 +537,9 @@ namespace HomeRun.Net
             }
 
 			float completed = Math.Min(Time.time - remoteTime, LOCAL_UPDATE_DELAY) / LOCAL_UPDATE_DELAY;
-			headTransform.position =
+			remoteHeadTransform.position =
 				Vector3.Lerp(headInfo.receivedPositionPrior, headInfo.receivedPosition, completed);
-			headTransform.rotation =
+			remoteHeadTransform.rotation =
 				Quaternion.Slerp(headInfo.receivedRotationPrior, headInfo.receivedRotation, completed);
         }
 
@@ -550,9 +568,9 @@ namespace HomeRun.Net
             }
 
 			float completed = Math.Min(Time.time - remoteTime, LOCAL_UPDATE_DELAY) / LOCAL_UPDATE_DELAY;
-			batTransform.position =
+			remoteBatTransform.position =
 				Vector3.Lerp(batInfo.receivedPositionPrior, batInfo.receivedPosition, completed);
-			batTransform.rotation = 
+			remoteBatTransform.rotation = 
 				Quaternion.Slerp(batInfo.receivedRotationPrior, batInfo.receivedRotation, completed);
         }
         #endregion
