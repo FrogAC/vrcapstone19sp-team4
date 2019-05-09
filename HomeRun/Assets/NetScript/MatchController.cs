@@ -194,6 +194,7 @@ namespace HomeRun.Net
         {
             Player player = null;
 
+            // slot used only for verification at this point
             if (m_currentState == State.WAITING_TO_SETUP_MATCH && slot < m_playerAreas.Length)
             {
                 if (user.ID == PlatformManager.MyID)
@@ -233,6 +234,7 @@ namespace HomeRun.Net
                 {
                     m_player.transform.SetParent(player.transform, false);
                     m_player.transform.localPosition = Vector3.zero;
+                    m_player.transform.rotation = playerArea.transform.rotation;
                     break;
                 }
             }
