@@ -609,8 +609,9 @@ namespace HomeRun.Net
             float completed = Math.Min(Time.time - remoteTime, LOCAL_UPDATE_DELAY) / LOCAL_UPDATE_DELAY;
             remoteBatTransform.position =
                 Vector3.Lerp(batData.receivedPositionPrior, batData.receivedPosition, completed);
-            remoteBatTransform.rotation =
-                Quaternion.Slerp(batData.receivedRotationPrior, batData.receivedRotation, completed);
+            // remoteBatTransform.rotation =
+            //     Quaternion.Slerp(batData.receivedRotationPrior, batData.receivedRotation, completed);
+			remoteBatTransform.rotation = batData.receivedRotation;
         }
 
         void ReceiveGloveTransforms(ulong remoteID, byte[] msg, ulong msgLength)
