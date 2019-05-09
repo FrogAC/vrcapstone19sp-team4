@@ -6,8 +6,8 @@ namespace HomeRun.Net
 
 	public class PlatformManager : MonoBehaviour
 	{
-		[SerializeField] private GameObject m_remoteHead = null;
-		[SerializeField] private GameObject m_remoteBat = null;
+		[SerializeField] private Transform m_remoteHead = null;
+		[SerializeField] private Transform m_remoteBat = null;
 
 		private static PlatformManager s_instance;
 		private MatchmakingManager m_matchmaking;
@@ -42,7 +42,7 @@ namespace HomeRun.Net
 
 			Core.Initialize();
 			m_matchmaking = new MatchmakingManager();
-			m_p2p = new P2PManager();
+			m_p2p = new P2PManager(m_remoteHead, m_remoteBat);
 		}
 
 
