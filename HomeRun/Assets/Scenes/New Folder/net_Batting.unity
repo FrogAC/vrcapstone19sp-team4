@@ -2148,7 +2148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1649993221}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RemoteBat
   m_TagString: Untagged
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -2868,7 +2868,7 @@ GameObject:
   - component: {fileID: 2132952335}
   - component: {fileID: 2132952334}
   - component: {fileID: 2132952337}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Capsule
   m_TagString: Bat
   m_Icon: {fileID: 0}
