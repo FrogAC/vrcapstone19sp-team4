@@ -638,9 +638,9 @@ namespace HomeRun.Net
             }
 
             float completed = Math.Min(Time.time - remoteTime, LOCAL_UPDATE_DELAY) / LOCAL_UPDATE_DELAY;
-            remoteBatTransform.position =
+            remoteGloveTransform.position =
                 Vector3.Lerp(batData.receivedPositionPrior, gloveData.receivedPosition, completed);
-            remoteBatTransform.rotation =
+            remoteGloveTransform.rotation =
                 Quaternion.Slerp(batData.receivedRotationPrior, gloveData.receivedRotation, completed);
         }
 
