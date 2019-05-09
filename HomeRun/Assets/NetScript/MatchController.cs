@@ -167,7 +167,7 @@ namespace HomeRun.Net
                         break;
                     case State.PLAYING_MATCH:
                         var delta = m_nextStateTransitionTime - Time.time;
-                        delta = 50.0f;
+                        m_nextStateTransitionTime += delta + 1.0f;
                         m_timerText.text = string.Format("{0:#0}:{1:#00}.{2:00}",
                             Mathf.Floor(delta / 60),
                             Mathf.Floor(delta) % 60,
