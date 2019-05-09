@@ -15,11 +15,13 @@ namespace HomeRun.Net
     {
         #region Member variables
 
-		private Transform remoteHeadTransform;
-		private Transform remoteBatTransform;
+        private Transform remoteHeadTransform;
+        private Transform remoteBatTransform;
+        private Transform remoteGloveTransform;
 
-		private Transform localHeadTransform;
-		private Transform localBatTransform;
+        private Transform localHeadTransform;
+        private Transform localBatTransform;
+        private Transform localGloveTransform;
 
         // helper class to hold data we need for remote players
         private class RemotePlayerData
@@ -42,6 +44,7 @@ namespace HomeRun.Net
         private float m_timeForNextBallUpdate;
         private float m_timeForNextHeadUpdate;
         private float m_timeForNextBatUpdate;
+        private float m_timeForNextGloveUpdate;
 
         private const byte TIME_SYNC_MESSAGE = 1;
         private const uint TIME_SYNC_MESSAGE_SIZE = 1 + 4;
@@ -53,7 +56,8 @@ namespace HomeRun.Net
         private const float LOCAL_BALLS_UPDATE_DELAY = 0.1f;
         private const byte LOCAL_HEAD_UPDATE_MESSAGE = 6;
         private const byte LOCAL_BAT_UPDATE_MESSAGE = 7;
-        private const byte LOCAL_PACKET_SIZE = 4+29;
+        private const byte LOCAL_GLOVE_UPDATE_MESSAGE = 8;
+        private const byte LOCAL_PACKET_SIZE = 4 + 29;
         private const float LOCAL_UPDATE_DELAY = 0.1f;
 
         // cache of local balls that we are sending updates for
@@ -73,9 +77,9 @@ namespace HomeRun.Net
         // the delegate to handle start-time coordination
         private StartTimeOffer m_startTimeOfferCallback;
 
-        private struct TransformInfoStruct
+        private struct TransformDataStruct
         {
-			public float lastReceivedTime;
+            public float lastReceivedTime;
             // the last received position update
             public Vector3 receivedPosition;
 
@@ -89,17 +93,18 @@ namespace HomeRun.Net
             public Quaternion receivedRotationPrior;
         }
 
-		private TransformInfoStruct headInfo = new TransformInfoStruct();
-		private TransformInfoStruct batInfo = new TransformInfoStruct();
+        private TransformDataStruct headData = new TransformDataStruct();
+        private TransformDataStruct batData = new TransformDataStruct();
+        private TransformDataStruct gloveData = new TransformDataStruct();
 
         #endregion
 
         public P2PManager(Transform head, Transform bat, Transform localHead, Transform localBat)
         {
-			remoteHeadTransform = head;
-			remoteBatTransform = bat;
-			localHeadTransform = localHead;
-			localBatTransform = localBat;
+            remoteHeadTransform = head;
+            remoteBatTransform = bat;
+            localHeadTransform = localHead;
+            localBatTransform = localBat;
             Net.SetPeerConnectRequestCallback(PeerConnectRequestCallback);
             Net.SetConnectionStateChangedCallback(ConnectionStateChangedCallback);
         }
@@ -141,6 +146,10 @@ namespace HomeRun.Net
                     case LOCAL_BAT_UPDATE_MESSAGE:
                         ReceiveBatTransforms(packet.SenderID, readBuffer, packet.Size);
                         break;
+
+                    case LOCAL_GLOVE_UPDATE_MESSAGE:
+                        ReceiveGloveTransforms(packet.SenderID, readBuffer, packet.Size);
+                        break;
                 }
             }
 
@@ -151,12 +160,18 @@ namespace HomeRun.Net
 
             if (Time.time >= m_timeForNextHeadUpdate)
             {
-				SendHeadTransform(localHeadTransform);
+                SendHeadTransform(localHeadTransform);
             }
 
-			if (Time.time >= m_timeForNextBatUpdate) {
-				SendBatTransform(localBatTransform);
-			}
+            if (Time.time >= m_timeForNextBatUpdate)
+            {
+                SendBatTransform(localBatTransform);
+            }
+
+            if (Time.time >= m_timeForNextGloveUpdate)
+            {
+                SendGloveTransform(localGloveTransform);
+            }
         }
 
         #region Connection Management
@@ -471,7 +486,7 @@ namespace HomeRun.Net
 
         #endregion
 
-        #region Head and Bat Transforms
+        #region Head Bat Glove Transforms
 
         public void SendHeadTransform(Transform headTransform)
         {
@@ -481,7 +496,7 @@ namespace HomeRun.Net
             int offset = 1;
             PackFloat(Time.realtimeSinceStartup, sendTransformBuffer, ref offset);
 
-			PackVector3(headTransform.position, sendTransformBuffer, ref offset);
+            PackVector3(headTransform.position, sendTransformBuffer, ref offset);
             PackQuaternion(headTransform.rotation, sendTransformBuffer, ref offset);
 
             foreach (KeyValuePair<ulong, RemotePlayerData> player in m_remotePlayers)
@@ -499,10 +514,30 @@ namespace HomeRun.Net
 
             sendTransformBuffer[0] = LOCAL_BAT_UPDATE_MESSAGE;  // Packet format
             int offset = 1;
-			PackFloat(Time.realtimeSinceStartup, sendTransformBuffer, ref offset);
-			
-			PackVector3(batTransform.position, sendTransformBuffer, ref offset);
+            PackFloat(Time.realtimeSinceStartup, sendTransformBuffer, ref offset);
+
+            PackVector3(batTransform.position, sendTransformBuffer, ref offset);
             PackQuaternion(batTransform.rotation, sendTransformBuffer, ref offset);
+
+            foreach (KeyValuePair<ulong, RemotePlayerData> player in m_remotePlayers)
+            {
+                if (player.Value.state == PeerConnectionState.Connected)
+                {
+                    Net.SendPacket(player.Key, sendTransformBuffer, SendPolicy.Unreliable);
+                }
+            }
+        }
+
+        public void SendGloveTransform(Transform gloveTransform)
+        {
+            m_timeForNextGloveUpdate = Time.time + LOCAL_UPDATE_DELAY;
+
+            sendTransformBuffer[0] = LOCAL_BAT_UPDATE_MESSAGE;  // Packet format
+            int offset = 1;
+            PackFloat(Time.realtimeSinceStartup, sendTransformBuffer, ref offset);
+
+            PackVector3(gloveTransform.position, sendTransformBuffer, ref offset);
+            PackQuaternion(gloveTransform.rotation, sendTransformBuffer, ref offset);
 
             foreach (KeyValuePair<ulong, RemotePlayerData> player in m_remotePlayers)
             {
@@ -521,26 +556,26 @@ namespace HomeRun.Net
             // because we're using unreliable networking the packets could come out of order
             // and the best thing to do is just ignore old packets because the data isn't
             // very useful anyway
-            if (remoteTime < headInfo.lastReceivedTime)
+            if (remoteTime < headData.lastReceivedTime)
                 return;
 
-            headInfo.lastReceivedTime = remoteTime;
+            headData.lastReceivedTime = remoteTime;
 
             // loop over all ball updates in the message
             while (offset != (int)msgLength)
             {
-				headInfo.receivedPositionPrior = headInfo.receivedPosition;
-                headInfo.receivedPosition = UnpackVector3(msg, ref offset);
+                headData.receivedPositionPrior = headData.receivedPosition;
+                headData.receivedPosition = UnpackVector3(msg, ref offset);
 
-				headInfo.receivedRotationPrior = headInfo.receivedRotation;
-                headInfo.receivedRotation = UnpackQuaternion(msg, ref offset);
+                headData.receivedRotationPrior = headData.receivedRotation;
+                headData.receivedRotation = UnpackQuaternion(msg, ref offset);
             }
 
-			float completed = Math.Min(Time.time - remoteTime, LOCAL_UPDATE_DELAY) / LOCAL_UPDATE_DELAY;
-			remoteHeadTransform.position =
-				Vector3.Lerp(headInfo.receivedPositionPrior, headInfo.receivedPosition, completed);
-			remoteHeadTransform.rotation =
-				Quaternion.Slerp(headInfo.receivedRotationPrior, headInfo.receivedRotation, completed);
+            float completed = Math.Min(Time.time - remoteTime, LOCAL_UPDATE_DELAY) / LOCAL_UPDATE_DELAY;
+            remoteHeadTransform.position =
+                Vector3.Lerp(headData.receivedPositionPrior, headData.receivedPosition, completed);
+            remoteHeadTransform.rotation =
+                Quaternion.Slerp(headData.receivedRotationPrior, headData.receivedRotation, completed);
         }
 
 
@@ -552,27 +587,59 @@ namespace HomeRun.Net
             // because we're using unreliable networking the packets could come out of order
             // and the best thing to do is just ignore old packets because the data isn't
             // very useful anyway
-            if (remoteTime < headInfo.lastReceivedTime)
+            if (remoteTime < batData.lastReceivedTime)
                 return;
 
-            batInfo.lastReceivedTime = remoteTime;
+            batData.lastReceivedTime = remoteTime;
 
             // loop over all ball updates in the message
             while (offset != (int)msgLength)
             {
-				batInfo.receivedPositionPrior = batInfo.receivedPosition;
-                batInfo.receivedPosition = UnpackVector3(msg, ref offset);
+                batData.receivedPositionPrior = batData.receivedPosition;
+                batData.receivedPosition = UnpackVector3(msg, ref offset);
 
-				batInfo.receivedRotationPrior = batInfo.receivedRotation;
-                batInfo.receivedRotation = UnpackQuaternion(msg, ref offset);
+                batData.receivedRotationPrior = batData.receivedRotation;
+                batData.receivedRotation = UnpackQuaternion(msg, ref offset);
             }
 
-			float completed = Math.Min(Time.time - remoteTime, LOCAL_UPDATE_DELAY) / LOCAL_UPDATE_DELAY;
-			remoteBatTransform.position =
-				Vector3.Lerp(batInfo.receivedPositionPrior, batInfo.receivedPosition, completed);
-			remoteBatTransform.rotation = 
-				Quaternion.Slerp(batInfo.receivedRotationPrior, batInfo.receivedRotation, completed);
+            float completed = Math.Min(Time.time - remoteTime, LOCAL_UPDATE_DELAY) / LOCAL_UPDATE_DELAY;
+            remoteBatTransform.position =
+                Vector3.Lerp(batData.receivedPositionPrior, batData.receivedPosition, completed);
+            remoteBatTransform.rotation =
+                Quaternion.Slerp(batData.receivedRotationPrior, batData.receivedRotation, completed);
         }
+
+        void ReceiveGloveTransforms(ulong remoteID, byte[] msg, ulong msgLength)
+        {
+            int offset = 1;
+            float remoteTime = UnpackTime(remoteID, msg, ref offset);
+
+            // because we're using unreliable networking the packets could come out of order
+            // and the best thing to do is just ignore old packets because the data isn't
+            // very useful anyway
+            if (remoteTime < gloveData.lastReceivedTime)
+                return;
+
+            gloveData.lastReceivedTime = remoteTime;
+
+            // loop over all ball updates in the message
+            while (offset != (int)msgLength)
+            {
+                gloveData.receivedPositionPrior = gloveData.receivedPosition;
+                gloveData.receivedPosition = UnpackVector3(msg, ref offset);
+
+                gloveData.receivedRotationPrior = gloveData.receivedRotation;
+                gloveData.receivedRotation = UnpackQuaternion(msg, ref offset);
+            }
+
+            float completed = Math.Min(Time.time - remoteTime, LOCAL_UPDATE_DELAY) / LOCAL_UPDATE_DELAY;
+            remoteBatTransform.position =
+                Vector3.Lerp(batData.receivedPositionPrior, gloveData.receivedPosition, completed);
+            remoteBatTransform.rotation =
+                Quaternion.Slerp(batData.receivedRotationPrior, gloveData.receivedRotation, completed);
+        }
+
+
         #endregion
 
         #region Serialization
@@ -610,7 +677,7 @@ namespace HomeRun.Net
             rot.x = UnpackFloat(buf, ref offset);
             rot.y = UnpackFloat(buf, ref offset);
             rot.z = UnpackFloat(buf, ref offset);
-			rot.w = UnpackFloat(buf, ref offset);
+            rot.w = UnpackFloat(buf, ref offset);
             return rot;
         }
         void PackFloat(float value, byte[] buf, ref int offset)
