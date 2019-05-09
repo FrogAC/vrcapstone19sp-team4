@@ -40,13 +40,9 @@ namespace HomeRun.Net
 		private const int TIME_SYNC_MESSAGE_COUNT = 7;
 		private const byte START_TIME_MESSAGE = 2;
 		private const uint START_TIME_MESSAGE_SIZE = 1+4;
-		private const byte BACKBOARD_UPDATE_MESSAGE = 3;
-		private const uint BACKBOARD_UPDATE_MESSAGE_SIZE = 1+4+12+12+12;
 		private const byte LOCAL_BALLS_UPDATE_MESSAGE = 4;
 		private const uint LOCAL_BALLS_UPDATE_MESSATE_SIZE_MAX = 1+4+(2*Player.MAX_BALLS*(1+4+12+12));
 		private const float LOCAL_BALLS_UPDATE_DELAY = 0.1f;
-		private const byte SCORE_UPDATE_MESSAGE = 5;
-		private const uint SCORE_UPDATE_MESSAGE_SIZE = 1 + 4;
 
 		// cache of local balls that we are sending updates for
 		private readonly Dictionary<int, P2PNetworkBall> m_localBalls = new Dictionary<int, P2PNetworkBall>();
@@ -97,18 +93,8 @@ namespace HomeRun.Net
 						ReceiveMatchStartTimeOffer(packet.SenderID, readBuffer);
 						break;
 
-					case BACKBOARD_UPDATE_MESSAGE:
-						Assert.AreEqual(BACKBOARD_UPDATE_MESSAGE_SIZE, packet.Size);
-						ReceiveBackboardUpdate(packet.SenderID, readBuffer);
-						break;
-
 					case LOCAL_BALLS_UPDATE_MESSAGE:
 						ReceiveBallTransforms(packet.SenderID, readBuffer, packet.Size);
-						break;
-
-					case SCORE_UPDATE_MESSAGE:
-						Assert.AreEqual(SCORE_UPDATE_MESSAGE_SIZE, packet.Size);
-						ReceiveScoredUpdate(packet.SenderID, readBuffer);
 						break;
 				}
 			}
@@ -353,39 +339,6 @@ namespace HomeRun.Net
 
 		#endregion
 
-		#region Backboard Transforms
-
-		public void SendBackboardUpdate(float time, Vector3 pos, Vector3 moveDir, Vector3 nextMoveDir)
-		{
-			byte[] buf = new byte[BACKBOARD_UPDATE_MESSAGE_SIZE];
-			buf[0] = BACKBOARD_UPDATE_MESSAGE;
-			int offset = 1;
-			PackFloat(time, buf, ref offset);
-			PackVector3(pos, buf, ref offset);
-			PackVector3(moveDir, buf, ref offset);
-			PackVector3(nextMoveDir, buf, ref offset);
-
-			foreach (KeyValuePair<ulong,RemotePlayerData> player in m_remotePlayers)
-			{
-				if (player.Value.state == PeerConnectionState.Connected)
-				{
-					Net.SendPacket(player.Key, buf, SendPolicy.Reliable);
-				}
-			}
-		}
-
-		void ReceiveBackboardUpdate(ulong remoteID, byte[] msg)
-		{
-			int offset = 1;
-			float remoteTime = UnpackTime(remoteID, msg, ref offset);
-			Vector3 pos = UnpackVector3(msg, ref offset);
-			Vector3 moveDir = UnpackVector3(msg, ref offset);
-			Vector3 nextMoveDir = UnpackVector3(msg, ref offset);
-
-		}
-
-		#endregion
-
 		#region Ball Tansforms
 
 		public void AddNetworkBall(GameObject ball)
@@ -460,33 +413,6 @@ namespace HomeRun.Net
 			}
 		}
 
-		#endregion
-
-		#region Score Updates
-
-		public void SendScoreUpdate(uint score)
-		{
-			byte[] buf = new byte[SCORE_UPDATE_MESSAGE_SIZE];
-			buf[0] = SCORE_UPDATE_MESSAGE;
-			int offset = 1;
-			PackUint32(score, buf, ref offset);
-
-			foreach (KeyValuePair<ulong, RemotePlayerData> player in m_remotePlayers)
-			{
-				if (player.Value.state == PeerConnectionState.Connected)
-				{
-					Net.SendPacket(player.Key, buf, SendPolicy.Reliable);
-				}
-			}
-		}
-
-		void ReceiveScoredUpdate(ulong remoteID, byte[] msg)
-		{
-			int offset = 1;
-			uint score = UnpackUint32(msg, ref offset);
-
-			m_remotePlayers[remoteID].player.ReceiveRemoteScore(score);
-		}
 		#endregion
 
 		#region Serialization
