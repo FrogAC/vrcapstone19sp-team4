@@ -64,7 +64,7 @@
             }
         }
 
-        // For Network
+        // Used for Create remote Ball
         public GameObject CreateBall(BallType ballType) {
             GameObject ball = Instantiate(selections[(int)ballType].prefab, spawnPoint.position, spawnPoint.rotation, spawnPoint);
             ball.GetComponent<Rigidbody>().isKinematic = true;

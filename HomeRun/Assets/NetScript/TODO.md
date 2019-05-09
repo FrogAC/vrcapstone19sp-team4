@@ -1,9 +1,9 @@
 Optimize -> MAX CONNECTION SIZE = 2, Discard array
 Optimize -> COMBINE Glove/Head/Bat Packet
-Optimize -> ProcessRemoteUpdate, more
+Optimize -> Sync Left/Right hand
+Optimize -> ProcessRemoteUpdate
 
 
-Feature -> change PlayerArea/MatchPlayerAddedCallback to match Player Type(For now always pick PITCHER first)
 FIX -> fix delta in UpdateMatchTimer
 
 
