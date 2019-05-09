@@ -22,6 +22,11 @@
 
         [SerializeField] TextMeshProUGUI ballNameText;
         [SerializeField] Transform spawnPoint;
+
+        public Transform SpawnPoint {
+            get {return spawnPoint;}
+        }
+
         GameObject spawnedPrefab = null;
         OVRGrabbable spawnedGrabbable;
         [SerializeField] OVRInput.Button selectNext = OVRInput.Button.DpadLeft;

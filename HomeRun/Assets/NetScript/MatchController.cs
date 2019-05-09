@@ -28,7 +28,7 @@ namespace HomeRun.Net
         [SerializeField] private uint MATCH_WARMUP_TIME = 10;
 
         // seconds for the match
-        [SerializeField] private uint MATCH_TIME = 9999;
+        [SerializeField] private uint MATCH_TIME = 999;
 
         // the current state of the match controller
         private State m_currentState;
@@ -43,7 +43,11 @@ namespace HomeRun.Net
         public PlayerType PlayerType
         {
             get { return m_playerType; }
-            set { m_playerType = value; }
+            set
+            {
+                m_playerType = value;
+                PlatformManager.Instance.SetTransformActiveFromType(value);
+            }
         }
 
         void Start()
