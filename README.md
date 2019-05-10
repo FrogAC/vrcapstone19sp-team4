@@ -86,6 +86,8 @@ We want to work on the zombie game mode next, so I will be helping with that by 
 
 Additionally, I want to reorganize the pitching system so that it is easier to add new pitches and adjust existing ones, as well as create a new type of pitch. Right now, the spiral ball is the only special pitch, so having either a ball that wiggles around or zig-zags would be interesting.
 
+### Stephen - Plans for next week:
+Setting up the grey box scene for the zombie mode. Specfically, setting up boxes that represent zombies. Having those zombies move at variable rates of speed torwards the player to try to attack and defeat the player. I will give the zombies an internal life bar that will be depleted by being hit by the bat or getting hit with a grenade. I will be working with Terrell to combine our scenes together into a working game mode. Once the basics of the game mode are complete I will work on making quality of life adjustments.
 
 # Asset
 .....
