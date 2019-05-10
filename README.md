@@ -70,6 +70,9 @@ This week the team is focusing on creating the playable demo that meets MVP as w
 
 ##### Daoyi:Network
 Finish the Networking base frame for 2 players. By establishing a peer-to-peer connection players can have shared Head+Bat/PitcherGlove+Ball movements with a constant refreshing counts of >90/second. There's no distinguishible latency using Rift and lab Ethernet. Also add some particle effect and plan to contributes more FXs in the future.
+![alt text](/Screenshots/Week6/dao_w6_0.PNG)
+![alt text](/Screenshots/Week6/dao_w6_1.gif)
+
 For next week(s) I would focus on optimizition connection to ensure "quest ready": for example now the priority of physics simulation is given to the Batter side which is extreamly unrealible and sensitive to network flaws. It is also a great idea to sync only on impact/collision points since ball movements are determinent. This will invlove more collabrates with Terrell's works.
 
 # Asset
