@@ -49,16 +49,48 @@ In terms of asset creation, we have decided to use a Stadium Asset Pack as a bas
 
 We have an ititial character design sketches, which will most likely be very low poly, with textured facial fieatures as opposed to modeled geometry to save time on animations. The focus for this week will be on making the glove for the pitcher, and assets that required for specific game modes, such as vfx shaders for home run derby, targets for target practice, and zombies for our zombie survival mode. A stretch goal we also have is to make a locker room that serves as the start menu scene.
 
-![alt text](https://github.com/UWRealityLab/vrcapstone19sp-team4/blob/master/Screenshots/Week5/Bat.PNG "Bat")
+![alt text](/Screenshots/Week5/Bat.PNG)
 
 ##### Demo Scene
 We have created a demo scene using the stadium pack, the bat and the piching script. Currently the batter controls the pitching mechanic with their left hand controller, using the X and Y buttons to cycle through different pitches. They can also use the left thumbstick to move around and adjust their position in relation to the batters box. They can grab the bat with with the righthand middle finger grip and must keep that button pressed in order to hold onto it. They can trigger the pitch with the left controller and swing the bat with the right handed one.
 
-![alt text](https://github.com/UWRealityLab/vrcapstone19sp-team4/blob/master/Screenshots/Week5/CurveballCrop.png "Curveball")
+![alt text](/Screenshots/Week5/CurveballCrop.png)
 
-![alt text](https://github.com/UWRealityLab/vrcapstone19sp-team4/blob/master/Screenshots/Week5/FastballCrop.png "Fastball")
+![alt text](/Screenshots/Week5/FastballCrop.png)
 
-![alt text](https://github.com/UWRealityLab/vrcapstone19sp-team4/blob/master/Screenshots/Week5/SpiralballCrop.png "Spiralball")
+![alt text](/Screenshots/Week5/SpiralballCrop.png)
 
 ##### Gameplay Goals
 For next week our goals are to turn the demo scene into actual gameplay modes. Our minimum goal is to have a home run derby mode where with a timer, where you have to see how many home runs you can hit. We will have an automatic pitcher and some sort of ui that shows the time you have left and the number that you have hit.
+
+### Week 6
+This week the team is focusing on creating the playable demo that meets MVP as well as basis of final goal. Terrell and Stephen worked on SinglePlayer Modes and mechniques. Andrew worked on Asset and Daoyi worked on the networking solution for Rift.
+##### Gameplay
+..... 
+
+##### Daoyi:Network
+Finish the Networking base frame for 2 players. By establishing a peer-to-peer connection players can have shared Head+Bat/PitcherGlove+Ball movements with a constant refreshing counts of >90/second. There's no distinguishible latency using Rift and lab Ethernet. Also add some particle effect and plan to contributes more FXs in the future.
+![alt text](/Screenshots/Week6/dao_w6_0.PNG)
+![alt text](/Screenshots/Week6/dao_w6_1.gif)
+
+For next week(s) I would focus on optimizition connection to ensure "quest ready": for example now the priority of physics simulation is given to the Batter side which is extreamly unrealible and sensitive to network flaws. It is also a great idea to sync only on impact/collision points since ball movements are determinent. This will invlove more collabrates with Terrell's works.
+
+##### Terrell and Stephen - Batting Mechanic:
+Early in the week, I worked with Stephen in order to make improvements to the batting mechanics. Previously, the ball would be launched along one of several fixed paths whenever the ball hit the bat, but now the ball can be hit into any direction. To do this, we moved the logic for hitting the ball from the bat to the ball so whenever the ball hits the bat and breaks out of its animation, it also launches itself depending on the angle that it hit the bat at. The speed of the hit is driven by how hard the player swings the bat, but we have a parameter that we can use to adjust the strength of the hit, so we can tweak that value later in order to make it easier or harder to hit homeruns. We also added haptic feedback for when the bat hits the ball. Now the controllers vibrate depending on how hard the hit was.
+
+##### Terrell - Target Practice:
+In preparation for our mid-quarter progress report, I worked on creating the target practice gamemode to show off the improvements that we made to the batting. Since we have already been using a scene with an auto-pitcher and batter for testing batting mechanics, the main task to get this game-mode working was creating targets that disappeared when hit and a way of tracking information about how many targets have been hit. For the targets, I made cylindrical zones outside the field to track where home runs were hit, and used spherical targets for places on and above the field. To visualize the targets, I used cylinders that faded away as they went up away from the ground and a particle system that created a rotating ring around the spherical targets.
+
+##### Terrell - Plans for next week:
+We want to work on the zombie game mode next, so I will be helping with that by making it so that balls explode on impact to deal damage to nearby zombies. Also, I want to work on the target practice mode to improve its gameplay elements. Right now everything is fairly basic: none of the targets move, and nothing happens whenever all of them have been hit. To improve this, I can make the targets move across the field, disappear after a set time, and keep track of a score that gets shown at the end of the game. By doing this, we can create a high-score system to give a clear sense of progress and make replaying the gamemode more engaging.
+
+Additionally, I want to reorganize the pitching system so that it is easier to add new pitches and adjust existing ones, as well as create a new type of pitch. Right now, the spiral ball is the only special pitch, so having either a ball that wiggles around or zig-zags would be interesting.
+
+### Stephen - Plans for next week:
+Setting up the grey box scene for the zombie mode. Specfically, setting up boxes that represent zombies. Having those zombies move at variable rates of speed torwards the player to try to attack and defeat the player. I will give the zombies an internal life bar that will be depleted by being hit by the bat or getting hit with a grenade. I will be working with Terrell to combine our scenes together into a working game mode. Once the basics of the game mode are complete I will work on making quality of life adjustments.
+
+# Asset
+.....
+
+To sum up at this point we are still working on seperate parts as decided weeks before ....
+
