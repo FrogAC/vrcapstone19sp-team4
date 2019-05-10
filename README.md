@@ -49,7 +49,7 @@ In terms of asset creation, we have decided to use a Stadium Asset Pack as a bas
 
 We have an ititial character design sketches, which will most likely be very low poly, with textured facial fieatures as opposed to modeled geometry to save time on animations. The focus for this week will be on making the glove for the pitcher, and assets that required for specific game modes, such as vfx shaders for home run derby, targets for target practice, and zombies for our zombie survival mode. A stretch goal we also have is to make a locker room that serves as the start menu scene.
 
-![alt text](Screenshots/Week5/Bat.PNG "Bat")
+![alt text](/Screenshots/Week5/Bat.PNG)
 
 ##### Demo Scene
 We have created a demo scene using the stadium pack, the bat and the piching script. Currently the batter controls the pitching mechanic with their left hand controller, using the X and Y buttons to cycle through different pitches. They can also use the left thumbstick to move around and adjust their position in relation to the batters box. They can grab the bat with with the righthand middle finger grip and must keep that button pressed in order to hold onto it. They can trigger the pitch with the left controller and swing the bat with the right handed one.
