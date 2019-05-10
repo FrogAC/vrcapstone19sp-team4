@@ -54,23 +54,26 @@ We have an ititial character design sketches, which will most likely be very low
 ##### Demo Scene
 We have created a demo scene using the stadium pack, the bat and the piching script. Currently the batter controls the pitching mechanic with their left hand controller, using the X and Y buttons to cycle through different pitches. They can also use the left thumbstick to move around and adjust their position in relation to the batters box. They can grab the bat with with the righthand middle finger grip and must keep that button pressed in order to hold onto it. They can trigger the pitch with the left controller and swing the bat with the right handed one.
 
-![alt text](https://github.com/UWRealityLab/vrcapstone19sp-team4/blob/master/Screenshots/Week5/CurveballCrop.png "Curveball")
+![alt text](/Screenshots/Week5/CurveballCrop.png)
 
-![alt text](https://github.com/UWRealityLab/vrcapstone19sp-team4/blob/master/Screenshots/Week5/FastballCrop.png "Fastball")
+![alt text](/Screenshots/Week5/FastballCrop.png)
 
-![alt text](https://github.com/UWRealityLab/vrcapstone19sp-team4/blob/master/Screenshots/Week5/SpiralballCrop.png "Spiralball")
+![alt text](/Screenshots/Week5/SpiralballCrop.png)
 
 ##### Gameplay Goals
 For next week our goals are to turn the demo scene into actual gameplay modes. Our minimum goal is to have a home run derby mode where with a timer, where you have to see how many home runs you can hit. We will have an automatic pitcher and some sort of ui that shows the time you have left and the number that you have hit.
 
 ### Week 6
 This week the team is focusing on creating the playable demo that meets MVP as well as basis of final goal. Terrell and Stephen worked on SinglePlayer Modes and mechniques. Andrew worked on Asset and Daoyi worked on the networking solution for Rift.
-# Gameplay
+##### Gameplay
 ..... 
 
-# Network
-Daoyi finished the Networking for 2 player matchmaking using p2p. The bat 
+##### Daoyi:Network
+Finish the Networking base frame for 2 players. By establishing a peer-to-peer connection players can have shared Head+Bat/PitcherGlove+Ball movements with a constant refreshing counts of >90/second. There's no distinguishible latency using Rift and lab Ethernet. Also add some particle effect and plan to contributes more FXs in the future.
+For next week(s) I would focus on optimizition connection to ensure "quest ready": for example now the priority of physics simulation is given to the Batter side which is extreamly unrealible and sensitive to network flaws. It is also a great idea to sync only on impact/collision points since ball movements are determinent. This will invlove more collabrates with Terrell's works.
 
 # Asset
 .....
+
+To sum up at this point we are still working on seperate parts as decided weeks before ....
 
