@@ -65,8 +65,6 @@ For next week our goals are to turn the demo scene into actual gameplay modes. O
 
 ### Week 6
 This week the team is focusing on creating the playable demo that meets MVP as well as basis of final goal. Terrell and Stephen worked on SinglePlayer Modes and mechniques. Andrew worked on Asset and Daoyi worked on the networking solution for Rift.
-##### Gameplay
-..... 
 
 ##### Daoyi:Network
 Finish the Networking base frame for 2 players. By establishing a peer-to-peer connection players can have shared Head+Bat/PitcherGlove+Ball movements with a constant refreshing counts of >90/second. There's no distinguishible latency using Rift and lab Ethernet. Also add some particle effect and plan to contributes more FXs in the future.
