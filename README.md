@@ -75,6 +75,18 @@ Finish the Networking base frame for 2 players. By establishing a peer-to-peer c
 
 For next week(s) I would focus on optimizition connection to ensure "quest ready": for example now the priority of physics simulation is given to the Batter side which is extreamly unrealible and sensitive to network flaws. It is also a great idea to sync only on impact/collision points since ball movements are determinent. This will invlove more collabrates with Terrell's works.
 
+##### Terrell and Stephen - Batting Mechanic:
+Early in the week, I worked with Stephen in order to make improvements to the batting mechanics. Previously, the ball would be launched along one of several fixed paths whenever the ball hit the bat, but now the ball can be hit into any direction. To do this, we moved the logic for hitting the ball from the bat to the ball so whenever the ball hits the bat and breaks out of its animation, it also launches itself depending on the angle that it hit the bat at. The speed of the hit is driven by how hard the player swings the bat, but we have a parameter that we can use to adjust the strength of the hit, so we can tweak that value later in order to make it easier or harder to hit homeruns. We also added haptic feedback for when the bat hits the ball. Now the controllers vibrate depending on how hard the hit was.
+
+##### Terrell - Target Practice:
+In preparation for our mid-quarter progress report, I worked on creating the target practice gamemode to show off the improvements that we made to the batting. Since we have already been using a scene with an auto-pitcher and batter for testing batting mechanics, the main task to get this game-mode working was creating targets that disappeared when hit and a way of tracking information about how many targets have been hit. For the targets, I made cylindrical zones outside the field to track where home runs were hit, and used spherical targets for places on and above the field. To visualize the targets, I used cylinders that faded away as they went up away from the ground and a particle system that created a rotating ring around the spherical targets.
+
+##### Terrell - Plans for next week:
+We want to work on the zombie game mode next, so I will be helping with that by making it so that balls explode on impact to deal damage to nearby zombies. Also, I want to work on the target practice mode to improve its gameplay elements. Right now everything is fairly basic: none of the targets move, and nothing happens whenever all of them have been hit. To improve this, I can make the targets move across the field, disappear after a set time, and keep track of a score that gets shown at the end of the game. By doing this, we can create a high-score system to give a clear sense of progress and make replaying the gamemode more engaging.
+
+Additionally, I want to reorganize the pitching system so that it is easier to add new pitches and adjust existing ones, as well as create a new type of pitch. Right now, the spiral ball is the only special pitch, so having either a ball that wiggles around or zig-zags would be interesting.
+
+
 # Asset
 .....
 
