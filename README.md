@@ -49,7 +49,7 @@ In terms of asset creation, we have decided to use a Stadium Asset Pack as a bas
 
 We have an ititial character design sketches, which will most likely be very low poly, with textured facial fieatures as opposed to modeled geometry to save time on animations. The focus for this week will be on making the glove for the pitcher, and assets that required for specific game modes, such as vfx shaders for home run derby, targets for target practice, and zombies for our zombie survival mode. A stretch goal we also have is to make a locker room that serves as the start menu scene.
 
-![alt text](https://github.com/UWRealityLab/vrcapstone19sp-team4/blob/master/Screenshots/Week5/Bat.PNG "Bat")
+![alt text](Screenshots/Week5/Bat.PNG "Bat")
 
 ##### Demo Scene
 We have created a demo scene using the stadium pack, the bat and the piching script. Currently the batter controls the pitching mechanic with their left hand controller, using the X and Y buttons to cycle through different pitches. They can also use the left thumbstick to move around and adjust their position in relation to the batters box. They can grab the bat with with the righthand middle finger grip and must keep that button pressed in order to hold onto it. They can trigger the pitch with the left controller and swing the bat with the right handed one.
@@ -62,3 +62,15 @@ We have created a demo scene using the stadium pack, the bat and the piching scr
 
 ##### Gameplay Goals
 For next week our goals are to turn the demo scene into actual gameplay modes. Our minimum goal is to have a home run derby mode where with a timer, where you have to see how many home runs you can hit. We will have an automatic pitcher and some sort of ui that shows the time you have left and the number that you have hit.
+
+### Week 6
+This week the team is focusing on creating the playable demo that meets MVP as well as basis of final goal. Terrell and Stephen worked on SinglePlayer Modes and mechniques. Andrew worked on Asset and Daoyi worked on the networking solution for Rift.
+# Gameplay
+..... 
+
+# Network
+Daoyi finished the Networking for 2 player matchmaking using p2p. The bat 
+
+# Asset
+.....
+
