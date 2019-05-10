@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 1189003861}
   - component: {fileID: 1189003860}
   m_Layer: 0
-  m_Name: Cube (2)
+  m_Name: rf_boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 1424344265}
   - component: {fileID: 1424344264}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: lf_boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 1430901257}
   - component: {fileID: 1430901256}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: cf_boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

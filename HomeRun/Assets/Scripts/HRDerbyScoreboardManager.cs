@@ -9,7 +9,7 @@ public class HRDerbyScoreboardManager : MonoBehaviour
     public event OnTimeUp TimeUpEvent;
 
     public Text timerText, scoreText;
-    public int timeAllowed;
+    public int timeAllowed, score;
     private bool isPaused;
     private Coroutine timer;
 
@@ -17,7 +17,7 @@ public class HRDerbyScoreboardManager : MonoBehaviour
     void Start()
     {
         timeAllowed = 60;
-        timer = StartCoroutine("Timer", timeAllowed);
+        //timer = StartCoroutine("Timer", timeAllowed);
         isPaused = false;
     }
 
@@ -42,6 +42,11 @@ public class HRDerbyScoreboardManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S))
         {
             StartTimer();
+        }
+
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            IncrementHRCount();
         }
     }
 
@@ -69,51 +74,32 @@ public class HRDerbyScoreboardManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Starts Timer
-    /// </summary>
     public void StartTimer()
     {
-        //if (timer.)
-        //{
-            ResetTimer();
-            timer = StartCoroutine(Timer(timeAllowed));
-        //}
+        ResetTimer();
+        timer = StartCoroutine(Timer(timeAllowed));
     }
 
-    /// <summary>
-    /// Resets Timer to original allowed time
-    /// </summary>
     public void ResetTimer()
     {
-        StopCoroutine(timer);
+        if (timer != null)
+            StopCoroutine(timer);
+
         isPaused = false;
         UpdateTimeText(timeAllowed);
     }
 
-    /// <summary>
-    /// Pauses Timer
-    /// </summary>
     public void PauseTimer()
     {
         isPaused = true;
     }
 
-    /// <summary>
-    /// Resumes timer
-    /// </summary>
     public void ResumeTimer()
     {
         if (isPaused) 
             isPaused = false;
     }
 
-    /// <summary>
-    /// Sets correct time string on GUI text
-    /// </summary>
-    /// <param name="time">
-    /// int time remaining in seconds
-    /// </param>
     private void UpdateTimeText(int time)
     {
         int sec = time % 60;
@@ -123,8 +109,20 @@ public class HRDerbyScoreboardManager : MonoBehaviour
         timerText.text = res;
     }
 
+    public void UpdateScoreText(int score)
+    {
+        string res = "";
+        if (score < 10)
+        {
+            res += "0";
+        }
+        res += score;
+        scoreText.text = res;
+    }
+
     private void IncrementHRCount()
     {
-
+        score += 1;
+        UpdateScoreText(score);
     }
 }
