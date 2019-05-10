@@ -131,6 +131,8 @@ public class ThrownBall : OVRGrabbable
     public float batHitMult = 3;
     private void OnCollisionEnter(Collision collision)
     {
+        // Remote Balls Bug fix, Not sure actual reason.
+        if (!rb) return;
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("Environment"))
         {

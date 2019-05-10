@@ -5,10 +5,10 @@ namespace HomeRun.Net
     using System.Collections.Generic;
     using HomeRun.Game;
 
-    public enum PlayerType
+    public enum PlayerType : int
     {
-        Batter,
-        Pitcher
+        Batter = 0,
+        Pitcher = 1
     }
 
     // The base Player component manages the balls that are in play.  Besides spawning new balls,
@@ -57,10 +57,8 @@ namespace HomeRun.Net
             var ball = m_ballSelector.CreateBall(ballType);
             m_balls.Enqueue(ball);
 
-            ball.transform.position = m_ballSelector.SpawnPoint.position;
-            ball.transform.SetParent(m_ballSelector.SpawnPoint, true);
-            ball.GetComponent<Rigidbody>().useGravity = false;
-            ball.GetComponent<Rigidbody>().detectCollisions = false;
+            // ball.transform.position = m_ballSelector.SpawnPoint.position;
+            // ball.transform.SetParent(m_ballSelector.SpawnPoint, true);
             return ball;
         }
 
