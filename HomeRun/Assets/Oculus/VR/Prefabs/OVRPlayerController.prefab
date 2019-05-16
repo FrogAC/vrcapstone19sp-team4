@@ -518,7 +518,7 @@ GameObject:
   - component: {fileID: 2080101480}
   m_Layer: 0
   m_Name: RightHandAnchor
-  m_TagString: Untagged
+  m_TagString: Hand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -655,7 +655,7 @@ GameObject:
   - component: {fileID: 3984347622396571138}
   m_Layer: 0
   m_Name: LeftHandAnchor
-  m_TagString: Untagged
+  m_TagString: Hand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -833,7 +833,7 @@ GameObject:
   - component: {fileID: 1075553486}
   m_Layer: 0
   m_Name: Glove
-  m_TagString: Untagged
+  m_TagString: Hand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1396,12 +1396,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selections:
   - name: fastball
+    type: 0
     prefab: {fileID: 4238686870500979200, guid: 8bea878d17912984a977420dd343753b,
       type: 3}
   - name: curveball
+    type: 0
     prefab: {fileID: 3730204624319060460, guid: 2b990e7762cd3894b966ee206b722a3f,
       type: 3}
   - name: spiralball
+    type: 0
     prefab: {fileID: 4578597730308542154, guid: b7eee885420e2d4479c440dde59bde89,
       type: 3}
   ballNameText: {fileID: 1496981807}
@@ -1482,7 +1485,7 @@ GameObject:
   - component: {fileID: 8184606187855056934}
   m_Layer: 0
   m_Name: R Sphere
-  m_TagString: Untagged
+  m_TagString: Hand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1570,7 +1573,7 @@ GameObject:
   - component: {fileID: 1749416140250867083}
   m_Layer: 0
   m_Name: Pitcher's Glove
-  m_TagString: Untagged
+  m_TagString: Hand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1605,7 +1608,7 @@ GameObject:
   - component: {fileID: 923439619098791942}
   m_Layer: 0
   m_Name: L Sphere
-  m_TagString: Untagged
+  m_TagString: Hand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
