@@ -37,4 +37,9 @@ public class VRButton : MonoBehaviour
     {
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
     }
+
+    public void LoadScene(string name)
+    {
+        SceneManager.LoadSceneAsync(name);
+    }
 }

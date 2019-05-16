@@ -127,7 +127,7 @@ namespace HomeRun.Net
         public static void TerminateWithError(Message msg)
         {
             Debug.Log("Error: " + msg.GetError().Message);
-            UnityEngine.Application.Quit();
+            //UnityEngine.Application.Quit();
         }
 
         public void QuitButtonPressed()

@@ -159,7 +159,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.vrcap19.homerun
+    Android: com.vrcap19.homerun_5_16
     Standalone: com.vrcap19.homerun
   buildNumber: {}
   AndroidBundleVersionCode: 4
@@ -263,7 +263,7 @@ PlayerSettings:
   AndroidEnableTango: 0
   androidEnableBanner: 1
   androidUseLowAccuracyLocation: 0
-  androidUseCustomKeystore: 1
+  androidUseCustomKeystore: 0
   m_AndroidBanners:
   - width: 320
     height: 180

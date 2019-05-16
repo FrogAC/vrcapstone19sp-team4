@@ -79,12 +79,7 @@ ScriptedImporter:
       bGenerateOnLoad: 1
     material: {fileID: -9117483709511198939, guid: 66b2f711f2044a84ab4e6df6aa986e55,
       type: 3}
-    generatedTextures:
-    - {fileID: -1387883846988599863, guid: 66b2f711f2044a84ab4e6df6aa986e55, type: 3}
-    - {fileID: -2013316763387345597, guid: 66b2f711f2044a84ab4e6df6aa986e55, type: 3}
-    - {fileID: -9139008800958924754, guid: 66b2f711f2044a84ab4e6df6aa986e55, type: 3}
-    - {fileID: 5190856435900987921, guid: 66b2f711f2044a84ab4e6df6aa986e55, type: 3}
-    - {fileID: -5438511697376885214, guid: 66b2f711f2044a84ab4e6df6aa986e55, type: 3}
+    generatedTextures: []
   - graphLabel: infield
     prototypeName: infield
     graphDescIndex: 1
