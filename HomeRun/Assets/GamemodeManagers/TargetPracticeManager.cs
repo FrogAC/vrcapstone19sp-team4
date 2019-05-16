@@ -31,7 +31,7 @@ public class TargetPracticeManager : MonoBehaviour
             {
                 completionTime = Time.timeSinceLevelLoad;
             }
-            targetCountText.text = "All Targets Hit!\n" + "Time: " + string.Format("{0:00}:{1:00.00}", (int)Time.timeSinceLevelLoad / 60, Time.timeSinceLevelLoad % 60);
+            targetCountText.text = "All Targets Hit!\n" + "Time: " + string.Format("{0:00}:{1:00.00}", (int)completionTime / 60, completionTime % 60);
         }
     }
 }
