@@ -87,8 +87,11 @@ Additionally, I want to reorganize the pitching system so that it is easier to a
 ### Stephen - Plans for next week:
 Setting up the grey box scene for the zombie mode. Specfically, setting up boxes that represent zombies. Having those zombies move at variable rates of speed torwards the player to try to attack and defeat the player. I will give the zombies an internal life bar that will be depleted by being hit by the bat or getting hit with a grenade. I will be working with Terrell to combine our scenes together into a working game mode. Once the basics of the game mode are complete I will work on making quality of life adjustments.
 
-# Asset
-.....
 
-To sum up at this point we are still working on seperate parts as decided weeks before ....
+### Week 7
+This week we continue on making new game modes and new assets while improving existing gameplays.
+
+##### Daoyi: Network
+Work on porting the network to the Quest after releasing next week. This is done by optimization the messages send between the p2p connections and let both side infer actions. I still need to wait until 21st to see if Oculus update the Quest Api -- for now Rift is still the backup device for network demo.
+Next week I will finish the networking part and move to assets -- helping polish the final looks.
 
