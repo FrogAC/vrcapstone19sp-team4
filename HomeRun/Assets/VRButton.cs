@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 public class VRButton : MonoBehaviour
 {
     public UnityEvent onPressedEvent;
+    public float activationDelay = 1;
+    public Color activatedColor = Color.cyan;
+    private bool isPressed;
 
     // Start is called before the first frame update
     void Start()
@@ -27,9 +30,19 @@ public class VRButton : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Hand")
+        if (other.tag == "Hand" && !isPressed)
         {
-            onPressedEvent.Invoke();
+            isPressed = true;
+            StartCoroutine(ButtonActivationDelay());
+        }
+    }
+
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Hand" && isPressed)
+        {
+            isPressed = false;
         }
     }
 
@@ -41,5 +54,28 @@ public class VRButton : MonoBehaviour
     public void LoadScene(string name)
     {
         SceneManager.LoadSceneAsync(name);
+    }
+
+    IEnumerator ButtonActivationDelay()
+    {
+        Renderer ren = GetComponent<Renderer>();
+        Color startColor = ren.material.color;
+        float startTime = Time.time;
+
+        while (Time.time < startTime + activationDelay && isPressed)
+        {
+            float t = (Time.time - startTime) / activationDelay;
+            ren.material.color = Color.Lerp(startColor, activatedColor, t);
+            yield return null;
+        }
+
+        if (isPressed)
+        {
+            onPressedEvent.Invoke();
+        }
+        yield return null;
+        ren.material.color = startColor;
+
+        
     }
 }
