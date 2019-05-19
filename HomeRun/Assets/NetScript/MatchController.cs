@@ -10,7 +10,8 @@ namespace HomeRun.Net
     // and entering a practice or online game match.
     public class MatchController : MonoBehaviour
     {
-        private PlayerType m_playerType = PlayerType.Batter;
+        // meant to be single instance
+        private static PlayerType m_playerType = PlayerType.Batter;
 
         // Text to display when the match will start or finish
         [SerializeField] private Text m_timerText = null;
@@ -24,7 +25,6 @@ namespace HomeRun.Net
         // this should equal the maximum number of players configured on the Oculus Dashboard
         // 0 = Batter, 1 = Pitcher
         [SerializeField] private PlayerArea[] m_playerAreas = new PlayerArea[2];
-
         // seconds to wait to coordinate P2P setup with other match players before starting
         [SerializeField] private uint MATCH_WARMUP_TIME = 10;
 
@@ -41,7 +41,7 @@ namespace HomeRun.Net
         // the court the local player was assigned to
         private int m_localSlot;
 
-        public PlayerType PlayerType
+        public static PlayerType PlayerType
         {
             get { return m_playerType; }
             set
