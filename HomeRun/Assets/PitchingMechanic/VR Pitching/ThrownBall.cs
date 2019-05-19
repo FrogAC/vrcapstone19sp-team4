@@ -189,6 +189,10 @@ public class ThrownBall : OVRGrabbable
         }
     }
 
+    // Estimate new pos/vel
+    public void OnHitByBat(Vector3 pos, Vector3 vel) {
+        
+    }
 
 
     /*

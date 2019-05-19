@@ -12,10 +12,8 @@ namespace HomeRun.Net
 	// versions of the simulation.
 	public class P2PNetworkBall : MonoBehaviour
 	{
+		int m_id = -1;
 		private BallType ballType = BallType.FastBall;
-		
-		// the last time this ball locally collided with something
-		private float lastCollisionTime;
 
 		// cached reference to the GameObject's Rigidbody component
 		private Rigidbody rigidBody;
@@ -30,13 +28,12 @@ namespace HomeRun.Net
 			get { return rigidBody.velocity; }
 		}
 
-		public bool IsHeld()
-		{
-			return !rigidBody.useGravity;
-		}
-
 		public BallType BallType {
 			get { return ballType; }
+		}
+
+		public int InstanceID {
+			get { return m_id; }
 		}
 
 		public P2PNetworkBall SetType(BallType t) {
@@ -44,56 +41,27 @@ namespace HomeRun.Net
 			return this;
 		}
 
+		public P2PNetworkBall SetInstanceID(int id) {
+			m_id = id;
+			return this;
+		}
+
 		public void ProcessRemoteUpdate(float remoteTime, bool isHeld, Vector3 pos, Vector3 vel)
 		{
-			if (isHeld)
-			{
 				transform.position = pos;
-			}
-			// TODO
-			// if we've collided since the update was sent, our state is going to be more accurate so
-			// it's better to ignore the update
-			else if (lastCollisionTime < remoteTime)
-			{
-				Debug.Log("SHOULDNT SEE THIS UPDATE!");
-				// To correct the position this sample directly moves the ball.
-				// Another approach would be to gradually lerp the ball there during
-				// FixedUpdate.  However, that approach aggravates any errors that
-				// come from estimatePosition and estimateVelocity so the lerp
-				// should be done over few timesteps.
-				float deltaT = Time.realtimeSinceStartup - remoteTime;
-				transform.localPosition = estimatePosition(pos, vel, deltaT);
-				rigidBody.velocity = estimateVelocity(vel, deltaT);
-
-				// if the ball is transitioning from held to ballistic, we need to
-				// update the RigidBody parameters
-				if (IsHeld())
-				{
-					rigidBody.useGravity = true;
-					rigidBody.detectCollisions = true;
-				}
-			}
 		}
 
-		// Estimates the new position assuming simple ballistic motion.
-		private Vector3 estimatePosition(Vector3 startPosition, Vector3 startVelocty, float time)
-		{
-			return startPosition + startVelocty * time + 0.5f * Physics.gravity * time * time;
+		public void ProcessBallThrow(Vector3 pos, Vector3 vel) {
+
 		}
 
-		// Estimates the new velocity assuming ballistic motion and drag.
-		private Vector3 estimateVelocity(Vector3 startVelocity, float time)
-		{
-			return startVelocity + Physics.gravity * time * Mathf.Clamp01 (1 - rigidBody.drag * time);
-		}
+		public void ProcessBallSpawn(Vector3 pos, Vector3 vel) {
 
-		void OnCollisionEnter(Collision collision)
-		{
-			lastCollisionTime = Time.realtimeSinceStartup;
 		}
 
 		void OnDestroy()
 		{
+			// called on ThrownBall
 			PlatformManager.P2P.RemoveNetworkBall(gameObject);
 		}
 
