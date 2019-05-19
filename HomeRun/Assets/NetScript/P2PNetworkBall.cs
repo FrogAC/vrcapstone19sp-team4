@@ -13,23 +13,25 @@ namespace HomeRun.Net
 	public class P2PNetworkBall : MonoBehaviour
 	{
 		int m_id = -1;
-		private BallType ballType = BallType.FastBall;
+		private BallType m_ballType = BallType.FastBall;
 
 		// cached reference to the GameObject's Rigidbody component
-		private Rigidbody rigidBody;
+		private Rigidbody m_rigidBody;
+		private ThrownBall m_tb;
 
 		void Awake()
 		{
-			rigidBody = gameObject.GetComponent<Rigidbody>();
+			m_rigidBody = gameObject.GetComponent<Rigidbody>();
+			m_tb = gameObject.GetComponent<ThrownBall>();
 		}
 
-		public Vector3 velocity
-		{
-			get { return rigidBody.velocity; }
+		public ThrownBall ThrowBall {
+			get { return m_tb; }
+			set { m_tb = value; }
 		}
 
 		public BallType BallType {
-			get { return ballType; }
+			get { return m_ballType; }
 		}
 
 		public int InstanceID {
@@ -37,7 +39,7 @@ namespace HomeRun.Net
 		}
 
 		public P2PNetworkBall SetType(BallType t) {
-			ballType = t;
+			m_ballType = t;
 			return this;
 		}
 
@@ -46,17 +48,14 @@ namespace HomeRun.Net
 			return this;
 		}
 
-		public void ProcessRemoteUpdate(float remoteTime, bool isHeld, Vector3 pos, Vector3 vel)
-		{
-				transform.position = pos;
-		}
-
 		public void ProcessBallThrow(Vector3 pos, Vector3 vel) {
-
+			m_tb.transform.position = pos;
+			m_tb.GrabEnd(vel, Vector3.zero);
 		}
 
-		public void ProcessBallSpawn(Vector3 pos, Vector3 vel) {
-
+		public void ProcessBallHit(Vector3 pos, Vector3 vel) {
+			m_tb.transform.position = pos;
+			m_rigidBody.velocity = vel;
 		}
 
 		void OnDestroy()
