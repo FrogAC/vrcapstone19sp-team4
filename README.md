@@ -87,8 +87,21 @@ Additionally, I want to reorganize the pitching system so that it is easier to a
 ### Stephen - Plans for next week:
 Setting up the grey box scene for the zombie mode. Specfically, setting up boxes that represent zombies. Having those zombies move at variable rates of speed torwards the player to try to attack and defeat the player. I will give the zombies an internal life bar that will be depleted by being hit by the bat or getting hit with a grenade. I will be working with Terrell to combine our scenes together into a working game mode. Once the basics of the game mode are complete I will work on making quality of life adjustments.
 
-# Asset
-.....
 
-To sum up at this point we are still working on seperate parts as decided weeks before ....
+### Week 7
+This week we continue on making new game modes and new assets while improving existing gameplays.
+
+##### Daoyi: Network
+Work on porting the network to the Quest after releasing next week. This is done by optimization the messages send between the p2p connections and let both side infer actions. I still need to wait until 21st to see if Oculus update the Quest Api -- for now Rift is still the backup device for network demo.
+Next week I will finish the networking part and move to assets -- helping polish the final looks.
+
+###### Terrell - Grenades
+This week I worked on the zombies mode in order to get our grenades working properly and started prototyping a simple in-game menu for changing between scenes. The grenade has been implemented as a component added to the baseballs that are thrown to the player, so we have a lot of flexibility with how we tweak the grenades in the future. They work by arming the ball to explode when it hits the bat, then actually exploding once it hits the ground or a zombie. The explosion works by checking for zombies within the explosion radius and currently just destroys the zombie, but in the future we can calculate damage done to zombies based on how far from the center of the explosion they were.
+
+###### Terrell - Simple UI
+The in-game menu is essentially a 3d panel that the player can bring up in front of them that has configurable buttons that the player can press. Right now, buttons are considered to be pressed as soon as the player’s hand touches them, so having some sort of delay before triggering or even allowing for the button to actually be depressed by the player’s hand would be the next step in improving the presentation. This UI system became important for our testing because we were finding issues when we tried to build our game and run it outside of Unity; many of our scenes seemed to crash on load and only the simplest ones were able to be built and played. The most unique crash of these was the zombie mode where the build would crash only when a ball had been hit and was about to explode. 
+
+##### Terrell - Plans for next week
+Debugging build issues will be something that I work on in this coming week. The problem isn’t crippling in the sense that it doesn’t seem to have an impact on our development right now, but will need to be solved sooner rather than later since we are nearing the end of the quarter and the fix that we find for the crashes may require us to reorganize large parts of the project. I also want to make sure that a new pitch gets added to the game since I didn’t add one this week.
+
 
