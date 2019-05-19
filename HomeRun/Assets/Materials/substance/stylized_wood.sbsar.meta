@@ -71,8 +71,4 @@ ScriptedImporter:
       bGenerateOnLoad: 1
     material: {fileID: 1994312231863573676, guid: 913ca693b7e79fe408db6ad1563228ea,
       type: 3}
-    generatedTextures:
-    - {fileID: 2940167469194504939, guid: 913ca693b7e79fe408db6ad1563228ea, type: 3}
-    - {fileID: -6446999080456719056, guid: 913ca693b7e79fe408db6ad1563228ea, type: 3}
-    - {fileID: 5089376924714468193, guid: 913ca693b7e79fe408db6ad1563228ea, type: 3}
-    - {fileID: 3646669714363792882, guid: 913ca693b7e79fe408db6ad1563228ea, type: 3}
+    generatedTextures: []

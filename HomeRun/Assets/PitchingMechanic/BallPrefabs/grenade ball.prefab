@@ -26,7 +26,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4d97a9ba054a2419342123cc8f568c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armingDelay: 0.5
+  armingDelay: 0.1
   explosionRadius: 3
   explosionFX: {fileID: 6672076032900241065, guid: d905061c63127474f836197b167f4eb2,
     type: 3}
@@ -35,7 +35,7 @@ MonoBehaviour:
     m_Bits: 2048
   bombExplodingLayers:
     serializedVersion: 2
-    m_Bits: 14135
+    m_Bits: 30519
   explodableLayers:
     serializedVersion: 2
     m_Bits: 16384
