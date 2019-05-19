@@ -508,6 +508,7 @@ namespace HomeRun.Net
                     .AddComponent<P2PNetworkBall>()
                     .SetType(type)
                     .SetInstanceID(instanceID);
+                newball.ThrowBall.initialize();
                 newball.transform.SetParent(m_remoteSpawnPointTransform);
 
                 m_remotePlayers[remoteID].activeBalls[instanceID] = newball;
