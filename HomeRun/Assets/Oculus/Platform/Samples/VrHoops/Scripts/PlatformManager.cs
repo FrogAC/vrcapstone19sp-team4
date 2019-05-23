@@ -56,11 +56,11 @@ namespace Oculus.Platform.Samples.VrHoops
 
 		void IsEntitledCallback(Message msg)
 		{
-			if (msg.IsError)
-			{
-				TerminateWithError(msg);
-				return;
-			}
+			// if (msg.IsError)
+			// {
+			// 	TerminateWithError(msg);
+			// 	return;
+			// }
 
 			// Next get the identity of the user that launched the Application.
 			Users.GetLoggedInUser().OnComplete(GetLoggedInUserCallback);
@@ -68,11 +68,11 @@ namespace Oculus.Platform.Samples.VrHoops
 
 		void GetLoggedInUserCallback(Message<User> msg)
 		{
-			if (msg.IsError)
-			{
-				TerminateWithError(msg);
-				return;
-			}
+			// if (msg.IsError)
+			// {
+			// 	TerminateWithError(msg);
+			// 	return;
+			// }
 
 			m_myID = msg.Data.ID;
 			m_myOculusID = msg.Data.OculusID;

@@ -5,31 +5,37 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/PitchingMechanic/VR Pitching/PitchingTest.unity
     guid: 0fe08876455b775419e497a1ffcf2a30
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/New Folder/Batting.unity
     guid: e576fdeb3e92de3429278e43213fce90
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/New Folder/BatterObjects.unity
     guid: b6583183c751dfa4babaf33866dcb394
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/New Folder/ZombieModeObjects.unity
     guid: beb8a0c6f871f854eaa11598fc9194be
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/New Folder/TargetPracticeObjects.unity
     guid: a54435d34e0aba64599f344c4dda6b34
-  - enabled: 1
+  - enabled: 0
     path: Assets/Baseball Stadium Pack/Scenes/BaseballStadium1.unity
     guid: 6a1a16279e679104c90e1bfbbe3d4489
-  - enabled: 1
+  - enabled: 0
     path: Assets/Baseball Stadium Pack/Scenes/BaseballStadium2.unity
     guid: 62bbf64ace644754897e6b920f88a9e3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Baseball Stadium Pack/Scenes/BaseballStadium3.unity
     guid: cb6e5147569633c4eb3dc03d48f4ddbe
-  - enabled: 1
+  - enabled: 0
     path: Assets/Baseball Stadium Pack/Scenes/BaseballStadium4.unity
     guid: 7cb39f9b5e7e3214b9dcba4fd7f2c62e
+  - enabled: 1
+    path: Assets/Scenes/New Folder/net_Batting.unity
+    guid: c646e613f946a884abcdb29f223d21b8
+  - enabled: 0
+    path: Assets/Oculus/Platform/Samples/VrHoops/Main.unity
+    guid: 8b67239c8d8693441abb62a2ac48f571
   m_configObjects: {}
