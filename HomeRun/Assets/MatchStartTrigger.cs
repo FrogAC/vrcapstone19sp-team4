@@ -15,7 +15,7 @@ public class MatchStartTrigger : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider other) {
-        MatchController.PlayerType = playerType;
+        matchController.PlayerType = playerType;
         matchController.PlayOnlineOrCancel();
 
         var triggers = GameObject.FindObjectsOfType<MatchStartTrigger>();

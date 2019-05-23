@@ -68,6 +68,8 @@
         public GameObject CreateBall(BallType ballType) {
             GameObject ball = Instantiate(selections[(int)ballType].prefab, spawnPoint.position, spawnPoint.rotation, spawnPoint);
             ball.GetComponent<Rigidbody>().isKinematic = true;
+            // Debug
+            ball.GetComponent<ThrownBall>().enabled = false;
             return ball;
         }
 

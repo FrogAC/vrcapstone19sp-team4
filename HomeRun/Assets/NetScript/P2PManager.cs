@@ -15,14 +15,13 @@ namespace HomeRun.Net
     {
         #region Member variables
 
-        private Transform m_remoteHeadTransform;
-        private Transform m_remoteBatTransform;
-        private Transform m_remoteGloveTransform;
+        private Transform remoteHeadTransform;
+        private Transform remoteBatTransform;
+        private Transform remoteGloveTransform;
 
-        private Transform m_localHeadTransform;
-        private Transform m_localBatTransform;
-        private Transform m_localGloveTransform;
-        private Transform m_remoteSpawnPointTransform;
+        private Transform localHeadTransform;
+        private Transform localBatTransform;
+        private Transform localGloveTransform;
 
         // helper class to hold data we need for remote players
         private class RemotePlayerData
@@ -33,6 +32,8 @@ namespace HomeRun.Net
             public RemotePlayer player;
             // offset from my local time to the time of the remote host
             public float remoteTimeOffset;
+            // the last ball update remote time, used to disgard out of order packets
+            public float lastReceivedBallsTime;
             // remote Instance ID -> local MonoBahaviours for balls we're receiving updates on
             public readonly Dictionary<int, P2PNetworkBall> activeBalls = new Dictionary<int, P2PNetworkBall>();
         }
@@ -40,6 +41,7 @@ namespace HomeRun.Net
         // authorized users to connect to and associated data
         private readonly Dictionary<ulong, RemotePlayerData> m_remotePlayers = new Dictionary<ulong, RemotePlayerData>();
         // when to send the next update to remotes on the state on my local balls
+        private float m_timeForNextBallUpdate;
         private float m_timeForNextHeadUpdate;
         private float m_timeForNextBatUpdate;
         private float m_timeForNextGloveUpdate;
@@ -49,33 +51,24 @@ namespace HomeRun.Net
         private const int TIME_SYNC_MESSAGE_COUNT = 7;
         private const byte START_TIME_MESSAGE = 2;
         private const uint START_TIME_MESSAGE_SIZE = 1 + 4;
-        /* Ball */
-        private const byte BALL_SPAWN_MESSAGE = 10;
-        private const uint BALL_SPAWN_MESSAGE_SIZE = 1 + 4 + 4;
-        private const byte BALL_THROW_MESSAGE = 11;
-        private const uint BALL_THROW_MESSAGE_SIZE = 1 + 4 + 12 + 12;
-        private const byte BALL_HIT_MESSAGE = 12;
-        private const uint BALL_HIT_MESSAGE_SIZE = 1 + 4 + 12 + 12;
-        /* Ball */
+        private const byte LOCAL_BALLS_UPDATE_MESSAGE = 3;
+        private const uint LOCAL_BALLS_UPDATE_MESSATE_SIZE_MAX = 1 + 4 + (2 * Player.MAX_BALLS * (1 + 4 + 4 + 12 + 12));
+        private const float LOCAL_BALLS_UPDATE_DELAY = 0.011f;
         private const byte LOCAL_HEAD_UPDATE_MESSAGE = 4;
         private const byte LOCAL_BAT_UPDATE_MESSAGE = 5;
         private const byte LOCAL_GLOVE_UPDATE_MESSAGE = 6;
         private const byte LOCAL_PACKET_SIZE = 4 + 29;
-
-        // 90fps = 0.011, 120fps = 0.008
-        private const float LOCAL_UPDATE_DELAY = 0.1f;
+		
+		// 90fps = 0.011, 120fps = 0.008
+        private const float LOCAL_UPDATE_DELAY = 0.01f;
 
         // cache of local balls that we are sending updates for
         private readonly Dictionary<int, P2PNetworkBall> m_localBalls = new Dictionary<int, P2PNetworkBall>();
 
-        private readonly byte[] m_sendTransformBuffer = new byte[LOCAL_PACKET_SIZE];
-        // this actually cant help too much
-        private readonly byte[] m_sendBallSpawnBuffer = new byte[BALL_SPAWN_MESSAGE_SIZE];
-        private readonly byte[] m_sendBallThrowBuffer = new byte[BALL_THROW_MESSAGE_SIZE];
-        private readonly byte[] m_sendBallHitBuffer = new byte[BALL_HIT_MESSAGE_SIZE];
+        private readonly byte[] sendTransformBuffer = new byte[LOCAL_PACKET_SIZE];
 
         // reusable buffer to read network data into
-        private readonly byte[] readBuffer = new byte[LOCAL_PACKET_SIZE];
+        private readonly byte[] readBuffer = new byte[LOCAL_BALLS_UPDATE_MESSATE_SIZE_MAX];
 
         // temporary time-sync cache of the calculated time offsets
         private readonly Dictionary<ulong, List<float>> m_remoteSyncTimeCache = new Dictionary<ulong, List<float>>();
@@ -110,14 +103,13 @@ namespace HomeRun.Net
 
         public P2PManager(Transform head, Transform bat, Transform glove, Transform localHead, Transform localBat, Transform localGlove)
         {
-            m_remoteHeadTransform = head;
-            m_remoteBatTransform = bat;
-            m_remoteGloveTransform = glove;
-            m_remoteSpawnPointTransform = glove.Find("Spawnpoint");
+            remoteHeadTransform = head;
+            remoteBatTransform = bat;
+			remoteGloveTransform = glove;
 
-            m_localHeadTransform = localHead;
-            m_localBatTransform = localBat;
-            m_localGloveTransform = localGlove;
+            localHeadTransform = localHead;
+            localBatTransform = localBat;
+			localGloveTransform = localGlove;
             Net.SetPeerConnectRequestCallback(PeerConnectRequestCallback);
             Net.SetConnectionStateChangedCallback(ConnectionStateChangedCallback);
         }
@@ -148,6 +140,10 @@ namespace HomeRun.Net
                         ReceiveMatchStartTimeOffer(packet.SenderID, readBuffer);
                         break;
 
+                    case LOCAL_BALLS_UPDATE_MESSAGE:
+                        ReceiveBallTransforms(packet.SenderID, readBuffer, packet.Size);
+                        break;
+
                     case LOCAL_HEAD_UPDATE_MESSAGE:
                         ReceiveHeadTransforms(packet.SenderID, readBuffer, packet.Size);
                         break;
@@ -159,34 +155,27 @@ namespace HomeRun.Net
                     case LOCAL_GLOVE_UPDATE_MESSAGE:
                         ReceiveGloveTransforms(packet.SenderID, readBuffer, packet.Size);
                         break;
-
-                    case BALL_SPAWN_MESSAGE:
-                        ReceiveBallSpawn(packet.SenderID, readBuffer, packet.Size);
-                        break;
-
-                    case BALL_THROW_MESSAGE:
-                        ReceiveBallThrow(packet.SenderID, readBuffer, packet.Size);
-                        break;
-
-                    case BALL_HIT_MESSAGE:
-                        ReceiveBallHit(packet.SenderID, readBuffer, packet.Size);
-                        break;
                 }
+            }
+
+            if (Time.time >= m_timeForNextBallUpdate && m_localBalls.Count > 0)
+            {
+                SendLocalBallTransforms();
             }
 
             if (Time.time >= m_timeForNextHeadUpdate)
             {
-                SendHeadTransform(m_localHeadTransform);
+                SendHeadTransform(localHeadTransform);
             }
 
-            if (MatchController.PlayerType == PlayerType.Batter && Time.time >= m_timeForNextBatUpdate)
+            if (Time.time >= m_timeForNextBatUpdate)
             {
-                SendBatTransform(m_localBatTransform);
+                SendBatTransform(localBatTransform);
             }
 
-            if (MatchController.PlayerType == PlayerType.Pitcher && Time.time >= m_timeForNextGloveUpdate)
+            if (Time.time >= m_timeForNextGloveUpdate)
             {
-                SendGloveTransform(m_localGloveTransform);
+                SendGloveTransform(localGloveTransform);
             }
         }
 
@@ -428,12 +417,7 @@ namespace HomeRun.Net
 
         public void AddNetworkBall(GameObject ball, BallType type)
         {
-            var id = ball.GetInstanceID();
-            m_localBalls[id] = ball
-                .AddComponent<P2PNetworkBall>()
-                .SetType(type)
-                .SetInstanceID(id);
-            SendBallSpawn(id, type);
+            m_localBalls[ball.GetInstanceID()] = ball.AddComponent<P2PNetworkBall>().SetType(type);
         }
 
         public void RemoveNetworkBall(GameObject ball)
@@ -441,63 +425,41 @@ namespace HomeRun.Net
             m_localBalls.Remove(ball.GetInstanceID());
         }
 
-        void SendBallSpawn(int id, BallType type)
+        void SendLocalBallTransforms()
         {
-            m_sendBallSpawnBuffer[0] = BALL_SPAWN_MESSAGE;
-            int offset = 1;
+            m_timeForNextBallUpdate = Time.time + LOCAL_BALLS_UPDATE_DELAY;
 
-            PackInt32(id, m_sendBallSpawnBuffer, ref offset);
-            PackInt32((int)type, m_sendBallSpawnBuffer, ref offset);
+            int msgSize = 1 + 4 + (m_localBalls.Count * (1 + 4 + 4 + 12 + 12));
+            byte[] sendBuffer = new byte[msgSize];
+            sendBuffer[0] = LOCAL_BALLS_UPDATE_MESSAGE;
+            int offset = 1;
+            PackFloat(Time.realtimeSinceStartup, sendBuffer, ref offset);
+
+            foreach (var ball in m_localBalls.Values)
+            {
+                PackInt32((int)ball.BallType, sendBuffer, ref offset);
+                //PackBool(ball.IsHeld(), sendBuffer, ref offset);
+                PackBool(true, sendBuffer, ref offset);
+                PackInt32(ball.gameObject.GetInstanceID(), sendBuffer, ref offset);
+                PackVector3(ball.transform.position, sendBuffer, ref offset);
+                PackVector3(ball.velocity, sendBuffer, ref offset);
+            }
 
             foreach (KeyValuePair<ulong, RemotePlayerData> player in m_remotePlayers)
             {
                 if (player.Value.state == PeerConnectionState.Connected)
                 {
-                    Net.SendPacket(player.Key, m_sendBallSpawnBuffer, SendPolicy.Reliable);
+                    Net.SendPacket(player.Key, sendBuffer, SendPolicy.Unreliable);
                 }
             }
         }
 
-        public void SendBallThrow(int id, Vector3 pos, Vector3 vel)
-        {
-            m_sendBallThrowBuffer[0] = BALL_THROW_MESSAGE;
-            int offset = 1;
-
-            PackInt32(id, m_sendBallThrowBuffer, ref offset);
-            PackVector3(pos, m_sendBallThrowBuffer, ref offset);
-            PackVector3(vel, m_sendBallThrowBuffer, ref offset);
-
-            foreach (KeyValuePair<ulong, RemotePlayerData> player in m_remotePlayers)
-            {
-                if (player.Value.state == PeerConnectionState.Connected)
-                {
-                    Net.SendPacket(player.Key, m_sendBallThrowBuffer, SendPolicy.Reliable);
-                }
-            }
-        }
-
-        public void SendBallHit(int id, Vector3 pos, Vector3 vel)
-        {
-            m_sendBallHitBuffer[0] = BALL_HIT_MESSAGE;
-            int offset = 1;
-
-            PackInt32(id, m_sendBallHitBuffer, ref offset);
-            PackVector3(pos, m_sendBallHitBuffer, ref offset);
-            PackVector3(vel, m_sendBallHitBuffer, ref offset);
-
-            foreach (KeyValuePair<ulong, RemotePlayerData> player in m_remotePlayers)
-            {
-                if (player.Value.state == PeerConnectionState.Connected)
-                {
-                    Net.SendPacket(player.Key, m_sendBallHitBuffer, SendPolicy.Reliable);
-                }
-            }
-        }
-
-        void ReceiveBallSpawn(ulong remoteID, byte[] msg, ulong msgLength)
+        void ReceiveBallTransforms(ulong remoteID, byte[] msg, ulong msgLength)
         {
             int offset = 1;
+            float remoteTime = UnpackTime(remoteID, msg, ref offset);
 
+<<<<<<< HEAD
             int instanceID = UnpackInt32(msg, ref offset);
             BallType type = (BallType)UnpackInt32(msg, ref offset);
 
@@ -514,39 +476,39 @@ namespace HomeRun.Net
                 m_remotePlayers[remoteID].activeBalls[instanceID] = newball;
             }
         }
-
-        void ReceiveBallThrow(ulong remoteID, byte[] msg, ulong msgLength)
-        {
-            int offset = 1;
-
-            int instanceID = UnpackInt32(msg, ref offset);
-            Vector3 pos = UnpackVector3(msg, ref offset);
-            Vector3 vel = UnpackVector3(msg, ref offset);
-
-            var ball = m_remotePlayers[remoteID].activeBalls[instanceID];
-            if (!ball) {
-                Debug.Log("Throw Ball" + instanceID + "Not Found!");
+=======
+            // because we're using unreliable networking the packets could come out of order
+            // and the best thing to do is just ignore old packets because the data isn't
+            // very useful anyway
+            if (remoteTime < m_remotePlayers[remoteID].lastReceivedBallsTime)
                 return;
-            }
-            
-            ball.ProcessBallThrow(pos, vel);
-        }
-        void ReceiveBallHit(ulong remoteID, byte[] msg, ulong msgLength)
-        {
-            int offset = 1;
+>>>>>>> parent of cf9859d... Backuo Branch & Clean Up net api
 
-            int instanceID = UnpackInt32(msg, ref offset);
-            Vector3 pos = UnpackVector3(msg, ref offset);
-            Vector3 vel = UnpackVector3(msg, ref offset);
+            m_remotePlayers[remoteID].lastReceivedBallsTime = remoteTime;
 
-            var ball = m_localBalls[instanceID];
-            if (!ball) {
-                Debug.Log("Hit Ball" + instanceID + "Not Found!");
-                return;
+            // loop over all ball updates in the message
+            while (offset != (int)msgLength)
+            {
+                int ballType = UnpackInt32(msg, ref offset);
+                bool isHeld = UnpackBool(msg, ref offset);
+                int instanceID = UnpackInt32(msg, ref offset);
+                Vector3 pos = UnpackVector3(msg, ref offset);
+                Vector3 vel = UnpackVector3(msg, ref offset);
+
+                if (!m_remotePlayers[remoteID].activeBalls.ContainsKey(instanceID))
+                {
+                    var newball = m_remotePlayers[remoteID].player.CreateBall((BallType)ballType).AddComponent<P2PNetworkBall>();
+                    newball.transform.SetParent(m_remotePlayers[remoteID].player.transform.parent);
+                    m_remotePlayers[remoteID].activeBalls[instanceID] = newball;
+                }
+                var ball = m_remotePlayers[remoteID].activeBalls[instanceID];
+                if (ball)
+                {
+                    ball.ProcessRemoteUpdate(remoteTime, isHeld, pos, vel);
+                }
             }
-            
-            ball.ProcessBallHit(pos, vel);
         }
+
         #endregion
 
         #region Head Bat Glove Transforms
@@ -555,18 +517,18 @@ namespace HomeRun.Net
         {
             m_timeForNextHeadUpdate = Time.time + LOCAL_UPDATE_DELAY;
 
-            m_sendTransformBuffer[0] = LOCAL_HEAD_UPDATE_MESSAGE;  // Packet format
+            sendTransformBuffer[0] = LOCAL_HEAD_UPDATE_MESSAGE;  // Packet format
             int offset = 1;
-            PackFloat(Time.realtimeSinceStartup, m_sendTransformBuffer, ref offset);
+            PackFloat(Time.realtimeSinceStartup, sendTransformBuffer, ref offset);
 
-            PackVector3(headTransform.position, m_sendTransformBuffer, ref offset);
-            PackQuaternion(headTransform.rotation, m_sendTransformBuffer, ref offset);
+            PackVector3(headTransform.position, sendTransformBuffer, ref offset);
+            PackQuaternion(headTransform.rotation, sendTransformBuffer, ref offset);
 
             foreach (KeyValuePair<ulong, RemotePlayerData> player in m_remotePlayers)
             {
                 if (player.Value.state == PeerConnectionState.Connected)
                 {
-                    Net.SendPacket(player.Key, m_sendTransformBuffer, SendPolicy.Unreliable);
+                    Net.SendPacket(player.Key, sendTransformBuffer, SendPolicy.Unreliable);
                 }
             }
         }
@@ -575,18 +537,18 @@ namespace HomeRun.Net
         {
             m_timeForNextBatUpdate = Time.time + LOCAL_UPDATE_DELAY;
 
-            m_sendTransformBuffer[0] = LOCAL_BAT_UPDATE_MESSAGE;  // Packet format
+            sendTransformBuffer[0] = LOCAL_BAT_UPDATE_MESSAGE;  // Packet format
             int offset = 1;
-            PackFloat(Time.realtimeSinceStartup, m_sendTransformBuffer, ref offset);
+            PackFloat(Time.realtimeSinceStartup, sendTransformBuffer, ref offset);
 
-            PackVector3(batTransform.position, m_sendTransformBuffer, ref offset);
-            PackQuaternion(batTransform.rotation, m_sendTransformBuffer, ref offset);
+            PackVector3(batTransform.position, sendTransformBuffer, ref offset);
+            PackQuaternion(batTransform.rotation, sendTransformBuffer, ref offset);
 
             foreach (KeyValuePair<ulong, RemotePlayerData> player in m_remotePlayers)
             {
                 if (player.Value.state == PeerConnectionState.Connected)
                 {
-                    Net.SendPacket(player.Key, m_sendTransformBuffer, SendPolicy.Unreliable);
+                    Net.SendPacket(player.Key, sendTransformBuffer, SendPolicy.Unreliable);
                 }
             }
         }
@@ -595,18 +557,18 @@ namespace HomeRun.Net
         {
             m_timeForNextGloveUpdate = Time.time + LOCAL_UPDATE_DELAY;
 
-            m_sendTransformBuffer[0] = LOCAL_GLOVE_UPDATE_MESSAGE;  // Packet format
+            sendTransformBuffer[0] = LOCAL_GLOVE_UPDATE_MESSAGE;  // Packet format
             int offset = 1;
-            PackFloat(Time.realtimeSinceStartup, m_sendTransformBuffer, ref offset);
+            PackFloat(Time.realtimeSinceStartup, sendTransformBuffer, ref offset);
 
-            PackVector3(gloveTransform.position, m_sendTransformBuffer, ref offset);
-            PackQuaternion(gloveTransform.rotation, m_sendTransformBuffer, ref offset);
+            PackVector3(gloveTransform.position, sendTransformBuffer, ref offset);
+            PackQuaternion(gloveTransform.rotation, sendTransformBuffer, ref offset);
 
             foreach (KeyValuePair<ulong, RemotePlayerData> player in m_remotePlayers)
             {
                 if (player.Value.state == PeerConnectionState.Connected)
                 {
-                    Net.SendPacket(player.Key, m_sendTransformBuffer, SendPolicy.Unreliable);
+                    Net.SendPacket(player.Key, sendTransformBuffer, SendPolicy.Unreliable);
                 }
             }
         }
@@ -635,9 +597,9 @@ namespace HomeRun.Net
             }
 
             float completed = Math.Min(Time.time - remoteTime, LOCAL_UPDATE_DELAY) / LOCAL_UPDATE_DELAY;
-            m_remoteHeadTransform.position =
+            remoteHeadTransform.position =
                 Vector3.Lerp(headData.receivedPositionPrior, headData.receivedPosition, completed);
-            m_remoteHeadTransform.rotation =
+            remoteHeadTransform.rotation =
                 Quaternion.Slerp(headData.receivedRotationPrior, headData.receivedRotation, completed);
         }
 
@@ -666,11 +628,11 @@ namespace HomeRun.Net
             }
 
             float completed = Math.Min(Time.time - remoteTime, LOCAL_UPDATE_DELAY) / LOCAL_UPDATE_DELAY;
-            m_remoteBatTransform.position =
+            remoteBatTransform.position =
                 Vector3.Lerp(batData.receivedPositionPrior, batData.receivedPosition, completed);
             // remoteBatTransform.rotation =
             //     Quaternion.Slerp(batData.receivedRotationPrior, batData.receivedRotation, completed);
-            m_remoteBatTransform.rotation = batData.receivedRotation;
+			remoteBatTransform.rotation = batData.receivedRotation;
         }
 
         void ReceiveGloveTransforms(ulong remoteID, byte[] msg, ulong msgLength)
@@ -697,9 +659,9 @@ namespace HomeRun.Net
             }
 
             float completed = Math.Min(Time.time - remoteTime, LOCAL_UPDATE_DELAY) / LOCAL_UPDATE_DELAY;
-            m_remoteGloveTransform.position =
+            remoteGloveTransform.position =
                 Vector3.Lerp(gloveData.receivedPositionPrior, gloveData.receivedPosition, completed);
-            m_remoteGloveTransform.rotation =
+            remoteGloveTransform.rotation =
                 Quaternion.Slerp(gloveData.receivedRotationPrior, gloveData.receivedRotation, completed);
         }
 

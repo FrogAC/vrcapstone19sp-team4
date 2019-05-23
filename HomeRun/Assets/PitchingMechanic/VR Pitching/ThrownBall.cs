@@ -196,6 +196,7 @@ public class ThrownBall : OVRGrabbable
         }
     }
 
+<<<<<<< HEAD
     // For NET
     public void OnHitByBat(Vector3 pos, Vector3 vel) {
         if (PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH && MatchController.PlayerType == PlayerType.Batter) {
@@ -207,6 +208,8 @@ public class ThrownBall : OVRGrabbable
             PlatformManager.Instance.P2PHitBall(netball.InstanceID, pos, vel);
         }
     }
+=======
+>>>>>>> parent of cf9859d... Backuo Branch & Clean Up net api
 
 
     /*
