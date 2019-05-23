@@ -190,12 +190,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
-<<<<<<< HEAD
-<<<<<<< HEAD
---- !u!4 &426762244 stripped
-=======
-=======
->>>>>>> parent of c34f8a7... Player UI tweaks
 --- !u!4 &193082998 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400012, guid: ce816f2e6abb0504092c23ed9b970dfd,
