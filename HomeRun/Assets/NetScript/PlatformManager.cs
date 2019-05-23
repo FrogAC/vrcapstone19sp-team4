@@ -88,6 +88,8 @@ namespace HomeRun.Net
                 return;
             }
 
+            GlobalSettings.UseNetwork = true;
+
             s_instance = this;
             DontDestroyOnLoad(gameObject);
 

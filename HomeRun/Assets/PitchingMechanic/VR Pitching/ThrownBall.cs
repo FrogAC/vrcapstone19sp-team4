@@ -4,6 +4,7 @@ using UnityEngine;
 using OVR;
 using UnityEngine.Events;
 using HomeRun.Net;
+using HomeRun;
 
 public class ThrownBall : OVRGrabbable
 {
@@ -49,7 +50,7 @@ public class ThrownBall : OVRGrabbable
         releaseLinVel = linearVelocity;
         releaseAngVel = angularVelocity;
         //Debug.Log("GrabEnd Success!");
-        if (PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH && MatchController.PlayerType == PlayerType.Pitcher) {
+        if (GlobalSettings.UseNetwork && PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH && MatchController.PlayerType == PlayerType.Pitcher) {
             PlatformManager.Instance.P2PThrowBall(gameObject.GetInstanceID(), transform.position, releaseLinVel);
         }
 
@@ -198,12 +199,13 @@ public class ThrownBall : OVRGrabbable
 
     // For NET
     public void OnHitByBat(Vector3 pos, Vector3 vel) {
-        if (PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH && MatchController.PlayerType == PlayerType.Batter) {
+        if (GlobalSettings.UseNetwork && PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH && MatchController.PlayerType == PlayerType.Batter) {
             P2PNetworkBall netball = gameObject.GetComponent<P2PNetworkBall>();
             if (!netball) {
                 Debug.Log("No NetWorkBall Found!");
                 return;
             }
+			Debug.Log("Ball Hit Velocity:" + vel);
             PlatformManager.Instance.P2PHitBall(netball.InstanceID, pos, vel);
         }
     }
