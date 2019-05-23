@@ -106,11 +106,11 @@ namespace HomeRun.Net
 
         void IsEntitledCallback(Message msg)
         {
-            if (msg.IsError)
-            {
-                TerminateWithError(msg);
-                return;
-            }
+            // if (msg.IsError)
+            // {
+            //     TerminateWithError(msg);
+            //     return;
+            // }
 
             // Next get the identity of the user that launched the Application.
             Users.GetLoggedInUser().OnComplete(GetLoggedInUserCallback);
@@ -118,11 +118,11 @@ namespace HomeRun.Net
 
         void GetLoggedInUserCallback(Message<User> msg)
         {
-            if (msg.IsError)
-            {
-                TerminateWithError(msg);
-                return;
-            }
+            // if (msg.IsError)
+            // {
+            //     TerminateWithError(msg);
+            //     return;
+            // }
 
             m_myID = msg.Data.ID;
             m_myOculusID = msg.Data.OculusID;
