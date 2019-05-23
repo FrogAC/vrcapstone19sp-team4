@@ -16,7 +16,6 @@ public class PlayerUI : MonoBehaviour
     void Start()
     {
         menuParent.SetActive(menuVisible);
-        transform.SetParent(null);
     }
 
     // Update is called once per frame
