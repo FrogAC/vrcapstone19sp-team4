@@ -186,6 +186,11 @@ PrefabInstance:
       propertyPath: redirectionStrength.m_Curve.Array.data[2].tangentMode
       value: 34
       objectReference: {fileID: 0}
+    - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
+        type: 3}
+      propertyPath: batHitMult
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 1900042084187694041, guid: e909dd8cf0768dc4dba50ac58709bc30,
         type: 3}
       propertyPath: m_LocalPosition.x
