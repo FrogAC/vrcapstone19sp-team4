@@ -109,3 +109,8 @@ This week our focus is on making the Quest work with the networking setup and im
 
 ### Stephen - Network and Ball physics:
 Work with Daoyi to determine the changes that need to be made to the code base to ensure a singular working game across the Rift and the Quest. The major focus of this portion is how we are going to get the ball physics calculations to handled across the machines in a P2P manner while respecting the latency that we will inevitably face with the non-corded Quest. Once these bugs are handled I will work with Terrell to make sure we have smooth transitions between scenes and put the finishing touches on the gameplay mechanics.
+
+
+#### Daoyi - Multiplayer
+Rewrite the Net logic for porting on quest. Work with Terrell to build and run demos with networking connection on the Quest -- although still have some compatitive issue. With Stephen, refine and fix the calculation for determing hitting behaviors.
+Next week: test multiplayer on quest, tweak some net parameters (package update rate etc). Most importantly adding game mechniques for multiplayer.
