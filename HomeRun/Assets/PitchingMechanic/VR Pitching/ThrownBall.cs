@@ -23,6 +23,10 @@ public class ThrownBall : OVRGrabbable
     [SerializeField] AnimationCurve SpiralAnimStrength = AnimationCurve.Linear(0, 1, 1, 0);
     [SerializeField] float spiralSpeed = 1f;
     [Space]
+    [SerializeField] AnimationCurve JitterAnimStrength = AnimationCurve.Linear(0, 0, 1, 0);
+    [SerializeField] float jitterSpeed = 1f;
+    [Space]
+    [Space]
     public float vibrationFrequency = 0.4f;
     public float vibrationAmplitude = 0.4f;
     public float vibrationDuration = 0.1f;
@@ -89,12 +93,16 @@ public class ThrownBall : OVRGrabbable
             //Vector3 trajectoryAugmentation = ballTarget.right * Mathf.Sin(dist*spiralspeed) + ballTarget.up * Mathf.Cos(dist * spiralspeed);
             Vector3 normal = -Vector3.ProjectOnPlane(targetVector, pitchingLine);
             Vector3 bitangent = Vector3.Cross(pitchingLine, normal);
-
             bitangent = bitangent.normalized + -normal.normalized * spiralSpeed;
-
             bitangent.Normalize();
-
             transform.forward = Vector3.Lerp(transform.forward, bitangent.normalized, SpiralAnimStrength.Evaluate(dist)).normalized;
+
+            // Applies Jitter
+            Vector3 jitterVec = new Vector3(Mathf.PerlinNoise(0, Time.time * jitterSpeed), Mathf.PerlinNoise(Time.time  * jitterSpeed, 0), 0);
+            jitterVec -= new Vector3(1,1,0) * 0.5f;
+            
+            transform.forward = Vector3.Lerp(transform.forward, jitterVec.normalized, JitterAnimStrength.Evaluate(dist)).normalized;
+
             // Calculates redirection
             transform.forward = Vector3.Lerp(transform.forward, targetVector.normalized, redirectionStrength.Evaluate(dist)).normalized + transform.forward * Mathf.Epsilon;
             // Moves the ball in the direction it's facing
