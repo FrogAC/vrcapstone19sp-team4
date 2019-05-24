@@ -114,3 +114,9 @@ Work with Daoyi to determine the changes that need to be made to the code base t
 #### Daoyi - Multiplayer
 Rewrite the Net logic for porting on quest. Work with Terrell to build and run demos with networking connection on the Quest -- although still have some compatitive issue. With Stephen, refine and fix the calculation for determing hitting behaviors.
 Next week: test multiplayer on quest, tweak some net parameters (package update rate etc). Most importantly adding game mechniques for multiplayer.
+
+#### Terrell - Jitterball
+In addition to working with other members of the team for bug fixing and integration of different aspects of the game, I’ve worked on a new pitch that essentially applies noise to the movement of the ball as it flies towards the batter. This will make its movement unpredictable mid-flight, but the noisy movement will be dampened as the ball gets closer to the batter so that hitting it is easier. Doing this won’t be too difficult since it can be done in a similar way to the spiralball, but there are still other issues with the pitch that need to be addressed.
+Right now, the random movement can sometime make the ball hit the ground and fail to get to the batter even when the ball is thrown in a reasonable direction. To fix this, I’ll work on and additional modifier for pitches that keeps the ball from flying to far away from its path, and possibly make a more general modifier that veers away from any collision. By improving these features for the jitterball, we will have more options for how to create future pitches since we can combine all of the features that we currently have to varying degrees in any pitch that we make.
+For next week, doing more work on bug-fixing and integration to get everything working well together will be important, but I also want to make path-correcting modifiers to improve the jitterball.
+
