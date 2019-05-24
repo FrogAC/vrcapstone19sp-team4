@@ -17,7 +17,7 @@ public class ThrownBall : OVRGrabbable
     private Rigidbody rb;
     [Header("Path properties")]
     // How strongly does the ball curve to the strike zone at different parts of the throw
-    [SerializeField] AnimationCurve redirectionStrength = AnimationCurve.Linear(0,0,1,1);
+    [SerializeField] AnimationCurve redirectionStrength = AnimationCurve.Linear(0, 0, 1, 1);
     [Space]
     // How strongly is the Spiral motion applieds
     [SerializeField] AnimationCurve SpiralAnimStrength = AnimationCurve.Linear(0, 1, 1, 0);
@@ -27,13 +27,14 @@ public class ThrownBall : OVRGrabbable
     public float vibrationAmplitude = 0.4f;
     public float vibrationDuration = 0.1f;
     [Space]
-    [SerializeField] UnityEvent onHitByBat;
 
     Vector3 releaseLinVel;
     Vector3 releaseAngVel;
 
     Vector3 flightVel;
     private OVRGrabber prevGrabber;
+
+    private Collider m_collider;
 
     new private void Start()
     {
@@ -50,7 +51,8 @@ public class ThrownBall : OVRGrabbable
         releaseLinVel = linearVelocity;
         releaseAngVel = angularVelocity;
         //Debug.Log("GrabEnd Success!");
-        if (GlobalSettings.UseNetwork && PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH && MatchController.PlayerType == PlayerType.Pitcher) {
+        if (GlobalSettings.UseNetwork && PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH && MatchController.PlayerType == PlayerType.Pitcher)
+        {
             PlatformManager.Instance.P2PThrowBall(gameObject.GetInstanceID(), transform.position, releaseLinVel);
         }
 
@@ -59,6 +61,7 @@ public class ThrownBall : OVRGrabbable
 
     public void initialize()
     {
+        m_collider = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
         strikezone = Strikezone.strikezone.transform;
         strikezoneCollider = strikezone.GetComponent<Collider>();
@@ -66,12 +69,12 @@ public class ThrownBall : OVRGrabbable
 
     IEnumerator Throw()
     {
-        
+
         rb.isKinematic = false;
         //Debug.Log("throw()");
         //transform.LookAt(strikezone);
         Vector3 releasePos = transform.position;
-        
+
 
         transform.forward = releaseLinVel.normalized;
 
@@ -124,7 +127,7 @@ public class ThrownBall : OVRGrabbable
 
     Vector3 GetBallTargetPosition()
     {
-        if(strikezoneCollider != null)
+        if (strikezoneCollider != null)
         {
             return strikezoneCollider.ClosestPoint(transform.position);
         }
@@ -133,7 +136,7 @@ public class ThrownBall : OVRGrabbable
     }
 
     private bool hasHitBat = false;
-    public float batHitMult = 3;
+    public float batHitMult = 3.0f;
     private void OnCollisionEnter(Collision collision)
     {
         // Remote Balls Bug fix, Not sure actual reason.
@@ -152,60 +155,80 @@ public class ThrownBall : OVRGrabbable
             rb.constraints = RigidbodyConstraints.None;
             //rb.velocity = Vector3.Reflect(flightVel.normalized, collision.impulse.normalized) * flightVel.magnitude;
             //Debug.Log(name + " hit " + collision.gameObject.name);
-            
-            
+
+
             // BatHit functionality
-            if(collision.gameObject.layer == LayerMask.NameToLayer("Bat") && !hasHitBat)
+            if (collision.gameObject.layer == LayerMask.NameToLayer("Bat") && !hasHitBat)
             {
-                hasHitBat = true;
+                // san check
+                Physics.IgnoreCollision(collision.collider, m_collider, true);
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+                hasHitBat = true;  
+                
 
-                onHitByBat.Invoke();
+                //onHitByBat.Invoke();
 
-                Physics.IgnoreCollision(collision.collider, collision.GetContact(0).otherCollider, true);
                 // Launch ball
-                rb.velocity = Vector3.Reflect(rb.velocity, collision.GetContact(0).normal);
-                Vector3 LaunchDir = Vector3.ProjectOnPlane(rb.velocity, collision.collider.transform.up);
+                Debug.Log("relative" + collision.relativeVelocity);
+                Debug.DrawRay(transform.position, collision.GetContact(0).normal, Color.black, 1.0f);
 
-                rb.velocity = LaunchDir.normalized * rb.velocity.magnitude * batHitMult;
+                Vector3 nVel = Vector3.Reflect(-collision.relativeVelocity, collision.GetContact(0).normal);
+                Vector3 LaunchDir = Vector3.ProjectOnPlane(nVel, collision.collider.transform.up);
+
+                Debug.DrawRay(transform.position, nVel, Color.red, 1.0f);
+
+                nVel = LaunchDir.normalized * nVel.magnitude * batHitMult;
 
                 float pointSpeed = 1;
-                Rigidbody batRB = collision.gameObject.GetComponentInParent<OVRGrabbable>().GetComponent<Rigidbody>();
+                Rigidbody batRB = collision.rigidbody;
                 if (batRB != null)
                 {
                     //Debug.Log(batRB.velocity + "------" + batRB.angularVelocity);
                     pointSpeed = batRB.GetPointVelocity(collision.GetContact(0).point).magnitude;
-                    rb.velocity *= pointSpeed;
+                    nVel *= pointSpeed;
                 }
+                Debug.DrawRay(transform.position, nVel, Color.blue, 1.0f);
 
+                rb.velocity = nVel;
+
+                Debug.Log("out" + nVel);
                 // After all calculation
-                OnHitByBat(transform.position, rb.velocity);
+                OnHitByBat(transform.position, nVel);
 
-                Debug.DrawLine(collision.GetContact(0).point, collision.GetContact(0).point + rb.velocity.normalized * 2, Color.red, 3);
+                //Debug.DrawLine(collision.GetContact(0).point, collision.GetContact(0).point + rb.velocity.normalized * 2, Color.red, 3);
 
-                Debug.Log("pointSpeed = " + pointSpeed);
+                //Debug.Log("pointSpeed = " + pointSpeed);
 
                 //StartCoroutine(VibrateController(vibrationFrequency, vibrationAmplitude, vibrationDuration));
                 OVRHapticsClip clip = new OVRHapticsClip();
                 for (int i = 0; i < vibrationDuration * 320; i++)
                 {
-                    clip.WriteSample((byte)Mathf.Clamp((int)(vibrationAmplitude * 255 * (1 + pointSpeed/10)), 0, 255));
+                    clip.WriteSample((byte)Mathf.Clamp((int)(vibrationAmplitude * 255 * (1 + pointSpeed / 10)), 0, 255));
                 }
                 OVRHaptics.RightChannel.Preempt(clip);
                 OVRHaptics.LeftChannel.Preempt(clip);
-
             }
         }
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+
+    }
+
     // For NET
-    public void OnHitByBat(Vector3 pos, Vector3 vel) {
-        if (GlobalSettings.UseNetwork && PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH && MatchController.PlayerType == PlayerType.Batter) {
+    public void OnHitByBat(Vector3 pos, Vector3 vel)
+    {
+        if (GlobalSettings.UseNetwork && PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH && MatchController.PlayerType == PlayerType.Batter)
+        {
             P2PNetworkBall netball = gameObject.GetComponent<P2PNetworkBall>();
-            if (!netball) {
+            if (!netball)
+            {
                 Debug.Log("No NetWorkBall Found!");
                 return;
             }
-			Debug.Log("Ball Hit Velocity:" + vel);
+            Debug.Log("Ball Hit Velocity:" + vel);
             PlatformManager.Instance.P2PHitBall(netball.InstanceID, pos, vel);
         }
     }
