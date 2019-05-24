@@ -51,10 +51,13 @@ namespace HomeRun.Net
 		public void ProcessBallThrow(Vector3 pos, Vector3 vel) {
 			m_tb.transform.position = pos;
 			m_tb.GrabEnd(vel, Vector3.zero);
+			m_rigidBody.isKinematic = false;
 		}
 
 		public void ProcessBallHit(Vector3 pos, Vector3 vel) {
 			Debug.Log("Hit!" + vel);
+            rb.useGravity = true;
+			//m_rigidBody.isKinematic = true;
 			m_rigidBody.angularVelocity = Vector3.zero;
 			m_rigidBody.velocity = Vector3.zero;
 			m_tb.transform.position = pos;
