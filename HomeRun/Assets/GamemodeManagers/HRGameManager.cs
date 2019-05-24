@@ -54,6 +54,10 @@ public class HRGameManager : MonoBehaviour
         }
     }
 
+    //====================================================
+    // Scoring Methods
+    //====================================================
+
     public void HomeRun()
     {
         homeruns++;

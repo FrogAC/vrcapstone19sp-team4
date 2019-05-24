@@ -18,10 +18,11 @@ public class FieldBoundary : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "ball")
+        if (other.gameObject.layer == 12)
         {
+            Debug.Log("Homerun");
             manager.HomeRun();
         }
     }
