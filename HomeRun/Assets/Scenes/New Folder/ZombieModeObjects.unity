@@ -771,7 +771,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnFrequency: 5
   spawnLineWidth: 30
-  zombiePrefab: {fileID: 2961513147741710694, guid: 490b2ee27cba8c4419eb66d27f7b7014,
+  zombiePrefab: {fileID: 2952197170991645796, guid: 4f4679cb000ffdb4fa6f154c525faac0,
     type: 3}
 --- !u!4 &807821417
 Transform:
