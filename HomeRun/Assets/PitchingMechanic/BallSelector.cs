@@ -82,7 +82,7 @@
             spawnedGrabbable = spawnedPrefab.GetComponent<ThrownBall>();
             spawnedPrefab.GetComponent<Rigidbody>().isKinematic = true;
 
-            if (PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH)
+            if (GlobalSettings.UseNetwork && PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH)
             {
                 PlatformManager.P2P.AddNetworkBall(spawnedPrefab, selections[currentIndex].type);
             }

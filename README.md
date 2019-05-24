@@ -104,4 +104,8 @@ The in-game menu is essentially a 3d panel that the player can bring up in front
 ##### Terrell - Plans for next week
 Debugging build issues will be something that I work on in this coming week. The problem isn’t crippling in the sense that it doesn’t seem to have an impact on our development right now, but will need to be solved sooner rather than later since we are nearing the end of the quarter and the fix that we find for the crashes may require us to reorganize large parts of the project. I also want to make sure that a new pitch gets added to the game since I didn’t add one this week.
 
+### Week 8
+This week our focus is on making the Quest work with the networking setup and improving the P2P information transfer to ensure the networking is running effectively and smoothly. Secondly, we are working bug testing ensuring we minimize the amount errors that occur during gameplay.
 
+### Stephen - Network and Ball physics:
+Work with Daoyi to determine the changes that need to be made to the code base to ensure a singular working game across the Rift and the Quest. The major focus of this portion is how we are going to get the ball physics calculations to handled across the machines in a P2P manner while respecting the latency that we will inevitably face with the non-corded Quest. Once these bugs are handled I will work with Terrell to make sure we have smooth transitions between scenes and put the finishing touches on the gameplay mechanics.
