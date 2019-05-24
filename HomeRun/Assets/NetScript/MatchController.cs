@@ -26,7 +26,7 @@ namespace HomeRun.Net
         // 0 = Batter, 1 = Pitcher
         [SerializeField] private PlayerArea[] m_playerAreas = new PlayerArea[2];
         // seconds to wait to coordinate P2P setup with other match players before starting
-        [SerializeField] private uint MATCH_WARMUP_TIME = 10;
+        [SerializeField] private uint MATCH_WARMUP_TIME = 5;
 
         // seconds for the match
         [SerializeField] private uint MATCH_TIME = 999;
