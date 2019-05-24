@@ -95,6 +95,10 @@
 					<h2 class="section-heading">Stephen - Network and Ball physics</h2>
 					<p>Work with Daoyi to determine the changes that need to be made to the code base to ensure a singular working game across the Rift and the Quest. The major focus of this portion is how we are going to get the ball physics calculations to handled across the machines in a P2P manner while respecting the latency that we will inevitably face with the non-corded Quest. Once these bugs are handled I will work with Terrell to make sure we have smooth transitions between scenes and put the finishing touches on the gameplay mechanics.</p>
 					
+					<h2 class="section-heading">Terrell - Jitterball</h2>
+					<p>In addition to working with other members of the team for bug fixing and integration of different aspects of the game, I’ve worked on a new pitch that essentially applies noise to the movement of the ball as it flies towards the batter. This will make its movement unpredictable mid-flight, but the noisy movement will be dampened as the ball gets closer to the batter so that hitting it is easier. Doing this won’t be too difficult since it can be done in a similar way to the spiralball, but there are still other issues with the pitch that need to be addressed.</p>
+					<p>Right now, the random movement can sometime make the ball hit the ground and fail to get to the batter even when the ball is thrown in a reasonable direction. To fix this, I’ll work on and additional modifier for pitches that keeps the ball from flying to far away from its path, and possibly make a more general modifier that veers away from any collision. By improving these features for the jitterball, we will have more options for how to create future pitches since we can combine all of the features that we currently have to varying degrees in any pitch that we make.</p>
+					<p>For next week, doing more work on bug-fixing and integration to get everything working well together will be important, but I also want to make path-correcting modifiers to improve the jitterball.</p>
 					
 					<h2 class="section-heading">Andrew - Assets</h2>
 					<p>This week I continued to work on the character that I had previously modeled. It is now rigged with usable skinweights that will work well enough for us in the upcoming demo. To continue with that, I will create some pitching animations to replace our ball shooter in singleplayer mode and begin to test hand ik for the character using the VR controllers.</p>
@@ -102,6 +106,7 @@
 					
 					<p>In addition to the character, I have also been working on assets to make the experience look more varied. For our zombie game mode, I have modeled and textured a grenade for us to use in place of the baseball. In addition for the previously mentioned locker room menu in the works, I have created a base locker, for which game modes will be selectable from.</p>
 					<img class="blog_image" src="../img/Week8/grenade.PNG">
+					<p></p>
 					<img class="blog_image" src="../img/Week8/locker.PNG">
 					
 					<p>I have also integrated the zombie animations and models that we have, which replace the green capsules that we had standing in for them. Next step for zombie mode will be to make sure that the explosions work correctly, and to adjust the lighting on the field so that it looks spookier.</p>
