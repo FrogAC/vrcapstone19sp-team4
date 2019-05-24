@@ -54,6 +54,9 @@ namespace HomeRun.Net
 		}
 
 		public void ProcessBallHit(Vector3 pos, Vector3 vel) {
+			Debug.Log("Hit!" + vel);
+			m_rigidBody.angularVelocity = Vector3.zero;
+			m_rigidBody.velocity = Vector3.zero;
 			m_tb.transform.position = pos;
 			m_rigidBody.velocity = vel;
 			NetEffectController.Instance.PlayBatHitEffect(pos);
