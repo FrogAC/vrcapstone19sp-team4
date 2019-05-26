@@ -14,6 +14,7 @@ namespace HomeRun.Net
         private static PlayerType m_playerType = PlayerType.Batter;
 
         // Text to display when the match will start or finish
+        [SerializeField] private Transform m_startObjects;
         [SerializeField] private Text m_timerText = null;
 
         // the camera is moved between the idle position and the assigned court position
@@ -29,7 +30,7 @@ namespace HomeRun.Net
         [SerializeField] private uint MATCH_WARMUP_TIME = 5;
 
         // seconds for the match
-        [SerializeField] private uint MATCH_TIME = 999;
+        [SerializeField] private uint MATCH_TIME = 99;
 
         // the current state of the match controller
         private State m_currentState;
@@ -120,6 +121,7 @@ namespace HomeRun.Net
                         break;
 
                     case State.WAITING_FOR_MATCH:
+                        m_startObjects.gameObject.SetActive(false);
                         Assert.AreEqual(oldState, State.NONE);
                         PlatformManager.TransitionToState(PlatformManager.State.MATCH_TRANSITION);
                         break;
@@ -168,7 +170,6 @@ namespace HomeRun.Net
                         break;
                     case State.PLAYING_MATCH:
                         var delta = m_nextStateTransitionTime - Time.time;
-                        m_nextStateTransitionTime += delta + 1.0f;
                         m_timerText.text = string.Format("{0:#0}:{1:#00}.{2:00}",
                             Mathf.Floor(delta / 60),
                             Mathf.Floor(delta) % 60,
@@ -184,10 +185,9 @@ namespace HomeRun.Net
 
         void SetupForIdle()
         {
-            for (int i = 0; i < m_playerAreas.Length; i++)
-            {
-                m_playerAreas[i].SetupForPlayer<AIPlayer>("* AI *");
-            }
+            m_playerType = PlayerType.Batter;
+            m_startObjects.gameObject.SetActive(true);
+            MoveCameraToMatchPosition();
         }
 
         Player MatchPlayerAddedCallback(int slot, User user)
@@ -227,17 +227,10 @@ namespace HomeRun.Net
 
         void MoveCameraToMatchPosition()
         {
-            foreach (var playerArea in m_playerAreas)
-            {
-                var player = playerArea.GetComponentInChildren<LocalPlayer>();
-                if (player)
-                {
-                    m_player.transform.SetParent(player.transform, false);
-                    m_player.transform.localPosition = Vector3.zero;
-                    m_player.transform.rotation = playerArea.transform.rotation;
-                    break;
-                }
-            }
+            int index = m_playerType == PlayerType.Batter ? 0 : 1; 
+            var player = m_playerAreas[index].PlayerHolder;
+            m_player.transform.position = player.position;
+            m_player.transform.rotation = player.rotation;
         }
 
         #endregion
