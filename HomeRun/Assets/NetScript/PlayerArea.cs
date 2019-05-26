@@ -9,7 +9,10 @@ namespace HomeRun.Net
 		[SerializeField] private PlayerType playerType = PlayerType.Batter;
 
 		// cached gameobject that where the player camera will move to
-		private GameObject m_playerHolder;
+		private Transform m_playerHolder;
+		public Transform PlayerHolder {
+			get { return m_playerHolder; }
+		}
 
 		// cached Text component where we'll render the player's name
 		private Text m_nameText;
@@ -26,7 +29,7 @@ namespace HomeRun.Net
 
 		void Awake()
 		{
-			m_playerHolder = gameObject.transform.Find("Player Holder").gameObject;
+			m_playerHolder = gameObject.transform.Find("Player Holder");
 			m_nameText = gameObject.GetComponentInChildren<Text>();
 		}
 
@@ -35,7 +38,7 @@ namespace HomeRun.Net
 			var oldplayer = m_playerHolder.GetComponent<Player>();
 			if (oldplayer) Destroy(oldplayer);
 
-			var player = m_playerHolder.AddComponent<T>();
+			var player = m_playerHolder.gameObject.AddComponent<T>();
 			m_nameText.text = name;
 
 			Debug.Log("Setup PlayerArea for " + ((player is LocalPlayer) ? "LocalPlayer" : "RemotePlayer"));

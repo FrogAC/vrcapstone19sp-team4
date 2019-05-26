@@ -50,6 +50,7 @@ namespace HomeRun.Net
 
 		public void ProcessBallThrow(Vector3 pos, Vector3 vel) {
 			m_rigidBody.isKinematic = false;
+            m_rigidBody.useGravity = false;
 			m_tb.transform.position = pos;
 
 			m_tb.GrabEnd(vel, Vector3.zero);
@@ -57,6 +58,8 @@ namespace HomeRun.Net
 
 		public void ProcessBallHit(Vector3 pos, Vector3 vel) {
 			Debug.Log("Hit!" + vel);
+			// stop ball animation
+            StopAllCoroutines();
 			m_rigidBody.isKinematic = false;
             m_rigidBody.useGravity = true;
 

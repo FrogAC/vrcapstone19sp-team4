@@ -509,7 +509,7 @@ namespace HomeRun.Net
                     .SetType(type)
                     .SetInstanceID(instanceID);
                 newball.ThrowBall.initialize();
-                newball.transform.SetParent(m_remoteSpawnPointTransform);
+                newball.transform.position = m_remoteSpawnPointTransform.position;
 
                 m_remotePlayers[remoteID].activeBalls[instanceID] = newball;
             }

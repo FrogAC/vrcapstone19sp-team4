@@ -170,7 +170,6 @@ public class ThrownBall : OVRGrabbable
                 //onHitByBat.Invoke();
 
                 // Launch ball
-                Debug.Log("relative" + collision.relativeVelocity);
                 Debug.DrawRay(transform.position, collision.GetContact(0).normal, Color.black, 1.0f);
 
                 Vector3 nVel = Vector3.Reflect(-collision.relativeVelocity, collision.GetContact(0).normal);
@@ -222,6 +221,7 @@ public class ThrownBall : OVRGrabbable
     {
         if (GlobalSettings.UseNetwork && PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH && MatchController.PlayerType == PlayerType.Batter)
         {
+            NetEffectController.Instance.PlayBatHitEffect(pos);
             P2PNetworkBall netball = gameObject.GetComponent<P2PNetworkBall>();
             if (!netball)
             {
