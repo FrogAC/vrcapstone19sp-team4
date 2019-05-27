@@ -136,7 +136,7 @@ namespace HomeRun.Net
                     continue;
 
                 packet.ReadBytes(readBuffer);
-
+                Debug.Log("ReadMsg" + readBuffer[0]);
                 switch (readBuffer[0])
                 {
                     case TIME_SYNC_MESSAGE:
