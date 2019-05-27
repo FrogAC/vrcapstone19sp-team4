@@ -48,10 +48,11 @@ namespace HomeRun.Net
 			return this;
 		}
 
-		public void ProcessBallThrow(Vector3 pos, Vector3 vel) {
+		public void ProcessBallThrow(Vector3 pos, Vector3 vel, Vector3 strikePos) {
 			m_rigidBody.isKinematic = false;
             m_rigidBody.useGravity = false;
 			m_tb.transform.position = pos;
+			NetStrikeZone.strikezone.transform.position = pos;
 
 			m_tb.GrabEnd(vel, Vector3.zero);
 		}
