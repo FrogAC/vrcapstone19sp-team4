@@ -52,7 +52,7 @@ namespace HomeRun.Net
 			m_rigidBody.isKinematic = false;
             m_rigidBody.useGravity = false;
 			m_tb.transform.position = pos;
-			NetStrikeZone.strikezone.transform.position = pos;
+			NetStrikeZone.strikezone.transform.position = strikePos;
 
 			m_tb.GrabEnd(vel, Vector3.zero);
 		}
