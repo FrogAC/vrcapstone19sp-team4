@@ -187,7 +187,7 @@ public class ThrownBall : OVRGrabbable
                 {
                     //Debug.Log(batRB.velocity + "------" + batRB.angularVelocity);
                     pointSpeed = batRB.GetPointVelocity(transform.position).magnitude;
-                    nVel *= pointSpeed;
+                    nVel *= (pointSpeed + 0.5f);
                 }
                 Debug.DrawRay(transform.position, nVel, Color.blue, 5.0f);
 
