@@ -53,7 +53,7 @@ namespace HomeRun.Net
         private const byte BALL_SPAWN_MESSAGE = 10;
         private const uint BALL_SPAWN_MESSAGE_SIZE = 1 + 4 + 4;
         private const byte BALL_THROW_MESSAGE = 11;
-        private const uint BALL_THROW_MESSAGE_SIZE = 1 + 4 + 12 + 12;
+        private const uint BALL_THROW_MESSAGE_SIZE = 1 + 4 + 12 + 12 + 12;
         private const byte BALL_HIT_MESSAGE = 12;
         private const uint BALL_HIT_MESSAGE_SIZE = 1 + 4 + 12 + 12;
         /* Ball */
@@ -75,7 +75,7 @@ namespace HomeRun.Net
         private readonly byte[] m_sendBallHitBuffer = new byte[BALL_HIT_MESSAGE_SIZE];
 
         // reusable buffer to read network data into
-        private readonly byte[] readBuffer = new byte[LOCAL_PACKET_SIZE];
+        private readonly byte[] readBuffer = new byte[BALL_THROW_MESSAGE_SIZE];  // max possible size
 
         // temporary time-sync cache of the calculated time offsets
         private readonly Dictionary<ulong, List<float>> m_remoteSyncTimeCache = new Dictionary<ulong, List<float>>();
@@ -458,7 +458,7 @@ namespace HomeRun.Net
             }
         }
 
-        public void SendBallThrow(int id, Vector3 pos, Vector3 vel)
+        public void SendBallThrow(int id, Vector3 pos, Vector3 vel, Vector3 strikePos)
         {
             m_sendBallThrowBuffer[0] = BALL_THROW_MESSAGE;
             int offset = 1;
@@ -466,6 +466,7 @@ namespace HomeRun.Net
             PackInt32(id, m_sendBallThrowBuffer, ref offset);
             PackVector3(pos, m_sendBallThrowBuffer, ref offset);
             PackVector3(vel, m_sendBallThrowBuffer, ref offset);
+            PackVector3(strikePos, m_sendBallThrowBuffer, ref offset);
 
             foreach (KeyValuePair<ulong, RemotePlayerData> player in m_remotePlayers)
             {
@@ -522,6 +523,7 @@ namespace HomeRun.Net
             int instanceID = UnpackInt32(msg, ref offset);
             Vector3 pos = UnpackVector3(msg, ref offset);
             Vector3 vel = UnpackVector3(msg, ref offset);
+            Vector3 strikePos = UnpackVector3(msg, ref offset);
 
             var ball = m_remotePlayers[remoteID].activeBalls[instanceID];
             if (!ball) {
@@ -529,7 +531,7 @@ namespace HomeRun.Net
                 return;
             }
             
-            ball.ProcessBallThrow(pos, vel);
+            ball.ProcessBallThrow(pos, vel, strikePos);
         }
         void ReceiveBallHit(ulong remoteID, byte[] msg, ulong msgLength)
         {

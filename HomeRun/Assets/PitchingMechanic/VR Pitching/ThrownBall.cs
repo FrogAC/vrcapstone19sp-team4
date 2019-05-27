@@ -57,7 +57,8 @@ public class ThrownBall : OVRGrabbable
         //Debug.Log("GrabEnd Success!");
         if (GlobalSettings.UseNetwork && PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH && MatchController.PlayerType == PlayerType.Pitcher)
         {
-            PlatformManager.Instance.P2PThrowBall(gameObject.GetInstanceID(), transform.position, releaseLinVel);
+            PlatformManager.Instance.P2PThrowBall(gameObject.GetInstanceID(), transform.position,
+                                                releaseLinVel, NetStrikeZone.strikezone.transform.position);
         }
 
         StartCoroutine(Throw());

@@ -195,7 +195,7 @@ namespace HomeRun.Net
         void SetupForIdle()
         {
             NetStrikeZone.strikezone.SetVisual(false);
-            //NetStrikeZone.strikezone.SetMotion(false);
+            NetStrikeZone.strikezone.SetMotion(false);
             SetAllAreaText("");
             m_playerType = PlayerType.Batter;
             m_startObjects.gameObject.SetActive(true);

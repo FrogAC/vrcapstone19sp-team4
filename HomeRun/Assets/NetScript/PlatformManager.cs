@@ -33,8 +33,8 @@ namespace HomeRun.Net
         }
         private MatchmakingManager m_matchmaking;
         private P2PManager m_p2p;
-        public void P2PThrowBall(int id, Vector3 pos, Vector3 vel) {
-            m_p2p.SendBallThrow(id, pos, vel);
+        public void P2PThrowBall(int id, Vector3 pos, Vector3 vel, Vector3 strikePos) {
+            m_p2p.SendBallThrow(id, pos, vel, strikePos);
         }
 
         public void P2PHitBall(int id, Vector3 pos, Vector3 vel) {
