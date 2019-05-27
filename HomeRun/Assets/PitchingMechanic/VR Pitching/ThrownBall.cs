@@ -71,6 +71,10 @@ public class ThrownBall : OVRGrabbable
         strikezone = Strikezone.strikezone.transform;
         strikezoneCollider = strikezone.GetComponent<Collider>();
     }
+    
+    public void StopThrow() {
+        StopAllCoroutines();
+    }
 
     IEnumerator Throw()
     {
@@ -113,6 +117,7 @@ public class ThrownBall : OVRGrabbable
 
             yield return new WaitForFixedUpdate();
         }
+        rb.useGravity = true;
         //Debug.Log("throw() done");
     }
 
