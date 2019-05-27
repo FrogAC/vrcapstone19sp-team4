@@ -68,6 +68,7 @@ namespace HomeRun.Net
 			m_rigidBody.angularVelocity = Vector3.zero;
 			m_throwball.transform.position = pos;
 			m_rigidBody.velocity = vel;
+			m_rigidBody.constraints = RigidbodyConstraints.None;
 
 			NetEffectController.Instance.PlayBatHitEffect(pos);
 		}
