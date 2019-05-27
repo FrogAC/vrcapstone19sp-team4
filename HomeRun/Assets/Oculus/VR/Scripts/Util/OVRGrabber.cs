@@ -320,9 +320,7 @@ public class OVRGrabber : MonoBehaviour
             return;
         }
 
-        Debug.Log("grabbedObj"+m_grabbedObj);
         Rigidbody grabbedRigidbody = m_grabbedObj.grabbedRigidbody;
-        Debug.Log("grabbedRB"+grabbedRigidbody);
         Vector3 grabbablePosition = pos + rot * m_grabbedObjectPosOff;
         Quaternion grabbableRotation = rot * m_grabbedObjectRotOff;
 
