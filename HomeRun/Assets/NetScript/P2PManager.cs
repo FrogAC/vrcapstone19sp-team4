@@ -75,7 +75,7 @@ namespace HomeRun.Net
         private readonly byte[] m_sendBallHitBuffer = new byte[BALL_HIT_MESSAGE_SIZE];
 
         // reusable buffer to read network data into
-        private readonly byte[] readBuffer = new byte[40];  // max possible size
+        private readonly byte[] readBuffer = new byte[BALL_THROW_MESSAGE_SIZE+1];  // max possible size
 
         // temporary time-sync cache of the calculated time offsets
         private readonly Dictionary<ulong, List<float>> m_remoteSyncTimeCache = new Dictionary<ulong, List<float>>();
