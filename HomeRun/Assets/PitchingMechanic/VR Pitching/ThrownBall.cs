@@ -55,7 +55,7 @@ public class ThrownBall : OVRGrabbable
         releaseLinVel = linearVelocity;
         releaseAngVel = angularVelocity;
         //Debug.Log("GrabEnd Success!");
-        if (GlobalSettings.UseNetwork && PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH && MatchController.PlayerType == PlayerType.Pitcher)
+        if (GlobalSettings.UseNetwork && MatchController.PlayerType == PlayerType.Pitcher)
         {
             PlatformManager.Instance.P2PThrowBall(gameObject.GetInstanceID(), transform.position,
                                                 releaseLinVel, NetStrikeZone.strikezone.transform.position);
@@ -222,7 +222,7 @@ public class ThrownBall : OVRGrabbable
     // For NET
     public void OnHitByBat(Vector3 pos, Vector3 vel)
     {
-        if (GlobalSettings.UseNetwork && PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH && MatchController.PlayerType == PlayerType.Batter)
+        if (GlobalSettings.UseNetwork  && MatchController.PlayerType == PlayerType.Batter)
        {
             P2PNetworkBall netball = gameObject.GetComponent<P2PNetworkBall>();
             if (!netball)

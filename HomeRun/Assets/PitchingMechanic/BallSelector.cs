@@ -36,7 +36,7 @@
         /* Multiplayer Settings */
         [Header("Multiplayer")]
 
-        [SerializeField] private float m_nextSelectableInterval = 5.0f;
+        private float m_nextSelectableInterval = 9.0f;
         private float m_nextSelectableTime = -1.0f;
 
 
@@ -131,7 +131,6 @@
                 {
                     ballNameText.text = "";
                 }
-
             }
         }
 
