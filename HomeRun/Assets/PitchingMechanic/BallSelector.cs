@@ -32,6 +32,12 @@
         [SerializeField] OVRInput.Button selectNext = OVRInput.Button.DpadLeft;
         [SerializeField] OVRInput.Button selectPrev = OVRInput.Button.DpadRight;
 
+        /* Multiplayer Settings */
+        [Header("Multiplayer")]
+
+        [SerializeField] private float m_nextSelectableInterval = 3.0f;
+        private float m_nextSelectableTime = float.MaxValue;
+
 
         // Start is called before the first frame update
         void Start()
@@ -67,12 +73,22 @@
         // Used for Create remote Ball
         public GameObject CreateBall(BallType ballType) {
             GameObject ball = Instantiate(selections[(int)ballType].prefab, spawnPoint.position, spawnPoint.rotation, spawnPoint);
-            ball.GetComponent<Rigidbody>().isKinematic = true;
+            //ball.GetComponent<Rigidbody>().isKinematic = true;
             return ball;
         }
 
         void UpdateSelection()
         {
+            if (GlobalSettings.UseNetwork && PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH ) {
+                if (Time.time < m_nextSelectableTime) {
+                    ballNameText.text = "Not Yet:(";
+                    return;
+                } else {
+                    NetStrikeZone.strikezone.SetMotion(true);
+                    m_nextSelectableTime = Time.time + m_nextSelectableInterval;
+                }
+            }
+
             if (spawnedPrefab != null)
             {
                 Destroy(spawnedPrefab.gameObject);

@@ -44,6 +44,10 @@ public class ThrownBall : OVRGrabbable
 
     override public void GrabEnd(Vector3 linearVelocity, Vector3 angularVelocity)
     {
+        if (GlobalSettings.UseNetwork && PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH
+            && MatchController.PlayerType == PlayerType.Pitcher)
+                NetStrikeZone.strikezone.SetMotion(false);
+
         prevGrabber = grabbedBy;
 
         base.GrabEnd(linearVelocity, angularVelocity);
@@ -69,7 +73,6 @@ public class ThrownBall : OVRGrabbable
 
     IEnumerator Throw()
     {
-
         rb.isKinematic = false;
         //Debug.Log("throw()");
         //transform.LookAt(strikezone);
@@ -164,8 +167,8 @@ public class ThrownBall : OVRGrabbable
                 Physics.IgnoreCollision(collision.collider, m_collider, true);
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
-                hasHitBat = true;  
-                
+                hasHitBat = true;
+
 
                 //onHitByBat.Invoke();
 

@@ -1,14 +1,16 @@
-Remove RB in P2PNetWorkBall
-Universal Effect Controller
+Note -> Tracking Ball collision instead assert time for next ball selecton interval
 
-
-FIX -> fix delta in UpdateMatchTimer
 FIX -> destroy in client BallSpawn
 
 Danger -> CreateBall use implicit selection index
 Danger -> PlayerData.activeball grow infi
 
-Net(Reliable): 
+
+
+DONE:
+Remove RB in P2PNetWorkBall
+Universal Effect Controller
+Net(Reliable):
     ID: pitcher's Instance ID
 
     NetWorkBallState { Static, Throw, Hit }
@@ -23,3 +25,4 @@ Net(Reliable):
     Batter SendBallHitMsg (InstanceID, pos, vel)
     Pitcher ReceiveBallHitMsg
     
+

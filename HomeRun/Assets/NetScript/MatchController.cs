@@ -121,23 +121,32 @@ namespace HomeRun.Net
                         break;
 
                     case State.WAITING_FOR_MATCH:
+                        SetAllAreaText("Waiting...");
                         m_startObjects.gameObject.SetActive(false);
                         Assert.AreEqual(oldState, State.NONE);
                         PlatformManager.TransitionToState(PlatformManager.State.MATCH_TRANSITION);
                         break;
 
                     case State.WAITING_TO_SETUP_MATCH:
+                        if (MatchController.m_playerType == PlayerType.Pitcher) NetStrikeZone.strikezone.SetVisual(true);
                         Assert.AreEqual(oldState, State.WAITING_FOR_MATCH);
                         m_nextStateTransitionTime = Time.time + MATCH_WARMUP_TIME;
                         break;
 
                     case State.PLAYING_MATCH:
+                        SetAllAreaText("");
                         Assert.AreEqual(oldState, State.WAITING_TO_SETUP_MATCH);
                         PlatformManager.TransitionToState(PlatformManager.State.PLAYING_A_NETWORKED_MATCH);
                         m_nextStateTransitionTime = Time.time + MATCH_TIME;
                         Debug.Log("Match Time Until" + m_nextStateTransitionTime);
                         break;
                 }
+            }
+        }
+
+        void SetAllAreaText(string text) {
+            foreach (var pa in m_playerAreas) {
+                pa.NameText.text = text;
             }
         }
 
@@ -185,6 +194,9 @@ namespace HomeRun.Net
 
         void SetupForIdle()
         {
+            NetStrikeZone.strikezone.SetVisual(false);
+            //NetStrikeZone.strikezone.SetMotion(false);
+            SetAllAreaText("");
             m_playerType = PlayerType.Batter;
             m_startObjects.gameObject.SetActive(true);
             MoveCameraToMatchPosition();

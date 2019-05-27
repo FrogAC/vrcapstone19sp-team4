@@ -39,18 +39,16 @@ namespace HomeRun.Net
 			if (oldplayer) Destroy(oldplayer);
 
 			var player = m_playerHolder.gameObject.AddComponent<T>();
-			m_nameText.text = name;
 
 			Debug.Log("Setup PlayerArea for " + ((player is LocalPlayer) ? "LocalPlayer" : "RemotePlayer"));
 
 			if (player is RemotePlayer)
 			{
+				m_nameText.text = name;
 			}
 			else if (player is LocalPlayer)
 			{
-			}
-			else
-			{
+				m_nameText.text = "";
 			}
 
 			return player;

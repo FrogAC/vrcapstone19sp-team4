@@ -28,8 +28,6 @@ namespace HomeRun.Net
             DontDestroyOnLoad(gameObject);
         }
 
-
-
         public void PlayBatHitEffect(Vector3 pos)
         {
             if (!m_batHitPS)
