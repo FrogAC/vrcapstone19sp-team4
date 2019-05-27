@@ -113,7 +113,8 @@ namespace HomeRun.Net
             m_remoteHeadTransform = head;
             m_remoteBatTransform = bat;
             m_remoteGloveTransform = glove;
-            m_remoteSpawnPointTransform = glove.Find("Spawnpoint");
+            m_remoteSpawnPointTransform = glove.GetComponentInChildren<BallSelector>().SpawnPoint;
+            Assert.IsNotNull(m_remoteSpawnPointTransform);
 
             m_localHeadTransform = localHead;
             m_localBatTransform = localBat;
