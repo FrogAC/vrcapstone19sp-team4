@@ -17,17 +17,17 @@ namespace HomeRun.Net
 
 		// cached reference to the GameObject's Rigidbody component
 		private Rigidbody m_rigidBody;
-		private ThrownBall m_tb;
+		private ThrownBall m_throwball;
 
 		void Awake()
 		{
 			m_rigidBody = gameObject.GetComponent<Rigidbody>();
-			m_tb = gameObject.GetComponent<ThrownBall>();
+			m_throwball = gameObject.GetComponent<ThrownBall>();
 		}
 
 		public ThrownBall ThrowBall {
-			get { return m_tb; }
-			set { m_tb = value; }
+			get { return m_throwball; }
+			set { m_throwball = value; }
 		}
 
 		public BallType BallType {
@@ -51,10 +51,10 @@ namespace HomeRun.Net
 		public void ProcessBallThrow(Vector3 pos, Vector3 vel, Vector3 strikePos) {
 			m_rigidBody.isKinematic = false;
             m_rigidBody.useGravity = false;
-			m_tb.transform.position = pos;
+			m_throwball.transform.position = pos;
 			NetStrikeZone.strikezone.transform.position = strikePos;
 
-			m_tb.GrabEnd(vel, Vector3.zero);
+			m_throwball.GrabEnd(vel, Vector3.zero);
 		}
 
 		public void ProcessBallHit(Vector3 pos, Vector3 vel) {
@@ -66,7 +66,7 @@ namespace HomeRun.Net
 
 			//m_rigidBody.isKinematic = true;
 			m_rigidBody.angularVelocity = Vector3.zero;
-			m_tb.transform.position = pos;
+			m_throwball.transform.position = pos;
 			m_rigidBody.velocity = vel;
 
 			NetEffectController.Instance.PlayBatHitEffect(pos);

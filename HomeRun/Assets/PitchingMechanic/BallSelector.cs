@@ -97,7 +97,7 @@
                         ballNameText.text = "No :(";
                     else if (ballNameText.text == "No :(")
                         ballNameText.text = "PATIENT";
-                    else
+                    else if (ballNameText.text != "PATIENT") 
                         ballNameText.text = "Not Yet";
                     return;
                 }
