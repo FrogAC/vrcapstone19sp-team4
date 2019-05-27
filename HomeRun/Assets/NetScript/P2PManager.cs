@@ -427,6 +427,7 @@ namespace HomeRun.Net
 
         #region Ball Tansforms
 
+        /* Add ball reference to localBall and Spawn ball with same ID in remote */
         public void AddNetworkBall(GameObject ball, BallType type)
         {
             var id = ball.GetInstanceID();
@@ -535,7 +536,7 @@ namespace HomeRun.Net
                 newball.transform.position = m_remoteSpawnPointTransform.position;
                 activeballs[instanceID] = newball;
             }
-            
+
             var ball = activeballs[instanceID];
             if (!ball)
             {
