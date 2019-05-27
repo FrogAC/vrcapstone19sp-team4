@@ -511,7 +511,8 @@ namespace HomeRun.Net
                 .SetType(type)
                 .SetInstanceID(instanceID);
             newball.ThrowBall.initialize();
-            newball.transform.position = m_remoteSpawnPointTransform.position;
+            newball.transform.SetParent(null);
+            newball.transform.localPosition = Vector3.zero;
 
             m_remotePlayers[remoteID].activeBalls[instanceID] = newball;
         }
@@ -526,15 +527,17 @@ namespace HomeRun.Net
             Vector3 strikePos = UnpackVector3(msg, ref offset);
 
             var activeballs = m_remotePlayers[remoteID].activeBalls;
-            if (!activeballs.ContainsKey(instanceID))  {// this shold not happen
+            if (!activeballs.ContainsKey(instanceID))
+            {// this shold not happen
                 var newball = m_remotePlayers[remoteID].player
                     .CreateBall(BallType.FastBall)
                     .AddComponent<P2PNetworkBall>()
                     .SetType(BallType.FastBall)
                     .SetInstanceID(instanceID);
                 newball.ThrowBall.initialize();
-                newball.transform.position = m_remoteSpawnPointTransform.position;
-                activeballs[instanceID] = newball;
+                newball.transform.SetParent(null);
+                newball.transform.localPosition = Vector3.zero;
+                m_remotePlayers[remoteID].activeBalls[instanceID] = newball;
             }
 
             var ball = activeballs[instanceID];
