@@ -75,7 +75,7 @@ namespace HomeRun.Net
         private readonly byte[] m_sendBallHitBuffer = new byte[BALL_HIT_MESSAGE_SIZE];
 
         // reusable buffer to read network data into
-        private readonly byte[] readBuffer = new byte[BALL_THROW_MESSAGE_SIZE+1];  // max possible size
+        private readonly byte[] readBuffer = new byte[BALL_THROW_MESSAGE_SIZE + 1];  // max possible size
 
         // temporary time-sync cache of the calculated time offsets
         private readonly Dictionary<ulong, List<float>> m_remoteSyncTimeCache = new Dictionary<ulong, List<float>>();
@@ -524,7 +524,19 @@ namespace HomeRun.Net
             Vector3 vel = UnpackVector3(msg, ref offset);
             Vector3 strikePos = UnpackVector3(msg, ref offset);
 
-            var ball = m_remotePlayers[remoteID].activeBalls[instanceID];
+            var activeballs = m_remotePlayers[remoteID].activeBalls;
+            if (!activeballs.ContainsKey(instanceID))  {// this shold not happen
+                var newball = m_remotePlayers[remoteID].player
+                    .CreateBall(BallType.FastBall)
+                    .AddComponent<P2PNetworkBall>()
+                    .SetType(BallType.FastBall)
+                    .SetInstanceID(instanceID);
+                newball.ThrowBall.initialize();
+                newball.transform.position = m_remoteSpawnPointTransform.position;
+                activeballs[instanceID] = newball;
+            }
+            
+            var ball = activeballs[instanceID];
             if (!ball)
             {
                 Debug.Log("Throw Ball" + instanceID + "Not Found!");
