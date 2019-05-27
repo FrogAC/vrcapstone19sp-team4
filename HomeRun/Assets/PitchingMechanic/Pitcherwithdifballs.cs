@@ -26,7 +26,7 @@ public class Pitcherwithdifballs : MonoBehaviour
     int currIndex = 0;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (autoPitch)
         {

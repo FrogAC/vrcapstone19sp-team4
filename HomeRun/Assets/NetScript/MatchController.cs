@@ -239,8 +239,7 @@ namespace HomeRun.Net
 
         void MoveCameraToMatchPosition()
         {
-            int index = m_playerType == PlayerType.Batter ? 0 : 1; 
-            var player = m_playerAreas[index].PlayerHolder;
+            var player = m_playerAreas[(int)m_playerType].PlayerHolder;
             m_player.transform.position = player.position;
             m_player.transform.rotation = player.rotation;
         }

@@ -195,7 +195,7 @@ public class ThrownBall : OVRGrabbable
 
                 rb.velocity = nVel;
 
-                Debug.Log("out" + nVel);
+               // Debug.Log("out" + nVel);
                 // After all calculation
                 OnHitByBat(transform.position, nVel);
 
