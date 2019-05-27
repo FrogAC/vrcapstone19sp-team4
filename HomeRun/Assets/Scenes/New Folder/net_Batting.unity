@@ -816,7 +816,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &214063653
 Transform:
   m_ObjectHideFlags: 0
@@ -1084,8 +1084,8 @@ MonoBehaviour:
   m_playerAreas:
   - {fileID: 1389609341}
   - {fileID: 717179146}
-  MATCH_WARMUP_TIME: 5
-  MATCH_TIME: 9999
+  MATCH_WARMUP_TIME: 20
+  MATCH_TIME: 240
 --- !u!4 &714373479
 Transform:
   m_ObjectHideFlags: 0
@@ -2644,7 +2644,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1815005006
 Transform:
   m_ObjectHideFlags: 0
