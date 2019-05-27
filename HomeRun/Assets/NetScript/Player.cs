@@ -8,7 +8,8 @@ namespace HomeRun.Net
     public enum PlayerType : int
     {
         Batter = 0,
-        Pitcher = 1
+        Pitcher = 1,
+        None = 3
     }
 
     // The base Player component manages the balls that are in play.  Besides spawning new balls,

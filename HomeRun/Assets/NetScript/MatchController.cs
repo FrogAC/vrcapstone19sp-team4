@@ -11,7 +11,7 @@ namespace HomeRun.Net
     public class MatchController : MonoBehaviour
     {
         // meant to be single instance
-        private static PlayerType m_playerType = PlayerType.Batter;
+        private static PlayerType m_playerType = PlayerType.None;
 
         // Text to display when the match will start or finish
         [SerializeField] private Transform m_startObjects;
@@ -197,7 +197,7 @@ namespace HomeRun.Net
             NetStrikeZone.strikezone.SetVisual(false);
             NetStrikeZone.strikezone.SetMotion(false);
             SetAllAreaText("");
-            m_playerType = PlayerType.Batter;
+            PlayerType = PlayerType.Batter;  // do not reset transforms
             m_startObjects.gameObject.SetActive(true);
             MoveCameraToMatchPosition();
         }

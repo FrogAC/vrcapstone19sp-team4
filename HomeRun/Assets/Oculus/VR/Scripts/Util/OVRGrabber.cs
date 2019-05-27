@@ -315,12 +315,14 @@ public class OVRGrabber : MonoBehaviour
 
     protected virtual void MoveGrabbedObject(Vector3 pos, Quaternion rot, bool forceTeleport = false)
     {
-        if (m_grabbedObj == null)
+        if (m_grabbedObj == null || !m_grabbedObj.isActiveAndEnabled)
         {
             return;
         }
 
+        Debug.Log("grabbedObj"+m_grabbedObj);
         Rigidbody grabbedRigidbody = m_grabbedObj.grabbedRigidbody;
+        Debug.Log("grabbedRB"+grabbedRigidbody);
         Vector3 grabbablePosition = pos + rot * m_grabbedObjectPosOff;
         Quaternion grabbableRotation = rot * m_grabbedObjectRotOff;
 
