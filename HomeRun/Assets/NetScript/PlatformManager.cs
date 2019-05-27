@@ -74,6 +74,13 @@ namespace HomeRun.Net
                     m_localGlove.gameObject.SetActive(true);
                     m_remoteGlove.gameObject.SetActive(false);
                     break;
+
+                case PlayerType.None:
+                    m_localBat.gameObject.SetActive(true);
+                    m_remoteBat.gameObject.SetActive(true);
+                    m_localGlove.gameObject.SetActive(true);
+                    m_remoteGlove.gameObject.SetActive(true);
+                    break;
             }
 
         }

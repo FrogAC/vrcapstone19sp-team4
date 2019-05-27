@@ -23,8 +23,9 @@
         [SerializeField] TextMeshProUGUI ballNameText;
         [SerializeField] Transform spawnPoint;
 
-        public Transform SpawnPoint {
-            get {return spawnPoint;}
+        public Transform SpawnPoint
+        {
+            get { return spawnPoint; }
         }
 
         GameObject spawnedPrefab = null;
@@ -71,7 +72,8 @@
         }
 
         // Used for Create remote Ball
-        public GameObject CreateBall(BallType ballType) {
+        public GameObject CreateBall(BallType ballType)
+        {
             GameObject ball = Instantiate(selections[(int)ballType].prefab, spawnPoint.position, spawnPoint.rotation, spawnPoint);
             //ball.GetComponent<Rigidbody>().isKinematic = true;
             return ball;
@@ -79,19 +81,24 @@
 
         void UpdateSelection()
         {
-            if (GlobalSettings.UseNetwork && PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH ) {
-                if (Time.time < m_nextSelectableTime) {
-                    ballNameText.text = "Not Yet:(";
-                    return;
-                } else {
-                    NetStrikeZone.strikezone.SetMotion(true);
-                    m_nextSelectableTime = Time.time + m_nextSelectableInterval;
-                }
-            }
 
             if (spawnedPrefab != null)
             {
                 Destroy(spawnedPrefab.gameObject);
+            }
+            else if (GlobalSettings.UseNetwork && PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH)
+            {   
+                // adding time limit when multiplayer match
+                if (Time.time < m_nextSelectableTime)
+                {
+                    ballNameText.text = "Not Yet:(";
+                    return;
+                }
+                else
+                {
+                    NetStrikeZone.strikezone.SetMotion(true);
+                    m_nextSelectableTime = Time.time + m_nextSelectableInterval;
+                }
             }
 
             spawnedPrefab = Instantiate(selections[currentIndex].prefab, spawnPoint.position, spawnPoint.rotation, spawnPoint);
