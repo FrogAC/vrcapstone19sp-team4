@@ -197,9 +197,9 @@ namespace HomeRun.Net
             NetStrikeZone.strikezone.SetVisual(false);
             NetStrikeZone.strikezone.SetMotion(false);
             SetAllAreaText("");
-            PlayerType = PlayerType.Batter;  // do not reset transforms
+            PlayerType = PlayerType.None;  // do not reset transforms
             m_startObjects.gameObject.SetActive(true);
-            MoveCameraToMatchPosition();
+            MoveCameraToIdlePosition();
         }
 
         Player MatchPlayerAddedCallback(int slot, User user)
@@ -239,7 +239,7 @@ namespace HomeRun.Net
 
         void MoveCameraToMatchPosition()
         {
-            var player = m_playerAreas[(int)m_playerType].PlayerHolder;
+            var player = m_playerAreas[(int)m_playerType % 2].PlayerHolder;
             m_player.transform.position = player.position;
             m_player.transform.rotation = player.rotation;
         }

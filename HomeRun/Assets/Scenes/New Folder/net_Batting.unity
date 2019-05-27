@@ -1797,6 +1797,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pitcher
       objectReference: {fileID: 0}
+    - target: {fileID: 7081815338293666105, guid: d45c272a38849ef4097f5e6df394ca50,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7081815338293666107, guid: d45c272a38849ef4097f5e6df394ca50,
         type: 3}
       propertyPath: m_LocalPosition.x
