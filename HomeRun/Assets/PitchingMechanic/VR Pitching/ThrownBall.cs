@@ -179,8 +179,6 @@ public class ThrownBall : OVRGrabbable
                 Vector3 nVel = Vector3.Reflect(-collision.relativeVelocity, collision.GetContact(0).normal);
                 Vector3 LaunchDir = Vector3.ProjectOnPlane(nVel, collision.collider.transform.up);
 
-                Debug.DrawRay(transform.position, nVel, Color.red, 1.0f);
-
                 nVel = LaunchDir.normalized * nVel.magnitude * batHitMult;
 
                 float pointSpeed = 1;
@@ -191,7 +189,7 @@ public class ThrownBall : OVRGrabbable
                     pointSpeed = batRB.GetPointVelocity(transform.position).magnitude;
                     nVel *= pointSpeed;
                 }
-                Debug.DrawRay(transform.position, nVel, Color.blue, 1.0f);
+                Debug.DrawRay(transform.position, nVel, Color.blue, 5.0f);
 
                 rb.velocity = nVel;
 
@@ -216,11 +214,6 @@ public class ThrownBall : OVRGrabbable
         }
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-
-    }
-
     // For NET
     public void OnHitByBat(Vector3 pos, Vector3 vel)
     {
@@ -232,7 +225,7 @@ public class ThrownBall : OVRGrabbable
                 Debug.Log("No NetWorkBall Found!");
                 return;
             }
-            Debug.Log("Ball Hit Velocity:" + vel);
+            Debug.Log("Sending Ball Hit:" + vel);
             PlatformManager.Instance.P2PHitBall(netball.InstanceID, pos, vel);
         }
     }
