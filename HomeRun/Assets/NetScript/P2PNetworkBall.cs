@@ -49,6 +49,7 @@ namespace HomeRun.Net
 		}
 
 		public void ProcessBallThrow(Vector3 pos, Vector3 vel, Vector3 strikePos) {
+			transform.SetParent(null, true);  // no distort
 			m_rigidBody.isKinematic = false;
             m_rigidBody.useGravity = false;
 			m_throwball.transform.position = pos;

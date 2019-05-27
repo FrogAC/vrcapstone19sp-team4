@@ -511,7 +511,7 @@ namespace HomeRun.Net
                 .SetType(type)
                 .SetInstanceID(instanceID);
             newball.ThrowBall.initialize();
-            newball.transform.SetParent(null);
+            newball.transform.SetParent(m_remoteSpawnPointTransform);
             newball.transform.localPosition = Vector3.zero;
 
             m_remotePlayers[remoteID].activeBalls[instanceID] = newball;
@@ -535,7 +535,7 @@ namespace HomeRun.Net
                     .SetType(BallType.FastBall)
                     .SetInstanceID(instanceID);
                 newball.ThrowBall.initialize();
-                newball.transform.SetParent(null);
+                newball.transform.SetParent(m_remoteSpawnPointTransform);
                 newball.transform.localPosition = Vector3.zero;
                 m_remotePlayers[remoteID].activeBalls[instanceID] = newball;
             }
