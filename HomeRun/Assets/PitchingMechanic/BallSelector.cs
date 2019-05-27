@@ -36,8 +36,8 @@
         /* Multiplayer Settings */
         [Header("Multiplayer")]
 
-        [SerializeField] private float m_nextSelectableInterval = 3.0f;
-        private float m_nextSelectableTime = float.MaxValue;
+        [SerializeField] private float m_nextSelectableInterval = 5.0f;
+        private float m_nextSelectableTime = -1.0f;
 
 
         // Start is called before the first frame update
@@ -87,11 +87,18 @@
                 Destroy(spawnedPrefab.gameObject);
             }
             else if (GlobalSettings.UseNetwork && PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH)
-            {   
+            {
                 // adding time limit when multiplayer match
                 if (Time.time < m_nextSelectableTime)
                 {
-                    ballNameText.text = "Not Yet:(";
+                    if (ballNameText.text == "Not Yet")
+                        ballNameText.text = "Not Yet:(";
+                    else if (ballNameText.text == "Not Yet:(")
+                        ballNameText.text = "No :(";
+                    else if (ballNameText.text == "No :(")
+                        ballNameText.text = "PATIENT";
+                    else
+                        ballNameText.text = "Not Yet";
                     return;
                 }
                 else
