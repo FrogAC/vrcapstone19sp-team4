@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using OVR;
+using HomeRun;
+using HomeRun.Net;
+using HomeRun.Game;
 
 public class Pitcherwithdifballs : MonoBehaviour
 {
@@ -10,9 +13,9 @@ public class Pitcherwithdifballs : MonoBehaviour
     public float randomThrowDelay = 3;
     [Space]
 
-    public ThrownBall [] ballToThrow;
+    public ThrownBall[] ballToThrow;
     public ThrownBall baseballPrefab;
-    public float lifetime = 6;
+    public float lifetime = 6;  // TODO remove
     public float speed = 5;
     System.Random random = new System.Random();
 
@@ -50,9 +53,13 @@ public class Pitcherwithdifballs : MonoBehaviour
     {
         baseballPrefab = ballToThrow[currIndex];
         ThrownBall ball = Instantiate(baseballPrefab, transform.position, transform.rotation);
+        if (GlobalSettings.UseNetwork && PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH)
+        {
+            PlatformManager.P2P.AddNetworkBall(ball.gameObject, (BallType)currIndex);
+        }
         ball.initialize();
         ball.GrabEnd(transform.forward * speed, Vector3.zero);
-        Destroy(ball, lifetime);
+        //Destroy(ball, lifetime);
     }
 
     // Update is called once per frame
