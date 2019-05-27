@@ -75,7 +75,7 @@ namespace HomeRun.Net
         private readonly byte[] m_sendBallHitBuffer = new byte[BALL_HIT_MESSAGE_SIZE];
 
         // reusable buffer to read network data into
-        private readonly byte[] readBuffer = new byte[BALL_THROW_MESSAGE_SIZE];  // max possible size
+        private readonly byte[] readBuffer = new byte[40];  // max possible size
 
         // temporary time-sync cache of the calculated time offsets
         private readonly Dictionary<ulong, List<float>> m_remoteSyncTimeCache = new Dictionary<ulong, List<float>>();
@@ -503,18 +503,16 @@ namespace HomeRun.Net
             int instanceID = UnpackInt32(msg, ref offset);
             BallType type = (BallType)UnpackInt32(msg, ref offset);
 
-            if (!m_remotePlayers[remoteID].activeBalls.ContainsKey(instanceID))
-            {
-                var newball = m_remotePlayers[remoteID].player
-                    .CreateBall((BallType)type)
-                    .AddComponent<P2PNetworkBall>()
-                    .SetType(type)
-                    .SetInstanceID(instanceID);
-                newball.ThrowBall.initialize();
-                newball.transform.position = m_remoteSpawnPointTransform.position;
 
-                m_remotePlayers[remoteID].activeBalls[instanceID] = newball;
-            }
+            var newball = m_remotePlayers[remoteID].player
+                .CreateBall((BallType)type)
+                .AddComponent<P2PNetworkBall>()
+                .SetType(type)
+                .SetInstanceID(instanceID);
+            newball.ThrowBall.initialize();
+            newball.transform.position = m_remoteSpawnPointTransform.position;
+
+            m_remotePlayers[remoteID].activeBalls[instanceID] = newball;
         }
 
         void ReceiveBallThrow(ulong remoteID, byte[] msg, ulong msgLength)
@@ -527,11 +525,12 @@ namespace HomeRun.Net
             Vector3 strikePos = UnpackVector3(msg, ref offset);
 
             var ball = m_remotePlayers[remoteID].activeBalls[instanceID];
-            if (!ball) {
+            if (!ball)
+            {
                 Debug.Log("Throw Ball" + instanceID + "Not Found!");
                 return;
             }
-            
+
             ball.ProcessBallThrow(pos, vel, strikePos);
         }
         void ReceiveBallHit(ulong remoteID, byte[] msg, ulong msgLength)
@@ -543,11 +542,12 @@ namespace HomeRun.Net
             Vector3 vel = UnpackVector3(msg, ref offset);
 
             var ball = m_localBalls[instanceID];
-            if (!ball) {
+            if (!ball)
+            {
                 Debug.Log("Hit Ball" + instanceID + "Not Found!");
                 return;
             }
-            
+
             ball.ProcessBallHit(pos, vel);
         }
         #endregion
