@@ -5,6 +5,7 @@ using OVR;
 using UnityEngine.Events;
 using HomeRun.Net;
 using HomeRun;
+using HomeRun.Game;
 
 public class ThrownBall : OVRGrabbable
 {
@@ -41,6 +42,9 @@ public class ThrownBall : OVRGrabbable
         base.Start();
         initialize();
     }
+
+    // ugly interface
+    public BallType balltype;
 
     override public void GrabEnd(Vector3 linearVelocity, Vector3 angularVelocity)
     {
@@ -118,8 +122,9 @@ public class ThrownBall : OVRGrabbable
             yield return new WaitForFixedUpdate();
         }
         rb.useGravity = true;
+        // play effect and destroy ball on success strike
         if (GlobalSettings.UseNetwork) {
-            
+
             Destroy(gameObject);
         }
     }
@@ -203,7 +208,7 @@ public class ThrownBall : OVRGrabbable
 
                // Debug.Log("out" + nVel);
                 // After all calculation
-                if (GlobalSettings.UseNetwork) NetEffectController.Instance.PlayBatHitEffect(transform.position);
+                if (GlobalSettings.UseNetwork) NetEffectController.Instance.PlayBatHitEffect(transform.position, balltype);
                 OnHitByBat(transform.position, nVel);
 
                 //Debug.DrawLine(collision.GetContact(0).point, collision.GetContact(0).point + rb.velocity.normalized * 2, Color.red, 3);

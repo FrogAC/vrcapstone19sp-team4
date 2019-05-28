@@ -71,7 +71,7 @@ namespace HomeRun.Net
 			m_rigidBody.velocity = vel;
 			m_rigidBody.constraints = RigidbodyConstraints.None;
 
-			NetEffectController.Instance.PlayBatHitEffect(pos);
+			NetEffectController.Instance.PlayBatHitEffect(pos, m_ballType);
 		}
 
 		void OnDestroy()

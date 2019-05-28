@@ -6,6 +6,7 @@
     using HomeRun.Net;
     using TMPro;
 
+    /// 0: fast, 1: curve, 2: spiral
     public enum BallType : int
     {
         FastBall = 0,
@@ -109,7 +110,10 @@
             }
 
             spawnedPrefab = Instantiate(selections[currentIndex].prefab, spawnPoint.position, spawnPoint.rotation, spawnPoint);
-            spawnedGrabbable = spawnedPrefab.GetComponent<ThrownBall>();
+            var tb = spawnedPrefab.GetComponent<ThrownBall>();
+            spawnedGrabbable = tb;
+            tb.balltype = selections[currentIndex].type;
+            Debug.Log(tb.balltype);
             spawnedPrefab.GetComponent<Rigidbody>().isKinematic = true;
 
             if (GlobalSettings.UseNetwork && PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH)
