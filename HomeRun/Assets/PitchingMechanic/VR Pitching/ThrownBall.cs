@@ -124,7 +124,7 @@ public class ThrownBall : OVRGrabbable
         rb.useGravity = true;
         // play effect and destroy ball on success strike
         if (GlobalSettings.UseNetwork) {
-
+            NetEffectController.Instance.PlayStrikeZoneHitEffect(transform.position, BallType.FastBall);
             Destroy(gameObject);
         }
     }
