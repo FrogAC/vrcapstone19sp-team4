@@ -36,10 +36,17 @@ public class ThrownBall : OVRGrabbable
     private OVRGrabber prevGrabber;
 
     private Collider m_collider;
-
-    new private void Start()
+    [SerializeField] private GameObject m_effectObj;
+    [SerializeField] private float m_throwSpeedThreshold = 1.0f;
+    private bool m_enableFX = false;
+    public void SetEnableFX(bool value)
     {
-        base.Start();
+        m_enableFX = value;
+        m_effectObj.SetActive(value);
+    }
+
+    void Awake()
+    {
         initialize();
     }
 
@@ -48,9 +55,9 @@ public class ThrownBall : OVRGrabbable
 
     override public void GrabEnd(Vector3 linearVelocity, Vector3 angularVelocity)
     {
-        if (GlobalSettings.UseNetwork && PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH
-            && MatchController.PlayerType == PlayerType.Pitcher)
-                NetStrikeZone.strikezone.SetMotion(false);
+        SetEnableFX(true);
+        if (GlobalSettings.UseNetwork)
+            NetStrikeZone.strikezone.SetMotion(false);
 
         prevGrabber = grabbedBy;
 
@@ -65,28 +72,40 @@ public class ThrownBall : OVRGrabbable
                                                 releaseLinVel, NetStrikeZone.strikezone.transform.position);
         }
 
-        StartCoroutine(Throw());
+
+        // check releasethreadhold, use RAW speed!
+        Debug.Log("Throw Speed:" + releaseLinVel.magnitude);
+        if (releaseLinVel.magnitude < m_throwSpeedThreshold)
+        {
+            SetEnableFX(true);
+            rb.isKinematic = false;
+            rb.useGravity = true;
+            rb.velocity = releaseLinVel * 5;
+        }
+        else
+        {
+            StartCoroutine(Throw());
+        }
     }
 
-    public void initialize()
+    void initialize()
     {
+        SetEnableFX(false);
         m_collider = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
         strikezone = Strikezone.strikezone.transform;
         strikezoneCollider = strikezone.GetComponent<Collider>();
     }
-    
-    public void StopThrow() {
+
+    public void StopThrow()
+    {
         StopAllCoroutines();
     }
 
     IEnumerator Throw()
     {
         rb.isKinematic = false;
-        //Debug.Log("throw()");
-        //transform.LookAt(strikezone);
         Vector3 releasePos = transform.position;
-
 
         transform.forward = releaseLinVel.normalized;
 
@@ -122,8 +141,10 @@ public class ThrownBall : OVRGrabbable
             yield return new WaitForFixedUpdate();
         }
         rb.useGravity = true;
+        GlobalSettings.Selectable = true;
         // play effect and destroy ball on success strike
-        if (GlobalSettings.UseNetwork) {
+        if (GlobalSettings.UseNetwork)
+        {
             NetEffectController.Instance.PlayStrikeZoneHitEffect(transform.position, BallType.FastBall);
             Destroy(gameObject);
         }
@@ -162,6 +183,7 @@ public class ThrownBall : OVRGrabbable
         if (collision.gameObject.layer == LayerMask.NameToLayer("Environment"))
         {
             Destroy(gameObject, 4);
+            GlobalSettings.Selectable = true;
         }
 
         // Ignore collision with hands
@@ -206,7 +228,7 @@ public class ThrownBall : OVRGrabbable
 
                 rb.velocity = nVel;
 
-               // Debug.Log("out" + nVel);
+                // Debug.Log("out" + nVel);
                 // After all calculation
                 if (GlobalSettings.UseNetwork) NetEffectController.Instance.PlayBatHitEffect(transform.position, balltype);
                 OnHitByBat(transform.position, nVel);
@@ -230,8 +252,8 @@ public class ThrownBall : OVRGrabbable
     // For NET
     public void OnHitByBat(Vector3 pos, Vector3 vel)
     {
-        if (GlobalSettings.UseNetwork  && MatchController.PlayerType == PlayerType.Batter)
-       {
+        if (GlobalSettings.UseNetwork && MatchController.PlayerType == PlayerType.Batter)
+        {
             P2PNetworkBall netball = gameObject.GetComponent<P2PNetworkBall>();
             if (!netball)
             {
