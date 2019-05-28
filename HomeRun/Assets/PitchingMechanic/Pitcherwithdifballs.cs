@@ -53,9 +53,12 @@ public class Pitcherwithdifballs : MonoBehaviour
     {
         baseballPrefab = ballToThrow[currIndex];
         ThrownBall ball = Instantiate(baseballPrefab, transform.position, transform.rotation);
+        int typei = currIndex == 2 ? currIndex : 1-currIndex;
+        ball.balltype = (BallType)typei;
+
         if (GlobalSettings.UseNetwork && PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH)
         {
-            PlatformManager.P2P.AddNetworkBall(ball.gameObject, (BallType)currIndex);
+            PlatformManager.P2P.AddNetworkBall(ball.gameObject, (BallType)typei);
         }
         ball.initialize();
         ball.GrabEnd(transform.forward * speed, Vector3.zero);
