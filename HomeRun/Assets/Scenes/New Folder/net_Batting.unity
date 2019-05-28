@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 2.1185474, g: 2.1185474, b: 2.1185474, a: 1}
+  m_AmbientSkyColor: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 3
-  m_AmbientMode: 3
+  m_AmbientIntensity: 1
+  m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 9db1704bf17a80e4ab114d1085dc4266, type: 2}
   m_HaloStrength: 0.5
@@ -2662,7 +2662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcc8cbee6ccc1ba40a566cb9d8a32b02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_batHitPS_Prefab: {fileID: 5814903909371394753, guid: 11cafb6105ef6964fa583f7f54623fcb,
+  m_batHitPS_Prefab: {fileID: 8753116551508122950, guid: b4f62a925d8514f4c99f2292f96fc180,
     type: 3}
   m_strikeHitPS_Prefab: {fileID: 0}
 --- !u!4 &1697460992
@@ -3552,7 +3552,7 @@ MonoBehaviour:
   m_snapOrientation: 0
   m_snapOffset: {fileID: 0}
   m_grabPoints:
-  - {fileID: 0}
+  - {fileID: 1300347039}
 --- !u!1 &5169800952663457035
 GameObject:
   m_ObjectHideFlags: 0
@@ -3858,6 +3858,111 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992537623212739092, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: _moonSize
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992537623212739092, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: _moonTint.r
+      value: 0.4556863
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992537623212739092, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: _moonTint.g
+      value: 0.52156866
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992537623212739092, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: _moonTint.b
+      value: 0.5764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 7926759238343448442, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 0.1875
+      objectReference: {fileID: 0}
+    - target: {fileID: 7926759239987107190, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.0101960795
+      objectReference: {fileID: 0}
+    - target: {fileID: 7926759239987107190, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.39137256
+      objectReference: {fileID: 0}
+    - target: {fileID: 7926759239987107190, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.70588243
+      objectReference: {fileID: 0}
+    - target: {fileID: 7926759239987107190, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992537622365255368, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: CycleProgress
+      value: 49.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992537622439977949, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: _sunParamsList.Params.Array.data[0].LightIntencity
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992537622439977949, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: _moonParamsList.Params.Array.data[0].LightIntencity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992537622439977949, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: _moonParamsList.Params.Array.data[1].LightIntencity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992537622439977949, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: _moonParamsList.Params.Array.data[2].LightIntencity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992537622439977949, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: _moonParamsList.Params.Array.data[3].LightIntencity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992537622439977949, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: _sunParamsList.Params.Array.data[1].LightIntencity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992537622439977949, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: _sunParamsList.Params.Array.data[2].LightIntencity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992537622439977949, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: _sunParamsList.Params.Array.data[3].LightIntencity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992537622439977949, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: _sunParamsList.Params.Array.data[4].LightIntencity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992537622439977949, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: _sunParamsList.Params.Array.data[5].LightIntencity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992537622439977949, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: _sunParamsList.Params.Array.data[6].LightIntencity
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61400656761d6a64aa1e59bac9e8e1bf, type: 3}
