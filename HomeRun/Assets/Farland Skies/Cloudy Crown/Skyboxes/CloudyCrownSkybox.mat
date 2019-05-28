@@ -40,7 +40,7 @@ Material:
     - _CloudsOffset: 0.15
     - _CloudsRotationSpeed: 1
     - _Exposure: 1.2
-    - _MoonSize: 0.7
+    - _MoonSize: 0.5
     - _StarsExtinction: 7.8
     - _StarsTwinklingSpeed: 5
     - _SunSize: 0.7
