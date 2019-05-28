@@ -100,11 +100,11 @@ namespace Oculus.Platform.Samples.VrHoops
 
 		void MatchmakingRoomUpdateCallback(Message<Room> msg)
 		{
-			if (msg.IsError)
-			{
-				PlatformManager.TerminateWithError(msg);
-				return;
-			}
+//			if (msg.IsError)
+//			{
+//				PlatformManager.TerminateWithError(msg);
+//				return;
+//			}
 
 			// check to make sure the room is valid as there are a few odd timing issues (for
 			// example when leaving a room) that can trigger an uninteresting update

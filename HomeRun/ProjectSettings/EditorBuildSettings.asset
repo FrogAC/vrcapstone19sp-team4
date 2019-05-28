@@ -35,7 +35,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/New Folder/net_Batting.unity
     guid: c646e613f946a884abcdb29f223d21b8
-  - enabled: 0
+  - enabled: 1
     path: Assets/Oculus/Platform/Samples/VrHoops/Main.unity
     guid: 8b67239c8d8693441abb62a2ac48f571
+  - enabled: 1
+    path: Assets/Oculus/VR/Scenes/Room.unity
+    guid: 54445976c1dbf1c49bb38ba7eba558e8
   m_configObjects: {}

@@ -162,7 +162,7 @@ PlayerSettings:
     Android: com.vrcap19.homerun
     Standalone: com.vrcap19.homerun
   buildNumber: {}
-  AndroidBundleVersionCode: 6
+  AndroidBundleVersionCode: 7
   AndroidMinSdkVersion: 19
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 0
@@ -650,12 +650,12 @@ PlayerSettings:
     28: UNITY_POST_PROCESSING_STACK_V2
   platformArchitecture: {}
   scriptingBackend:
-    Android: 0
+    Android: 1
     Standalone: 1
   il2cppCompilerConfiguration: {}
   managedStrippingLevel: {}
   incrementalIl2cppBuild: {}
-  allowUnsafeCode: 1
+  allowUnsafeCode: 0
   additionalIl2CppArgs: 
   scriptingRuntimeVersion: 1
   gcIncremental: 0

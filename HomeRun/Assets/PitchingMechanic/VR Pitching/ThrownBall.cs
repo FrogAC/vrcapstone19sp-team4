@@ -26,6 +26,7 @@ public class ThrownBall : OVRGrabbable
     [SerializeField] AnimationCurve JitterAnimStrength = AnimationCurve.Linear(0, 0, 1, 0);
     [SerializeField] float jitterSpeed = 1f;
     [Space]
+    [SerializeField] float updateDelay = 0;
     [Space]
     public float vibrationFrequency = 0.4f;
     public float vibrationAmplitude = 0.4f;
@@ -99,7 +100,7 @@ public class ThrownBall : OVRGrabbable
 
             // Applies Jitter
             Vector3 jitterVec = new Vector3(Mathf.PerlinNoise(0, Time.time * jitterSpeed), Mathf.PerlinNoise(Time.time  * jitterSpeed, 0), 0);
-            jitterVec -= new Vector3(1,1,0) * 0.5f;
+            jitterVec -= new Vector3(0.5f, transform.position.y - releasePos.y, 0);
             
             transform.forward = Vector3.Lerp(transform.forward, jitterVec.normalized, JitterAnimStrength.Evaluate(dist)).normalized;
 
@@ -112,6 +113,7 @@ public class ThrownBall : OVRGrabbable
             rb.angularVelocity = Vector3.zero;
             rb.velocity = flightVel;
 
+            yield return new WaitForSeconds(updateDelay);
             yield return new WaitForFixedUpdate();
         }
         //Debug.Log("throw() done");
