@@ -118,7 +118,10 @@ public class ThrownBall : OVRGrabbable
             yield return new WaitForFixedUpdate();
         }
         rb.useGravity = true;
-        //Debug.Log("throw() done");
+        if (GlobalSettings.UseNetwork) {
+            
+            Destroy(gameObject);
+        }
     }
 
     float GetNormalizedPitchProgress(Vector3 releasePos, Vector3 position)

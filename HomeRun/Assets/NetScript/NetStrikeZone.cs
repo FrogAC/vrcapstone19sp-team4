@@ -31,7 +31,7 @@ namespace HomeRun.Net
             transform.position = origin + t * m_moveVec;
         }
 
-        public void SetVisual(bool b)
+        public void SetVisibal(bool b)
         {
             m_visual.SetActive(b);
         }
