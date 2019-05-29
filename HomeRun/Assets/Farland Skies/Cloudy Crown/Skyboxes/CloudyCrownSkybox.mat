@@ -43,7 +43,7 @@ Material:
     - _MoonSize: 0.5
     - _StarsExtinction: 7.8
     - _StarsTwinklingSpeed: 5
-    - _SunSize: 0.7
+    - _SunSize: 0.5
     m_Colors:
     - _BottomColor: {r: 0.0026143792, g: 0.23660132, b: 0.5163399, a: 1}
     - _MoonTint: {r: 0.4556863, g: 0.52156866, b: 0.5764706, a: 1}
