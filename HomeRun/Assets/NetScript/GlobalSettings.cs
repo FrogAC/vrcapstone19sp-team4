@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HomeRun
+namespace HomeRun {
+public static class GlobalSettings
 {
-    public static class GlobalSettings
-    {
-        public static bool UseNetwork = false;
-        public static bool Selectable = true;
-
-    }
+    public static bool UseNetwork = false;
+}
 }
