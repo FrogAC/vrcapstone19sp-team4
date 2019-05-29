@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HomeRun.Game;
 
 namespace HomeRun.Net
 {
@@ -12,9 +13,11 @@ namespace HomeRun.Net
             get { return s_instance; }
         }
 
-        [SerializeField]
-        private ParticleSystem m_batHitPS_Prefab;
-        private ParticleSystem m_batHitPS;
+        [Header("0: fast, 1: curve, 2: spiral")]
+        [SerializeField] private GameObject[] m_Bathit_Prefabs;
+        [SerializeField] private GameObject[] m_Strikehit_Prefabs;
+        private ParticleSystem[] m_BathitParticles = new ParticleSystem[3];
+        private ParticleSystem[] m_StrikerhitParticles = new ParticleSystem[3];
 
 
         void Awake()
@@ -28,15 +31,26 @@ namespace HomeRun.Net
             DontDestroyOnLoad(gameObject);
         }
 
-        public void PlayBatHitEffect(Vector3 pos)
+        public void PlayBatHitEffect(Vector3 pos, BallType type)
         {
-            if (!m_batHitPS)
+            int idx = (int) type;
+            if (!m_BathitParticles[idx])
             {
-                m_batHitPS = Instantiate(m_batHitPS_Prefab, transform.position, transform.rotation);
-                m_batHitPS.transform.SetParent(transform);
+                m_BathitParticles[idx] = Instantiate(m_Bathit_Prefabs[idx], transform.position, transform.rotation).GetComponentInChildren<ParticleSystem>();
             }
-            m_batHitPS.transform.position = pos;
-            m_batHitPS.Play();
+            m_BathitParticles[idx].transform.position = pos;
+            m_BathitParticles[idx].Play();
+        }
+
+        public void PlayStrikeZoneHitEffect(Vector3 pos, BallType type)
+        {
+            int idx = (int) type;
+            if (!m_StrikerhitParticles[idx])
+            {
+                m_StrikerhitParticles[idx] = Instantiate(m_Strikehit_Prefabs[idx], transform.position, transform.rotation).GetComponentInChildren<ParticleSystem>();
+            }
+            m_StrikerhitParticles[idx].transform.position = pos;
+            m_StrikerhitParticles[idx].Play();
         }
     }
 }

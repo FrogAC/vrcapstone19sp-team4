@@ -63,7 +63,7 @@ namespace HomeRun.Net
         private const byte LOCAL_PACKET_SIZE = 4 + 29;
 
         // 90fps = 0.011, 120fps = 0.008
-        private const float LOCAL_UPDATE_DELAY = 0.1f;
+        private const float LOCAL_UPDATE_DELAY = 0.05f;
 
         // cache of local balls that we are sending updates for
         private readonly Dictionary<int, P2PNetworkBall> m_localBalls = new Dictionary<int, P2PNetworkBall>();
@@ -504,13 +504,18 @@ namespace HomeRun.Net
             int instanceID = UnpackInt32(msg, ref offset);
             BallType type = (BallType)UnpackInt32(msg, ref offset);
 
-
+            foreach (Transform child in m_remoteSpawnPointTransform)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
+            
             var newball = m_remotePlayers[remoteID].player
                 .CreateBall((BallType)type)
                 .AddComponent<P2PNetworkBall>()
                 .SetType(type)
                 .SetInstanceID(instanceID);
-            newball.ThrowBall.initialize();
+            //newball.ThrowBall.initialize();
+
             newball.transform.SetParent(m_remoteSpawnPointTransform);
             newball.transform.localPosition = Vector3.zero;
 
@@ -534,10 +539,12 @@ namespace HomeRun.Net
                     .AddComponent<P2PNetworkBall>()
                     .SetType(BallType.FastBall)
                     .SetInstanceID(instanceID);
-                newball.ThrowBall.initialize();
+                //newball.ThrowBall.initialize();
+                while (m_remoteSpawnPointTransform.childCount != 0)
+                    GameObject.Destroy(m_remoteSpawnPointTransform.GetChild(0));
                 newball.transform.SetParent(m_remoteSpawnPointTransform);
                 newball.transform.localPosition = Vector3.zero;
-                m_remotePlayers[remoteID].activeBalls[instanceID] = newball;
+                activeballs[instanceID] = newball;
             }
 
             var ball = activeballs[instanceID];

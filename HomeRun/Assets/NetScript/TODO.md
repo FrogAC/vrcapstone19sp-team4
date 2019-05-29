@@ -1,11 +1,18 @@
 Note -> Tracking Ball collision instead assert time for next ball selecton interval
 
 FIX -> destroy in client BallSpawn
+Quest -> remove ParticleSystem Controller
+
+Ambigu -> namespace HomeRun should be Homerun.settings
 
 Danger -> CreateBall use implicit selection index
 Danger -> PlayerData.activeball grow infi
 
+Interpolate Normal, swing direction
 
+Pitcher Loop:
+    Timing  -> throw -> Hit Response
+                     -> !Hit Response
 
 DONE:
 Remove RB in P2PNetWorkBall
