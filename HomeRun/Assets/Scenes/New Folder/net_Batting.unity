@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.04124847, g: 0.23498225, b: 0.5217763, a: 1}
+  m_IndirectSpecularColor: {r: 0.01514339, g: 0.22748119, b: 0.5180915, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -192,6 +192,30 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2117516117, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
+      propertyPath: selections.Array.data[1].type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2117516117, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
+      propertyPath: selections.Array.data[2].type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
+      propertyPath: m_Name
+      value: OVRCameraRig
+      objectReference: {fileID: 0}
+    - target: {fileID: 14300000, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
+      propertyPath: m_Radius
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 14300000, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
+      propertyPath: m_Height
+      value: 1.29
+      objectReference: {fileID: 0}
     - target: {fileID: 11400010, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
       propertyPath: SnapRotation
       value: 1
@@ -228,34 +252,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 100004, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 100004, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
-      propertyPath: m_Name
-      value: OVRCameraRig
-      objectReference: {fileID: 0}
     - target: {fileID: 1487356152863360509, guid: ce816f2e6abb0504092c23ed9b970dfd,
         type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2117516117, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
-      propertyPath: selections.Array.data[1].type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2117516117, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
-      propertyPath: selections.Array.data[2].type
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 14300000, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
-      propertyPath: m_Radius
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 14300000, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
-      propertyPath: m_Height
-      value: 1.29
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
@@ -2267,8 +2267,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7081815338293666106, guid: d45c272a38849ef4097f5e6df394ca50,
         type: 3}
+      propertyPath: ballToThrow.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7081815338293666106, guid: d45c272a38849ef4097f5e6df394ca50,
+        type: 3}
       propertyPath: randomThrowRange
-      value: 0.3
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7081815338293666106, guid: d45c272a38849ef4097f5e6df394ca50,
         type: 3}
@@ -2278,8 +2283,14 @@ PrefabInstance:
     - target: {fileID: 7081815338293666106, guid: d45c272a38849ef4097f5e6df394ca50,
         type: 3}
       propertyPath: randomThrowDelay
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7081815338293666106, guid: d45c272a38849ef4097f5e6df394ca50,
+        type: 3}
+      propertyPath: ballToThrow.Array.data[0]
+      value: 
+      objectReference: {fileID: 4238686870500979215, guid: 8bea878d17912984a977420dd343753b,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d45c272a38849ef4097f5e6df394ca50, type: 3}
 --- !u!1001 &1220050691
@@ -3997,6 +4008,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7992537622365255368, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: CycleProgress
+      value: 49.52
+      objectReference: {fileID: 0}
     - target: {fileID: 7992537623212739092, guid: 61400656761d6a64aa1e59bac9e8e1bf,
         type: 3}
       propertyPath: _moonSize
@@ -4016,36 +4032,6 @@ PrefabInstance:
         type: 3}
       propertyPath: _moonTint.b
       value: 0.5764706
-      objectReference: {fileID: 0}
-    - target: {fileID: 7926759238343448442, guid: 61400656761d6a64aa1e59bac9e8e1bf,
-        type: 3}
-      propertyPath: m_Intensity
-      value: 0.1875
-      objectReference: {fileID: 0}
-    - target: {fileID: 7926759239987107190, guid: 61400656761d6a64aa1e59bac9e8e1bf,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0.0101960795
-      objectReference: {fileID: 0}
-    - target: {fileID: 7926759239987107190, guid: 61400656761d6a64aa1e59bac9e8e1bf,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.39137256
-      objectReference: {fileID: 0}
-    - target: {fileID: 7926759239987107190, guid: 61400656761d6a64aa1e59bac9e8e1bf,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0.70588243
-      objectReference: {fileID: 0}
-    - target: {fileID: 7926759239987107190, guid: 61400656761d6a64aa1e59bac9e8e1bf,
-        type: 3}
-      propertyPath: m_Intensity
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7992537622365255368, guid: 61400656761d6a64aa1e59bac9e8e1bf,
-        type: 3}
-      propertyPath: CycleProgress
-      value: 49.52
       objectReference: {fileID: 0}
     - target: {fileID: 7992537622439977949, guid: 61400656761d6a64aa1e59bac9e8e1bf,
         type: 3}
@@ -4100,6 +4086,31 @@ PrefabInstance:
     - target: {fileID: 7992537622439977949, guid: 61400656761d6a64aa1e59bac9e8e1bf,
         type: 3}
       propertyPath: _sunParamsList.Params.Array.data[6].LightIntencity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7926759238343448442, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 0.1875
+      objectReference: {fileID: 0}
+    - target: {fileID: 7926759239987107190, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.0101960795
+      objectReference: {fileID: 0}
+    - target: {fileID: 7926759239987107190, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.39137256
+      objectReference: {fileID: 0}
+    - target: {fileID: 7926759239987107190, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.70588243
+      objectReference: {fileID: 0}
+    - target: {fileID: 7926759239987107190, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: m_Intensity
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
