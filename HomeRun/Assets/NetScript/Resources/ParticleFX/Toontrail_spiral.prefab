@@ -19105,7 +19105,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4117384310806112}
-  - component: {fileID: 3665524366182866671}
   m_Layer: 0
   m_Name: Toontrail_spiral
   m_TagString: Untagged
@@ -19131,31 +19130,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3665524366182866671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1979048356021752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9e272d634f40434b85fbf756732714d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  size: 0.1
-  speed: 1
-  duration: 1
-  loop: 1
-  prewarm: 0
-  lights: 0
-  trails: 0
-  changeColor: 0
-  newMaxColor: {r: 0.07352942, g: 1, b: 0.078690685, a: 1}
-  newMinColor: {r: 0.047199354, g: 0.71323526, b: 0.050909765, a: 1}
-  ParticleSystems:
-  - {fileID: 1859662828525494}
-  - {fileID: 1890649862769804}
-  - {fileID: 1210068337201960}
-  - {fileID: 1615150988019640}
-  ActiveParticleSystems: 01010101

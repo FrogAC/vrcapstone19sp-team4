@@ -219,7 +219,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 4167520253387022, guid: b867367881ec4ef40ac3c99dea1e7b34, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.01
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 121162492566664895, guid: b867367881ec4ef40ac3c99dea1e7b34, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b867367881ec4ef40ac3c99dea1e7b34, type: 3}
 --- !u!1 &1009209431245210754 stripped
 GameObject:
@@ -240,11 +245,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3730204624319060449}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: af62cc980a2f2b34ea036f8ef8ec0cc3,
-        type: 3}
-      propertyPath: m_Name
-      value: ball_cubic
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: af62cc980a2f2b34ea036f8ef8ec0cc3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -314,6 +314,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 28.986423
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: af62cc980a2f2b34ea036f8ef8ec0cc3,
+        type: 3}
+      propertyPath: m_Name
+      value: ball_cubic
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af62cc980a2f2b34ea036f8ef8ec0cc3, type: 3}

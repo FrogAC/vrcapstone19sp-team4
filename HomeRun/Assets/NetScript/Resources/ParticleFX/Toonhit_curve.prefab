@@ -4783,7 +4783,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4052556200185266}
-  - component: {fileID: 5017944906176196718}
   m_Layer: 0
   m_Name: Toonhit_curve
   m_TagString: Untagged
@@ -4806,35 +4805,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5017944906176196718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1262490536792160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9e272d634f40434b85fbf756732714d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  size: 0.3
-  speed: 1
-  duration: 0.8
-  loop: 0
-  prewarm: 0
-  lights: 0
-  trails: 0
-  changeColor: 1
-  newMaxColor: {r: 1, g: 0.82385063, b: 0, a: 1}
-  newMinColor: {r: 1, g: 0.9504018, b: 0, a: 1}
-  ParticleSystems:
-  - {fileID: 1380786872565946}
-  - {fileID: 1894076616436126}
-  - {fileID: 1502482182843190}
-  - {fileID: 1136232877197634}
-  - {fileID: 1313138977308530}
-  ActiveParticleSystems: 0101010101
 --- !u!1 &1313138977308530
 GameObject:
   m_ObjectHideFlags: 0
