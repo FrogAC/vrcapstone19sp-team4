@@ -128,7 +128,8 @@ MonoBehaviour:
   m_snapPosition: 0
   m_snapOrientation: 0
   m_snapOffset: {fileID: 0}
-  m_grabPoints: []
+  m_grabPoints:
+  - {fileID: 1900042084187694038}
   speed: 4
   strikezone: {fileID: 0}
   redirectionStrength:
@@ -192,11 +193,9 @@ MonoBehaviour:
   vibrationFrequency: 0.32
   vibrationAmplitude: 0.22
   vibrationDuration: 0.1
-  onHitByBat:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+  m_effectObj: {fileID: 0}
+  m_throwSpeedThreshold: 1
+  balltype: 0
   batHitMult: 0.1
 --- !u!114 &2454735733605466773
 MonoBehaviour:

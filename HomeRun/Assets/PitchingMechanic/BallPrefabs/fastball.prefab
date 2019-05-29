@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 3417680724420157822}
   - {fileID: 8319948406311017345}
-  - {fileID: 3593129011887276042}
+  - {fileID: 3588335279464778869}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -82,7 +82,8 @@ MonoBehaviour:
   m_snapPosition: 0
   m_snapOrientation: 0
   m_snapOffset: {fileID: 0}
-  m_grabPoints: []
+  m_grabPoints:
+  - {fileID: 4238686870500979202}
   speed: 8
   strikezone: {fileID: 0}
   redirectionStrength:
@@ -146,7 +147,7 @@ MonoBehaviour:
   vibrationFrequency: 0.32
   vibrationAmplitude: 0.22
   vibrationDuration: 0.1
-  m_effectObj: {fileID: 3587230697975290184}
+  m_effectObj: {fileID: 3588335279464778876}
   m_throwSpeedThreshold: 2.5
   balltype: 0
   batHitMult: 0.1
@@ -370,13 +371,13 @@ PrefabInstance:
     - {fileID: 54218289380661066, guid: 3d58479f69dc537469cc0928a8cf9b2b, type: 3}
     - {fileID: 135034933871738152, guid: 3d58479f69dc537469cc0928a8cf9b2b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3d58479f69dc537469cc0928a8cf9b2b, type: 3}
---- !u!1 &3587230697975290184 stripped
+--- !u!1 &3588335279464778876 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1183884577445174, guid: 3d58479f69dc537469cc0928a8cf9b2b,
     type: 3}
   m_PrefabInstance: {fileID: 3588335279464778878}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &3593129011887276042 stripped
+--- !u!4 &3588335279464778869 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4794009515002996, guid: 3d58479f69dc537469cc0928a8cf9b2b,
     type: 3}

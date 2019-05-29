@@ -42,7 +42,8 @@ public class ThrownBall : OVRGrabbable
     public void SetEnableFX(bool value)
     {
         m_enableFX = value;
-        m_effectObj.SetActive(value);
+        if (m_effectObj)
+            m_effectObj.SetActive(value);
     }
 
     void Awake()
