@@ -128,7 +128,7 @@ namespace HomeRun.Net
                         break;
 
                     case State.WAITING_TO_SETUP_MATCH:
-                        if (MatchController.m_playerType == PlayerType.Pitcher) NetStrikeZone.strikezone.SetVisual(true);
+                        if (MatchController.m_playerType == PlayerType.Pitcher) NetStrikeZone.strikezone.SetVisibal(true);
                         Assert.AreEqual(oldState, State.WAITING_FOR_MATCH);
                         m_nextStateTransitionTime = Time.time + MATCH_WARMUP_TIME;
                         break;
@@ -194,7 +194,7 @@ namespace HomeRun.Net
 
         void SetupForIdle()
         {
-            NetStrikeZone.strikezone.SetVisual(false);
+            NetStrikeZone.strikezone.SetVisibal(false);
             NetStrikeZone.strikezone.SetMotion(false);
             SetAllAreaText("");
             PlayerType = PlayerType.None;  // do not reset transforms
