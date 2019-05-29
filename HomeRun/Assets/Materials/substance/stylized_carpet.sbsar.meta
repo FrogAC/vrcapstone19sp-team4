@@ -1,0 +1,140 @@
+fileFormatVersion: 2
+guid: 9bfa2a04d6b37ba4795ac4348e2fca60
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 232528478, guid: 43a8bbf65be290d44ba52b94476242b9, type: 3}
+  version: 17
+  mGraphInstanceData:
+  - graphLabel: Carpet
+    prototypeName: Carpet
+    graphDescIndex: 0
+    generateAllOutputs: 0
+    generateMipMaps: 1
+    preset: " <sbspreset pkgurl=\"pkg://Carpet\" label=\"\" >\n </sbspreset>\n"
+    shaderName: Standard
+    outputNames: baseColor,normal,metallic,height
+    texturePackingList:
+    - outputName: baseColor
+      alphaSource: baseColor
+    - outputName: normal
+      alphaSource: normal
+    - outputName: roughness
+      alphaSource: roughness
+    - outputName: metallic
+      alphaSource: smoothness
+    - outputName: height
+      alphaSource: height
+    textureParameters:
+    - textureName: Carpet - roughness
+      wrapMode: 0
+      filterMode: 1
+      aniso: 1
+    - textureName: Carpet - baseColor
+      wrapMode: 0
+      filterMode: 1
+      aniso: 1
+    - textureName: Carpet - normal
+      wrapMode: 0
+      filterMode: 1
+      aniso: 1
+    - textureName: Carpet - metallic
+      wrapMode: 0
+      filterMode: 1
+      aniso: 1
+    - textureName: Carpet - height
+      wrapMode: 0
+      filterMode: 1
+      aniso: 1
+    colorSpaceList:
+    - outputName: baseColor
+      bLinear: 0
+    - outputName: normal
+      bLinear: 1
+    - outputName: roughness
+      bLinear: 1
+    - outputName: metallic
+      bLinear: 1
+    - outputName: height
+      bLinear: 1
+    inputTextureMap: []
+    targetSettingList:
+    - label: 
+      bLockRatio: 1
+      textureWidth: 1024
+      textureHeight: 1024
+      textureFormat: 0
+      bGenerateOnLoad: 1
+    material: {fileID: -1420874079755031372, guid: 9bfa2a04d6b37ba4795ac4348e2fca60,
+      type: 3}
+    generatedTextures:
+    - {fileID: 8820539725198098447, guid: 9bfa2a04d6b37ba4795ac4348e2fca60, type: 3}
+    - {fileID: -3026783573179901606, guid: 9bfa2a04d6b37ba4795ac4348e2fca60, type: 3}
+    - {fileID: -2524877032834545636, guid: 9bfa2a04d6b37ba4795ac4348e2fca60, type: 3}
+    - {fileID: -8032895458388552301, guid: 9bfa2a04d6b37ba4795ac4348e2fca60, type: 3}
+  - graphLabel: Carpet_1
+    prototypeName: Carpet
+    graphDescIndex: 0
+    generateAllOutputs: 0
+    generateMipMaps: 1
+    preset: " <sbspreset pkgurl=\"pkg://Carpet\" label=\"\" >\n </sbspreset>\n"
+    shaderName: Standard
+    outputNames: baseColor,normal,metallic,height
+    texturePackingList:
+    - outputName: baseColor
+      alphaSource: baseColor
+    - outputName: normal
+      alphaSource: normal
+    - outputName: roughness
+      alphaSource: roughness
+    - outputName: metallic
+      alphaSource: smoothness
+    - outputName: height
+      alphaSource: height
+    textureParameters:
+    - textureName: Carpet_1 - roughness
+      wrapMode: 0
+      filterMode: 1
+      aniso: 1
+    - textureName: Carpet_1 - baseColor
+      wrapMode: 0
+      filterMode: 1
+      aniso: 1
+    - textureName: Carpet_1 - normal
+      wrapMode: 0
+      filterMode: 1
+      aniso: 1
+    - textureName: Carpet_1 - metallic
+      wrapMode: 0
+      filterMode: 1
+      aniso: 1
+    - textureName: Carpet_1 - height
+      wrapMode: 0
+      filterMode: 1
+      aniso: 1
+    colorSpaceList:
+    - outputName: baseColor
+      bLinear: 0
+    - outputName: normal
+      bLinear: 1
+    - outputName: roughness
+      bLinear: 1
+    - outputName: metallic
+      bLinear: 1
+    - outputName: height
+      bLinear: 1
+    inputTextureMap: []
+    targetSettingList:
+    - label: 
+      bLockRatio: 1
+      textureWidth: 1024
+      textureHeight: 1024
+      textureFormat: 0
+      bGenerateOnLoad: 1
+    material: {fileID: -3033688140191156255, guid: 9bfa2a04d6b37ba4795ac4348e2fca60,
+      type: 3}
+    generatedTextures: []
