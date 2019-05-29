@@ -511,8 +511,10 @@ namespace HomeRun.Net
                 .SetType(type)
                 .SetInstanceID(instanceID);
             //newball.ThrowBall.initialize();
-            while (m_remoteSpawnPointTransform.childCount != 0)
-                GameObject.Destroy(m_remoteSpawnPointTransform.GetChild(0));
+            foreach (Transform child in m_remoteSpawnPointTransform)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
             newball.transform.SetParent(m_remoteSpawnPointTransform);
             newball.transform.localPosition = Vector3.zero;
 
