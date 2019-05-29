@@ -29,10 +29,11 @@ public class ExplodingBall : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        StartCoroutine(ArmTime());
         if (bombArmed || (LayerMask.GetMask(LayerMask.LayerToName(collision.collider.gameObject.layer)) & bombExplodingLayers) != 0)
         {
             Destroy(this.gameObject);
-            Instantiate(explosionFX, transform.position, transform.rotation);
+            //Instantiate(explosionFX, transform.position, transform.rotation);
 
             Debug.Log("BOOM @ " + transform.position);
 
