@@ -20,7 +20,7 @@ public class Pitcher : MonoBehaviour
 
     void ThrowBall() {
         ThrownBall ball = Instantiate(baseballPrefab, transform.position, transform.rotation);
-        ball.initialize();
+        //ball.initialize();
         ball.GrabEnd(transform.forward * speed, Vector3.zero);
         Destroy(ball, lifetime);
     }

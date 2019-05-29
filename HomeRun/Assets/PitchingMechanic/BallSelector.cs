@@ -40,7 +40,6 @@
         private float m_nextSelectableInterval = 9.0f;
         private float m_nextSelectableTime = -1.0f;
 
-
         // Start is called before the first frame update
         void Start()
         {
@@ -87,10 +86,10 @@
             {
                 Destroy(spawnedPrefab.gameObject);
             }
-            else if (GlobalSettings.UseNetwork && PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH)
+            else if (GlobalSettings.UseNetwork)
             {
                 // adding time limit when multiplayer match
-                if (Time.time < m_nextSelectableTime)
+                if (!GlobalSettings.Selectable)
                 {
                     if (ballNameText.text == "Not Yet")
                         ballNameText.text = "Not Yet:(";
@@ -98,22 +97,21 @@
                         ballNameText.text = "No :(";
                     else if (ballNameText.text == "No :(")
                         ballNameText.text = "PATIENT";
-                    else if (ballNameText.text != "PATIENT") 
+                    else if (ballNameText.text != "PATIENT")
                         ballNameText.text = "Not Yet";
                     return;
                 }
                 else
                 {
                     NetStrikeZone.strikezone.SetMotion(true);
-                    m_nextSelectableTime = Time.time + m_nextSelectableInterval;
+                    GlobalSettings.Selectable = false;  // disable until ball lands
+                    //m_nextSelectableTime = Time.time + m_nextSelectableInterval;
                 }
             }
 
             spawnedPrefab = Instantiate(selections[currentIndex].prefab, spawnPoint.position, spawnPoint.rotation, spawnPoint);
             var tb = spawnedPrefab.GetComponent<ThrownBall>();
             spawnedGrabbable = tb;
-            tb.balltype = selections[currentIndex].type;
-            Debug.Log(tb.balltype);
             spawnedPrefab.GetComponent<Rigidbody>().isKinematic = true;
 
             if (GlobalSettings.UseNetwork && PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH)

@@ -201,7 +201,9 @@ MonoBehaviour:
   vibrationFrequency: 0.32
   vibrationAmplitude: 0.22
   vibrationDuration: 0.1
-  balltype: 0
+  m_effectObj: {fileID: 4732384672730395411}
+  m_throwSpeedThreshold: 1.5
+  balltype: 2
   batHitMult: 0.1
 --- !u!114 &1341505122466693793
 MonoBehaviour:
@@ -364,6 +366,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b29b116dcf8f26847b4d19186fb025b4, type: 3}
+--- !u!1 &4732384672730395411 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1979048356021752, guid: b29b116dcf8f26847b4d19186fb025b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 4732096999683798763}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4730303100108660875 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4117384310806112, guid: b29b116dcf8f26847b4d19186fb025b4,
