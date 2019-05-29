@@ -504,17 +504,18 @@ namespace HomeRun.Net
             int instanceID = UnpackInt32(msg, ref offset);
             BallType type = (BallType)UnpackInt32(msg, ref offset);
 
-
+            foreach (Transform child in m_remoteSpawnPointTransform)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
+            
             var newball = m_remotePlayers[remoteID].player
                 .CreateBall((BallType)type)
                 .AddComponent<P2PNetworkBall>()
                 .SetType(type)
                 .SetInstanceID(instanceID);
             //newball.ThrowBall.initialize();
-            foreach (Transform child in m_remoteSpawnPointTransform)
-            {
-                GameObject.Destroy(child.gameObject);
-            }
+
             newball.transform.SetParent(m_remoteSpawnPointTransform);
             newball.transform.localPosition = Vector3.zero;
 
