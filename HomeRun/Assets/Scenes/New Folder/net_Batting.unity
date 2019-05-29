@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.01514339, g: 0.22748119, b: 0.5180915, a: 1}
+  m_IndirectSpecularColor: {r: 0.041216493, g: 0.234967, b: 0.5218133, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4032,6 +4032,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _moonTint.b
       value: 0.5764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992537623212739092, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: _sunSize
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7992537622439977949, guid: 61400656761d6a64aa1e59bac9e8e1bf,
         type: 3}
