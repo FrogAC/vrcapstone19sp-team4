@@ -24,7 +24,7 @@ PrefabInstance:
     - target: {fileID: 1900042084187694036, guid: e909dd8cf0768dc4dba50ac58709bc30,
         type: 3}
       propertyPath: m_Name
-      value: curveball
+      value: backup_curveball
       objectReference: {fileID: 0}
     - target: {fileID: 1900042084187694036, guid: e909dd8cf0768dc4dba50ac58709bc30,
         type: 3}
@@ -35,6 +35,11 @@ PrefabInstance:
         type: 3}
       propertyPath: strikezone
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
+        type: 3}
+      propertyPath: balltype
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1900042084187694041, guid: e909dd8cf0768dc4dba50ac58709bc30,
         type: 3}

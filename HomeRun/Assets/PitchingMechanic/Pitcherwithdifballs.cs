@@ -20,7 +20,7 @@ public class Pitcherwithdifballs : MonoBehaviour
     System.Random random = new System.Random();
 
     [Space]
-    public Transform ballTarget;
+    //public Transform ballTarget;
     [Space]
     [SerializeField] OVRInput.Button nextSelection = OVRInput.Button.Three;
     [SerializeField] OVRInput.Button prevSelection = OVRInput.Button.Four;

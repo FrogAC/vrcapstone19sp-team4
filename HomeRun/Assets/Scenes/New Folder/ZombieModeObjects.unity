@@ -431,14 +431,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoPitch: 1
-  randomThrowRange: 0.18
-  randomThrowDelay: 2
+  randomThrowRange: 0
+  randomThrowDelay: 1
   ballToThrow:
   - {fileID: 4238686870500979215, guid: c88c808b66657844389397e9025ef641, type: 3}
   baseballPrefab: {fileID: 0}
   lifetime: 3
   speed: 5
-  ballTarget: {fileID: 426762244}
+  ballTarget: {fileID: 0}
   nextSelection: 4
   prevSelection: 8
   throwBall: 1
