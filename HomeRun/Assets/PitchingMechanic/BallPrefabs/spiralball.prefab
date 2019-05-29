@@ -128,7 +128,8 @@ MonoBehaviour:
   m_snapPosition: 0
   m_snapOrientation: 0
   m_snapOffset: {fileID: 0}
-  m_grabPoints: []
+  m_grabPoints:
+  - {fileID: 4578597730308542152}
   speed: 4
   strikezone: {fileID: 0}
   redirectionStrength:
