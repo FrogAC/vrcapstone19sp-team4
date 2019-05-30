@@ -37,6 +37,12 @@ public class Pitcherwithdifballs : MonoBehaviour
         }
     }
 
+    void OnEnable() {
+        if (autoPitch)
+        {
+            StartCoroutine(AutomaticPitching());
+        }
+    }
     IEnumerator AutomaticPitching()
     {
         while (true)
