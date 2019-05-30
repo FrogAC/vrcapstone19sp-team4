@@ -16,6 +16,7 @@ namespace HomeRun.Net
         // Text to display when the match will start or finish
         [SerializeField] private Transform m_startObjects;
         [SerializeField] private Text m_timerText = null;
+        [SerializeField] private Text m_timerText1 = null;
 
         // the camera is moved between the idle position and the assigned court position
         [SerializeField] private GameObject m_player = null;
@@ -176,6 +177,7 @@ namespace HomeRun.Net
                 {
                     case State.WAITING_TO_SETUP_MATCH:
                         m_timerText.text = string.Format("{0:0}", Mathf.Ceil(Time.time - MatchStartTime));
+                        m_timerText1.text = m_timerText.text;
                         break;
                     case State.PLAYING_MATCH:
                         var delta = m_nextStateTransitionTime - Time.time;
@@ -183,6 +185,7 @@ namespace HomeRun.Net
                             Mathf.Floor(delta / 60),
                             Mathf.Floor(delta) % 60,
                             Mathf.Floor(delta * 100) % 100);
+                        m_timerText1.text = m_timerText.text;
                         break;
                 }
             }
