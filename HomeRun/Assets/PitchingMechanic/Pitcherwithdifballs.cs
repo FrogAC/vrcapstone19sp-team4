@@ -27,16 +27,6 @@ public class Pitcherwithdifballs : MonoBehaviour
     [SerializeField] OVRInput.Button throwBall = OVRInput.Button.One;
 
     int currIndex = 0;
-
-    // Start is called before the first frame update
-    void Awake()
-    {
-        if (autoPitch)
-        {
-            StartCoroutine(AutomaticPitching());
-        }
-    }
-
     void OnEnable() {
         if (autoPitch)
         {
