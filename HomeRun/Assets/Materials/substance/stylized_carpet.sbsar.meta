@@ -71,11 +71,7 @@ ScriptedImporter:
       bGenerateOnLoad: 1
     material: {fileID: -1420874079755031372, guid: 9bfa2a04d6b37ba4795ac4348e2fca60,
       type: 3}
-    generatedTextures:
-    - {fileID: 8820539725198098447, guid: 9bfa2a04d6b37ba4795ac4348e2fca60, type: 3}
-    - {fileID: -3026783573179901606, guid: 9bfa2a04d6b37ba4795ac4348e2fca60, type: 3}
-    - {fileID: -2524877032834545636, guid: 9bfa2a04d6b37ba4795ac4348e2fca60, type: 3}
-    - {fileID: -8032895458388552301, guid: 9bfa2a04d6b37ba4795ac4348e2fca60, type: 3}
+    generatedTextures: []
   - graphLabel: Carpet_1
     prototypeName: Carpet
     graphDescIndex: 0

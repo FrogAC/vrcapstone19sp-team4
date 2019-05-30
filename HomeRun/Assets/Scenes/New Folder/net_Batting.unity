@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.041216493, g: 0.234967, b: 0.5218133, a: 1}
+  m_IndirectSpecularColor: {r: 0.015339788, g: 0.22752753, b: 0.5180534, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1329,8 +1329,8 @@ MonoBehaviour:
   m_remoteBat: {fileID: 1095769788}
   m_remoteGlove: {fileID: 905580138}
   m_localHead: {fileID: 2060322795}
-  m_localBat: {fileID: 1112381600}
-  m_localGlove: {fileID: 868962544}
+  m_localBat: {fileID: 1344344759}
+  m_localGlove: {fileID: 1112381600}
 --- !u!4 &606186864
 Transform:
   m_ObjectHideFlags: 0
@@ -1719,12 +1719,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!4 &868962544 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6266865658691401025, guid: ce816f2e6abb0504092c23ed9b970dfd,
-    type: 3}
-  m_PrefabInstance: {fileID: 4507113}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &880021666
 GameObject:
   m_ObjectHideFlags: 0
