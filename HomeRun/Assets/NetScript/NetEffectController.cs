@@ -66,7 +66,6 @@ namespace HomeRun.Net
             if (!m_HomerunText)
             {
                 m_HomerunText = Instantiate(m_Homeruntext_Prefab, transform.position, transform.rotation).transform;
-                m_HomerunText.gameObject.SetActive(false);
             }
 
             m_HomerunhitParticle.Play();
@@ -75,20 +74,23 @@ namespace HomeRun.Net
             Vibrate(3.0f);
             var player = GameObject.FindGameObjectWithTag("Player").transform.position;
             Vector3 dir = (player - pos).normalized;
-            m_HomerunText.position = pos + dir * 10f;
+            m_HomerunText.position = pos;
             m_HomerunText.rotation = Quaternion.LookRotation(dir,Vector3.up);
-            m_HomerunText.gameObject.SetActive(true);
+
+            StopAllCoroutines();
+
             foreach (Rigidbody rb in m_HomerunText.GetComponentsInChildren<Rigidbody>()) {
                 rb.velocity = Vector3.zero;
                 rb.transform.localPosition = Vector3.zero;
-                rb.transform.localRotation = Quaternion.identity;
-                rb.AddExplosionForce(50.0f, pos, 100.0f, 50.0f, ForceMode.Impulse);
-                StartCoroutine(Explode(rb.transform, Vector3.zero, Vector3.one, 3.0f));
+                rb.AddForce((player - pos) * 8f,ForceMode.Force);
+                //rb.AddExplosionForce(300.0f, pos - dir * 15f, 80.0f, 10.0f, ForceMode.Acceleration);
+                StartCoroutine(Shrink(rb.transform, Vector3.zero, Vector3.one, 3.5f));
             }
         }
 
 
-        IEnumerator Explode(Transform transform, Vector3 start, Vector3 end, float time)
+        // actually not shrink
+        IEnumerator Shrink(Transform transform, Vector3 start, Vector3 end, float time)
         {
             float remain = time;
             while (remain > 0.0f)
@@ -99,7 +101,15 @@ namespace HomeRun.Net
                 transform.localScale = Vector3.Lerp(start, end, t);
                 yield return null;
             }
-            //yield return new WaitForSeconds(5);
+            remain = time/1.5f;
+            while (remain > 0.0f)
+            {
+                remain -= Time.deltaTime;
+                float t =  remain / (time/1.5f);
+                t = EaseOutElastic(t);
+                transform.localScale = Vector3.Lerp(start, end, t);
+                yield return null;
+            }
         }
         public static float EaseOutElastic(float value)
         {
