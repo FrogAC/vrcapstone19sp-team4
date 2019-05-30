@@ -30,8 +30,8 @@ public class TargetPracticeManager : MonoBehaviour
         remainingTargets = targetsContainer.transform.childCount;
         if (remainingTargets > 0)
         {
-            targetCountText.text = "Targets: " + remainingTargets +"\n";
-            timerText.text = "Time: "+ string.Format("{0:00}:{1:00.00}", (int)Time.timeSinceLevelLoad / 60, Time.timeSinceLevelLoad % 60);
+            targetCountText.text = "Targets: \n" + remainingTargets;
+            timerText.text = "Time: \n"+ string.Format("{0:00}:{1:00.00}", (int)Time.timeSinceLevelLoad / 60, Time.timeSinceLevelLoad % 60);
         } else
         {
             if (! hasCompleted) {
@@ -43,8 +43,8 @@ public class TargetPracticeManager : MonoBehaviour
             {
                 completionTime = Time.timeSinceLevelLoad;
             }
-            targetCountText.text = "All Targets Hit!\n";
-            timerText.text = "Time: " + string.Format("{0:00}:{1:00.00}", (int)completionTime / 60, completionTime % 60);
+            targetCountText.text = "All Targets Hit!";
+            timerText.text = "Time: \n" + string.Format("{0:00}:{1:00.00}", (int)completionTime / 60, completionTime % 60);
         }
     }
 }

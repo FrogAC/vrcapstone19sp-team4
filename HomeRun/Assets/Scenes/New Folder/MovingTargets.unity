@@ -386,10 +386,6 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Hand
       objectReference: {fileID: 0}
-    - target: {fileID: 134650, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
-      propertyPath: m_TagString
-      value: Hand
-      objectReference: {fileID: 0}
     - target: {fileID: 6029165319904654604, guid: ce816f2e6abb0504092c23ed9b970dfd,
         type: 3}
       propertyPath: m_IsActive
@@ -397,6 +393,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6029165319904654604, guid: ce816f2e6abb0504092c23ed9b970dfd,
         type: 3}
+      propertyPath: m_TagString
+      value: Hand
+      objectReference: {fileID: 0}
+    - target: {fileID: 134650, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
       propertyPath: m_TagString
       value: Hand
       objectReference: {fileID: 0}
@@ -665,9 +665,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9038cc660ca54ec4ab07d0d5507c8c43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoPitch: 0
+  autoPitch: 1
   randomThrowRange: 0.18
-  randomThrowDelay: 4
+  randomThrowDelay: 2
   ballToThrow:
   - {fileID: 3730204624319060451, guid: 2b990e7762cd3894b966ee206b722a3f, type: 3}
   - {fileID: 4238686870500979215, guid: 8bea878d17912984a977420dd343753b, type: 3}
