@@ -284,7 +284,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 30
+      scalar: 150
       minScalar: 1.5
       maxCurve:
         serializedVersion: 2
@@ -5058,7 +5058,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 20
+      scalar: 100
       minScalar: 1.5
       maxCurve:
         serializedVersion: 2
@@ -6117,8 +6117,8 @@ ParticleSystem:
         ctime7: 0
         atime0: 13645
         atime1: 65535
-        atime2: 65535
-        atime3: 65535
+        atime2: 0
+        atime3: 0
         atime4: 0
         atime5: 0
         atime6: 0
@@ -9832,7 +9832,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 26
+      scalar: 130
       minScalar: 1.5
       maxCurve:
         serializedVersion: 2
@@ -10891,8 +10891,8 @@ ParticleSystem:
         ctime7: 0
         atime0: 13645
         atime1: 65535
-        atime2: 65535
-        atime3: 65535
+        atime2: 0
+        atime3: 0
         atime4: 0
         atime5: 0
         atime6: 0
@@ -14606,8 +14606,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 10
-      minScalar: 8
+      scalar: 50
+      minScalar: 40
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -19380,7 +19380,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 26
+      scalar: 130
       minScalar: 12
       maxCurve:
         serializedVersion: 2
@@ -23914,7 +23914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9e272d634f40434b85fbf756732714d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 2
+  size: 10
   speed: 1
   duration: 1
   loop: 0
@@ -24218,8 +24218,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 11
-      minScalar: 8
+      scalar: 55
+      minScalar: 40
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -28999,7 +28999,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 8
+      scalar: 40
       minScalar: 1.5
       maxCurve:
         serializedVersion: 2
@@ -30058,8 +30058,8 @@ ParticleSystem:
         ctime7: 0
         atime0: 13645
         atime1: 65535
-        atime2: 65535
-        atime3: 65535
+        atime2: 0
+        atime3: 0
         atime4: 0
         atime5: 0
         atime6: 0
@@ -33657,8 +33657,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 7
-      minScalar: 6
+      scalar: 35
+      minScalar: 30
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -33773,8 +33773,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 5
-      minScalar: 3
+      scalar: 25
+      minScalar: 15
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -34235,7 +34235,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 2
+      value: 10
       mode: 0
       spread: 0
       speed:
@@ -34816,7 +34816,7 @@ ParticleSystem:
         serializedVersion: 2
         key0: {r: 0.5415827, g: 0.16911763, b: 1, a: 1}
         key1: {r: 1, g: 1, b: 1, a: 1}
-        key2: {r: 0.6985294, g: 0.6985294, b: 0.6985294, a: 0}
+        key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
@@ -34824,7 +34824,7 @@ ParticleSystem:
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
         ctime1: 54934
-        ctime2: 58982
+        ctime2: 0
         ctime3: 0
         ctime4: 0
         ctime5: 0
@@ -34832,8 +34832,8 @@ ParticleSystem:
         ctime7: 0
         atime0: 0
         atime1: 65535
-        atime2: 65535
-        atime3: 65535
+        atime2: 0
+        atime3: 0
         atime4: 0
         atime5: 0
         atime6: 0
@@ -34853,7 +34853,7 @@ ParticleSystem:
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
         ctime1: 65535
-        ctime2: 58982
+        ctime2: 0
         ctime3: 0
         ctime4: 0
         ctime5: 0
@@ -34861,8 +34861,8 @@ ParticleSystem:
         ctime7: 0
         atime0: 0
         atime1: 65535
-        atime2: 65535
-        atime3: 65535
+        atime2: 0
+        atime3: 0
         atime4: 0
         atime5: 0
         atime6: 0

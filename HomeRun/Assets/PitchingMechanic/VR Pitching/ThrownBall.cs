@@ -260,7 +260,7 @@ public class ThrownBall : OVRGrabbable
 
     void OnTriggerEnter(Collider collider) {
         if (collider.gameObject.layer == LayerMask.NameToLayer("HomerunFence")) {
-            if (GlobalSettings.UseNetwork) NetEffectController.Instance.PlayHomerunEffect(collider.transform.position);
+            if (GlobalSettings.UseNetwork) NetEffectController.Instance.PlayHomerunEffect(transform.position);
             // Audio etc
         }
     }
