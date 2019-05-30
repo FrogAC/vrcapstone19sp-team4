@@ -1,3 +1,6 @@
+
+!!! fix HOMERUN effect!!
+
 Note -> Tracking Ball collision instead assert time for next ball selecton interval
 
 FIX -> destroy in client BallSpawn
