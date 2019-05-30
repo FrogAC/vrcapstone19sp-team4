@@ -15,13 +15,17 @@ namespace HomeRun.Net
 
         [Header("0: fast, 1: curve, 2: spiral")]
         [SerializeField] private GameObject[] m_Bathit_Prefabs;
-        [SerializeField] private GameObject[] m_Strikehit_Prefabs;
+        [SerializeField] private GameObject m_Strikehit_Prefabs;
+        [SerializeField] private GameObject m_Striketext_Prefabs;
         [SerializeField] private GameObject m_Homerunhit_Prefab;
         [SerializeField] private GameObject m_Homeruntext_Prefab;
         private ParticleSystem m_HomerunhitParticle;
         private Transform m_HomerunText;
+        private Transform m_StrikeText;
         private ParticleSystem[] m_BathitParticles = new ParticleSystem[3];
-        private ParticleSystem[] m_StrikerhitParticles = new ParticleSystem[3];
+        private ParticleSystem m_StrikerhitParticles;
+
+        private Transform m_player;
 
 
         void Awake()
@@ -31,6 +35,7 @@ namespace HomeRun.Net
                 Destroy(gameObject);
                 return;
             }
+            m_player = GameObject.FindGameObjectWithTag("Player").transform;
             s_instance = this;
             DontDestroyOnLoad(gameObject);
         }
@@ -46,15 +51,25 @@ namespace HomeRun.Net
             m_BathitParticles[idx].Play();
         }
 
-        public void PlayStrikeZoneHitEffect(Vector3 pos, BallType type)
+        public void PlayStrikeZoneHitEffect(Vector3 pos)
         {
-            int idx = (int)type;
-            if (!m_StrikerhitParticles[idx])
+            if (!m_StrikerhitParticles)
             {
-                m_StrikerhitParticles[idx] = Instantiate(m_Strikehit_Prefabs[idx], transform.position, transform.rotation).GetComponentInChildren<ParticleSystem>();
+                m_StrikerhitParticles = Instantiate(m_Strikehit_Prefabs, transform.position, transform.rotation).GetComponentInChildren<ParticleSystem>();
             }
-            m_StrikerhitParticles[idx].transform.position = pos;
-            m_StrikerhitParticles[idx].Play();
+            if (!m_StrikeText)
+            {
+                m_StrikeText = Instantiate(m_Striketext_Prefabs, transform.position, transform.rotation).transform;
+            }
+
+            m_StrikerhitParticles.transform.position = pos;
+            m_StrikerhitParticles.Play();
+
+
+            Vector3 dir = (m_player.position - pos).normalized;
+            m_StrikeText.position = pos;
+            m_StrikeText.rotation = Quaternion.LookRotation(dir, Vector3.up);
+            StartCoroutine(Shrink(m_StrikeText, Vector3.zero, Vector3.one, 1.5f));
         }
 
         // explosion and fly toward player?
@@ -72,17 +87,17 @@ namespace HomeRun.Net
 
             // Explode
             Vibrate(3.0f);
-            var player = GameObject.FindGameObjectWithTag("Player").transform.position;
-            Vector3 dir = (player - pos).normalized;
+            Vector3 dir = (m_player.position - pos).normalized;
             m_HomerunText.position = pos;
-            m_HomerunText.rotation = Quaternion.LookRotation(dir,Vector3.up);
+            m_HomerunText.rotation = Quaternion.LookRotation(dir, Vector3.up);
 
             StopAllCoroutines();
 
-            foreach (Rigidbody rb in m_HomerunText.GetComponentsInChildren<Rigidbody>()) {
+            foreach (Rigidbody rb in m_HomerunText.GetComponentsInChildren<Rigidbody>())
+            {
                 rb.velocity = Vector3.zero;
                 rb.transform.localPosition = Vector3.zero;
-                rb.AddForce((player - pos) * 8f,ForceMode.Force);
+                rb.AddForce((m_player.position - pos) * 8f, ForceMode.Force);
                 //rb.AddExplosionForce(300.0f, pos - dir * 15f, 80.0f, 10.0f, ForceMode.Acceleration);
                 StartCoroutine(Shrink(rb.transform, Vector3.zero, Vector3.one, 3.5f));
             }
@@ -101,11 +116,11 @@ namespace HomeRun.Net
                 transform.localScale = Vector3.Lerp(start, end, t);
                 yield return null;
             }
-            remain = time/1.5f;
+            remain = time / 1.5f;
             while (remain > 0.0f)
             {
                 remain -= Time.deltaTime;
-                float t =  remain / (time/1.5f);
+                float t = remain / (time / 1.5f);
                 t = EaseOutElastic(t);
                 transform.localScale = Vector3.Lerp(start, end, t);
                 yield return null;
