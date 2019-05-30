@@ -155,7 +155,7 @@ public class ThrownBall : OVRGrabbable
             OVRHaptics.RightChannel.Preempt(clip);
             OVRHaptics.LeftChannel.Preempt(clip);
             NetEffectController.Instance.PlayStrikeZoneHitEffect(transform.position, BallType.FastBall);
-            Destroy(gameObject);
+           // Destroy(gameObject);
         }
     }
 
