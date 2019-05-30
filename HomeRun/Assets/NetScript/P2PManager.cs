@@ -503,10 +503,8 @@ namespace HomeRun.Net
             int instanceID = UnpackInt32(msg, ref offset);
             BallType type = (BallType)UnpackInt32(msg, ref offset);
 
-            // foreach (Transform child in m_remoteSpawnPointTransform)
-            // {
-            //     GameObject.Destroy(child.gameObject);
-            // }
+            foreach (Transform child in m_remoteSpawnPointTransform)
+                GameObject.Destroy(child.gameObject);
 
             var newball = m_remotePlayers[remoteID].player
                 .CreateBall((BallType)type)
@@ -533,6 +531,9 @@ namespace HomeRun.Net
             var activeballs = m_remotePlayers[remoteID].activeBalls;
             if (!activeballs.ContainsKey(instanceID))
             {// this shold not happen
+            foreach (Transform child in m_remoteSpawnPointTransform)
+                GameObject.Destroy(child.gameObject);
+                
                 var newball = m_remotePlayers[remoteID].player
                     .CreateBall(BallType.FastBall)
                     .AddComponent<P2PNetworkBall>()
