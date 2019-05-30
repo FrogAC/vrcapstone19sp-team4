@@ -11,6 +11,8 @@ public class ZombieMove : MonoBehaviour
         Direct
     }
 
+    [SerializeField] public int health = 3;
+
     [SerializeField] private float m_moveSpeed = 2;
     [SerializeField] private float m_turnSpeed = 200;
 
@@ -38,6 +40,8 @@ public class ZombieMove : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (health <= 0) Destroy(this.gameObject);
+
         switch (m_controlMode)
         {
             case ControlMode.Direct:

@@ -26,4 +26,11 @@ public class FreezeConstraintOnRelease : MonoBehaviour
             rb.constraints = RigidbodyConstraints.None;
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag.Equals("Zombie")) {
+            collision.gameObject.GetComponent<ZombieMove>().health -= 1;
+        }
+    }
 }
