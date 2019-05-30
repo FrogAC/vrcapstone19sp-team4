@@ -54,12 +54,12 @@ public class ExplodingBall : MonoBehaviour
         Destroy(this.gameObject);
         Instantiate(explosionFX, transform.position, transform.rotation);
 
-        Debug.Log("BOOM @ " + transform.position);
+        //Debug.Log("BOOM @ " + transform.position);
 
         Collider[] explosionTargets = Physics.OverlapSphere(transform.position, explosionRadius, explodableLayers);
         foreach (Collider hitCollider in explosionTargets)
         {
-            Debug.Log("hit " + hitCollider.name + " with explosion");
+            //Debug.Log("hit " + hitCollider.name + " with explosion");
             Destroy(hitCollider.gameObject);
         }
     }

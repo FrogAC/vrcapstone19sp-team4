@@ -6,10 +6,11 @@ public class PlayerHealth : MonoBehaviour
 {
     public int health;
     // Start is called before the first frame update
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag.Equals("Zombie"))
+        if (other.gameObject.tag.Equals("Zombie"))
         {
+            Debug.Log("Zombie Trigger Occured");
             health -= 1;
             if (health <= 0) Debug.Log("Player Just Died");
         }
