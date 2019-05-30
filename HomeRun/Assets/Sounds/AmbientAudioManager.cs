@@ -6,9 +6,9 @@ public class AmbientAudioManager : MonoBehaviour
 { 
     public AudioClip[] cheers;
     public AudioClip ambientClip;
-    public AudioSource ambient, ambientOffset, cheer;
+    public AudioSource ambient, ambientOffset, cheer, applause;
     [SerializeField]
-    private int cheerInterval, cheerStartDelay;
+    private int fadeInTime, cheerInterval, cheerStartDelay;
 
     private float ambientTrackLength, ambientTrackLoopOffset;
 
@@ -19,12 +19,19 @@ public class AmbientAudioManager : MonoBehaviour
         ambientTrackLoopOffset = ambientTrackLength / 2;
         InitAmbientNoiseTracks();
         StartAmbientNoiseTracks();
-        
+        cheer.loop = false;
+        ThrownBall.OnHit += PlayHitApplause;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Time.time <= fadeInTime)
+        {
+            ambient.volume = Time.time / fadeInTime * 0.5f;
+            ambientOffset.volume = Time.time / fadeInTime * 0.5f;
+        }
+
         if (Time.time > cheerStartDelay && (int)Time.time % cheerInterval == 0)
         {
             if (!cheer.isPlaying)
@@ -37,7 +44,10 @@ public class AmbientAudioManager : MonoBehaviour
         
     }
 
-
+    private void OnEnable()
+    {
+        ThrownBall.OnHit += PlayHitApplause;
+    }
 
     private void InitAmbientNoiseTracks()
     {
@@ -52,5 +62,15 @@ public class AmbientAudioManager : MonoBehaviour
     {
         ambient.Play();
         ambientOffset.Play();
+    }
+
+    public void PlayHitApplause()
+    {
+        if (!applause.isPlaying)
+        {
+            applause.loop = false;
+            applause.Play();
+            
+        }
     }
 }

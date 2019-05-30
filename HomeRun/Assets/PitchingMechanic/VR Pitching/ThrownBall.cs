@@ -35,6 +35,9 @@ public class ThrownBall : OVRGrabbable
     Vector3 flightVel;
     private OVRGrabber prevGrabber;
 
+    public delegate void HitAction();
+    public static event HitAction OnHit;
+
     private Collider m_collider;
     [SerializeField] private GameObject m_effectObj;
     [SerializeField] private float m_throwSpeedThreshold = 1.0f;
@@ -246,6 +249,9 @@ public class ThrownBall : OVRGrabbable
                 }
                 OVRHaptics.RightChannel.Preempt(clip);
                 OVRHaptics.LeftChannel.Preempt(clip);
+
+                // Global Hit Event
+                OnHit();
             }
         }
     }
