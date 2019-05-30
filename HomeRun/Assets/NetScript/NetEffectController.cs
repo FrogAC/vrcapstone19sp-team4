@@ -70,8 +70,9 @@ namespace HomeRun.Net
             }
 
             m_HomerunhitParticle.Play();
-            // Pop up easing
+
             // Explode
+            Vibrate(3.0f);
             var player = GameObject.FindGameObjectWithTag("Player").transform.position;
             Vector3 dir = (player - pos).normalized;
             m_HomerunText.position = pos + dir * 10f;

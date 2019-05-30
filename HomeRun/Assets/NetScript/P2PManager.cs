@@ -179,12 +179,12 @@ namespace HomeRun.Net
                 SendHeadTransform(m_localHeadTransform);
             }
 
-            if (MatchController.PlayerType == PlayerType.Batter && Time.time >= m_timeForNextBatUpdate)
+            if (MatchController.PlayerType != PlayerType.Pitcher && Time.time >= m_timeForNextBatUpdate)
             {
                 SendBatTransform(m_localBatTransform);
             }
 
-            if (MatchController.PlayerType == PlayerType.Pitcher && Time.time >= m_timeForNextGloveUpdate)
+            if (MatchController.PlayerType != PlayerType.Batter && Time.time >= m_timeForNextGloveUpdate)
             {
                 SendGloveTransform(m_localGloveTransform);
             }
@@ -533,7 +533,7 @@ namespace HomeRun.Net
             {// this shold not happen
             foreach (Transform child in m_remoteSpawnPointTransform)
                 GameObject.Destroy(child.gameObject);
-                
+
                 var newball = m_remotePlayers[remoteID].player
                     .CreateBall(BallType.FastBall)
                     .AddComponent<P2PNetworkBall>()

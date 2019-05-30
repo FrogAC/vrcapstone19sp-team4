@@ -1268,7 +1268,7 @@ MonoBehaviour:
   m_remoteGlove: {fileID: 905580138}
   m_localHead: {fileID: 2060322795}
   m_localBat: {fileID: 5169800952663457137}
-  m_localGlove: {fileID: 1413604689}
+  m_localGlove: {fileID: 868962544}
 --- !u!4 &606186864
 Transform:
   m_ObjectHideFlags: 0
@@ -1657,6 +1657,12 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!4 &868962544 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6266865658691401025, guid: ce816f2e6abb0504092c23ed9b970dfd,
+    type: 3}
+  m_PrefabInstance: {fileID: 4507113}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &880021666
 GameObject:
   m_ObjectHideFlags: 0
@@ -2572,12 +2578,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 70.210175, y: 198.39444, z: 1}
   m_Center: {x: 1.3316479, y: 88.02463, z: 0}
---- !u!4 &1413604689 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1749416140250867083, guid: ce816f2e6abb0504092c23ed9b970dfd,
-    type: 3}
-  m_PrefabInstance: {fileID: 4507113}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1697460990
 GameObject:
   m_ObjectHideFlags: 0
