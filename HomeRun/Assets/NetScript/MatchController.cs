@@ -238,6 +238,7 @@ namespace HomeRun.Net
         {
             m_player.transform.SetParent(m_idleAreaTransform, false);
             m_player.transform.localPosition = Vector3.zero;
+            m_player.transform.rotation = m_idleAreaTransform.rotation;
         }
 
         void MoveCameraToMatchPosition()
