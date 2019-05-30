@@ -210,7 +210,7 @@ namespace HomeRun.Net
             Player player = null;
 
             // slot used only for verification at this point
-            if (m_currentState == State.WAITING_TO_SETUP_MATCH && slot < m_playerAreas.Length)
+            if (m_currentState == State.WAITING_TO_SETUP_MATCH && slot >= 0)
             {
                 if (user.ID == PlatformManager.MyID)
                 {
