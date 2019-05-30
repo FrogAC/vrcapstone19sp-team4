@@ -842,7 +842,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &214063653
 Transform:
   m_ObjectHideFlags: 0
@@ -1329,7 +1329,7 @@ MonoBehaviour:
   m_remoteBat: {fileID: 1095769788}
   m_remoteGlove: {fileID: 905580138}
   m_localHead: {fileID: 2060322795}
-  m_localBat: {fileID: 1344344759}
+  m_localBat: {fileID: 1112381600}
   m_localGlove: {fileID: 868962544}
 --- !u!4 &606186864
 Transform:
@@ -2107,6 +2107,12 @@ Transform:
   m_Father: {fileID: 1937570943}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 182.55199}
+--- !u!4 &1112381600 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1749416140250867083, guid: ce816f2e6abb0504092c23ed9b970dfd,
+    type: 3}
+  m_PrefabInstance: {fileID: 4507113}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1125492377
 PrefabInstance:
   m_ObjectHideFlags: 0
