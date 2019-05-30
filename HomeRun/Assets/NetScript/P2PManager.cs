@@ -221,10 +221,10 @@ namespace HomeRun.Net
 
         void PeerConnectRequestCallback(Message<NetworkingPeer> msg)
         {
-            Net.Accept(msg.Data.ID);
             if (m_remotePlayers.ContainsKey(msg.Data.ID))
             {
                 Debug.LogFormat("P2P Accepting Connection request from {0}", msg.Data.ID);
+                Net.Accept(msg.Data.ID);
             }
             else
             {
