@@ -1,5 +1,5 @@
 
-!!! fix HOMERUN effect!!
+Add "STRIKE" effect for pitchter
 
 Note -> Tracking Ball collision instead assert time for next ball selecton interval
 
