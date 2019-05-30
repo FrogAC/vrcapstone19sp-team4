@@ -35,8 +35,6 @@ public class ThrownBall : OVRGrabbable
     Vector3 flightVel;
     private OVRGrabber prevGrabber;
 
-    public delegate void HitAction();
-    public static event HitAction OnHit;
 
     private Collider m_collider;
     [SerializeField] private GameObject m_effectObj;
@@ -149,6 +147,13 @@ public class ThrownBall : OVRGrabbable
         // play effect and destroy ball on success strike
         if (GlobalSettings.UseNetwork)
         {
+            OVRHapticsClip clip = new OVRHapticsClip();
+            for (int i = 0; i < vibrationDuration * 320; i++)
+            {
+                clip.WriteSample((byte)Mathf.Clamp((int)(vibrationAmplitude * 255 * (1 + releaseLinVel.magnitude / 10)), 0, 255));
+            }
+            OVRHaptics.RightChannel.Preempt(clip);
+            OVRHaptics.LeftChannel.Preempt(clip);
             NetEffectController.Instance.PlayStrikeZoneHitEffect(transform.position, BallType.FastBall);
             Destroy(gameObject);
         }
@@ -249,9 +254,6 @@ public class ThrownBall : OVRGrabbable
                 }
                 OVRHaptics.RightChannel.Preempt(clip);
                 OVRHaptics.LeftChannel.Preempt(clip);
-
-                // Global Hit Event
-                OnHit();
             }
         }
     }

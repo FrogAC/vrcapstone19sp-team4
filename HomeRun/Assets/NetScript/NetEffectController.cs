@@ -33,7 +33,7 @@ namespace HomeRun.Net
 
         public void PlayBatHitEffect(Vector3 pos, BallType type)
         {
-            int idx = (int) type;
+            int idx = (int)type;
             if (!m_BathitParticles[idx])
             {
                 m_BathitParticles[idx] = Instantiate(m_Bathit_Prefabs[idx], transform.position, transform.rotation).GetComponentInChildren<ParticleSystem>();
@@ -44,7 +44,7 @@ namespace HomeRun.Net
 
         public void PlayStrikeZoneHitEffect(Vector3 pos, BallType type)
         {
-            int idx = (int) type;
+            int idx = (int)type;
             if (!m_StrikerhitParticles[idx])
             {
                 m_StrikerhitParticles[idx] = Instantiate(m_Strikehit_Prefabs[idx], transform.position, transform.rotation).GetComponentInChildren<ParticleSystem>();
@@ -52,5 +52,23 @@ namespace HomeRun.Net
             m_StrikerhitParticles[idx].transform.position = pos;
             m_StrikerhitParticles[idx].Play();
         }
+
+        public void PlayWordExplosionEffect(Vector3 pos, string word)
+        {
+
+        }
+
+
+        public void Vibrate(float duration)
+        {
+            OVRHapticsClip clip = new OVRHapticsClip();
+            for (int i = 0; i < duration * 320; i++)
+            {
+                clip.WriteSample((byte)Mathf.Clamp((int)(0.4 * 255), 0, 255));
+            }
+            OVRHaptics.RightChannel.Preempt(clip);
+            OVRHaptics.LeftChannel.Preempt(clip);
+        }
+
     }
 }
