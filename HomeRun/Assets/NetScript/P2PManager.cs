@@ -503,10 +503,10 @@ namespace HomeRun.Net
             int instanceID = UnpackInt32(msg, ref offset);
             BallType type = (BallType)UnpackInt32(msg, ref offset);
 
-            foreach (Transform child in m_remoteSpawnPointTransform)
-            {
-                GameObject.Destroy(child.gameObject);
-            }
+            // foreach (Transform child in m_remoteSpawnPointTransform)
+            // {
+            //     GameObject.Destroy(child.gameObject);
+            // }
 
             var newball = m_remotePlayers[remoteID].player
                 .CreateBall((BallType)type)
@@ -539,8 +539,6 @@ namespace HomeRun.Net
                     .SetType(BallType.FastBall)
                     .SetInstanceID(instanceID);
                 //newball.ThrowBall.initialize();
-                while (m_remoteSpawnPointTransform.childCount != 0)
-                    GameObject.Destroy(m_remoteSpawnPointTransform.GetChild(0));
                 newball.transform.SetParent(m_remoteSpawnPointTransform);
                 newball.transform.localPosition = Vector3.zero;
                 activeballs[instanceID] = newball;
