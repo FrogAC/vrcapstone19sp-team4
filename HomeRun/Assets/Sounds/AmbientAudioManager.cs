@@ -20,7 +20,7 @@ public class AmbientAudioManager : MonoBehaviour
         InitAmbientNoiseTracks();
         StartAmbientNoiseTracks();
         cheer.loop = false;
-        ThrownBall.OnHit += PlayHitApplause;
+        //ThrownBall.OnHit += PlayHitApplause;
     }
 
     // Update is called once per frame
@@ -46,7 +46,7 @@ public class AmbientAudioManager : MonoBehaviour
 
     private void OnEnable()
     {
-        ThrownBall.OnHit += PlayHitApplause;
+        //ThrownBall.OnHit += PlayHitApplause;
     }
 
     private void InitAmbientNoiseTracks()
