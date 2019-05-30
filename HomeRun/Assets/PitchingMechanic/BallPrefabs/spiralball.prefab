@@ -10,11 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4578597730308542151}
   - component: {fileID: 4578597730308542150}
-  - component: {fileID: 4578597730308542153}
   - component: {fileID: 4578597730308542152}
   - component: {fileID: 4578597730308542148}
   - component: {fileID: 4578597730308542149}
-  - component: {fileID: 1341505122466693793}
   m_Layer: 12
   m_Name: spiralball
   m_TagString: Untagged
@@ -46,43 +44,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4578597730308542154}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &4578597730308542153
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4578597730308542154}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
 --- !u!135 &4578597730308542152
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -206,20 +167,6 @@ MonoBehaviour:
   m_throwSpeedThreshold: 1.5
   balltype: 2
   batHitMult: 0.1
---- !u!114 &1341505122466693793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4578597730308542154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3406017d4b3af2c42bb13b758c8da497, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  color: {r: 0, g: 0.89049053, b: 1, a: 1}
-  colorInfluence: 0.5
 --- !u!1001 &3698709908779600977
 PrefabInstance:
   m_ObjectHideFlags: 0
