@@ -6,6 +6,7 @@ public class ExplodingBall : MonoBehaviour
 {
     private bool bombArmed = false;
 
+    public float explodeDelay = 2f;
     public float armingDelay = 0.5f;
     public float explosionRadius = 3;
 
@@ -32,17 +33,8 @@ public class ExplodingBall : MonoBehaviour
         StartCoroutine(ArmTime());
         if (bombArmed || (LayerMask.GetMask(LayerMask.LayerToName(collision.collider.gameObject.layer)) & bombExplodingLayers) != 0)
         {
-            Destroy(this.gameObject);
-            //Instantiate(explosionFX, transform.position, transform.rotation);
-
-            Debug.Log("BOOM @ " + transform.position);
-
-            Collider[] explosionTargets = Physics.OverlapSphere(transform.position, explosionRadius, explodableLayers);
-            foreach (Collider hitCollider in explosionTargets)
-            {
-                Debug.Log("hit " + hitCollider.name + " with explosion");
-                Destroy(hitCollider.gameObject);
-            }
+            StartCoroutine(ExplodeDelay());
+            
         } else if (!bombArmed && (LayerMask.GetMask(LayerMask.LayerToName(collision.collider.gameObject.layer)) & bombArmingLayers) != 0 )
         {
             Debug.Log("hit by "+collision.collider.name);
@@ -54,5 +46,21 @@ public class ExplodingBall : MonoBehaviour
     {
         yield return new WaitForSeconds(armingDelay);
         bombArmed = true;
+    }
+
+    IEnumerator ExplodeDelay()
+    {
+        yield return new WaitForSeconds(explodeDelay);
+        Destroy(this.gameObject);
+        Instantiate(explosionFX, transform.position, transform.rotation);
+
+        //Debug.Log("BOOM @ " + transform.position);
+
+        Collider[] explosionTargets = Physics.OverlapSphere(transform.position, explosionRadius, explodableLayers);
+        foreach (Collider hitCollider in explosionTargets)
+        {
+            //Debug.Log("hit " + hitCollider.name + " with explosion");
+            Destroy(hitCollider.gameObject);
+        }
     }
 }
