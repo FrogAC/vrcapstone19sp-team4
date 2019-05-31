@@ -204,11 +204,14 @@ namespace HomeRun.Net
                 // ID comparison is used to decide who Connects and who Accepts
                 if (PlatformManager.MyID < player.ID)
                 {
+                    System.Threading.Thread.Sleep(2000);            
                     Debug.Log("P2P Try Connect to: " + player.ID);
                     Net.Connect(player.ID);
                 }
             }
         }
+
+
 
         public void DisconnectAll()
         {
