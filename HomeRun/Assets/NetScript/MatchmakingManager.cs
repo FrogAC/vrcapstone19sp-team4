@@ -82,14 +82,14 @@ namespace HomeRun.Net
 
 			// this sample doesn't try to coordinate that all the players see consistent
 			// positioning to assigned courts, but that would be a great next feature to add
-			int slot = 1;
+			int slot = 0;
 
 			if (msg.Data.UsersOptional != null)
 			{
 				foreach (var user in msg.Data.UsersOptional)
 				{
 					Debug.Log("User ID" + user.ID);
-					var player = MatchPlayerAddedCallback(slot--, user);
+					var player = MatchPlayerAddedCallback(slot++, user);
 					if (PlatformManager.MyID != user.ID)
 					{
 						m_remotePlayers[user.ID] = user;
@@ -115,6 +115,7 @@ namespace HomeRun.Net
 				{
 					foreach (User user in msg.Data.UsersOptional)
 					{
+						Debug.Log("Update User ID" + user.ID);
 						if (PlatformManager.MyID != user.ID && !m_remotePlayers.ContainsKey(user.ID))
 						{
 							m_remotePlayers[user.ID] = user;
