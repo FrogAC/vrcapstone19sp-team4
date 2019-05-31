@@ -24,7 +24,7 @@ PrefabInstance:
     - target: {fileID: 1900042084187694036, guid: e909dd8cf0768dc4dba50ac58709bc30,
         type: 3}
       propertyPath: m_Name
-      value: Jitterball
+      value: LightningBall
       objectReference: {fileID: 0}
     - target: {fileID: 1900042084187694036, guid: e909dd8cf0768dc4dba50ac58709bc30,
         type: 3}
@@ -35,6 +35,11 @@ PrefabInstance:
         type: 3}
       propertyPath: JitterAnimStrength.m_Curve.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
+        type: 3}
+      propertyPath: NormalizedSpeedOverPath.m_Curve.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
         type: 3}
@@ -114,7 +119,7 @@ PrefabInstance:
     - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
         type: 3}
       propertyPath: updateDelay
-      value: 0.03
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
         type: 3}
@@ -190,6 +195,86 @@ PrefabInstance:
         type: 3}
       propertyPath: redirectionStrength.m_Curve.Array.data[1].outWeight
       value: 0.435311
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
+        type: 3}
+      propertyPath: NormalizedSpeedOverPath.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
+        type: 3}
+      propertyPath: NormalizedSpeedOverPath.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
+        type: 3}
+      propertyPath: NormalizedSpeedOverPath.m_Curve.Array.data[2].time
+      value: 1.0021623
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
+        type: 3}
+      propertyPath: NormalizedSpeedOverPath.m_Curve.Array.data[2].value
+      value: 0.9816632
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
+        type: 3}
+      propertyPath: NormalizedSpeedOverPath.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
+        type: 3}
+      propertyPath: NormalizedSpeedOverPath.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
+        type: 3}
+      propertyPath: NormalizedSpeedOverPath.m_Curve.Array.data[2].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
+        type: 3}
+      propertyPath: NormalizedSpeedOverPath.m_Curve.Array.data[2].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
+        type: 3}
+      propertyPath: NormalizedSpeedOverPath.m_Curve.Array.data[2].inWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
+        type: 3}
+      propertyPath: NormalizedSpeedOverPath.m_Curve.Array.data[2].outWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
+        type: 3}
+      propertyPath: NormalizedSpeedOverPath.m_Curve.Array.data[3].time
+      value: 1.0021623
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
+        type: 3}
+      propertyPath: NormalizedSpeedOverPath.m_Curve.Array.data[3].value
+      value: 0.9816632
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
+        type: 3}
+      propertyPath: normailzedSpeedAffectsUpdateDelay
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
+        type: 3}
+      propertyPath: NormalizedSpeedOverPath.m_Curve.Array.data[1].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
+        type: 3}
+      propertyPath: NormalizedSpeedOverPath.m_Curve.Array.data[1].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
+        type: 3}
+      propertyPath: NormalizedSpeedOverPath.m_Curve.Array.data[1].inWeight
+      value: 0.14170039
       objectReference: {fileID: 0}
     - target: {fileID: 1900042084187694041, guid: e909dd8cf0768dc4dba50ac58709bc30,
         type: 3}

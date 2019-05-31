@@ -26,6 +26,10 @@ public class ThrownBall : OVRGrabbable
     [SerializeField] AnimationCurve JitterAnimStrength = AnimationCurve.Linear(0, 0, 1, 0);
     [SerializeField] float jitterSpeed = 1f;
     [Space]
+    // Normalized speed relative to launch velocity of the ball
+    [SerializeField] AnimationCurve NormalizedSpeedOverPath = AnimationCurve.Linear(0, 1, 1, 1);
+    [SerializeField] bool normailzedSpeedAffectsUpdateDelay;
+    [Space]
     [SerializeField] float updateDelay = 0;
     [Space]
     public float vibrationFrequency = 0.4f;
@@ -101,19 +105,22 @@ public class ThrownBall : OVRGrabbable
             // Applies Jitter
             Vector3 jitterVec = new Vector3(Mathf.PerlinNoise(0, Time.time * jitterSpeed), Mathf.PerlinNoise(Time.time  * jitterSpeed, 0), 0);
             jitterVec -= new Vector3(0.5f, transform.position.y - releasePos.y, 0);
-            
             transform.forward = Vector3.Lerp(transform.forward, jitterVec.normalized, JitterAnimStrength.Evaluate(dist)).normalized;
 
             // Calculates redirection
             transform.forward = Vector3.Lerp(transform.forward, targetVector.normalized, redirectionStrength.Evaluate(dist)).normalized + transform.forward * Mathf.Epsilon;
             // Moves the ball in the direction it's facing
             //transform.position += transform.forward * Time.fixedDeltaTime * speed * releaseLinVel.magnitude;
-            flightVel = transform.forward * speed * releaseLinVel.magnitude;
+            flightVel = transform.forward * speed * releaseLinVel.magnitude * NormalizedSpeedOverPath.Evaluate(dist);
 
             rb.angularVelocity = Vector3.zero;
             rb.velocity = flightVel;
 
-            yield return new WaitForSeconds(updateDelay);
+            // Applys the update delay, calculating the delay if dependent on speed
+            float effectiveDelay = updateDelay;
+            updateDelay /= (normailzedSpeedAffectsUpdateDelay) ? NormalizedSpeedOverPath.Evaluate(dist) : 1;
+            yield return new WaitForSeconds(effectiveDelay);
+
             yield return new WaitForFixedUpdate();
         }
         //Debug.Log("throw() done");
