@@ -122,3 +122,9 @@ Right now, the random movement can sometime make the ball hit the ground and fai
 
 For next week, doing more work on bug-fixing and integration to get everything working well together will be important, but I also want to make path-correcting modifiers to improve the jitterball.
 
+### Week 9
+This week was mainly polishing and multiplayer debugging
+
+### Daoyi - Assets & Multiplayer
+Add distinct visual effects, add assets for a nearly-complete multiplayer-player loop. With Stephen we fix a crucial bug in network code base that cause random player timeout. I also work on getting logs for Quest validation error, which has been sent to Quest Staff earlier this week.
+Next week I will polish the gameplay part of multiplayer match based on the data we get from player tests, more player goals and visual feedbacks.
