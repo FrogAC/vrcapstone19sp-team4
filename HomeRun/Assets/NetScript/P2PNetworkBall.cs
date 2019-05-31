@@ -72,6 +72,14 @@ namespace HomeRun.Net
 			m_rigidBody.constraints = RigidbodyConstraints.None;
 
 			NetEffectController.Instance.PlayBatHitEffect(pos, m_ballType);
+			
+            StartCoroutine(EnableSelect(3));
+			Destroy(this, 3.0f);
+		}
+
+		IEnumerator EnableSelect(int s) {
+			yield return new WaitForSeconds(s);
+			GlobalSettings.Selectable = true;
 		}
 
 		void OnDestroy()
