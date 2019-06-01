@@ -107,7 +107,7 @@ Debugging build issues will be something that I work on in this coming week. The
 ### Week 8
 This week our focus is on making the Quest work with the networking setup and improving the P2P information transfer to ensure the networking is running effectively and smoothly. Secondly, we are working bug testing ensuring we minimize the amount errors that occur during gameplay.
 
-### Stephen - Network and Ball physics:
+#### Stephen - Network and Ball physics:
 Work with Daoyi to determine the changes that need to be made to the code base to ensure a singular working game across the Rift and the Quest. The major focus of this portion is how we are going to get the ball physics calculations to handled across the machines in a P2P manner while respecting the latency that we will inevitably face with the non-corded Quest. Once these bugs are handled I will work with Terrell to make sure we have smooth transitions between scenes and put the finishing touches on the gameplay mechanics.
 
 
@@ -125,7 +125,7 @@ For next week, doing more work on bug-fixing and integration to get everything w
 ### Week 9
 This week was mainly polishing and multiplayer debugging
 
-### Daoyi - Assets & Multiplayer
+#### Daoyi - Assets & Multiplayer
 Add distinct visual effects, add assets for a nearly-complete multiplayer-player loop. With Stephen we fix a crucial bug in network code base that cause random player timeout. I also work on getting logs for Quest validation error, which has been sent to Quest Staff earlier this week.
 Next week I will polish the gameplay part of multiplayer match based on the data we get from player tests, more player goals and visual feedbacks.
 
