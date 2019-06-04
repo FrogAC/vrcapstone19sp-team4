@@ -15,6 +15,7 @@ namespace HomeRun.Net
 
         [Header("0: fast, 1: curve, 2: spiral")]
         [SerializeField] private GameObject[] m_Bathit_Prefabs;
+        [SerializeField] private GameObject m_StrikeMisstext_Prefab;
         [SerializeField] private GameObject m_Strikehit_Prefabs;
         [SerializeField] private GameObject m_Striketext_Prefabs;
         [SerializeField] private GameObject m_Homerunhit_Prefab;
@@ -22,6 +23,7 @@ namespace HomeRun.Net
         private ParticleSystem m_HomerunhitParticle;
         private Transform m_HomerunText;
         private Transform m_StrikeText;
+        private Transform m_StrikeMisstext;
         private ParticleSystem[] m_BathitParticles = new ParticleSystem[3];
         private ParticleSystem m_StrikerhitParticles;
 
@@ -70,6 +72,20 @@ namespace HomeRun.Net
             m_StrikeText.position = pos;
             m_StrikeText.rotation = Quaternion.LookRotation(dir, Vector3.up);
             StartCoroutine(Shrink(m_StrikeText, Vector3.zero, Vector3.one, 1.5f));
+        }
+
+        public void PlayStrikeZoneMissEffect(Vector3 pos)
+        {
+            if (!m_StrikeMisstext)
+            {
+                m_StrikeMisstext = Instantiate(m_StrikeMisstext_Prefab, transform.position, transform.rotation).transform;
+            }
+
+
+            Vector3 dir = (m_player.position - pos).normalized;
+            m_StrikeMisstext.position = pos;
+            m_StrikeMisstext.rotation = Quaternion.LookRotation(dir, Vector3.up);
+            StartCoroutine(Shrink(m_StrikeMisstext, Vector3.zero, Vector3.one, 1.5f));
         }
 
         // explosion and fly toward player?

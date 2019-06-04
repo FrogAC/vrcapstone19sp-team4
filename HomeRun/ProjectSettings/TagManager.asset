@@ -8,6 +8,9 @@ TagManager:
   - Bat
   - Hand
   - Zombie
+  - SceneBarrier
+  - StrikeTrigger
+  - MissTrigger
   layers:
   - Default
   - TransparentFX

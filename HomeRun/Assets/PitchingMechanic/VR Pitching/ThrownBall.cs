@@ -40,6 +40,7 @@ public class ThrownBall : OVRGrabbable
     [SerializeField] private GameObject m_effectObj;
     [SerializeField] private float m_throwSpeedThreshold = 1.0f;
     private bool m_enableFX = false;
+    private bool m_hasStrike = false;
     public void SetEnableFX(bool value)
     {
         m_enableFX = value;
@@ -71,7 +72,8 @@ public class ThrownBall : OVRGrabbable
         if (GlobalSettings.UseNetwork && MatchController.PlayerType == PlayerType.Pitcher)
         {
             PlatformManager.Instance.P2PThrowBall(gameObject.GetInstanceID(), transform.position,
-                                                releaseLinVel, NetStrikeZone.strikezone.transform.position);
+                                                releaseLinVel, NetStrikeZone.strikezone.transform.position);  // an actually badd idea
+                                                // but works
         }
 
 
@@ -147,14 +149,7 @@ public class ThrownBall : OVRGrabbable
         // play effect and destroy ball on success strike
         if (GlobalSettings.UseNetwork)
         {
-            OVRHapticsClip clip = new OVRHapticsClip();
-            for (int i = 0; i < vibrationDuration * 320; i++)
-            {
-                clip.WriteSample((byte)Mathf.Clamp((int)(vibrationAmplitude * 255 * (1 + releaseLinVel.magnitude / 10)), 0, 255));
-            }
-            OVRHaptics.RightChannel.Preempt(clip);
-            OVRHaptics.LeftChannel.Preempt(clip);
-            NetEffectController.Instance.PlayStrikeZoneHitEffect(transform.position);
+            Debug.LogError("NetStrikeHit! Should either hit True StikeZone or Miss befire this!");
            // Destroy(gameObject);
         }
     }
@@ -263,8 +258,43 @@ public class ThrownBall : OVRGrabbable
             if (GlobalSettings.UseNetwork &&  PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH) 
                 NetEffectController.Instance.PlayHomerunEffect(transform.position);
             // Audio etc
+        } else if (collider.tag.Equals("StrikeTrigger")) {
+            m_hasStrike = true;
+            StopAllCoroutines();
+            rb.useGravity = true;
+
+            OVRHapticsClip clip = new OVRHapticsClip();
+            for (int i = 0; i < vibrationDuration * 320; i++)
+            {
+                clip.WriteSample((byte)Mathf.Clamp((int)(vibrationAmplitude * 255 * (1 + releaseLinVel.magnitude / 10)), 0, 255));
+            }
+            OVRHaptics.RightChannel.Preempt(clip);
+            OVRHaptics.LeftChannel.Preempt(clip);
+            NetEffectController.Instance.PlayStrikeZoneHitEffect(transform.position);
+        } else if (collider.tag.Equals("MissTrigger") && !m_hasStrike) {
+            StopAllCoroutines();
+            rb.useGravity = true;
+
+            OVRHapticsClip clip = new OVRHapticsClip();
+            for (int i = 0; i < vibrationDuration * 320; i++)
+            {
+                clip.WriteSample((byte)Mathf.Clamp((int)(vibrationAmplitude * 255 * (1 + releaseLinVel.magnitude / 10)), 0, 255));
+            }
+            OVRHaptics.RightChannel.Preempt(clip);
+            OVRHaptics.LeftChannel.Preempt(clip);
+
+            NetEffectController.Instance.PlayStrikeZoneMissEffect(transform.position);
         }
     }
+
+    void OnTriggerExit(Collider collider) {
+        if (collider.tag.Equals("SceneBarrier")) {
+            StopAllCoroutines();
+            GlobalSettings.Selectable = true;
+            Destroy(gameObject);
+        }
+    }
+
 
     // For NET
     public void OnHitByBat(Vector3 pos, Vector3 vel)
