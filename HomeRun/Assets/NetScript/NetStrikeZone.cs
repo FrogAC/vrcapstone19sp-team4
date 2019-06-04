@@ -38,7 +38,7 @@ namespace HomeRun.Net
 
         public void SetMotion(bool b)
         {
-            m_enableMove = b;
+           m_enableMove = b;
         }
 
         // Start is called before the first frame update

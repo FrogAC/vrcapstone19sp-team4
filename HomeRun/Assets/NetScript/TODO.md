@@ -1,5 +1,5 @@
 
-Add "STRIKE" effect for pitchter
+Add hit head effect
 
 Note -> Tracking Ball collision instead assert time for next ball selecton interval
 
