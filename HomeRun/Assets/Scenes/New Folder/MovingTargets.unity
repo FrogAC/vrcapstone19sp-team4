@@ -382,6 +382,23 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2117516117, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
+      propertyPath: selections.Array.data[1].type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2117516117, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
+      propertyPath: selections.Array.data[2].type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 950676636113779804, guid: ce816f2e6abb0504092c23ed9b970dfd,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hand
+      objectReference: {fileID: 0}
+    - target: {fileID: 134650, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
+      propertyPath: m_TagString
+      value: Hand
+      objectReference: {fileID: 0}
     - target: {fileID: 168962, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
       propertyPath: m_TagString
       value: Hand
@@ -395,23 +412,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Hand
-      objectReference: {fileID: 0}
-    - target: {fileID: 134650, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
-      propertyPath: m_TagString
-      value: Hand
-      objectReference: {fileID: 0}
-    - target: {fileID: 950676636113779804, guid: ce816f2e6abb0504092c23ed9b970dfd,
-        type: 3}
-      propertyPath: m_TagString
-      value: Hand
-      objectReference: {fileID: 0}
-    - target: {fileID: 2117516117, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
-      propertyPath: selections.Array.data[1].type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2117516117, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
-      propertyPath: selections.Array.data[2].type
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
@@ -674,7 +674,7 @@ MonoBehaviour:
   - {fileID: 4578597730308542149, guid: b7eee885420e2d4479c440dde59bde89, type: 3}
   baseballPrefab: {fileID: 0}
   lifetime: 3
-  speed: 5
+  speed: 4
   nextSelection: 4
   prevSelection: 8
   throwBall: 1
