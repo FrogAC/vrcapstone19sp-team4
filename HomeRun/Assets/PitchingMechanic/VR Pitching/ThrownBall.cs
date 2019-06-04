@@ -28,7 +28,7 @@ public class ThrownBall : OVRGrabbable
 
     [SerializeField] AnimationCurve JitterAnimStrength = AnimationCurve.Linear(0, 0, 1, 0);
     [SerializeField] float jitterSpeed = 1f;
-    [SerializeField] float jitterJHeightOffset = 0;
+    [SerializeField] float jitterHeightOffset = 0;
     [Space]
     
     [SerializeField] AnimationCurve controlStrength = AnimationCurve.Linear(0, 0, 1, 0);
