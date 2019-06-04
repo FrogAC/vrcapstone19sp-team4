@@ -25,6 +25,7 @@ public class ThrownBall : OVRGrabbable
     [Space]
     [SerializeField] AnimationCurve JitterAnimStrength = AnimationCurve.Linear(0, 0, 1, 0);
     [SerializeField] float jitterSpeed = 1f;
+    [SerializeField] float jitterJHeightOffset = 0;
     [Space]
     // Normalized speed relative to launch velocity of the ball
     [SerializeField] AnimationCurve NormalizedSpeedOverPath = AnimationCurve.Linear(0, 1, 1, 1);
@@ -89,6 +90,15 @@ public class ThrownBall : OVRGrabbable
         while (dist < 1)
         {
             dist = GetNormalizedPitchProgress(releasePos, transform.position);
+            /*
+            if (transform.position.x > 2)
+            {
+                transform.position -= Vector3.right * 4;
+            }
+            else if (transform.position.x < 2)
+            {
+                transform.position += Vector3.right * 4;
+            }*/
 
             Vector3 pitchingLine = releasePos - GetBallTargetPosition();
             Vector3 targetVector = GetBallTargetPosition() - transform.position;
@@ -104,7 +114,7 @@ public class ThrownBall : OVRGrabbable
 
             // Applies Jitter
             Vector3 jitterVec = new Vector3(Mathf.PerlinNoise(0, Time.time * jitterSpeed), Mathf.PerlinNoise(Time.time  * jitterSpeed, 0), 0);
-            jitterVec -= new Vector3(0.5f, transform.position.y - releasePos.y, 0);
+            jitterVec -= new Vector3(0.5f, transform.position.y - releasePos.y - jitterJHeightOffset, 0);   // Adjusts random direction to avoid hitting ground
             transform.forward = Vector3.Lerp(transform.forward, jitterVec.normalized, JitterAnimStrength.Evaluate(dist)).normalized;
 
             // Calculates redirection

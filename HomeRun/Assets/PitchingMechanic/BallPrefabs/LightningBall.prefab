@@ -144,7 +144,7 @@ PrefabInstance:
     - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
         type: 3}
       propertyPath: JitterAnimStrength.m_Curve.Array.data[2].tangentMode
-      value: 34
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
         type: 3}
@@ -164,12 +164,12 @@ PrefabInstance:
     - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
         type: 3}
       propertyPath: JitterAnimStrength.m_Curve.Array.data[2].inSlope
-      value: -0.7654764
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
         type: 3}
       propertyPath: JitterAnimStrength.m_Curve.Array.data[2].outSlope
-      value: -0.7654764
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
         type: 3}
@@ -275,6 +275,11 @@ PrefabInstance:
         type: 3}
       propertyPath: NormalizedSpeedOverPath.m_Curve.Array.data[1].inWeight
       value: 0.14170039
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
+        type: 3}
+      propertyPath: jitterJHeightOffset
+      value: -0.52
       objectReference: {fileID: 0}
     - target: {fileID: 1900042084187694041, guid: e909dd8cf0768dc4dba50ac58709bc30,
         type: 3}
