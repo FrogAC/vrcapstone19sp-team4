@@ -20,10 +20,27 @@ public class ThrownBall : OVRGrabbable
     // How strongly does the ball curve to the strike zone at different parts of the throw
     [SerializeField] AnimationCurve redirectionStrength = AnimationCurve.Linear(0, 0, 1, 1);
     [Space]
+
     // How strongly is the Spiral motion applieds
     [SerializeField] AnimationCurve SpiralAnimStrength = AnimationCurve.Linear(0, 1, 1, 0);
     [SerializeField] float spiralSpeed = 1f;
     [Space]
+
+    [SerializeField] AnimationCurve JitterAnimStrength = AnimationCurve.Linear(0, 0, 1, 0);
+    [SerializeField] float jitterSpeed = 1f;
+    [SerializeField] float jitterJHeightOffset = 0;
+    [Space]
+    
+    [SerializeField] AnimationCurve controlStrength = AnimationCurve.Linear(0, 0, 1, 0);
+    [Space]
+
+    // Normalized speed relative to launch velocity of the ball
+    [SerializeField] AnimationCurve NormalizedSpeedOverPath = AnimationCurve.Linear(0, 1, 1, 1);
+    [SerializeField] bool normailzedSpeedAffectsUpdateDelay;
+    [Space]
+    [SerializeField] float updateDelay = 0;
+    [Space]
+
     public float vibrationFrequency = 0.4f;
     public float vibrationAmplitude = 0.4f;
     public float vibrationDuration = 0.1f;
@@ -119,9 +136,17 @@ public class ThrownBall : OVRGrabbable
         {
             dist = GetNormalizedPitchProgress(releasePos, transform.position);
 
+            // Reference directions used in calculations
             Vector3 pitchingLine = releasePos - GetBallTargetPosition();
             Vector3 targetVector = GetBallTargetPosition() - transform.position;
-            //Debug.Log(dist+ "\t\t"+targetVector);
+
+            // Applies Control
+            if (prevGrabber != null) {
+                // Gets direction that the controller is pointing in order to allow direct control of trajectory
+                Vector3 controlVec = Vector3.ProjectOnPlane(prevGrabber.transform.forward, pitchingLine);
+                controlVec *= controlStrength.Evaluate(dist);
+                transform.forward = Vector3.Lerp(transform.forward, controlVec, controlStrength.Evaluate(dist)).normalized + transform.forward * Mathf.Epsilon;
+            }
 
             //Applies Spiral Motion
             //Vector3 trajectoryAugmentation = ballTarget.right * Mathf.Sin(dist*spiralspeed) + ballTarget.up * Mathf.Cos(dist * spiralspeed);
