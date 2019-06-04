@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/New Folder/MovingTargets.unity
+    guid: c110d87aa11899240a642f1f520724fc
+  - enabled: 1
     path: Assets/PitchingMechanic/VR Pitching/PitchingTest.unity
     guid: 0fe08876455b775419e497a1ffcf2a30
   - enabled: 1
@@ -14,9 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/New Folder/BatterObjects.unity
     guid: b6583183c751dfa4babaf33866dcb394
-  - enabled: 1
-    path: Assets/Scenes/New Folder/MovingTargets.unity
-    guid: c110d87aa11899240a642f1f520724fc
   - enabled: 1
     path: Assets/Scenes/New Folder/ZombieModeObjects.unity
     guid: beb8a0c6f871f854eaa11598fc9194be
