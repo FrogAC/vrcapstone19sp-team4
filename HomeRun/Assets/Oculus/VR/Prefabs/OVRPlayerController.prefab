@@ -1407,6 +1407,14 @@ MonoBehaviour:
     type: 0
     prefab: {fileID: 4578597730308542154, guid: b7eee885420e2d4479c440dde59bde89,
       type: 3}
+  - name: lightningball
+    type: 0
+    prefab: {fileID: 4238686870500979200, guid: ba952df343e33664cb861eaceb81b1c6,
+      type: 3}
+  - name: controlball
+    type: 0
+    prefab: {fileID: 3730204624319060460, guid: 095ed3a9b0b2d684390d216022524f33,
+      type: 3}
   ballNameText: {fileID: 1496981807}
   spawnPoint: {fileID: 58922213}
   selectNext: 4
