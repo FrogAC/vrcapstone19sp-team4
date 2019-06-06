@@ -2519,6 +2519,36 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6685083818827090058, guid: 8a491d108bfb6fc4485de9ffe77d6dda,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714785556825968158, guid: 8a491d108bfb6fc4485de9ffe77d6dda,
+        type: 3}
+      propertyPath: onPressedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: LockerRoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 7698099277184737999, guid: 8a491d108bfb6fc4485de9ffe77d6dda,
+        type: 3}
+      propertyPath: m_text
+      value: Locker Room
+      objectReference: {fileID: 0}
+    - target: {fileID: 7698099277184737999, guid: 8a491d108bfb6fc4485de9ffe77d6dda,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7698099277184737999, guid: 8a491d108bfb6fc4485de9ffe77d6dda,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7698099277184737999, guid: 8a491d108bfb6fc4485de9ffe77d6dda,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a491d108bfb6fc4485de9ffe77d6dda, type: 3}
 --- !u!1 &1593016801 stripped
@@ -3368,6 +3398,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 7578418033476445427, guid: 8de3297acce14f74cab6265935d02b79,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7578418033476445424, guid: 8de3297acce14f74cab6265935d02b79,
         type: 3}
       propertyPath: OnHitBall.m_PersistentCalls.m_Calls.Array.size
@@ -3397,11 +3432,6 @@ PrefabInstance:
         type: 3}
       propertyPath: OnHitBall.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Transform, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 7578418033476445427, guid: 8de3297acce14f74cab6265935d02b79,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8de3297acce14f74cab6265935d02b79, type: 3}
