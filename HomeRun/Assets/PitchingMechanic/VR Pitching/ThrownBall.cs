@@ -58,6 +58,7 @@ public class ThrownBall : OVRGrabbable
     [SerializeField] private float m_throwSpeedThreshold = 1.0f;
     private bool m_enableFX = false;
     private bool m_hasStrike = false;
+    private bool m_hasHitEnv = false;
     public void SetEnableFX(bool value)
     {
         m_enableFX = value;
@@ -209,10 +210,12 @@ public class ThrownBall : OVRGrabbable
         // Remote Balls Bug fix, Not sure actual reason.
         if (!rb) return;
 
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Environment"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Environment") && !m_hasHitEnv)
         {
+            m_hasHitEnv = true;
             Destroy(gameObject, 4);
             GlobalSettings.Selectable = true;
+            if (GlobalSettings.UseNetwork) NetEffectController.Instance.PlayGroundHitEffect(transform.position);
         }
 
         // Ignore collision with hands
