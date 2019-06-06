@@ -295,6 +295,7 @@ public class ThrownBall : OVRGrabbable
             m_hasStrike = true;
             StopAllCoroutines();
             rb.useGravity = true;
+            GlobalSettings.Selectable = true;
 
             OVRHapticsClip clip = new OVRHapticsClip();
             for (int i = 0; i < vibrationDuration * 320; i++)
@@ -307,6 +308,7 @@ public class ThrownBall : OVRGrabbable
         } else if (collider.tag.Equals("MissTrigger") && !m_hasStrike) {
             StopAllCoroutines();
             rb.useGravity = true;
+            GlobalSettings.Selectable = true;
 
             OVRHapticsClip clip = new OVRHapticsClip();
             for (int i = 0; i < vibrationDuration * 320; i++)
