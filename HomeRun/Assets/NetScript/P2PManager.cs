@@ -22,7 +22,6 @@ namespace HomeRun.Net
         private Transform m_localHeadTransform;
         private Transform m_localBatTransform;
         private Transform m_localGloveTransform;
-        private Transform m_localRHandTransform;
         private Transform m_remoteSpawnPointTransform;
 
         // helper class to hold data we need for remote players
@@ -109,7 +108,7 @@ namespace HomeRun.Net
 
         #endregion
 
-        public P2PManager(Transform head, Transform bat, Transform glove, Transform localHead, Transform localBat, Transform localGlove, Transform localHand)
+        public P2PManager(Transform head, Transform bat, Transform glove, Transform localHead, Transform localBat, Transform localGlove)
         {
             m_remoteHeadTransform = head;
             m_remoteBatTransform = bat;
@@ -120,7 +119,6 @@ namespace HomeRun.Net
             m_localHeadTransform = localHead;
             m_localBatTransform = localBat;
             m_localGloveTransform = localGlove;
-            m_localRHandTransform = localHand;
             Net.SetPeerConnectRequestCallback(PeerConnectRequestCallback);
             Net.SetConnectionStateChangedCallback(ConnectionStateChangedCallback);
         }
@@ -188,7 +186,7 @@ namespace HomeRun.Net
 
             if (MatchController.PlayerType != PlayerType.Batter && Time.time >= m_timeForNextGloveUpdate)
             {
-                SendGloveTransform(m_localRHandTransform);
+                SendGloveTransform(m_localGloveTransform);
             }
         }
 
