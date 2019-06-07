@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>VR HR Derby - Week 10</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="../css/clean-blog.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="../index.html">VR Capstone Team 4</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="../index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="../about.html">About</a>
+                    </li>
+                    <li>
+                        <a href="../contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('../img/Week6/stadium_3.PNG')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>Week 10</h1>
+                        <h2 class="subheading">Push to Demo Day...</h2>
+                        <span class="meta">Posted on June 7, 2019</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+					<p>This week was mainly polishing</p>
+					
+					<h2 class="section-heading">Daoyi Multiplayer</h2>
+					
+					<p>We finally got good news from oculus so we will hopefully have our Quests setup for networking for the demo day.</p>
+					
+					
+					<h2 class="section-heading">Terrell - Control Ball</h2>
+					<p>This is the final ball type that will be added before our demo. The control ball allows the pitcher to control which way the ball goes after it has been thrown by pointing the controller in a direction. This was an idea that had come up fairly early on, but required more stable features and organization in the project to pull off well. The most challenging issue initially was that the ball needed to get constant input from the player about which direction to go. This was done by saving a reference to the object that threw the ball so that the ball could get the direction that it was pointing at any time. Tweaking the behavior of the ball and feel of the control was fairly straight-forward since all of the features used in the other balls were available and could be added to varying degrees in order to make the ball move in a reasonable way.
+</p>
+					<h2 class="section-heading">Terrell - Visual Effects</h2>
+					<p>I’ve added particle systems for the lightning ball and control ball, as well as replaced the explosion particle system on the grenade. Overall, these visual changes feel really good and keep each of the balls looking distinct from one another.
+</p>
+					<h2 class="section-heading">Terrell - Local Leaderboard</h2>
+					<p>I implemented a leaderboard script that saves data locally in order to track highscores in each game mode. It uses Unity’s PlayerPrefs to save and load data between game sessions and manages most of the reading and writing of data to PlayerPrefs when scenes load and unload. Right now it seems like everything is working as expected and just needs to be implemented into the game.
+					</p>
+					
+					
+					<h2 class="section-heading">Andrew - Locker Room Menu</h2>
+					<p>This week I completed the locker room. This will be our central hub for switching betweeen game modes, where the player can get their bearings and get used to the controls before being thrust into the batting simulation. I really wanted to establish an ambience for the player, so I added a radio with the original recording of 'Take me out to the ball game" playing in a corner of the room. I also added a chalk board where we will put the local leaderboard scores.</p>
+					<p></p>
+					<img class="blog_image" src="../img/Week10/locker_room.PNG">
+					<p></p>
+					<p>The idea with the Jerseys is that each player will be able to go up to the jeresey with the game mode that they are interested in and select that in order to get to that desired game mode.</p>
+					
+					
+				
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; Your Website 2016</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="../js/jqBootstrapValidation.js"></script>
+    <script src="../js/contact_me.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="../js/clean-blog.min.js"></script>
+
+</body>
+
+</html>
