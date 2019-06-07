@@ -138,15 +138,3 @@ I’ve made some changes to the targets in our target practice game mode. In ord
 #### Stephen - Zombies & Bug Fixes
 This week I focused on fixing bugs associated with the Batter Mode Scene that caused it to crash immediately on load. After that fix I moved on to tweaking the way the Zombie mode was played by adding player and Zombie heath bars provding a way to eliminate the Zombies but also adding stakes for the player. After adding this into the game I had to make adjustments to the hit boxes as the Zombie interactions were not working properly. Having that taken care of I then worked with Daoyi to ensure that the issues with the Mulitplayer regularly failing to establish a connection was taken care of. Going forward we will focus on keeping in touch with Oculus to get the issues associated with the Networking on the Quest taken care of.
 
-
-### Week 10
-This week was mostly polishing
-
-#### Terrell - Control Ball
-This is the final ball type that will be added before our demo. The control ball allows the pitcher to control which way the ball goes after it has been thrown by pointing the controller in a direction. This was an idea that had come up fairly early on, but required more stable features and organization in the project to pull off well. The most challenging issue initially was that the ball needed to get constant input from the player about which direction to go. This was done by saving a reference to the object that threw the ball so that the ball could get the direction that it was pointing at any time. Tweaking the behavior of the ball and feel of the control was fairly straight-forward since all of the features used in the other balls were available and could be added to varying degrees in order to make the ball move in a reasonable way.
-
-#### Terrell - Visual Effects
-I’ve added particle systems for the lightning ball and control ball, as well as replaced the explosion particle system on the grenade. Overall, these visual changes feel really good and keep each of the balls looking distinct from one another. 
-
-#### Terrell - Local Leaderboard
-I implemented a leaderboard script that saves data locally in order to track highscores in each game mode. It uses Unity’s PlayerPrefs to save and load data between game sessions and manages most of the reading and writing of data to PlayerPrefs when scenes load and unload. Right now it seems like everything is working as expected and just needs to be implemented into the game.
