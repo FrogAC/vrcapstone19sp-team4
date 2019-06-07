@@ -11,10 +11,7 @@
     {
         FastBall = 0,
         CurveBall = 1,
-        SpiralBall = 2,
-        LightningBall = 3,
-        ControlBall = 4
-
+        SpiralBall = 2
     }
 
     public class BallSelector : MonoBehaviour

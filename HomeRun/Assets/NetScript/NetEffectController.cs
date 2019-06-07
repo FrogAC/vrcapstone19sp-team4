@@ -15,7 +15,6 @@ namespace HomeRun.Net
 
         [Header("0: fast, 1: curve, 2: spiral")]
         [SerializeField] private GameObject[] m_Bathit_Prefabs;
-        [SerializeField] private GameObject m_GroundHit_Prefab;
         [SerializeField] private GameObject m_StrikeMisstext_Prefab;
         [SerializeField] private GameObject m_Strikehit_Prefabs;
         [SerializeField] private GameObject m_Striketext_Prefabs;
@@ -23,27 +22,13 @@ namespace HomeRun.Net
         [SerializeField] private GameObject m_Homeruntext_Prefab;
         private ParticleSystem m_HomerunhitParticle;
         private Transform m_HomerunText;
-        private Transform m_display_HomerunText;  // display : used for score board
         private Transform m_StrikeText;
-        private Transform m_display_StrikeText;
         private Transform m_StrikeMisstext;
-        private Transform m_display_StrikeMissText;
-
         private ParticleSystem[] m_BathitParticles = new ParticleSystem[3];
-        private ParticleSystem m_GroundHitParticle;
         private ParticleSystem m_StrikerhitParticles;
 
         private Transform m_player;
 
-        private Transform displayTransform {
-            get {   
-                    int myIdx = (int)MatchController.PlayerType;
-                    if (myIdx < 2)
-                        return MatchController.Instance.PlayerAreas[1 - myIdx].FXSpawnPoint; 
-                    else 
-                        return null;
-                }
-        }
 
         void Awake()
         {
@@ -67,15 +52,6 @@ namespace HomeRun.Net
             m_BathitParticles[idx].transform.position = pos;
             m_BathitParticles[idx].Play();
         }
-        public void PlayGroundHitEffect(Vector3 pos)
-        {
-            if (!m_GroundHitParticle)
-            {
-                m_GroundHitParticle = Instantiate(m_GroundHit_Prefab, transform.position, transform.rotation).GetComponentInChildren<ParticleSystem>();
-            }
-            m_GroundHitParticle.transform.position = pos;
-            m_GroundHitParticle.Play();
-        }
 
         public void PlayStrikeZoneHitEffect(Vector3 pos)
         {
@@ -86,19 +62,11 @@ namespace HomeRun.Net
             if (!m_StrikeText)
             {
                 m_StrikeText = Instantiate(m_Striketext_Prefabs, transform.position, transform.rotation).transform;
-                m_display_StrikeText = Instantiate(m_Striketext_Prefabs, transform.position, transform.rotation).transform;
-                m_display_StrikeText.localScale = Vector3.zero;  // in case not in game
-            }
-
-            var displaySpawnTrans = displayTransform;
-            if (displayTransform) {
-                m_display_StrikeText.position = displaySpawnTrans.position;
-                m_display_StrikeText.rotation = displaySpawnTrans.rotation;
-                StartCoroutine(Shrink(m_display_StrikeText, Vector3.zero, new Vector3(0.8f,0.8f,0.8f), 1.0f));
             }
 
             m_StrikerhitParticles.transform.position = pos;
             m_StrikerhitParticles.Play();
+
 
             Vector3 dir = (m_player.position - pos).normalized;
             m_StrikeText.position = pos;
@@ -111,16 +79,8 @@ namespace HomeRun.Net
             if (!m_StrikeMisstext)
             {
                 m_StrikeMisstext = Instantiate(m_StrikeMisstext_Prefab, transform.position, transform.rotation).transform;
-                m_display_StrikeMissText = Instantiate(m_StrikeMisstext_Prefab, transform.position, transform.rotation).transform;
-                m_display_StrikeMissText.localScale = Vector3.zero;  // in case not in game
             }
 
-            var displaySpawnTrans = displayTransform;
-            if (displayTransform) {
-                m_display_StrikeMissText.position = displaySpawnTrans.position;
-                m_display_StrikeMissText.rotation = displaySpawnTrans.rotation;
-                StartCoroutine(Shrink(m_display_StrikeMissText, Vector3.zero, new Vector3(0.8f,0.8f,0.8f), 1.0f));
-            }
 
             Vector3 dir = (m_player.position - pos).normalized;
             m_StrikeMisstext.position = pos;
@@ -137,29 +97,18 @@ namespace HomeRun.Net
             if (!m_HomerunText)
             {
                 m_HomerunText = Instantiate(m_Homeruntext_Prefab, transform.position, transform.rotation).transform;
-                m_display_HomerunText = Instantiate(m_Homeruntext_Prefab, transform.position, transform.rotation).transform;
-                m_display_HomerunText.localScale = Vector3.zero;  // in case not in game
-                
-            }
-
-            StopAllCoroutines();
-
-            
-            if (displayTransform) {
-                var displaySpawnTrans = displayTransform;
-                m_display_HomerunText.position = displaySpawnTrans.position;
-                m_display_HomerunText.rotation = displaySpawnTrans.rotation;
-                StartCoroutine(Shrink(m_display_HomerunText, Vector3.zero, new Vector3(0.3f,0.3f,0.3f), 1.0f));
             }
 
             m_HomerunhitParticle.Play();
-            
 
             // Explode
             Vibrate(3.0f);
             Vector3 dir = (m_player.position - pos).normalized;
             m_HomerunText.position = pos;
             m_HomerunText.rotation = Quaternion.LookRotation(dir, Vector3.up);
+
+            StopAllCoroutines();
+
             foreach (Rigidbody rb in m_HomerunText.GetComponentsInChildren<Rigidbody>())
             {
                 rb.velocity = Vector3.zero;
@@ -193,9 +142,6 @@ namespace HomeRun.Net
                 yield return null;
             }
         }
-
-
-
         public static float EaseOutElastic(float value)
         {
             float start = 0.0f;
