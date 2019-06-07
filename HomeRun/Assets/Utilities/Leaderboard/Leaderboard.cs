@@ -61,7 +61,7 @@ public class Leaderboard : MonoBehaviour
         }
 
         PlayerPrefs.SetString(key, value);
-        PlayerPrefs.Save;
+        PlayerPrefs.Save();
     }
 
     // Read an array of Entries from playerPrefs for this leaderboard
