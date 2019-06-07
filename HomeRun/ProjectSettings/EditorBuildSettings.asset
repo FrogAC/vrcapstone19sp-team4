@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/New Folder/LockerRoom.unity
+    guid: 6be60c571a8d3b740ac0aaf52ca2ed21
+  - enabled: 1
     path: Assets/Scenes/New Folder/MovingTargets.unity
     guid: c110d87aa11899240a642f1f520724fc
   - enabled: 1
@@ -41,7 +44,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Oculus/Platform/Samples/VrHoops/Main.unity
     guid: 8b67239c8d8693441abb62a2ac48f571
-  - enabled: 1
-    path: Assets/Scenes/New Folder/LockerRoom.unity
-    guid: 6be60c571a8d3b740ac0aaf52ca2ed21
   m_configObjects: {}
