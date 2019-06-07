@@ -240,7 +240,7 @@ public class ThrownBall : OVRGrabbable
             if (collision.gameObject.layer == LayerMask.NameToLayer("Bat") && !hasHitBat)
             {
                 // san check
-                Physics.IgnoreCollision(collision.collider, m_collider, true);
+                //Physics.IgnoreCollision(collision.collider, m_collider, true);
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
                 hasHitBat = true;

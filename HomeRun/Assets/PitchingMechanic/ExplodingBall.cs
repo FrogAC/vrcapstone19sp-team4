@@ -52,7 +52,7 @@ public class ExplodingBall : MonoBehaviour
     {
         yield return new WaitForSeconds(explodeDelay);
         Destroy(this.gameObject);
-        Instantiate(explosionFX, transform.position, transform.rotation);
+        Destroy(Instantiate(explosionFX, transform.position, transform.rotation), 5);
 
         //Debug.Log("BOOM @ " + transform.position);
 
