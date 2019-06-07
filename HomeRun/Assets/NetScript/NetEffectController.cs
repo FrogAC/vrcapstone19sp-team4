@@ -94,7 +94,7 @@ namespace HomeRun.Net
             if (displayTransform) {
                 m_display_StrikeText.position = displaySpawnTrans.position;
                 m_display_StrikeText.rotation = displaySpawnTrans.rotation;
-                StartCoroutine(Shrink(m_display_StrikeText, Vector3.zero, Vector3.one, 1.0f));
+                StartCoroutine(Shrink(m_display_StrikeText, Vector3.zero, new Vector3(0.8f,0.8f,0.8f), 1.0f));
             }
 
             m_StrikerhitParticles.transform.position = pos;
@@ -119,7 +119,7 @@ namespace HomeRun.Net
             if (displayTransform) {
                 m_display_StrikeMissText.position = displaySpawnTrans.position;
                 m_display_StrikeMissText.rotation = displaySpawnTrans.rotation;
-                StartCoroutine(Shrink(m_display_StrikeMissText, Vector3.zero, Vector3.one, 1.0f));
+                StartCoroutine(Shrink(m_display_StrikeMissText, Vector3.zero, new Vector3(0.8f,0.8f,0.8f), 1.0f));
             }
 
             Vector3 dir = (m_player.position - pos).normalized;
@@ -141,6 +141,9 @@ namespace HomeRun.Net
                 m_display_HomerunText.localScale = Vector3.zero;  // in case not in game
                 
             }
+
+            StopAllCoroutines();
+
             
             if (displayTransform) {
                 var displaySpawnTrans = displayTransform;
@@ -157,9 +160,6 @@ namespace HomeRun.Net
             Vector3 dir = (m_player.position - pos).normalized;
             m_HomerunText.position = pos;
             m_HomerunText.rotation = Quaternion.LookRotation(dir, Vector3.up);
-
-            StopAllCoroutines();
-
             foreach (Rigidbody rb in m_HomerunText.GetComponentsInChildren<Rigidbody>())
             {
                 rb.velocity = Vector3.zero;
