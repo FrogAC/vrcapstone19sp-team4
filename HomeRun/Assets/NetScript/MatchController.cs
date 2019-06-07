@@ -219,6 +219,8 @@ namespace HomeRun.Net
             NetStrikeZone.strikezone.SetVisibal(false);
             NetStrikeZone.strikezone.SetMotion(false);
             SetAllAreaText("");
+            m_timerText.text = "";
+            m_timerText1.text = "";
             PlayerType = PlayerType.None;  // do not reset transforms
             m_startObjects.gameObject.SetActive(true);
             MoveCameraToIdlePosition();

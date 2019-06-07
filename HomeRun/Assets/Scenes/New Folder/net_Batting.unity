@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.015339788, g: 0.22752753, b: 0.5180534, a: 1}
+  m_IndirectSpecularColor: {r: 0.041216493, g: 0.234967, b: 0.5218133, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1093,7 +1093,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &112201755
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1991,7 +1991,7 @@ MonoBehaviour:
   m_idleAreaTransform: {fileID: 714769908}
   m_playerAreas:
   - {fileID: 1389609341}
-  - {fileID: 0}
+  - {fileID: 717179146}
   MATCH_WARMUP_TIME: 20
   MATCH_TIME: 240
 --- !u!4 &714373479
@@ -2083,6 +2083,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 714769907}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &717179146 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1389609341, guid: 2fe94835ee7dc95408fe9962cb2a7aaa,
+    type: 3}
+  m_PrefabInstance: {fileID: 7060050539618416248}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6832566bef014eb479921d6a5637be72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &839559148
 GameObject:
   m_ObjectHideFlags: 0
@@ -3095,7 +3107,7 @@ PrefabInstance:
     - target: {fileID: 7081815338293666106, guid: d45c272a38849ef4097f5e6df394ca50,
         type: 3}
       propertyPath: randomThrowRange
-      value: 0.5
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7081815338293666106, guid: d45c272a38849ef4097f5e6df394ca50,
         type: 3}
@@ -3116,7 +3128,7 @@ PrefabInstance:
     - target: {fileID: 7081815338293666106, guid: d45c272a38849ef4097f5e6df394ca50,
         type: 3}
       propertyPath: speed
-      value: 3.5
+      value: 2.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d45c272a38849ef4097f5e6df394ca50, type: 3}
