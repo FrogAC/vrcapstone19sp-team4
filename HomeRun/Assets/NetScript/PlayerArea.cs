@@ -7,15 +7,19 @@ namespace HomeRun.Net
 	public class PlayerArea : MonoBehaviour
 	{
 		[SerializeField] private PlayerType playerType = PlayerType.Batter;
+		[SerializeField] private Transform m_FxSpawnPoint;
+		public Transform FXSpawnPoint {
+			get { return m_FxSpawnPoint; }
+		}
 
 		// cached gameobject that where the player camera will move to
-		private Transform m_playerHolder;
+		[SerializeField] private Transform m_playerHolder;
 		public Transform PlayerHolder {
 			get { return m_playerHolder; }
 		}
 
 		// cached Text component where we'll render the player's name
-		private Text m_nameText;
+		[SerializeField] private Text m_nameText;
 
 		public Player Player
 		{
@@ -25,12 +29,6 @@ namespace HomeRun.Net
 		public Text NameText
 		{
 			get { return m_nameText; }
-		}
-
-		void Awake()
-		{
-			m_playerHolder = gameObject.transform.Find("Player Holder");
-			m_nameText = gameObject.GetComponentInChildren<Text>();
 		}
 
 		public T SetupForPlayer<T>(string name) where T : Player
