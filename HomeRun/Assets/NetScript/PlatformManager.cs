@@ -15,6 +15,7 @@ namespace HomeRun.Net
         [SerializeField] private Transform m_localHead = null;
         [SerializeField] private Transform m_localBat = null;
         [SerializeField] private Transform m_localGlove = null;
+        [SerializeField] private Transform m_localRHand = null;
 
         public BallSelector LocalBallSelector
         {
@@ -102,7 +103,7 @@ namespace HomeRun.Net
 
             Core.Initialize();
             m_matchmaking = new MatchmakingManager();
-            m_p2p = new P2PManager(m_remoteHead, m_remoteBat, m_remoteGlove, m_localHead, m_localBat, m_localGlove);
+            m_p2p = new P2PManager(m_remoteHead, m_remoteBat, m_remoteGlove, m_localHead, m_localBat, m_localGlove, m_localRHand);
         }
 
 
@@ -127,11 +128,11 @@ namespace HomeRun.Net
 
         void GetLoggedInUserCallback(Message<User> msg)
         {
-            // if (msg.IsError)
-            // {
-            //     TerminateWithError(msg);
-            //     return;
-            // }
+            if (msg.IsError)
+            {
+                TerminateWithError(msg);
+                return;
+            }
 
             m_myID = msg.Data.ID;
             m_myOculusID = msg.Data.OculusID;
