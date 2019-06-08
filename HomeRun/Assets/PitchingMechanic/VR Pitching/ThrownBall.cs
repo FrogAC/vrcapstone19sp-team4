@@ -9,6 +9,9 @@ using HomeRun.Game;
 
 public class ThrownBall : OVRGrabbable
 {
+    // Uses values from 0 to 1. How much should the bat's launch direction be influenced by curved surfaces
+    //   0 = only use contact normals, 1 = only use swing direction
+    public static float BATTING_AIM_ASSIST = 0.7f;
     [Space]
     public float speed = 3;
 
@@ -229,7 +232,7 @@ public class ThrownBall : OVRGrabbable
             if (collision.gameObject.layer == LayerMask.NameToLayer("Bat") && !hasHitBat)
             {
                 // san check
-                Physics.IgnoreCollision(collision.collider, m_collider, true);
+                //Physics.IgnoreCollision(collision.collider, m_collider, true);
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
                 hasHitBat = true;
@@ -249,6 +252,11 @@ public class ThrownBall : OVRGrabbable
                 Rigidbody batRB = collision.rigidbody;
                 if (batRB != null)
                 {
+                    // Applies Bat Aim Assist - Calculates the direction of the swing
+                    Vector3 swingDir = Vector3.Cross(batRB.angularVelocity.normalized, batRB.transform.forward).normalized;
+                    nVel = Vector3.Lerp(nVel.normalized, swingDir.normalized, BATTING_AIM_ASSIST).normalized * nVel.magnitude;
+
+
                     //Debug.Log(batRB.velocity + "------" + batRB.angularVelocity);
                     pointSpeed = batRB.GetPointVelocity(transform.position).magnitude;
                     nVel *= (pointSpeed + 0.5f);
