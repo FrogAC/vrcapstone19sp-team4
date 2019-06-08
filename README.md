@@ -142,6 +142,13 @@ This week I focused on fixing bugs associated with the Batter Mode Scene that ca
 ### Week 10
 This week was mostly polishing
 
+#### Daoyi - cheers
+  Get multiplayer build and run on the quest, smooth connection.
+  Also improve visual indications, focus on interaction between two players.
+  Since Quest version is working, I shall put all time on optimization on performance/connection/graphics before demo day.
+  
+  Surely we cannot really judge this along commercial VR games such as the ones from Oculus Studio, it still miss a lot elements in terms of game design and gameplay. In other words, the game does not provide fair chanllenges nor balanced competitions for players. However, the product is mostly complete and, most importantly, is a 'Quest game that first-time player can enjoy with other'. I believe every team member has already did their best to make this fits the original image in our mind. Thank you.
+
 #### Terrell - Control Ball
 This is the final ball type that will be added before our demo. The control ball allows the pitcher to control which way the ball goes after it has been thrown by pointing the controller in a direction. This was an idea that had come up fairly early on, but required more stable features and organization in the project to pull off well. The most challenging issue initially was that the ball needed to get constant input from the player about which direction to go. This was done by saving a reference to the object that threw the ball so that the ball could get the direction that it was pointing at any time. Tweaking the behavior of the ball and feel of the control was fairly straight-forward since all of the features used in the other balls were available and could be added to varying degrees in order to make the ball move in a reasonable way.
 
