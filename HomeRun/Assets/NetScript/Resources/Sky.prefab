@@ -40,10 +40,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8033912622990363625}
     m_Modifications:
-    - target: {fileID: 1000010386143778, guid: 343c81389df5bea428fd193525123ad3, type: 3}
-      propertyPath: m_Name
-      value: SkyboxController
-      objectReference: {fileID: 0}
     - target: {fileID: 4000011551960202, guid: 343c81389df5bea428fd193525123ad3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.056414545
@@ -87,6 +83,10 @@ PrefabInstance:
     - target: {fileID: 4000011551960202, guid: 343c81389df5bea428fd193525123ad3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000010386143778, guid: 343c81389df5bea428fd193525123ad3, type: 3}
+      propertyPath: m_Name
+      value: SkyboxController
       objectReference: {fileID: 0}
     - target: {fileID: 4000012282440710, guid: 343c81389df5bea428fd193525123ad3, type: 3}
       propertyPath: m_LocalRotation.x
@@ -300,10 +300,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8033912622990363625}
     m_Modifications:
-    - target: {fileID: 1000012265338806, guid: 7631b023c8302874c8ad21b5f51a9f7f, type: 3}
-      propertyPath: m_Name
-      value: SkyboxCycleManager
-      objectReference: {fileID: 0}
     - target: {fileID: 4000010419590262, guid: 7631b023c8302874c8ad21b5f51a9f7f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.056414545
@@ -348,6 +344,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012265338806, guid: 7631b023c8302874c8ad21b5f51a9f7f, type: 3}
+      propertyPath: m_Name
+      value: SkyboxCycleManager
+      objectReference: {fileID: 0}
     - target: {fileID: 114000013045074406, guid: 7631b023c8302874c8ad21b5f51a9f7f,
         type: 3}
       propertyPath: CycleProgress
@@ -378,10 +378,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8033912622990363625}
     m_Modifications:
-    - target: {fileID: 1000010315274596, guid: f8c0456dcebb9c64aa80f4b73306ff32, type: 3}
-      propertyPath: m_Name
-      value: SkyboxDayNightCycle
-      objectReference: {fileID: 0}
     - target: {fileID: 4000014014418644, guid: f8c0456dcebb9c64aa80f4b73306ff32, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.056414545
@@ -425,6 +421,10 @@ PrefabInstance:
     - target: {fileID: 4000014014418644, guid: f8c0456dcebb9c64aa80f4b73306ff32, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000010315274596, guid: f8c0456dcebb9c64aa80f4b73306ff32, type: 3}
+      propertyPath: m_Name
+      value: SkyboxDayNightCycle
       objectReference: {fileID: 0}
     - target: {fileID: 114000013408783834, guid: f8c0456dcebb9c64aa80f4b73306ff32,
         type: 3}
