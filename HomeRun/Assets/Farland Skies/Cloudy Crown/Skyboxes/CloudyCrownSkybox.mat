@@ -39,19 +39,12 @@ Material:
     - _CloudsHeight: 0
     - _CloudsOffset: 0.2
     - _CloudsRotationSpeed: 1
-<<<<<<< HEAD
-    - _Exposure: 1
-    - _MoonSize: 1
-    - _StarsExtinction: 2
-    - _StarsTwinklingSpeed: 4
-    - _SunSize: 1
-=======
+
     - _Exposure: 1.2
     - _MoonSize: 0.5
     - _StarsExtinction: 7.8
     - _StarsTwinklingSpeed: 5
     - _SunSize: 0.5
->>>>>>> d60dd0db906f1e06ef0bc695b5a710398e02d60a
     m_Colors:
     - _BottomColor: {r: 0.773, g: 0.455, b: 0.682, a: 1}
     - _MoonTint: {r: 0.4901961, g: 0.5372549, b: 1, a: 1}
