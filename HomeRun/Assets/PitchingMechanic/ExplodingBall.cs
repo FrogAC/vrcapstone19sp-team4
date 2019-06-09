@@ -10,7 +10,7 @@ public class ExplodingBall : MonoBehaviour
     public float armingDelay = 0.5f;
     public float explosionRadius = 3;
 
-    public GameObject explosionFX;
+    public ParticleSystem explosionFX;
     [Space]
     public LayerMask bombArmingLayers;
     public LayerMask bombExplodingLayers;

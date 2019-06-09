@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 6764037420178653240}
   - component: {fileID: 6764037420178653247}
   - component: {fileID: 6764037420178653246}
-  - component: {fileID: 6764037420178653242}
+  - component: {fileID: 5599077301650097313}
   m_Layer: 5
   m_Name: HR_Derby_Scoreboard
   m_TagString: Untagged
@@ -333,7 +333,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &6764037420178653242
+--- !u!114 &5599077301650097313
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -342,12 +342,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6764037420178653245}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4857b6ae41b6eb94e9937943594e21f9, type: 3}
+  m_Script: {fileID: 11500000, guid: e73faad4591424e409cb3dc367873053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 6764037420168116030}
   scoreText: {fileID: 6764037421016905842}
-  timeAllowed: 60
 --- !u!1 &6764037420252772811
 GameObject:
   m_ObjectHideFlags: 0

@@ -37,10 +37,10 @@ namespace HomeRun.Net
         // 0 = Batter, 1 = Pitcher
         [SerializeField] private PlayerArea[] m_playerAreas = new PlayerArea[2];
         // seconds to wait to coordinate P2P setup with other match players before starting
-        [SerializeField] private uint MATCH_WARMUP_TIME = 15;
+        [SerializeField] private uint MATCH_WARMUP_TIME = 5;
 
         // seconds for the match
-        [SerializeField] private uint MATCH_TIME = 360;
+        [SerializeField] private uint MATCH_TIME = 99;
 
         // the current state of the match controller
         private State m_currentState;
@@ -50,13 +50,7 @@ namespace HomeRun.Net
         private float m_nextStateTransitionTime;
 
         // the court the local player was assigned to
-        private int m_localSlot;        
-        private static MatchController s_instance;
-
-        public static MatchController Instance
-        {
-            get { return s_instance; }
-        }
+        private int m_localSlot;
 
         public static PlayerType PlayerType
         {
@@ -66,20 +60,6 @@ namespace HomeRun.Net
                 m_playerType = value;
                 PlatformManager.Instance.SetTransformActiveFromType(value);
             }
-        }
-        public PlayerArea[] PlayerAreas {
-            get {return m_playerAreas;}
-        }
-
-        void Awake() {
-            if (s_instance != null)
-            {
-                Destroy(gameObject);
-                return;
-            }
-
-            s_instance = this;
-            DontDestroyOnLoad(gameObject);
         }
 
         void Start()
@@ -262,14 +242,15 @@ namespace HomeRun.Net
                 switch (m_currentState)
                 {
                     case State.WAITING_TO_SETUP_MATCH:
-                        m_timerText.text = "Warm-UP: " + string.Format("{0:0}", Mathf.Ceil(Time.time - MatchStartTime));
+                        m_timerText.text = string.Format("{0:0}", Mathf.Ceil(Time.time - MatchStartTime));
                         m_timerText1.text = m_timerText.text;
                         break;
                     case State.PLAYING_MATCH:
                         var delta = m_nextStateTransitionTime - Time.time;
-                        m_timerText.text = "Time: " + string.Format("{0:#0}:{1:#00}",
+                        m_timerText.text = string.Format("{0:#0}:{1:#00}.{2:00}",
                             Mathf.Floor(delta / 60),
-                            Mathf.Floor(delta) % 60);
+                            Mathf.Floor(delta) % 60,
+                            Mathf.Floor(delta * 100) % 100);
                         m_timerText1.text = m_timerText.text;
                         break;
                 }
@@ -333,11 +314,9 @@ namespace HomeRun.Net
 
         void MoveCameraToMatchPosition()
         {
-            // batter goto 0, pitcher 1
-            var holder = m_playerAreas[(int)m_playerType % 2].PlayerHolder;
-            m_player.transform.SetParent(holder, false);
-            m_player.transform.localPosition = Vector3.zero;
-            m_player.transform.rotation = holder.rotation;
+            var player = m_playerAreas[(int)m_playerType % 2].PlayerHolder;
+            m_player.transform.position = player.position;
+            m_player.transform.rotation = player.rotation;
         }
 
         #endregion
