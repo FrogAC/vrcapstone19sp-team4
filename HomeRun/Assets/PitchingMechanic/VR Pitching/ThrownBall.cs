@@ -291,7 +291,7 @@ public class ThrownBall : OVRGrabbable
             if (GlobalSettings.UseNetwork &&  PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH) 
                 NetEffectController.Instance.PlayHomerunEffect(transform.position);
             // Audio etc
-        } else if (collider.tag.Equals("StrikeTrigger")) {
+        } else if (collider.tag.Equals("StrikeTrigger") && !hasHitBat) {
             m_hasStrike = true;
             StopAllCoroutines();
             rb.useGravity = true;
@@ -304,7 +304,7 @@ public class ThrownBall : OVRGrabbable
             OVRHaptics.RightChannel.Preempt(clip);
             OVRHaptics.LeftChannel.Preempt(clip);
             NetEffectController.Instance.PlayStrikeZoneHitEffect(transform.position);
-        } else if (collider.tag.Equals("MissTrigger") && !m_hasStrike) {
+        } else if (collider.tag.Equals("MissTrigger") && !m_hasStrike && !hasHitBat) {
             StopAllCoroutines();
             rb.useGravity = true;
 

@@ -5,6 +5,10 @@ using HomeRun.Game;
 
 namespace HomeRun.Net
 {
+
+    /**
+        This also controls Scores of multiplayer
+     */
     public class NetEffectController : MonoBehaviour
     {
         private static NetEffectController s_instance;
@@ -128,7 +132,7 @@ namespace HomeRun.Net
             {
                 remain -= Time.deltaTime;
                 float t = 1 - remain / time;
-                t = EaseOutElastic(t);
+                t = EaseOutBack(t);
                 transform.localScale = Vector3.Lerp(start, end, t);
                 yield return null;
             }
@@ -137,37 +141,43 @@ namespace HomeRun.Net
             {
                 remain -= Time.deltaTime;
                 float t = remain / (time / 1.5f);
-                t = EaseOutElastic(t);
+                t = EaseOutBack(t);
                 transform.localScale = Vector3.Lerp(start, end, t);
                 yield return null;
             }
         }
-        public static float EaseOutElastic(float value)
+
+
+
+        public static float EaseOutBack(float value)
         {
             float start = 0.0f;
             float end = 1.0f;
-            end -= start;
 
-            float d = 1f;
-            float p = d * .3f;
-            float s;
-            float a = 0;
+            float s = 1.70158f;
+            value = (value) - 1;
+            return end * ((value) * value * ((s + 1) * value + s) + 1) + start;
 
-            if (value == 0) return start;
+            // float d = 1f;
+            // float p = d * .3f;
+            // float s;
+            // float a = 0;
 
-            if ((value /= d) == 1) return start + end;
+            // if (value == 0) return start;
 
-            if (a == 0f || a < Mathf.Abs(end))
-            {
-                a = end;
-                s = p * 0.25f;
-            }
-            else
-            {
-                s = p / (2 * Mathf.PI) * Mathf.Asin(end / a);
-            }
+            // if ((value /= d) == 1) return start + end;
 
-            return (a * Mathf.Pow(2, -10 * value) * Mathf.Sin((value * d - s) * (2 * Mathf.PI) / p) + end + start);
+            // if (a == 0f || a < Mathf.Abs(end))
+            // {
+            //     a = end;
+            //     s = p * 0.25f;
+            // }
+            // else
+            // {
+            //     s = p / (2 * Mathf.PI) * Mathf.Asin(end / a);
+            // }
+
+            // return (a * Mathf.Pow(2, -10 * value) * Mathf.Sin((value * d - s) * (2 * Mathf.PI) / p) + end + start);
         }
 
         public void Vibrate(float duration)
