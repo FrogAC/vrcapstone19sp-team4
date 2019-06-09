@@ -159,11 +159,11 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.vrcap19.NetTest
+    Android: com.vrcap19.homerun
     Standalone: com.vrcap19.homerun
   buildNumber: {}
-  AndroidBundleVersionCode: 12
-  AndroidMinSdkVersion: 23
+  AndroidBundleVersionCode: 11
+  AndroidMinSdkVersion: 19
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 0
   aotOptions: 
