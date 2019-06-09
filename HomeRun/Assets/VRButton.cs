@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class VRButton : MonoBehaviour
 {
-    public UnityEvent onPressedEvent;
+    public UnityEvent onPressedOrTriggeredEvent;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +29,7 @@ public class VRButton : MonoBehaviour
     {
         if (other.tag == "Hand")
         {
-            onPressedEvent.Invoke();
+            onPressedOrTriggeredEvent.Invoke();
         }
     }
 

@@ -61,6 +61,7 @@ public class ThrownBall : OVRGrabbable
     [SerializeField] private float m_throwSpeedThreshold = 1.0f;
     private bool m_enableFX = false;
     private bool m_hasStrike = false;
+    private bool m_hasHitEnv = false;
     public void SetEnableFX(bool value)
     {
         m_enableFX = value;
@@ -155,12 +156,15 @@ public class ThrownBall : OVRGrabbable
             //Vector3 trajectoryAugmentation = ballTarget.right * Mathf.Sin(dist*spiralspeed) + ballTarget.up * Mathf.Cos(dist * spiralspeed);
             Vector3 normal = -Vector3.ProjectOnPlane(targetVector, pitchingLine);
             Vector3 bitangent = Vector3.Cross(pitchingLine, normal);
-
             bitangent = bitangent.normalized + -normal.normalized * spiralSpeed;
-
             bitangent.Normalize();
-
             transform.forward = Vector3.Lerp(transform.forward, bitangent.normalized, SpiralAnimStrength.Evaluate(dist)).normalized;
+
+            // Applies Jitter
+            Vector3 jitterVec = new Vector3(Mathf.PerlinNoise(0, Time.time * jitterSpeed), Mathf.PerlinNoise(Time.time * jitterSpeed, 0), 0);
+            jitterVec -= new Vector3(0.5f, transform.position.y - releasePos.y - jitterHeightOffset, 0);   // Adjusts random direction to avoid hitting ground
+            transform.forward = Vector3.Lerp(transform.forward, jitterVec.normalized, JitterAnimStrength.Evaluate(dist)).normalized;
+
             // Calculates redirection
             transform.forward = Vector3.Lerp(transform.forward, targetVector.normalized, redirectionStrength.Evaluate(dist)).normalized + transform.forward * Mathf.Epsilon;
             // Moves the ball in the direction it's facing
@@ -169,6 +173,11 @@ public class ThrownBall : OVRGrabbable
 
             rb.angularVelocity = Vector3.zero;
             rb.velocity = flightVel;
+
+            // Applys the update delay, calculating the delay if dependent on speed
+            float effectiveDelay = updateDelay;
+            updateDelay /= (normailzedSpeedAffectsUpdateDelay) ? NormalizedSpeedOverPath.Evaluate(dist) : 1;
+            yield return new WaitForSeconds(effectiveDelay);
 
             yield return new WaitForFixedUpdate();
         }
@@ -212,10 +221,12 @@ public class ThrownBall : OVRGrabbable
         // Remote Balls Bug fix, Not sure actual reason.
         if (!rb) return;
 
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Environment"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Environment") && !m_hasHitEnv)
         {
+            m_hasHitEnv = true;
             Destroy(gameObject, 4);
             GlobalSettings.Selectable = true;
+            if (GlobalSettings.UseNetwork) NetEffectController.Instance.PlayGroundHitEffect(transform.position);
         }
 
         // Ignore collision with hands
@@ -295,6 +306,7 @@ public class ThrownBall : OVRGrabbable
             m_hasStrike = true;
             StopAllCoroutines();
             rb.useGravity = true;
+            GlobalSettings.Selectable = true;
 
             OVRHapticsClip clip = new OVRHapticsClip();
             for (int i = 0; i < vibrationDuration * 320; i++)
@@ -307,6 +319,7 @@ public class ThrownBall : OVRGrabbable
         } else if (collider.tag.Equals("MissTrigger") && !m_hasStrike && !hasHitBat) {
             StopAllCoroutines();
             rb.useGravity = true;
+            GlobalSettings.Selectable = true;
 
             OVRHapticsClip clip = new OVRHapticsClip();
             for (int i = 0; i < vibrationDuration * 320; i++)
