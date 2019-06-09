@@ -138,8 +138,6 @@ I’ve made some changes to the targets in our target practice game mode. In ord
 #### Stephen - Zombies & Bug Fixes
 This week I focused on fixing bugs associated with the Batter Mode Scene that caused it to crash immediately on load. After that fix I moved on to tweaking the way the Zombie mode was played by adding player and Zombie heath bars provding a way to eliminate the Zombies but also adding stakes for the player. After adding this into the game I had to make adjustments to the hit boxes as the Zombie interactions were not working properly. Having that taken care of I then worked with Daoyi to ensure that the issues with the Mulitplayer regularly failing to establish a connection was taken care of. Going forward we will focus on keeping in touch with Oculus to get the issues associated with the Networking on the Quest taken care of.
 
-<<<<<<< HEAD
-=======
 
 ### Week 10
 This week was mostly polishing
@@ -159,4 +157,3 @@ I’ve added particle systems for the lightning ball and control ball, as well a
 
 #### Terrell - Local Leaderboard
 I implemented a leaderboard script that saves data locally in order to track highscores in each game mode. It uses Unity’s PlayerPrefs to save and load data between game sessions and manages most of the reading and writing of data to PlayerPrefs when scenes load and unload. Right now it seems like everything is working as expected and just needs to be implemented into the game.
->>>>>>> c59a52daee874ec2fe35a8be7a21d8feb1458a68
