@@ -3,6 +3,7 @@ namespace HomeRun.Net
     using UnityEngine;
     using UnityEngine.Assertions;
     using UnityEngine.UI;
+    using System.Collections;
     using System.Collections.Generic;
     using Oculus.Platform.Models;
 
@@ -17,6 +18,14 @@ namespace HomeRun.Net
         [SerializeField] private Transform m_startObjects;
         [SerializeField] private Text m_timerText = null;
         [SerializeField] private Text m_timerText1 = null;
+        [SerializeField] private GameObject m_ScoreHolder = null;
+        [SerializeField] private GameObject m_ScoreHolder1 = null;
+        [SerializeField] private Text m_ScoreBoard = null;
+        [SerializeField] private Text m_ScoreBoard1 = null;
+
+        private int m_myScore = 0;
+        private int m_opScore = 0;
+
 
         // the camera is moved between the idle position and the assigned court position
         [SerializeField] private GameObject m_player = null;
@@ -156,6 +165,11 @@ namespace HomeRun.Net
 
                     case State.PLAYING_MATCH:
                         SetAllAreaText("");
+                        m_myScore = 0;
+                        m_opScore = 0;
+                        m_ScoreHolder.SetActive(true);
+                        m_ScoreHolder1.SetActive(true);
+                        UpdateScore(0,0);
                         Assert.AreEqual(oldState, State.WAITING_TO_SETUP_MATCH);
                         PlatformManager.TransitionToState(PlatformManager.State.PLAYING_A_NETWORKED_MATCH);
                         m_nextStateTransitionTime = Time.time + MATCH_TIME;
@@ -169,6 +183,58 @@ namespace HomeRun.Net
             foreach (var pa in m_playerAreas) {
                 pa.NameText.text = text;
             }
+        }
+
+        public void UpdateScore(int batterChange, int pitcherChange) {
+            m_myScore += (m_playerType == PlayerType.Batter) ? batterChange : pitcherChange;
+            m_opScore += (m_playerType == PlayerType.Batter) ? pitcherChange : batterChange;
+            if (m_myScore < 0) m_myScore = 0;
+            if (m_opScore < 0) m_opScore = 0;
+            m_ScoreBoard.text = string.Format("{0:#00} - {0:#00}",
+                                m_myScore, m_opScore);
+            m_ScoreBoard1.text = m_ScoreBoard.text;
+            StartCoroutine( RotateOutBack((m_playerType == PlayerType.Batter) ? m_ScoreHolder.transform : m_ScoreHolder1.transform, 1.5f) );
+        }
+
+        IEnumerator RotateOutBack(Transform transform, float time)
+        {
+            float remain = time;
+            while (remain > 0.0f)
+            {
+                remain -= Time.deltaTime;
+                float t = 1 - remain / time;
+                t = EaseOutElasticBack(t);
+                transform.rotation = Quaternion.AngleAxis(t, Vector3.up);
+                yield return null;
+            }
+        }
+
+
+
+        public static float EaseOutElasticBack(float value)
+        {
+            float start = 0.0f;
+            float end = 180.0f;
+            float d = 1f;
+            float p = d * .3f;
+            float s;
+            float a = 0;
+
+            if (value == 0) return start;
+
+            if ((value /= d) == 1) return start + end;
+
+            if (a == 0f || a < Mathf.Abs(end))
+            {
+                a = end;
+                s = p * 0.25f;
+            }
+            else
+            {
+                s = p / (2 * Mathf.PI) * Mathf.Asin(end / a);
+            }
+
+            return (a * Mathf.Pow(2, -10 * value) * Mathf.Sin((value * d - s) * (2 * Mathf.PI) / p) + end + start);
         }
 
         void UpdateCheckForNextTimedTransition()
@@ -219,6 +285,9 @@ namespace HomeRun.Net
             NetStrikeZone.strikezone.SetVisibal(false);
             NetStrikeZone.strikezone.SetMotion(false);
             SetAllAreaText("");
+
+            m_ScoreHolder.SetActive(false);
+            m_ScoreHolder1.SetActive(false);
             m_timerText.text = "";
             m_timerText1.text = "";
             PlayerType = PlayerType.None;  // do not reset transforms
