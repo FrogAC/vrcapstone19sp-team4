@@ -20,7 +20,7 @@ public class PlayerHealth : MonoBehaviour
         {
             Debug.Log("Zombie Trigger Occured");
             health -= 1;
-            changeColor();
+            StartCoroutine("changeColor");
             if (health <= 0) Debug.Log("Player Just Died");
         }
     }
