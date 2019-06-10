@@ -12,9 +12,10 @@ public class HRGameManager : MonoBehaviour
 
     public HRDerbyScoreboard scoreboard;
     public int timeAllowed;
+    public OVRGrabbable bat;
 
     private int homeruns;
-    private bool isPaused;
+    private bool isPaused, batGrabbed;
     private Coroutine timer;
 
     private void Start()
@@ -24,10 +25,17 @@ public class HRGameManager : MonoBehaviour
             timeAllowed = 60;
         isPaused = false;
         TimeUpEvent += GameOver;
+        batGrabbed = false;
     }
 
     private void Update()
     {
+        if (!batGrabbed && bat.isGrabbed)
+        {
+            batGrabbed = true;
+            StartTimer();
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             PauseGame();
