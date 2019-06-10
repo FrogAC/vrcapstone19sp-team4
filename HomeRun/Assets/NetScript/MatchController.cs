@@ -185,6 +185,12 @@ namespace HomeRun.Net
             }
         }
 
+        /**
+            Miss : Pitcher - 1
+            Strike: Pitcher + 4
+            Homerun: Batter + 5
+            Hit: Batter + 1
+         */
         public void UpdateScore(int batterChange, int pitcherChange) {
             m_myScore += (m_playerType == PlayerType.Batter) ? batterChange : pitcherChange;
             m_opScore += (m_playerType == PlayerType.Batter) ? pitcherChange : batterChange;

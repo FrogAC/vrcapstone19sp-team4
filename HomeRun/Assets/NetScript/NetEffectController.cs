@@ -68,6 +68,7 @@ namespace HomeRun.Net
             {
                 m_BathitParticles[idx] = Instantiate(m_Bathit_Prefabs[idx], transform.position, transform.rotation).GetComponentInChildren<ParticleSystem>();
             }
+            MatchController.Instance.UpdateScore(1,0);
             m_BathitParticles[idx].transform.position = pos;
             m_BathitParticles[idx].Play();
         }
@@ -100,6 +101,8 @@ namespace HomeRun.Net
                 m_display_StrikeText.rotation = displaySpawnTrans.rotation;
                 StartCoroutine(Shrink(m_display_StrikeText, Vector3.zero, new Vector3(0.8f,0.8f,0.8f), 1.0f));
             }
+            
+            MatchController.Instance.UpdateScore(0,4);
 
             m_StrikerhitParticles.transform.position = pos;
             m_StrikerhitParticles.Play();
@@ -125,6 +128,8 @@ namespace HomeRun.Net
                 m_display_StrikeMissText.rotation = displaySpawnTrans.rotation;
                 StartCoroutine(Shrink(m_display_StrikeMissText, Vector3.zero, new Vector3(0.8f,0.8f,0.8f), 1.0f));
             }
+            
+            MatchController.Instance.UpdateScore(0,-1);
 
             Vector3 dir = (m_player.position - pos).normalized;
             m_StrikeMisstext.position = pos;
@@ -147,6 +152,8 @@ namespace HomeRun.Net
             }
 
             StopAllCoroutines();
+            
+            MatchController.Instance.UpdateScore(5,0);
 
             
             if (displayTransform) {
