@@ -135,7 +135,7 @@ namespace HomeRun.Net
                 StartCoroutine(Shrink(m_display_StrikeMissText, Vector3.zero, new Vector3(0.8f,0.8f,0.8f), 1.0f));
             }
             
-            MatchController.Instance.UpdateScore(1,0);
+            MatchController.Instance.UpdateScore(2,0);
 
             Vector3 dir = (m_player.position - pos).normalized;
             m_StrikeMisstext.position = pos;

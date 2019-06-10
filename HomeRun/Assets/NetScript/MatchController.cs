@@ -302,7 +302,6 @@ namespace HomeRun.Net
             NetStrikeZone.strikezone.SetVisibal(false);
             NetStrikeZone.strikezone.SetMotion(false);
             SetAllAreaText("");
-
             m_ScoreHolder.SetActive(false);
             m_ScoreHolder1.SetActive(false);
             m_timerText.text = "";
