@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using HomeRun.Game;
 
-namespace HomeRun.Net
+namespace HomeRun.Game
 {
 
     /**
         This also controls Scores of multiplayer
      */
-    public class NetEffectController : MonoBehaviour
+    public class LocalEffectController : MonoBehaviour
     {
-        private static NetEffectController s_instance;
-        public static NetEffectController Instance
+        private static LocalEffectController s_instance;
+        public static LocalEffectController Instance
         {
             get { return s_instance; }
         }
@@ -25,32 +25,18 @@ namespace HomeRun.Net
         [SerializeField] private GameObject m_Striketext_Prefabs;
         [SerializeField] private GameObject m_Homerunhit_Prefab;
         [SerializeField] private GameObject m_Homeruntext_Prefab;
-        [SerializeField] private GameObject m_HomerunDisplayText_Prefab;
         private ParticleSystem m_HomerunhitParticle;
         private Transform m_HomerunText;
-        private Transform m_display_HomerunText;  // display : used for score board
         private Transform m_StrikeText;
-        private Transform m_display_StrikeText;
         private Transform m_StrikeMisstext;
-        private Transform m_display_StrikeMissText;
 
         private ParticleSystem[] m_BathitParticles = new ParticleSystem[3];
         private ParticleSystem m_GroundHitParticle;
         private ParticleSystem m_StrikerhitParticles;
 
-        private AmbientAudioManager m_audioManager;
 
         private Transform m_player;
 
-        private Transform displayTransform {
-            get {   
-                    int myIdx = (int)MatchController.PlayerType;
-                    if (myIdx < 2)
-                        return MatchController.Instance.PlayerAreas[1 - myIdx].FXSpawnPoint; 
-                    else 
-                        return null;
-                }
-        }
 
         void Awake()
         {
@@ -59,7 +45,6 @@ namespace HomeRun.Net
                 Destroy(gameObject);
                 return;
             }
-            m_audioManager = FindObjectOfType<AmbientAudioManager>();
             m_player = GameObject.FindGameObjectWithTag("Player").transform;
             s_instance = this;
             DontDestroyOnLoad(gameObject);
@@ -72,11 +57,9 @@ namespace HomeRun.Net
             {
                 m_BathitParticles[idx] = Instantiate(m_Bathit_Prefabs[idx], transform.position, transform.rotation).GetComponentInChildren<ParticleSystem>();
             }
-            MatchController.Instance.UpdateScore(1,0);
+
             m_BathitParticles[idx].transform.position = pos;
             m_BathitParticles[idx].Play();
-
-            m_audioManager.PlayHitApplause();
         }
         public void PlayGroundHitEffect(Vector3 pos)
         {
@@ -97,18 +80,7 @@ namespace HomeRun.Net
             if (!m_StrikeText)
             {
                 m_StrikeText = Instantiate(m_Striketext_Prefabs, transform.position, transform.rotation).transform;
-                m_display_StrikeText = Instantiate(m_Striketext_Prefabs, transform.position, transform.rotation).transform;
-                m_display_StrikeText.localScale = Vector3.zero;  // in case not in game
             }
-
-            var displaySpawnTrans = displayTransform;
-            if (displayTransform) {
-                m_display_StrikeText.position = displaySpawnTrans.position;
-                m_display_StrikeText.rotation = displaySpawnTrans.rotation;
-                StartCoroutine(Shrink(m_display_StrikeText, Vector3.zero, new Vector3(0.8f,0.8f,0.8f), 1.0f));
-            }
-            
-            MatchController.Instance.UpdateScore(0,4);
 
             m_StrikerhitParticles.transform.position = pos;
             m_StrikerhitParticles.Play();
@@ -124,18 +96,8 @@ namespace HomeRun.Net
             if (!m_StrikeMisstext)
             {
                 m_StrikeMisstext = Instantiate(m_StrikeMisstext_Prefab, transform.position, transform.rotation).transform;
-                m_display_StrikeMissText = Instantiate(m_StrikeMisstext_Prefab, transform.position, transform.rotation).transform;
-                m_display_StrikeMissText.localScale = Vector3.zero;  // in case not in game
             }
 
-            var displaySpawnTrans = displayTransform;
-            if (displayTransform) {
-                m_display_StrikeMissText.position = displaySpawnTrans.position;
-                m_display_StrikeMissText.rotation = displaySpawnTrans.rotation;
-                StartCoroutine(Shrink(m_display_StrikeMissText, Vector3.zero, new Vector3(0.8f,0.8f,0.8f), 1.0f));
-            }
-            
-            MatchController.Instance.UpdateScore(1,0);
 
             Vector3 dir = (m_player.position - pos).normalized;
             m_StrikeMisstext.position = pos;
@@ -152,26 +114,15 @@ namespace HomeRun.Net
             if (!m_HomerunText)
             {
                 m_HomerunText = Instantiate(m_Homeruntext_Prefab, transform.position, transform.rotation).transform;
-                m_display_HomerunText = Instantiate(m_HomerunDisplayText_Prefab, transform.position, transform.rotation).transform;
-                m_display_HomerunText.localScale = Vector3.zero;  // in case not in game
                 
             }
 
             StopAllCoroutines();
             
-            MatchController.Instance.UpdateScore(5,0);
 
-            if (displayTransform) {
-                var displaySpawnTrans = displayTransform;
-                m_display_HomerunText.position = displaySpawnTrans.position;
-                m_display_HomerunText.rotation = displaySpawnTrans.rotation;
-                StartCoroutine(Shrink(m_display_HomerunText, Vector3.zero, Vector3.one, 1.0f));
-            }
 
             m_HomerunhitParticle.Play();
 
-            // Explode
-            Vibrate(3.0f);
             Vector3 dir = (m_player.position - pos).normalized;
             m_HomerunText.position = pos;
             m_HomerunText.rotation = Quaternion.LookRotation(dir, Vector3.up);
@@ -242,16 +193,6 @@ namespace HomeRun.Net
             return (a * Mathf.Pow(2, -10 * value) * Mathf.Sin((value * d - s) * (2 * Mathf.PI) / p) + end + start);
         }
 
-        public void Vibrate(float duration)
-        {
-            OVRHapticsClip clip = new OVRHapticsClip();
-            for (int i = 0; i < duration * 320; i++)
-            {
-                clip.WriteSample((byte)Mathf.Clamp((int)(0.4 * 255), 0, 255));
-            }
-            OVRHaptics.RightChannel.Preempt(clip);
-            OVRHaptics.LeftChannel.Preempt(clip);
-        }
 
     }
 }

@@ -909,10 +909,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   queueAhead: 1
   useRecommendedMSAALevel: 0
-  _monoscopic: 0
+  _monoscopic: 1
   enableAdaptiveResolution: 0
   minRenderScale: 0.7
-  maxRenderScale: 1
+  maxRenderScale: 1.165
   _headPoseRelativeOffsetRotation: {x: 0, y: 0, z: 0}
   _headPoseRelativeOffsetTranslation: {x: 0, y: 0, z: 0}
   profilerTcpPort: 32419
@@ -5578,6 +5578,11 @@ PrefabInstance:
       propertyPath: matchController
       value: 
       objectReference: {fileID: 714373478}
+    - target: {fileID: 4126951575581676597, guid: 8fc5e6edf6ab79b48ab628cae789a199,
+        type: 3}
+      propertyPath: playerType
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8fc5e6edf6ab79b48ab628cae789a199, type: 3}
 --- !u!54 &3984347622400486379
@@ -5845,6 +5850,11 @@ PrefabInstance:
         type: 3}
       propertyPath: CycleProgress
       value: 49.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992537622365255368, guid: 61400656761d6a64aa1e59bac9e8e1bf,
+        type: 3}
+      propertyPath: CycleDuration
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 7992537623212739092, guid: 61400656761d6a64aa1e59bac9e8e1bf,
         type: 3}
