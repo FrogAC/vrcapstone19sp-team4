@@ -11,7 +11,7 @@ public class ThrownBall : OVRGrabbable
 {
     // Uses values from 0 to 1. How much should the bat's launch direction be influenced by curved surfaces
     //   0 = only use contact normals, 1 = only use swing direction
-    public static float BATTING_AIM_ASSIST = 0.7f;
+    public static float BATTING_AIM_ASSIST = 0.5f;
     [Space]
     public float speed = 3;
 
@@ -99,7 +99,6 @@ public class ThrownBall : OVRGrabbable
 
 
         // check releasethreadhold, use RAW speed!
-        Debug.Log("Throw Speed:" + releaseLinVel.magnitude);
         if (releaseLinVel.magnitude < m_throwSpeedThreshold)
         {
             SetEnableFX(true);
@@ -258,21 +257,21 @@ public class ThrownBall : OVRGrabbable
                 Vector3 LaunchDir = Vector3.ProjectOnPlane(nVel, collision.collider.transform.up);
 
                 nVel = LaunchDir.normalized * nVel.magnitude * batHitMult;
+                Debug.DrawRay(transform.position, nVel, Color.blue, 5.0f);
 
                 float pointSpeed = 1;
                 Rigidbody batRB = collision.rigidbody;
                 if (batRB != null)
                 {
                     // Applies Bat Aim Assist - Calculates the direction of the swing
-                    Vector3 swingDir = Vector3.Cross(batRB.angularVelocity.normalized, batRB.transform.forward).normalized;
+                    Vector3 swingDir = Vector3.Cross(batRB.angularVelocity.normalized, batRB.transform.up).normalized;
+                    Debug.DrawRay(transform.position, swingDir, Color.red, 5.0f);
                     nVel = Vector3.Lerp(nVel.normalized, swingDir.normalized, BATTING_AIM_ASSIST).normalized * nVel.magnitude;
-
 
                     //Debug.Log(batRB.velocity + "------" + batRB.angularVelocity);
                     pointSpeed = batRB.GetPointVelocity(transform.position).magnitude;
                     nVel *= (pointSpeed + 0.5f);
                 }
-                Debug.DrawRay(transform.position, nVel, Color.blue, 5.0f);
 
                 rb.velocity = nVel;
 

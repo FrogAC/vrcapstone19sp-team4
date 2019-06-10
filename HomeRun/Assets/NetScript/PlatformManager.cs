@@ -16,6 +16,7 @@ namespace HomeRun.Net
         [SerializeField] private Transform m_localBat = null;
         [SerializeField] private Transform m_localGlove = null;
         [SerializeField] private Transform m_localRHand = null;
+        [SerializeField] private Transform m_localRRender = null;
 
         public BallSelector LocalBallSelector
         {
@@ -67,6 +68,7 @@ namespace HomeRun.Net
                     m_remoteBat.gameObject.SetActive(false);
                     m_localGlove.gameObject.SetActive(false);
                     m_remoteGlove.gameObject.SetActive(true);
+                    m_localRRender.gameObject.SetActive(false);
                     break;
 
                 case PlayerType.Pitcher:
@@ -74,13 +76,15 @@ namespace HomeRun.Net
                     m_remoteBat.gameObject.SetActive(true);
                     m_localGlove.gameObject.SetActive(true);
                     m_remoteGlove.gameObject.SetActive(false);
+                    m_localRRender.gameObject.SetActive(true);
                     break;
 
                 case PlayerType.None:
                     m_localBat.gameObject.SetActive(true);
                     m_remoteBat.gameObject.SetActive(true);
-                    m_localGlove.gameObject.SetActive(true);
-                    m_remoteGlove.gameObject.SetActive(true);
+                    m_localGlove.gameObject.SetActive(false);
+                    m_remoteGlove.gameObject.SetActive(false);
+                    m_localRRender.gameObject.SetActive(true);
                     break;
             }
 

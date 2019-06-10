@@ -164,7 +164,6 @@ namespace HomeRun.Net
             }
 
             m_HomerunhitParticle.Play();
-            
 
             // Explode
             Vibrate(3.0f);

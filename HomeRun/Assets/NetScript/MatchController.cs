@@ -167,8 +167,13 @@ namespace HomeRun.Net
                         SetAllAreaText("");
                         m_myScore = 0;
                         m_opScore = 0;
-                        m_ScoreHolder.SetActive(true);
-                        m_ScoreHolder1.SetActive(true);
+                        if (m_playerType == PlayerType.Batter) {
+                            m_ScoreHolder.SetActive(true);
+                            m_ScoreHolder1.SetActive(false);
+                        } else {
+                            m_ScoreHolder.SetActive(false);
+                            m_ScoreHolder1.SetActive(true);
+                        }
                         UpdateScore(0,0);
                         Assert.AreEqual(oldState, State.WAITING_TO_SETUP_MATCH);
                         PlatformManager.TransitionToState(PlatformManager.State.PLAYING_A_NETWORKED_MATCH);
@@ -196,7 +201,7 @@ namespace HomeRun.Net
             m_opScore += (m_playerType == PlayerType.Batter) ? pitcherChange : batterChange;
             if (m_myScore < 0) m_myScore = 0;
             if (m_opScore < 0) m_opScore = 0;
-            m_ScoreBoard.text = string.Format("{0:#00} - {0:#00}",
+            m_ScoreBoard.text = string.Format("{0:#00} - {1:#00}",
                                 m_myScore, m_opScore);
             m_ScoreBoard1.text = m_ScoreBoard.text;
             StartCoroutine( RotateOutBack((m_playerType == PlayerType.Batter) ? m_ScoreHolder.transform : m_ScoreHolder1.transform, 1.5f) );
@@ -205,22 +210,20 @@ namespace HomeRun.Net
         IEnumerator RotateOutBack(Transform transform, float time)
         {
             float remain = time;
+            float start = 0.0f;
+            float end = 360.0f;
             while (remain > 0.0f)
             {
                 remain -= Time.deltaTime;
                 float t = 1 - remain / time;
-                t = EaseOutElasticBack(t);
+                t = EaseOutElasticBack(start, end,t);
                 transform.rotation = Quaternion.AngleAxis(t, Vector3.up);
                 yield return null;
             }
         }
 
-
-
-        public static float EaseOutElasticBack(float value)
+        public static float EaseOutElasticBack(float start, float end, float value)
         {
-            float start = 0.0f;
-            float end = 180.0f;
             float d = 1f;
             float p = d * .3f;
             float s;
@@ -332,7 +335,7 @@ namespace HomeRun.Net
 
         void MoveCameraToIdlePosition()
         {
-            m_player.transform.SetParent(m_idleAreaTransform, false);
+            m_player.transform.SetParent(m_idlWeAreaTransform, false);
             m_player.transform.localPosition = Vector3.zero;
             m_player.transform.rotation = m_idleAreaTransform.rotation;
         }
