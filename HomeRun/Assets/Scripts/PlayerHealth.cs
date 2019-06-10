@@ -8,6 +8,7 @@ public class PlayerHealth : MonoBehaviour
     public Color safeColor;
     public Color notSafeColor;
     public GameObject hitNotifier;
+    public GameEvent event1;
 
     // Start is called before the first frame update
     private void Start()

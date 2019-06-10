@@ -311,7 +311,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 349717010}
   m_LocalRotation: {x: -0, y: 0.9921601, z: -0, w: 0.12497382}
-  m_LocalPosition: {x: 0, y: 0, z: 3.2089994}
+  m_LocalPosition: {x: 0.07, y: 0, z: 0.78}
   m_LocalScale: {x: 0.7092302, y: 1.4253299, z: 0.6698602}
   m_Children: []
   m_Father: {fileID: 442007971}
@@ -333,6 +333,7 @@ MonoBehaviour:
   safeColor: {r: 1, g: 0, b: 0, a: 0}
   notSafeColor: {r: 1, g: 0, b: 0, a: 0.78431374}
   hitNotifier: {fileID: 388528806}
+  event1: {fileID: 0}
   duration: 1.02
   smoothness: 0.02
 --- !u!65 &349717013
@@ -430,7 +431,7 @@ GameObject:
   - component: {fileID: 388528810}
   - component: {fileID: 388528809}
   - component: {fileID: 388528808}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Fader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -445,8 +446,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 388528806}
   m_LocalRotation: {x: -0, y: 0.9917979, z: -0, w: 0.12781614}
-  m_LocalPosition: {x: 0.49410462, y: -0.63, z: 3.11355}
-  m_LocalScale: {x: 19.284521, y: 4.50799, z: 0.12547003}
+  m_LocalPosition: {x: 0.69, y: -0.47, z: 2.38}
+  m_LocalScale: {x: 179.9277, y: 42.060276, z: 1.1706557}
   m_Children: []
   m_Father: {fileID: 442007971}
   m_RootOrder: 4
