@@ -9,6 +9,7 @@ using HomeRun.Game;
 public class Pitcherwithdifballs : MonoBehaviour
 {
     public bool autoPitch;
+    public bool cyclePitches;
     public float randomThrowRange = 1;
     public float randomThrowDelay = 3;
     [Space]
@@ -26,7 +27,7 @@ public class Pitcherwithdifballs : MonoBehaviour
     [SerializeField] OVRInput.Button prevSelection = OVRInput.Button.Four;
     [SerializeField] OVRInput.Button throwBall = OVRInput.Button.One;
 
-    int currIndex = 0;
+    int currIndex = -1;
     void OnEnable() {
         if (autoPitch)
         {
@@ -40,7 +41,11 @@ public class Pitcherwithdifballs : MonoBehaviour
             yield return new WaitForSeconds(randomThrowDelay);
 
             transform.forward += new Vector3(Random.Range(-randomThrowRange, randomThrowRange) * 3, Random.Range(-randomThrowRange, randomThrowRange), 1);
-            currIndex = Random.Range(0, ballToThrow.Length);
+            if (cyclePitches) {
+                currIndex = (currIndex + 1) % ballToThrow.Length;
+            } else {
+                currIndex = Random.Range(0, ballToThrow.Length);
+            }
             ThrowBall();
         }
     }
