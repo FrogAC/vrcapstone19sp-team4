@@ -72,7 +72,7 @@ public class ZombieMove : MonoBehaviour
             m_currentH = Mathf.Lerp(m_currentH, h, Time.deltaTime * m_interpolation);
 
             transform.position += transform.forward * m_currentV * m_moveSpeed * Time.deltaTime;
-            transform.LookAt(player.transform, Vector3.up);
+            transform.LookAt(new Vector3(player.transform.position.x, 0, player.transform.position.z), Vector3.up);
             //transform.Rotate(0, m_currentH * m_turnSpeed * Time.deltaTime, 0);
 
             m_animator.SetFloat("MoveSpeed", m_currentV);
