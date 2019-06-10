@@ -242,7 +242,6 @@ GameObject:
   - component: {fileID: 6764037420178653247}
   - component: {fileID: 6764037420178653246}
   - component: {fileID: 6764037420178653242}
-  - component: {fileID: 1248675148283489658}
   m_Layer: 5
   m_Name: HR_Derby_Scoreboard
   m_TagString: Untagged
@@ -341,7 +340,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6764037420178653245}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4857b6ae41b6eb94e9937943594e21f9, type: 3}
   m_Name: 
@@ -349,21 +348,6 @@ MonoBehaviour:
   timerText: {fileID: 6764037420168116030}
   scoreText: {fileID: 6764037421016905842}
   timeAllowed: 60
-  score: 0
---- !u!114 &1248675148283489658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6764037420178653245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e73faad4591424e409cb3dc367873053, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timerText: {fileID: 6764037420168116030}
-  scoreText: {fileID: 6764037421016905842}
 --- !u!1 &6764037420252772811
 GameObject:
   m_ObjectHideFlags: 0

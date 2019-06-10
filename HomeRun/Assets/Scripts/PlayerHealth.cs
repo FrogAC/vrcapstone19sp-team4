@@ -8,7 +8,6 @@ public class PlayerHealth : MonoBehaviour
     public Color safeColor;
     public Color notSafeColor;
     public GameObject hitNotifier;
-    public GameEvent event1;
 
     // Start is called before the first frame update
     private void Start()
@@ -21,39 +20,17 @@ public class PlayerHealth : MonoBehaviour
         {
             Debug.Log("Zombie Trigger Occured");
             health -= 1;
-            playerGotHit();
+            changeColor();
             if (health <= 0) Debug.Log("Player Just Died");
         }
     }
 
-    public void playerGotHit(){
-        StartCoroutine("LerpColor");
-        StartCoroutine("UnLerpColor");
+    IEnumerator changeColor()
+    {
+        hitNotifier.GetComponent<Renderer>().material.color = Color.Lerp(safeColor, notSafeColor, 5.0f);
+        yield return null;
+       // hitNotifier.GetComponent<Renderer>().material.color = Color.Lerp(notSafeColor, safeColor, 1.0f);
     }
- public float duration = .35f; // This will be your time in seconds.
- public float smoothness = 0.02f; // This will determine the smoothness of the lerp. Smaller values are smoother. Really it's the time between updates.
- 
- IEnumerator LerpColor()
- {
-     float progress = 0; //This float will serve as the 3rd parameter of the lerp function.
-     float increment = smoothness/duration; //The amount of change to apply.
-     while(progress < 1)
-     {
-        hitNotifier.GetComponent<Renderer>().material.color = Color.Lerp(safeColor, notSafeColor, progress);
-        progress += increment;
-        yield return new WaitForSeconds(smoothness);
-     }
- }
-IEnumerator UnLerpColor()
- {
-     float progress = 0; //This float will serve as the 3rd parameter of the lerp function.
-     float increment = smoothness/duration; //The amount of change to apply.
-     while(progress < 1)
-     {
-        hitNotifier.GetComponent<Renderer>().material.color = Color.Lerp(notSafeColor, safeColor, progress);
-        progress += increment;
-        yield return new WaitForSeconds(smoothness);
-     }
- }
+
 
 }

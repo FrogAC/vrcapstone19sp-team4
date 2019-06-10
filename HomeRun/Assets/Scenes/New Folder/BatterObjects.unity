@@ -330,17 +330,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoPitch: 1
-  cyclePitches: 0
   randomThrowRange: 0.18
-  randomThrowDelay: 2
+  randomThrowDelay: 1.6
   ballToThrow:
   - {fileID: 3730204624319060451, guid: 2b990e7762cd3894b966ee206b722a3f, type: 3}
   - {fileID: 4238686870500979215, guid: 8bea878d17912984a977420dd343753b, type: 3}
   - {fileID: 4578597730308542149, guid: b7eee885420e2d4479c440dde59bde89, type: 3}
-  - {fileID: 4238686870500979215, guid: ba952df343e33664cb861eaceb81b1c6, type: 3}
-  - {fileID: 3730204624319060451, guid: 095ed3a9b0b2d684390d216022524f33, type: 3}
-  baseballPrefab: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
-    type: 3}
+  baseballPrefab: {fileID: 0}
   lifetime: 3
   speed: 4
   nextSelection: 4
