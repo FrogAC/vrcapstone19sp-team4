@@ -50,7 +50,7 @@ namespace HomeRun.Net
         private float m_nextStateTransitionTime;
 
         // the court the local player was assigned to
-        private int m_localSlot;        
+        private int m_localSlot;
         private static MatchController s_instance;
 
         public static MatchController Instance
@@ -67,11 +67,13 @@ namespace HomeRun.Net
                 PlatformManager.Instance.SetTransformActiveFromType(value);
             }
         }
-        public PlayerArea[] PlayerAreas {
-            get {return m_playerAreas;}
+        public PlayerArea[] PlayerAreas
+        {
+            get { return m_playerAreas; }
         }
 
-        void Awake() {
+        void Awake()
+        {
             if (s_instance != null)
             {
                 Destroy(gameObject);
@@ -167,14 +169,17 @@ namespace HomeRun.Net
                         SetAllAreaText("");
                         m_myScore = 0;
                         m_opScore = 0;
-                        if (m_playerType == PlayerType.Batter) {
+                        if (m_playerType == PlayerType.Batter)
+                        {
                             m_ScoreHolder.SetActive(true);
                             m_ScoreHolder1.SetActive(false);
-                        } else {
+                        }
+                        else
+                        {
                             m_ScoreHolder.SetActive(false);
                             m_ScoreHolder1.SetActive(true);
                         }
-                        UpdateScore(0,0);
+                        UpdateScore(0, 0);
                         Assert.AreEqual(oldState, State.WAITING_TO_SETUP_MATCH);
                         PlatformManager.TransitionToState(PlatformManager.State.PLAYING_A_NETWORKED_MATCH);
                         m_nextStateTransitionTime = Time.time + MATCH_TIME;
@@ -184,8 +189,10 @@ namespace HomeRun.Net
             }
         }
 
-        void SetAllAreaText(string text) {
-            foreach (var pa in m_playerAreas) {
+        void SetAllAreaText(string text)
+        {
+            foreach (var pa in m_playerAreas)
+            {
                 pa.NameText.text = text;
             }
         }
@@ -196,7 +203,8 @@ namespace HomeRun.Net
             Homerun: Batter + 5
             Hit: Batter + 1
          */
-        public void UpdateScore(int batterChange, int pitcherChange) {
+        public void UpdateScore(int batterChange, int pitcherChange)
+        {
             m_myScore += (m_playerType == PlayerType.Batter) ? batterChange : pitcherChange;
             m_opScore += (m_playerType == PlayerType.Batter) ? pitcherChange : batterChange;
             if (m_myScore < 0) m_myScore = 0;
@@ -204,26 +212,26 @@ namespace HomeRun.Net
             m_ScoreBoard.text = string.Format("{0:#00} - {1:#00}",
                                 m_myScore, m_opScore);
             m_ScoreBoard1.text = m_ScoreBoard.text;
-            StartCoroutine( RotateOutBack((m_playerType == PlayerType.Batter) ? m_ScoreHolder.transform : m_ScoreHolder1.transform, 1.5f) );
+            StartCoroutine(RotateOutBack((m_playerType == PlayerType.Batter) ? m_ScoreHolder.transform : m_ScoreHolder1.transform, 1.5f));
         }
 
         IEnumerator RotateOutBack(Transform transform, float time)
         {
             float remain = time;
-            float start = 0.0f;
-            float end = 360.0f;
             while (remain > 0.0f)
             {
                 remain -= Time.deltaTime;
                 float t = 1 - remain / time;
-                t = EaseOutElasticBack(start, end,t);
+                t = EaseOutElasticBack(t);
                 transform.rotation = Quaternion.AngleAxis(t, Vector3.up);
                 yield return null;
             }
         }
 
-        public static float EaseOutElasticBack(float start, float end, float value)
+        public static float EaseOutElasticBack(float value)
         {
+            float start = 0.0f;
+            float end = 360.0f;
             float d = 1f;
             float p = d * .3f;
             float s;
@@ -320,7 +328,7 @@ namespace HomeRun.Net
                 }
                 else
                 {
-                    var remotePlayer = m_playerAreas[1-(int)m_playerType].SetupForPlayer<RemotePlayer>(user.OculusID);
+                    var remotePlayer = m_playerAreas[1 - (int)m_playerType].SetupForPlayer<RemotePlayer>(user.OculusID);
                     remotePlayer.User = user;
                     player = remotePlayer;
                 }
@@ -335,7 +343,7 @@ namespace HomeRun.Net
 
         void MoveCameraToIdlePosition()
         {
-            m_player.transform.SetParent(m_idlWeAreaTransform, false);
+            m_player.transform.SetParent(m_idleAreaTransform, false);
             m_player.transform.localPosition = Vector3.zero;
             m_player.transform.rotation = m_idleAreaTransform.rotation;
         }

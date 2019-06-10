@@ -55,7 +55,6 @@ public class AmbientAudioManager : MonoBehaviour
         ambientOffset.clip = ambientClip;
         ambientOffset.time = ambientTrackLoopOffset;
         ambient.loop = ambientOffset.loop = true;
-        
     }
 
     public void StartAmbientNoiseTracks()
@@ -70,7 +69,6 @@ public class AmbientAudioManager : MonoBehaviour
         {
             applause.loop = false;
             applause.Play();
-            
         }
     }
 }

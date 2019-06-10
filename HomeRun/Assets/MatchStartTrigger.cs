@@ -14,6 +14,8 @@ public class MatchStartTrigger : MonoBehaviour
     private string[] hints = new string[2];  // leave 2 for now
 
     private TextMeshPro tm;
+    private bool m_isDuringHit = false;
+    [SerializeField] private Transform m_rotationTransform;
 
     void Awake()
     {
@@ -38,6 +40,9 @@ public class MatchStartTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if (m_isDuringHit) return;
+        StartCoroutine(RotateOutBack(m_rotationTransform, 2.0f));
+        
         if (this.GetInstanceID() != s_lastTargetID)
         {  // reset id
             s_lastTargetID = this.GetInstanceID();
@@ -56,5 +61,46 @@ public class MatchStartTrigger : MonoBehaviour
         {
             SetHint(s_hitLeft);
         }
+    }
+
+    IEnumerator RotateOutBack(Transform transform, float time)
+    {
+        m_isDuringHit = true;
+        float remain = time;
+        float start = 0.0f;
+        float end = 360.0f;
+        while (remain > 0.0f)
+        {
+            remain -= Time.deltaTime;
+            float t = 1 - remain / time;
+            t = EaseOutElasticBack(start, end, t);
+            transform.rotation = Quaternion.AngleAxis(t, Vector3.up);
+            yield return null;
+        }
+        m_isDuringHit = false;
+    }
+
+    public static float EaseOutElasticBack(float start, float end, float value)
+    {
+        float d = 1f;
+        float p = d * .3f;
+        float s;
+        float a = 0;
+
+        if (value == 0) return start;
+
+        if ((value /= d) == 1) return start + end;
+
+        if (a == 0f || a < Mathf.Abs(end))
+        {
+            a = end;
+            s = p * 0.25f;
+        }
+        else
+        {
+            s = p / (2 * Mathf.PI) * Mathf.Asin(end / a);
+        }
+
+        return (a * Mathf.Pow(2, -10 * value) * Mathf.Sin((value * d - s) * (2 * Mathf.PI) / p) + end + start);
     }
 }

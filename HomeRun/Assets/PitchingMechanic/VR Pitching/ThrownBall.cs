@@ -69,6 +69,13 @@ public class ThrownBall : OVRGrabbable
             m_effectObj.SetActive(value);
     }
 
+    void Update() {
+        if (Mathf.Abs(transform.position.x) + Mathf.Abs(transform.position.y) + Mathf.Abs(transform.position.z) > 500){
+            Debug.Log("Too Far, destroy!");
+            Destroy(gameObject);
+        }
+    }
+
     void Awake()
     {
         initialize();
@@ -331,15 +338,6 @@ public class ThrownBall : OVRGrabbable
             NetEffectController.Instance.PlayStrikeZoneMissEffect(transform.position);
         }
     }
-
-    void OnTriggerExit(Collider collider) {
-        if (collider.tag.Equals("SceneBarrier")) {
-            StopAllCoroutines();
-            GlobalSettings.Selectable = true;
-            Destroy(gameObject);
-        }
-    }
-
 
     // For NET
     public void OnHitByBat(Vector3 pos, Vector3 vel)

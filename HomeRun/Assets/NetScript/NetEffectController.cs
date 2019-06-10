@@ -25,6 +25,7 @@ namespace HomeRun.Net
         [SerializeField] private GameObject m_Striketext_Prefabs;
         [SerializeField] private GameObject m_Homerunhit_Prefab;
         [SerializeField] private GameObject m_Homeruntext_Prefab;
+        [SerializeField] private GameObject m_HomerunDisplayText_Prefab;
         private ParticleSystem m_HomerunhitParticle;
         private Transform m_HomerunText;
         private Transform m_display_HomerunText;  // display : used for score board
@@ -36,6 +37,8 @@ namespace HomeRun.Net
         private ParticleSystem[] m_BathitParticles = new ParticleSystem[3];
         private ParticleSystem m_GroundHitParticle;
         private ParticleSystem m_StrikerhitParticles;
+
+        private AmbientAudioManager m_audioManager;
 
         private Transform m_player;
 
@@ -56,6 +59,7 @@ namespace HomeRun.Net
                 Destroy(gameObject);
                 return;
             }
+            m_audioManager = FindObjectOfType<AmbientAudioManager>();
             m_player = GameObject.FindGameObjectWithTag("Player").transform;
             s_instance = this;
             DontDestroyOnLoad(gameObject);
@@ -71,6 +75,8 @@ namespace HomeRun.Net
             MatchController.Instance.UpdateScore(1,0);
             m_BathitParticles[idx].transform.position = pos;
             m_BathitParticles[idx].Play();
+
+            m_audioManager.PlayHitApplause();
         }
         public void PlayGroundHitEffect(Vector3 pos)
         {
@@ -129,7 +135,7 @@ namespace HomeRun.Net
                 StartCoroutine(Shrink(m_display_StrikeMissText, Vector3.zero, new Vector3(0.8f,0.8f,0.8f), 1.0f));
             }
             
-            MatchController.Instance.UpdateScore(0,-1);
+            MatchController.Instance.UpdateScore(1,0);
 
             Vector3 dir = (m_player.position - pos).normalized;
             m_StrikeMisstext.position = pos;
@@ -146,7 +152,7 @@ namespace HomeRun.Net
             if (!m_HomerunText)
             {
                 m_HomerunText = Instantiate(m_Homeruntext_Prefab, transform.position, transform.rotation).transform;
-                m_display_HomerunText = Instantiate(m_Homeruntext_Prefab, transform.position, transform.rotation).transform;
+                m_display_HomerunText = Instantiate(m_HomerunDisplayText_Prefab, transform.position, transform.rotation).transform;
                 m_display_HomerunText.localScale = Vector3.zero;  // in case not in game
                 
             }
@@ -155,12 +161,11 @@ namespace HomeRun.Net
             
             MatchController.Instance.UpdateScore(5,0);
 
-            
             if (displayTransform) {
                 var displaySpawnTrans = displayTransform;
                 m_display_HomerunText.position = displaySpawnTrans.position;
                 m_display_HomerunText.rotation = displaySpawnTrans.rotation;
-                StartCoroutine(Shrink(m_display_HomerunText, Vector3.zero, new Vector3(0.3f,0.3f,0.3f), 1.0f));
+                StartCoroutine(Shrink(m_display_HomerunText, Vector3.zero, Vector3.one, 1.0f));
             }
 
             m_HomerunhitParticle.Play();
