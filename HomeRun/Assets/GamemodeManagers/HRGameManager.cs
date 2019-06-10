@@ -13,6 +13,7 @@ public class HRGameManager : MonoBehaviour
     public HRDerbyScoreboard scoreboard;
     public int timeAllowed;
     public OVRGrabbable bat;
+    public Pitcherwithdifballs pitcher;
 
     private int homeruns;
     private bool isPaused, batGrabbed;
@@ -26,6 +27,9 @@ public class HRGameManager : MonoBehaviour
         isPaused = false;
         TimeUpEvent += GameOver;
         batGrabbed = false;
+
+        scoreboard.UpdateTimeText(timeAllowed);
+ 
     }
 
     private void Update()
@@ -79,6 +83,7 @@ public class HRGameManager : MonoBehaviour
     public void GameOver()
     {
         TimeUpEvent -= GameOver;
+        pitcher.randomThrowDelay = int.MaxValue;
         Debug.Log("GameOver");
     }
 
