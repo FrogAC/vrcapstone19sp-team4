@@ -83,7 +83,7 @@ public class Leaderboard : MonoBehaviour
     }
 
     // Formats content for display
-    string ToFormatedString(){
+    public string ToFormatedString(){
         string output = leaderboardName + "\n";
         output += "Score:\t UserName:\n";
         for (int i = 0; i < leaderboardEntries.Length; i++) {
