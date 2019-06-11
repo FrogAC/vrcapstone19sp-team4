@@ -324,8 +324,6 @@ namespace HomeRun.Net
                 {
                     var localPlayer = m_playerAreas[(int)m_playerType].SetupForPlayer<LocalPlayer>(user.OculusID);
                     MoveCameraToMatchPosition();
-                    Invoke("MoveCameraToMatchPosition", 2);
-                    Invoke("MoveCameraToMatchPosition", 5);
                     player = localPlayer;
                     m_localSlot = slot;
                 }
@@ -356,9 +354,13 @@ namespace HomeRun.Net
             // batter goto 0, pitcher 1
             var holder = m_playerAreas[(int)m_playerType % 2].PlayerHolder;
             m_player.transform.SetParent(holder, true);
-            m_player.transform.localPosition = Vector3.zero;
+            Invoke("ResetLocalPosition", 2);
             m_player.transform.rotation = holder.rotation;
             m_player.GetComponent<CharacterController>().SimpleMove(Vector3.zero);
+        }
+
+        void ResetLocalPosition(Transform transform) {
+            m_player.transform.localPosition = Vector3.zero;
         }
 
         #endregion
