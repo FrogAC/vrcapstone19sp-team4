@@ -332,7 +332,7 @@ MonoBehaviour:
   autoPitch: 1
   cyclePitches: 0
   randomThrowRange: 0.18
-  randomThrowDelay: 2
+  randomThrowDelay: 3
   ballToThrow:
   - {fileID: 3730204624319060451, guid: 2b990e7762cd3894b966ee206b722a3f, type: 3}
   - {fileID: 4238686870500979215, guid: 8bea878d17912984a977420dd343753b, type: 3}
