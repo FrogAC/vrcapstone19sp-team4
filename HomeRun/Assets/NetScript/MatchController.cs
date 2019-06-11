@@ -343,8 +343,8 @@ namespace HomeRun.Net
 
         void MoveCameraToIdlePosition()
         {
-            m_player.transform.SetParent(m_idleAreaTransform, true);
-            m_player.transform.localPosition = Vector3.zero;
+            //m_player.transform.SetParent(m_idleAreaTransform, true);
+            m_player.transform.position = m_idleAreaTransform.position;
             m_player.transform.rotation = m_idleAreaTransform.rotation;
         }
 
@@ -352,18 +352,17 @@ namespace HomeRun.Net
         {
             // batter goto 0, pitcher 1
             var holder = m_playerAreas[(int)m_playerType % 2].PlayerHolder;
-            m_player.transform.SetParent(holder, true);
-            Invoke("ResetLocalPosition", 4);
-            Invoke("ResetLocalPosition", 8);
+            //m_player.transform.SetParent(holder, true);
+            m_player.transform.localPosition = holder.position;
             m_player.transform.rotation = holder.rotation;
             m_player.GetComponent<CharacterController>().SimpleMove(Vector3.zero);
         }
 
         void ResetLocalPosition() {
             Debug.Log("ResetLocalPosition");
-            m_player.transform.localPosition = Vector3.zero;
             m_myScore = 0;
             m_opScore = 0;
+            UpdateScore(0,0);
         }
 
         #endregion
