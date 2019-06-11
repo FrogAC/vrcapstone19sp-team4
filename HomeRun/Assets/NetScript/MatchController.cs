@@ -168,8 +168,6 @@ namespace HomeRun.Net
 
                     case State.PLAYING_MATCH:
                         SetAllAreaText("");
-                        m_myScore = 0;
-                        m_opScore = 0;
                         if (m_playerType == PlayerType.Batter)
                         {
                             m_ScoreHolder.SetActive(true);
@@ -180,7 +178,8 @@ namespace HomeRun.Net
                             m_ScoreHolder.SetActive(false);
                             m_ScoreHolder1.SetActive(true);
                         }
-                        UpdateScore(0, 0);
+                        m_myScore = 0;
+                        m_opScore = 0;
                         Assert.AreEqual(oldState, State.WAITING_TO_SETUP_MATCH);
                         PlatformManager.TransitionToState(PlatformManager.State.PLAYING_A_NETWORKED_MATCH);
                         m_nextStateTransitionTime = Time.time + MATCH_TIME;
@@ -363,6 +362,9 @@ namespace HomeRun.Net
         void ResetLocalPosition() {
             Debug.Log("ResetLocalPosition");
             m_player.transform.localPosition = Vector3.zero;
+            m_player.GetComponent<CharacterController>().SimpleMove(Vector3.zero);
+            m_myScore = 0;
+            m_opScore = 0;
         }
 
         #endregion
