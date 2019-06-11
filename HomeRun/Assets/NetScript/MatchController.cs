@@ -350,12 +350,14 @@ namespace HomeRun.Net
 
         void MoveCameraToMatchPosition()
         {
+            var CC =  m_player.GetComponent<CharacterController>();
             // batter goto 0, pitcher 1
             var holder = m_playerAreas[(int)m_playerType % 2].PlayerHolder;
             //m_player.transform.SetParent(holder, true);
+            CC.enabled = false;
             m_player.transform.position = new Vector3(0.25f, 0.75f, -17.91f);
             m_player.transform.rotation = holder.rotation;
-            //m_player.GetComponent<CharacterController>().SimpleMove(Vector3.zero);
+            CC.enabled = true;
         }
 
         void ResetLocalPosition() {
