@@ -160,9 +160,9 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.vrcap19.NetTest
-    Standalone: com.vrcap19.homerun
+    Standalone: com.vrcap19.NetTest
   buildNumber: {}
-  AndroidBundleVersionCode: 21
+  AndroidBundleVersionCode: 22
   AndroidMinSdkVersion: 23
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 0
