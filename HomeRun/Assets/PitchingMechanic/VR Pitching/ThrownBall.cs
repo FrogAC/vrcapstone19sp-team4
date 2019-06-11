@@ -227,7 +227,7 @@ public class ThrownBall : OVRGrabbable
         return strikezone.position;
     }
 
-    private bool hasHitBat = false;
+    public bool hasHitBat = false;
     public float batHitMult = 3.0f;
     private void OnCollisionEnter(Collision collision)
     {
@@ -309,7 +309,7 @@ public class ThrownBall : OVRGrabbable
     }
 
     void OnTriggerEnter(Collider collider) {
-        if (collider.gameObject.layer == LayerMask.NameToLayer("HomerunFence") && !m_hasHitHomerun && !m_hasHitEnv && hasHitBat) {
+        if (collider.gameObject.layer == LayerMask.NameToLayer("HomerunFence") && !m_hasHitHomerun && !m_hasHitEnv) {
             m_hasHitHomerun = true;
             if (GlobalSettings.UseNetwork &&  PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH) 
                 NetEffectController.Instance.PlayHomerunEffect(transform.position);

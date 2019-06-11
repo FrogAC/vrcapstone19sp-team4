@@ -60,6 +60,7 @@ namespace HomeRun.Net
 
 		public void ProcessBallHit(Vector3 pos, Vector3 vel) {
 			Debug.Log("Hit!" + vel);
+			m_throwball.hasHitBat = true;
 			// stop ball animation
             m_throwball.StopThrow();
 			m_rigidBody.isKinematic = false;
