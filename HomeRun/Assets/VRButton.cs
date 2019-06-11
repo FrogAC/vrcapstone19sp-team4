@@ -40,6 +40,7 @@ public class VRButton : MonoBehaviour
 
     public void LoadScene(string name)
     {
+        if (!name.Equals("net_Batting")) HomeRun.GlobalSettings.UseNetwork = false;
         SceneManager.LoadSceneAsync(name);
     }
 }

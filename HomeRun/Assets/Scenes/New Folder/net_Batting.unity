@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0751392, g: 0.196906, b: 0.41373765, a: 1}
+  m_IndirectSpecularColor: {r: 0.04109732, g: 0.23494309, b: 0.52180773, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2216,7 +2216,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924480188}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -17.1, z: -4.9}
+  m_LocalPosition: {x: 0, y: -24, z: -25.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1398019937}
@@ -2822,7 +2822,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1302466275}
   m_LocalRotation: {x: -0, y: 0.3362846, z: -0, w: 0.94176036}
-  m_LocalPosition: {x: -61.1, y: 32.799995, z: -72.8}
+  m_LocalPosition: {x: -77.4, y: 32.799995, z: -66.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 924480189}
@@ -2839,7 +2839,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 70.210175, y: 198.39444, z: 16.31}
+  m_Size: {x: 70.210175, y: 198.39444, z: 49.3}
   m_Center: {x: 1.3316479, y: 88.02463, z: 0}
 --- !u!114 &1389609341 stripped
 MonoBehaviour:
@@ -2878,8 +2878,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398019936}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7, y: 32.8, z: -95.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.26496, y: 32.8, z: -96.4}
+  m_LocalScale: {x: 1.3267, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 924480189}
   m_RootOrder: 0
@@ -2895,7 +2895,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 70.210175, y: 198.39444, z: 16.31}
+  m_Size: {x: 70.210175, y: 198.39444, z: 49.3}
   m_Center: {x: 1.3316479, y: 88.02463, z: 0}
 --- !u!1 &1443932186
 GameObject:
@@ -3111,7 +3111,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1731721067}
   m_LocalRotation: {x: -0, y: -0.3158242, z: -0, w: 0.94881773}
-  m_LocalPosition: {x: 59.487236, y: 32.799995, z: -75.13223}
+  m_LocalPosition: {x: 71.3, y: 32.799995, z: -70}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 924480189}
@@ -3128,7 +3128,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 70.210175, y: 198.39444, z: 16.31}
+  m_Size: {x: 70.210175, y: 198.39444, z: 49.3}
   m_Center: {x: 1.3316479, y: 88.02463, z: 0}
 --- !u!114 &1790386571 stripped
 MonoBehaviour:
