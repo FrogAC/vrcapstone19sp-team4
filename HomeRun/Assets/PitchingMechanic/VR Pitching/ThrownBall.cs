@@ -62,6 +62,7 @@ public class ThrownBall : OVRGrabbable
     private bool m_enableFX = false;
     private bool m_hasStrike = false;
     private bool m_hasHitEnv = false;
+    private bool m_hasHitHomerun = false;
     public void SetEnableFX(bool value)
     {
         m_enableFX = value;
@@ -309,7 +310,8 @@ public class ThrownBall : OVRGrabbable
     }
 
     void OnTriggerEnter(Collider collider) {
-        if (collider.gameObject.layer == LayerMask.NameToLayer("HomerunFence")) {
+        if (collider.gameObject.layer == LayerMask.NameToLayer("HomerunFence") && !m_hasHitHomerun) {
+            m_hasHitHomerun = true;
             if (GlobalSettings.UseNetwork &&  PlatformManager.CurrentState == PlatformManager.State.PLAYING_A_NETWORKED_MATCH) 
                 NetEffectController.Instance.PlayHomerunEffect(transform.position);
             // Audio etc
