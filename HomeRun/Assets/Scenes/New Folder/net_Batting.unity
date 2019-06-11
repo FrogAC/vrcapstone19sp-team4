@@ -1954,6 +1954,10 @@ MonoBehaviour:
     type: 2
     prefab: {fileID: 4578597730308542154, guid: b7eee885420e2d4479c440dde59bde89,
       type: 3}
+  - name: lightning
+    type: 3
+    prefab: {fileID: 4238686870500979200, guid: ba952df343e33664cb861eaceb81b1c6,
+      type: 3}
   ballNameText: {fileID: 898426482}
   spawnPoint: {fileID: 135110509}
   selectNext: 4
@@ -5223,12 +5227,16 @@ MonoBehaviour:
     prefab: {fileID: 4238686870500979200, guid: 8bea878d17912984a977420dd343753b,
       type: 3}
   - name: curveball
-    type: 0
+    type: 1
     prefab: {fileID: 3730204624319060460, guid: 2b990e7762cd3894b966ee206b722a3f,
       type: 3}
   - name: spiralball
-    type: 0
+    type: 2
     prefab: {fileID: 4578597730308542154, guid: b7eee885420e2d4479c440dde59bde89,
+      type: 3}
+  - name: lightning
+    type: 3
+    prefab: {fileID: 4238686870500979200, guid: ba952df343e33664cb861eaceb81b1c6,
       type: 3}
   ballNameText: {fileID: 4515192306618417834}
   spawnPoint: {fileID: 4515192305168709472}

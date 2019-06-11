@@ -199,7 +199,7 @@ namespace HomeRun.Net
         }
 
         /**
-            Miss : Pitcher - 1
+            Miss : Batter + 1
             Strike: Pitcher + 4
             Homerun: Batter + 5
             Hit: Batter + 1
