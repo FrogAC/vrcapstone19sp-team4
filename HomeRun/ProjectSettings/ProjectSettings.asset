@@ -162,7 +162,7 @@ PlayerSettings:
     Android: com.vrcap19.NetTest
     Standalone: com.vrcap19.NetTest
   buildNumber: {}
-  AndroidBundleVersionCode: 25
+  AndroidBundleVersionCode: 26
   AndroidMinSdkVersion: 23
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 0
