@@ -25,6 +25,6 @@ public class ZombiesManager : MonoBehaviour
 
     void SpawnZombie()
     {
-        Instantiate(zombiePrefab, transform.position + transform.right * Random.Range(-spawnLineWidth / 2, spawnLineWidth / 2), transform.rotation);
+        Instantiate(zombiePrefab, transform.position + transform.right * Random.Range(-spawnLineWidth, spawnLineWidth), transform.rotation);
     }
 }

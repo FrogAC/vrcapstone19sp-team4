@@ -335,6 +335,7 @@ MonoBehaviour:
   hitNotifier: {fileID: 388528806}
   event1: {fileID: 0}
   deadText: {fileID: 1081152692}
+  Zombie: {fileID: 807821415}
   duration: 1.02
   smoothness: 0.02
 --- !u!65 &349717013
@@ -1021,7 +1022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnFrequency: 5
-  spawnLineWidth: 60
+  spawnLineWidth: 70
   zombiePrefab: {fileID: 2952197170991645796, guid: 4f4679cb000ffdb4fa6f154c525faac0,
     type: 3}
 --- !u!4 &807821417
