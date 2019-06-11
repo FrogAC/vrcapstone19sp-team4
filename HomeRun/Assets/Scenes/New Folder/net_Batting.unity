@@ -4460,7 +4460,7 @@ MonoBehaviour:
   GravityModifier: 1
   useProfileData: 0
   EnableLinearMovement: 1
-  EnableRotation: 1
+  EnableRotation: 0
   RotationEitherThumbstick: 0
 --- !u!114 &4515192305149710545
 MonoBehaviour:
@@ -5753,12 +5753,12 @@ PrefabInstance:
     - target: {fileID: 7060050539779683049, guid: 2fe94835ee7dc95408fe9962cb2a7aaa,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.97
+      value: 6.66
       objectReference: {fileID: 0}
     - target: {fileID: 7060050539779683049, guid: 2fe94835ee7dc95408fe9962cb2a7aaa,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.56
+      value: -3.29
       objectReference: {fileID: 0}
     - target: {fileID: 1389609341, guid: 2fe94835ee7dc95408fe9962cb2a7aaa, type: 3}
       propertyPath: playerType

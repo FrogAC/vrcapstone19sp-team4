@@ -325,6 +325,7 @@ namespace HomeRun.Net
                     var localPlayer = m_playerAreas[(int)m_playerType].SetupForPlayer<LocalPlayer>(user.OculusID);
                     MoveCameraToMatchPosition();
                     Invoke("MoveCameraToMatchPosition", 2);
+                    Invoke("MoveCameraToMatchPosition", 5);
                     player = localPlayer;
                     m_localSlot = slot;
                 }
