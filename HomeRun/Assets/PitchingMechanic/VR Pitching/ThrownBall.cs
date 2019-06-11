@@ -232,7 +232,7 @@ public class ThrownBall : OVRGrabbable
         if (collision.gameObject.layer == LayerMask.NameToLayer("Environment") && !m_hasHitEnv)
         {
             Debug.Log("hit env, destroy");
-            MatchController.Instance.UpdateScore(2,0);
+            if (GlobalSettings.UseNetwork) MatchController.Instance.UpdateScore(2,0);
             m_hasHitEnv = true;
             Destroy(gameObject, 4);
             GlobalSettings.Selectable = true;
