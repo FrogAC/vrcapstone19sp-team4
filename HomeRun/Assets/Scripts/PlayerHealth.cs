@@ -9,11 +9,23 @@ public class PlayerHealth : MonoBehaviour
     public Color notSafeColor;
     public GameObject hitNotifier;
     public GameEvent event1;
+    public GameObject deadText;
+    private bool dead = false;
 
     // Start is called before the first frame update
     private void Start()
     {
         safeColor = hitNotifier.GetComponent<Renderer>().material.color;
+        deadText.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (!dead && health <= 0)
+        {
+            dead = true;
+            deadText.SetActive(true);
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -55,5 +67,8 @@ IEnumerator UnLerpColor()
         yield return new WaitForSeconds(smoothness);
      }
  }
+
+    
+
 
 }
