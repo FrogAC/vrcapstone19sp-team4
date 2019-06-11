@@ -81,7 +81,9 @@ namespace HomeRun.Net
             }
 
             s_instance = this;
-            DontDestroyOnLoad(gameObject);
+            GlobalSettings.UseNetwork = true;
+            GlobalSettings.Selectable = true;
+            //DontDestroyOnLoad(gameObject);
         }
 
         void Start()
@@ -406,6 +408,11 @@ namespace HomeRun.Net
         }
 
         #endregion
+        void OnDestory() {
+            GlobalSettings.UseNetwork = false;
+        }
 
     }
+
+
 }

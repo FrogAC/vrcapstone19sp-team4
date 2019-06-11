@@ -62,7 +62,7 @@ namespace HomeRun.Net
             m_audioManager = FindObjectOfType<AmbientAudioManager>();
             m_player = GameObject.FindGameObjectWithTag("Player").transform;
             s_instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
 
         public void PlayBatHitEffect(Vector3 pos, BallType type)

@@ -103,7 +103,7 @@ namespace HomeRun.Net
             GlobalSettings.UseNetwork = true;
 
             s_instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
 
             Core.Initialize();
             m_matchmaking = new MatchmakingManager();
