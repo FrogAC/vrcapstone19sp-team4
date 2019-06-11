@@ -9215,6 +9215,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: door
       objectReference: {fileID: 0}
+    - target: {fileID: 2502203975881118265, guid: 8e58994f9a04c91498d94755ec9cf37b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 8e58994f9a04c91498d94755ec9cf37b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9285,11 +9290,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 0967619cf34a34046b0a0aad2f9d5038, type: 2}
-    - target: {fileID: 2502203975881118265, guid: 8e58994f9a04c91498d94755ec9cf37b,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e58994f9a04c91498d94755ec9cf37b, type: 3}
 --- !u!4 &1280425414 stripped
@@ -11985,7 +11985,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: BatterObjects
+          m_StringArgument: Batting
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
