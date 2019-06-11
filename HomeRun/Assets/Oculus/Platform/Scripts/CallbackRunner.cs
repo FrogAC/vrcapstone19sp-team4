@@ -19,7 +19,7 @@ namespace Oculus.Platform
       }
       if (IsPersistantBetweenSceneLoads)
       {
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
       }
     }
 
