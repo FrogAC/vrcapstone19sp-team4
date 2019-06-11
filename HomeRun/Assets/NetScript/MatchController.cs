@@ -224,7 +224,7 @@ namespace HomeRun.Net
                 remain -= Time.deltaTime;
                 float t = 1 - remain / time;
                 t = EaseOutElasticBack(t);
-                transform.rotation = Quaternion.AngleAxis(t, Vector3.up);
+                transform.localRotation = Quaternion.AngleAxis(t, Vector3.up);
                 yield return null;
             }
         }
@@ -305,6 +305,7 @@ namespace HomeRun.Net
             SetAllAreaText("");
             m_ScoreHolder.SetActive(false);
             m_ScoreHolder1.SetActive(false);
+
             m_timerText.text = "";
             m_timerText1.text = "";
             PlayerType = PlayerType.None;  // do not reset transforms
