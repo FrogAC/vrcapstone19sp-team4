@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.04109732, g: 0.23494309, b: 0.52180773, a: 1}
+  m_IndirectSpecularColor: {r: 0.041240066, g: 0.23500279, b: 0.52187294, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1200,6 +1200,22 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 548775037, guid: 8a491d108bfb6fc4485de9ffe77d6dda, type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 548775037, guid: 8a491d108bfb6fc4485de9ffe77d6dda, type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 548775037, guid: 8a491d108bfb6fc4485de9ffe77d6dda, type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 548775037, guid: 8a491d108bfb6fc4485de9ffe77d6dda, type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7698099277184737999, guid: 8a491d108bfb6fc4485de9ffe77d6dda,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -1222,22 +1238,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7698099277184737999, guid: 8a491d108bfb6fc4485de9ffe77d6dda,
         type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 548775037, guid: 8a491d108bfb6fc4485de9ffe77d6dda, type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 548775037, guid: 8a491d108bfb6fc4485de9ffe77d6dda, type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 548775037, guid: 8a491d108bfb6fc4485de9ffe77d6dda, type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 548775037, guid: 8a491d108bfb6fc4485de9ffe77d6dda, type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
@@ -4393,7 +4393,7 @@ MonoBehaviour:
   GravityModifier: 1
   useProfileData: 0
   EnableLinearMovement: 1
-  EnableRotation: 0
+  EnableRotation: 1
   RotationEitherThumbstick: 0
 --- !u!114 &4515192305149710545
 MonoBehaviour:
