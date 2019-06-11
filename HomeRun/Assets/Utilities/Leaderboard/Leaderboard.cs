@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Leaderboard : MonoBehaviour
 {
-    [SerializeField] string leaderboardName = "Zombies";
+    [SerializeField] string leaderboardName = "Home Runs";
     [SerializeField] int numEntries = 10;
     Entry[] leaderboardEntries;
     
@@ -22,6 +22,14 @@ public class Leaderboard : MonoBehaviour
     void OnApplicationQuit()
     {
         WriteEntriesToPlayerPrefs();
+    }
+
+    public void AddEntry(string playerName, int score)
+    {
+        Entry en = new Entry();
+        en.username = playerName;
+        en.score = score;
+        AddEntry(en);
     }
 
     // Add a entry and sort the array.
@@ -83,7 +91,7 @@ public class Leaderboard : MonoBehaviour
     }
 
     // Formats content for display
-    string ToFormatedString(){
+    public string ToFormatedString(){
         string output = leaderboardName + "\n";
         output += "Score:\t UserName:\n";
         for (int i = 0; i < leaderboardEntries.Length; i++) {
