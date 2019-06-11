@@ -353,9 +353,9 @@ namespace HomeRun.Net
             // batter goto 0, pitcher 1
             var holder = m_playerAreas[(int)m_playerType % 2].PlayerHolder;
             //m_player.transform.SetParent(holder, true);
-            m_player.transform.localPosition = holder.position;
+            m_player.transform.localPosition = new Vector3(0.34f, 6f, -2.91f);
             m_player.transform.rotation = holder.rotation;
-            m_player.GetComponent<CharacterController>().SimpleMove(Vector3.zero);
+            //m_player.GetComponent<CharacterController>().SimpleMove(Vector3.zero);
         }
 
         void ResetLocalPosition() {

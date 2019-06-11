@@ -2790,6 +2790,31 @@ PrefabInstance:
       propertyPath: matchController
       value: 
       objectReference: {fileID: 714373478}
+    - target: {fileID: 4126951575581676598, guid: 8fc5e6edf6ab79b48ab628cae789a199,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 38.168583
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126951575581676598, guid: 8fc5e6edf6ab79b48ab628cae789a199,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 2.5569544
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126951575581676598, guid: 8fc5e6edf6ab79b48ab628cae789a199,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 3.842169
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126951575581676598, guid: 8fc5e6edf6ab79b48ab628cae789a199,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 1.7629315
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126951575581676598, guid: 8fc5e6edf6ab79b48ab628cae789a199,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.3614185
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8fc5e6edf6ab79b48ab628cae789a199, type: 3}
 --- !u!4 &1296324510 stripped
