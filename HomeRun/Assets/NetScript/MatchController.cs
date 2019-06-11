@@ -359,7 +359,7 @@ namespace HomeRun.Net
             m_player.GetComponent<CharacterController>().SimpleMove(Vector3.zero);
         }
 
-        void ResetLocalPosition(Transform transform) {
+        void ResetLocalPosition() {
             m_player.transform.localPosition = Vector3.zero;
         }
 
