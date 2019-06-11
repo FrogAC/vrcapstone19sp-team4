@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Oculus.Platform;
 
 public class HRGameManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class HRGameManager : MonoBehaviour
     public event HomeRunDelegate homeRunEvent;
     public delegate void OnTimeUp();
     public event OnTimeUp TimeUpEvent;
+    
 
     public HRDerbyScoreboard scoreboard;
     public int timeAllowed;
@@ -18,9 +20,23 @@ public class HRGameManager : MonoBehaviour
     private int homeruns;
     private bool isPaused, batGrabbed;
     private Coroutine timer;
+    private Leaderboard leaderboard;
+
+    private string[] names = {
+        "Babe Ruth",
+        "Hank Aaron",
+        "Jackie Robison",
+        "Ichiro",
+        "Ty Cobb",
+        "Mickey Mantle",
+        "Willie Mays",
+        "Derek Jeter",
+        "Yogi Berra"
+    };
 
     private void Start()
     {
+        leaderboard = gameObject.GetComponent<Leaderboard>();
         // Init Variables
         if (timeAllowed <= 0)
             timeAllowed = 60;
@@ -85,6 +101,9 @@ public class HRGameManager : MonoBehaviour
         TimeUpEvent -= GameOver;
         pitcher.randomThrowDelay = int.MaxValue;
         Debug.Log("GameOver");
+        //OVRManager.
+        string name = names[Random.Range(0, names.Length - 1)];
+        leaderboard.AddEntry(name, homeruns);
     }
 
     
