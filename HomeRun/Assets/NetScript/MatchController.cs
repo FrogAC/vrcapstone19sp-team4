@@ -362,7 +362,6 @@ namespace HomeRun.Net
         void ResetLocalPosition() {
             Debug.Log("ResetLocalPosition");
             m_player.transform.localPosition = Vector3.zero;
-            m_player.GetComponent<CharacterController>().SimpleMove(Vector3.zero);
             m_myScore = 0;
             m_opScore = 0;
         }
