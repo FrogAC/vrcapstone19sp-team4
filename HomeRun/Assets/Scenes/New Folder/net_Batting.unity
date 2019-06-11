@@ -4443,7 +4443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0950df82e7936c84983497630bde5b54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Acceleration: 0.1
+  Acceleration: 1
   Damping: 0.3
   BackAndSideDampen: 0.5
   JumpForce: 0.3
@@ -5741,6 +5741,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7060050539779683049, guid: 2fe94835ee7dc95408fe9962cb2a7aaa,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 7060050539779683049, guid: 2fe94835ee7dc95408fe9962cb2a7aaa,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.56
       objectReference: {fileID: 0}
     - target: {fileID: 1389609341, guid: 2fe94835ee7dc95408fe9962cb2a7aaa, type: 3}
       propertyPath: playerType
