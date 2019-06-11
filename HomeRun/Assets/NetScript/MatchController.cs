@@ -355,13 +355,13 @@ namespace HomeRun.Net
             var holder = m_playerAreas[(int)m_playerType % 2].PlayerHolder;
             //m_player.transform.SetParent(holder, true);
             CC.enabled = false;
-            m_player.transform.position = new Vector3(0.25f, 0.75f, -17.91f);
+            m_player.transform.position = holder.position;
             m_player.transform.rotation = holder.rotation;
             CC.enabled = true;
+            Invoke("ResetScore", MATCH_WARMUP_TIME);
         }
 
-        void ResetLocalPosition() {
-            Debug.Log("ResetLocalPosition");
+        void ResetScore() {
             m_myScore = 0;
             m_opScore = 0;
             UpdateScore(0,0);
