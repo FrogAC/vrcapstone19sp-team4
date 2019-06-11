@@ -81,6 +81,10 @@ public class ThrownBall : OVRGrabbable
         initialize();
     }
 
+    void OnDestroy() {
+        GlobalSettings.Selectable = true;
+    }
+
     // ugly interface
     public BallType balltype;
 
