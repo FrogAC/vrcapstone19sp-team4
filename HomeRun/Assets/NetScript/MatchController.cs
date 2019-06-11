@@ -148,7 +148,6 @@ namespace HomeRun.Net
                 {
                     case State.NONE:
                         SetupForIdle();
-                        MoveCameraToIdlePosition();
                         PlatformManager.TransitionToState(PlatformManager.State.WAITING_TO_PRACTICE_OR_MATCHMAKE);
                         break;
 
@@ -322,6 +321,7 @@ namespace HomeRun.Net
                 {
                     var localPlayer = m_playerAreas[(int)m_playerType].SetupForPlayer<LocalPlayer>(user.OculusID);
                     MoveCameraToMatchPosition();
+                    
                     player = localPlayer;
                     m_localSlot = slot;
                 }

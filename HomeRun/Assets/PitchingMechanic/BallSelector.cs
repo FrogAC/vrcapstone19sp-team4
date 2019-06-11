@@ -37,11 +37,7 @@
         [SerializeField] OVRInput.Button selectNext = OVRInput.Button.DpadLeft;
         [SerializeField] OVRInput.Button selectPrev = OVRInput.Button.DpadRight;
 
-        /* Multiplayer Settings */
-        [Header("Multiplayer")]
 
-        private float m_nextSelectableInterval = 9.0f;
-        private float m_nextSelectableTime = -1.0f;
 
         // Start is called before the first frame update
         void Start()

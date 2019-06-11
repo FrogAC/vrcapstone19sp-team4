@@ -124,6 +124,8 @@ public class ThrownBall : OVRGrabbable
         SetEnableFX(false);
         m_collider = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
+        rb.useGravity = false;
+        rb.isKinematic = true;
         strikezone = Strikezone.strikezone.transform;
         strikezoneCollider = strikezone.GetComponent<Collider>();
     }
@@ -229,15 +231,13 @@ public class ThrownBall : OVRGrabbable
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("Environment") && !m_hasHitEnv)
         {
+            Debug.Log("hit env, destroy");
             MatchController.Instance.UpdateScore(2,0);
             m_hasHitEnv = true;
             Destroy(gameObject, 4);
             GlobalSettings.Selectable = true;
             if (GlobalSettings.UseNetwork) NetEffectController.Instance.PlayGroundHitEffect(transform.position);
-        }
-
-        // Ignore collision with hands
-        if (collision.gameObject.layer != LayerMask.NameToLayer("PlayerBody"))
+        } else if (collision.gameObject.layer != LayerMask.NameToLayer("PlayerBody"))
         {
             StopAllCoroutines();
             rb.useGravity = true;

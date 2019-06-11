@@ -75,8 +75,6 @@ namespace HomeRun.Net
             MatchController.Instance.UpdateScore(1,0);
             m_BathitParticles[idx].transform.position = pos;
             m_BathitParticles[idx].Play();
-
-            m_audioManager.PlayHitApplause();
         }
         public void PlayGroundHitEffect(Vector3 pos)
         {
@@ -158,6 +156,8 @@ namespace HomeRun.Net
             }
 
             StopAllCoroutines();
+
+            m_audioManager.PlayHitApplause();
             
             MatchController.Instance.UpdateScore(5,0);
 
