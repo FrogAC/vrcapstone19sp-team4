@@ -62,6 +62,7 @@ public class ThrownBall : OVRGrabbable
     private bool m_enableFX = false;
     private bool m_hasStrike = false;
     private bool m_hasHitEnv = false;
+    private bool m_hasMiss = false;
     private bool m_hasHitHomerun = false;
     public void SetEnableFX(bool value)
     {
@@ -117,6 +118,8 @@ public class ThrownBall : OVRGrabbable
             rb.isKinematic = false;
             rb.useGravity = true;
             rb.velocity = releaseLinVel * 5;
+            
+            if (GlobalSettings.UseNetwork) MatchController.Instance.UpdateScore(2,0);
         }
         else
         {
@@ -237,7 +240,6 @@ public class ThrownBall : OVRGrabbable
         if (collision.gameObject.layer == LayerMask.NameToLayer("Environment") && !m_hasHitEnv)
         {
             Debug.Log("hit env, destroy");
-            if (GlobalSettings.UseNetwork) MatchController.Instance.UpdateScore(2,0);
             m_hasHitEnv = true;
             Destroy(gameObject, 4);
             GlobalSettings.Selectable = true;
@@ -330,6 +332,7 @@ public class ThrownBall : OVRGrabbable
             OVRHaptics.LeftChannel.Preempt(clip);
             NetEffectController.Instance.PlayStrikeZoneHitEffect(transform.position);
         } else if (collider.tag.Equals("MissTrigger") && !m_hasStrike && !hasHitBat) {
+            m_hasMiss = true;
             StopAllCoroutines();
             rb.useGravity = true;
             GlobalSettings.Selectable = true;
