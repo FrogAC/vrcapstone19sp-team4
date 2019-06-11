@@ -164,7 +164,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.48
+  m_Radius: 1.02
   m_Height: 6.0451164
   m_Direction: 1
   m_Center: {x: -0.0000000015502654, y: 2.8020177, z: -0.0000000120620465}
@@ -1711,17 +1711,17 @@ PrefabInstance:
     - target: {fileID: 3642817523685476863, guid: 1aae582061b3b254aa215ad517c20a21,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.000000033833
       objectReference: {fileID: 0}
     - target: {fileID: 3642817523685476863, guid: 1aae582061b3b254aa215ad517c20a21,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.059044
       objectReference: {fileID: 0}
     - target: {fileID: 3642817523685476863, guid: 1aae582061b3b254aa215ad517c20a21,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.00000033528
       objectReference: {fileID: 0}
     - target: {fileID: 3642817523685476863, guid: 1aae582061b3b254aa215ad517c20a21,
         type: 3}
@@ -1762,21 +1762,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3642817523685476863, guid: 1aae582061b3b254aa215ad517c20a21,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 3642817523685476863, guid: 1aae582061b3b254aa215ad517c20a21,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 3642817523685476863, guid: 1aae582061b3b254aa215ad517c20a21,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1aae582061b3b254aa215ad517c20a21, type: 3}
@@ -3072,7 +3057,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8ba8e887138bb59438200821e0edc832, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3183,6 +3168,7 @@ MonoBehaviour:
   - {fileID: 1755199646753852, guid: 234541cc6c80f2944a7647e04cd0a3b5, type: 3}
   - {fileID: 1262490536792160, guid: 3b03486559cd4804092a87cb2783f919, type: 3}
   - {fileID: 1312591640859010, guid: b4f62a925d8514f4c99f2292f96fc180, type: 3}
+  - {fileID: 1755199646753852, guid: 234541cc6c80f2944a7647e04cd0a3b5, type: 3}
   m_GroundHit_Prefab: {fileID: 1486444696406430, guid: d519ca5a3e3170047b6ad861d6654901,
     type: 3}
   m_StrikeMisstext_Prefab: {fileID: 5206567264988062990, guid: faa65d96cf750064c93c4d9bd99b0e3c,
