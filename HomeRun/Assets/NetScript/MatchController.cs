@@ -343,9 +343,11 @@ namespace HomeRun.Net
 
         void MoveCameraToIdlePosition()
         {
-            //m_player.transform.SetParent(m_idleAreaTransform, true);
+            var CC =  m_player.GetComponent<CharacterController>();
+            CC.enabled = false;
             m_player.transform.position = m_idleAreaTransform.position;
             m_player.transform.rotation = m_idleAreaTransform.rotation;
+            CC.enabled = true;
         }
 
         void MoveCameraToMatchPosition()
