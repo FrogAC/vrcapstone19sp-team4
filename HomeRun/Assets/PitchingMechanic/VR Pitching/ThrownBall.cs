@@ -72,7 +72,7 @@ public class ThrownBall : OVRGrabbable
     }
 
     void Update() {
-        if (Mathf.Abs(transform.position.x) + Mathf.Abs(transform.position.y) + Mathf.Abs(transform.position.z) > 500){
+        if (Mathf.Abs(transform.position.x) + Mathf.Abs(transform.position.y) + Mathf.Abs(transform.position.z) > 800){
             Debug.Log("Too Far, destroy!");
             Destroy(gameObject);
             GlobalSettings.Selectable = true;
