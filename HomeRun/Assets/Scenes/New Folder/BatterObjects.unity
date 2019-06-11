@@ -342,7 +342,7 @@ MonoBehaviour:
   baseballPrefab: {fileID: 1900042084187694043, guid: e909dd8cf0768dc4dba50ac58709bc30,
     type: 3}
   lifetime: 3
-  speed: 4
+  speed: 3.5
   nextSelection: 4
   prevSelection: 8
   throwBall: 1
