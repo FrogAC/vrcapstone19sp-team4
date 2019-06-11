@@ -11,6 +11,7 @@ public class PlayerHealth : MonoBehaviour
     public GameEvent event1;
     public GameObject deadText;
     private bool dead = false;
+    public GameObject ZombieMode;
 
     // Start is called before the first frame update
     private void Start()
@@ -25,6 +26,7 @@ public class PlayerHealth : MonoBehaviour
         {
             dead = true;
             deadText.SetActive(true);
+            ZombieMode.GetComponent<ZombiesManager>().spawnFrequency = int.MaxValue;
         }
     }
     private void OnTriggerEnter(Collider other)

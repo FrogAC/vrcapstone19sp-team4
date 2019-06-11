@@ -335,6 +335,7 @@ MonoBehaviour:
   hitNotifier: {fileID: 388528806}
   event1: {fileID: 0}
   deadText: {fileID: 1081152692}
+  ZombieMode: {fileID: 807821415}
   duration: 1.02
   smoothness: 0.02
 --- !u!65 &349717013
@@ -1021,7 +1022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnFrequency: 5
-  spawnLineWidth: 60
+  spawnLineWidth: 70
   zombiePrefab: {fileID: 2952197170991645796, guid: 4f4679cb000ffdb4fa6f154c525faac0,
     type: 3}
 --- !u!4 &807821417
@@ -1303,17 +1304,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1081152692}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -25.2}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 14.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2008283314}
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_Father: {fileID: 442007971}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 2.7, y: 6.6}
+  m_AnchoredPosition: {x: -4.27, y: 0}
   m_SizeDelta: {x: 58.5, y: 13.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1385785960
